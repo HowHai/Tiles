@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/mean',
+	// db: 'mongodb://localhost/mean',
+	db: 'mongodb://tilesUser:tiles123@ds033419.mongolab.com:33419/heroku_app23022989',
 	facebook: {
 		clientID: 'APP_ID',
 		clientSecret: 'APP_SECRET',
