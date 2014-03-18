@@ -20,7 +20,7 @@ exports.list = function(req, res){
 
 // Create tile
 exports.create = function(req, res){
-  // PhantomJS test
+  // PhantomJS testt
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
       return page.open('http://www.thisiswhyimbroke.com/new/', function(status) {
