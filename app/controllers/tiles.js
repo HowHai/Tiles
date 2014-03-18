@@ -5,7 +5,8 @@
  */
 var mongoose = require('mongoose'),
   Tile = mongoose.model('Tile'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  phantom = require('phantom');
 
 // Get list of all tiles
 exports.list = function(req, res){
@@ -19,15 +20,40 @@ exports.list = function(req, res){
 
 // Create tile
 exports.create = function(req, res){
-  // Create a random tile from seed data
-  var tile = new Tile(randomTileObject());
+  // PhantomJS test
+    phantom.create(function(ph) {
+    return ph.createPage(function(page) {
+      return page.open('http://www.thisiswhyimbroke.com/new/', function(status) {
+        console.log('opened site?', status);
 
-  tile.save(function(error, data) {
-    if (error)
-      res.send(error);
-    else
-      res.json(data); // Return created tile object
+        page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
+          setTimeout(function() {
+            return page.evaluate(function() {
+
+              var titleArr = [];
+              var contentArr = [];
+
+              titleArr.push(jQuery('article h1 a')[0].text);
+              contentArr.push(jQuery('article .details .desc p')[0].innerText);
+
+              return {name: titleArr[0], content: contentArr[0], imgUrl: 'photo1.jpg'};
+            }, function(result) {
+
+                var tile = new Tile(result);
+
+                tile.save(function(error, data) {
+                  if (error)
+                    res.send(error);
+                  else
+                    res.json(data); // Return created tile object
+                });
+            });
+          }, 1000);
+        });
+      });
+    });
   });
+  // END
 };
 
 // Return random tile object
@@ -48,4 +74,42 @@ var randomTileObject = function() {
   var randomImgUrl = "photo" + randomPhotoNumber + ".jpg"
 
   return {name: randomName, content: truncatedContent, imgUrl: randomImgUrl};
+}
+
+var scrapContent = function() {
+  // Scrap image
+  // phantom.create(function(ph) {
+  //   return ph.createPage(function(page) {
+  //     return page.open(siteUrl, function(status) {
+  //       console.log('page loaded:', status);
+
+  //       page.render('public/modules/tiles/img/twitter.png');
+  //       ph.exit();
+  //     });
+  //   });
+  // });
+
+  // Scrape content
+  phantom.create(function(ph) {
+    return ph.createPage(function(page) {
+      return page.open('http://www.thisiswhyimbroke.com/new/', function(status) {
+        console.log('opened site?', status);
+
+        page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
+          setTimeout(function() {
+            return page.evaluate(function() {
+
+              var titleArr = [];
+              var contentArr = [];
+
+              titleArr.push(jQuery('article h1 a')[0].text);
+              contentArr.push(jQuery('article .details .desc p')[0].innerText);
+
+              return {name: titleArr[0], content: contentArr[0], imgUrl: 'photo1.jpg'};
+            }, function(result) {console.log(result);});
+          }, 1000);
+        });
+      });
+    });
+  });
 }
