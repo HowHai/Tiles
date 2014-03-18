@@ -8,33 +8,33 @@ module.exports = function(grunt) {
 			serverViews: {
 				files: ['app/views/**'],
 				options: {
-					livereload: true,
+					livereload: false,
 				}
 			},
 			serverJS: {
 				files: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 				tasks: ['jshint'],
 				options: {
-					livereload: true,
+					livereload: false,
 				}
 			},
 			clientViews: {
 				files: ['public/modules/**/views/*.html'],
 				options: {
-					livereload: true,
+					livereload: false,
 				}
 			},
 			clientJS: {
 				files: ['public/js/**/*.js', 'public/modules/**/*.js'],
 				tasks: ['jshint'],
 				options: {
-					livereload: true,
+					livereload: false,
 				}
 			},
 			clientCSS: {
 				files: ['public/**/css/*.css'],
 				options: {
-					livereload: true,
+					livereload: false,
 				}
 			}
 		},
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	//Load NPM tasks 
+	//Load NPM tasks
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-mocha-test');
