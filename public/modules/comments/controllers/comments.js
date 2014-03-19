@@ -1,11 +1,10 @@
 'use strict';
 
-
 angular.module('mean.comments').controller('CommentsCtrl', ['$scope', '$stateParams', '$location', 'Authentication', 'Comments', function($scope, $stateParams, $location, Authentication, Comments) {
   $scope.authentication = Authentication;
 
   $scope.create = function() {
-    // Grad current tile ID by div element
+    // Grab current tile ID by div element
     var tileId = $('#testId')[0].innerText;
 
     var comment = new Comments ({
@@ -36,8 +35,8 @@ angular.module('mean.comments').controller('CommentsCtrl', ['$scope', '$statePar
   };
 
   $scope.find = function() {
-    Comments.query(function(comments) {
-        $scope.comments = comments;
+    Comments.query(function(comments) { 
+      $scope.comments = comments;
     });
   };
 

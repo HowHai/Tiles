@@ -4,6 +4,7 @@
     height: 450px;
     border: 1px solid black;
     text-align: center;
+    padding:5px;
   }
 </style>
 
@@ -15,14 +16,19 @@
   <div id="mainTile">
     <h2>{{tile.name}}</h2>
     <img src="/modules/tiles/img/profiles/{{tile.imgUrl}}" alt="Splash">
-    <p>{{tile.content}}</p>
+    <h5>{{tile.content}}</h5>
   </div>
 
-  <div id="testId">{{tile._id}}</div>
+  <div id="testId" ng-hide="true">{{tile._id}}</div>
+
+  <h5>Comments</h5>
+  <div data-ng-repeat="content in tile.comments">
+    <p>{{content}}</p>
+  </div>
 </section>
 
 <section data-ng-controller="CommentsCtrl">
-<h1>Add comment</h1>
+<h4>Add comment</h4>
   <form  data- ng-submit="create()">
     <fieldset> 
       <textarea data-ng-model="content" cols="60" rows="2" placeholder="Comment"></textarea>
@@ -31,4 +37,3 @@
     </fieldset>
   </form>
 </section>
-<br>

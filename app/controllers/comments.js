@@ -11,11 +11,12 @@ exports.create = function(req, res) {
   var comment = new Comment(req.body);
   comment.user = req.user;
 
-  // Grab Tile ID to pass into comment creation
   var id = comment.tile;
+  var data = comment.content
 
-  Tile.findById(id, function(err, doc){
-    doc.comments.push(comment);
+  Tile.findById(id, function(err, doc) {
+    // console.log(data);
+    doc.comments.push(data);
     doc.save();
   });
 
@@ -63,7 +64,6 @@ exports.list = function(req, res) {
     }
   });
 };
-
 
 // Comment middleware
 exports.commentByID = function(req, res, next, id) {

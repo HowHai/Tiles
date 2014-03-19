@@ -7,7 +7,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     $http.get('/tiles', null)
       .success(function(response) {
         // Get first tile
-        $scope.tile = response[0];
+        $scope.tile = response[response.length-1];
       })
 
     // Create a random tile and save to database
