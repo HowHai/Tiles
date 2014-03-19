@@ -6,39 +6,41 @@ phantom.create(function(ph) {
 
       page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',function() {
 
+        // setTimeout(function() {
+
         page.evaluate(function() {
           var images = [];
 
           function getImgDimensions($i) {
-              return {
-                  top : $i.offset().top,
-                  left : $i.offset().left,
-                  width : $i.width(),
-                  height : $i.height()
-              }
+            return {
+              top : $i.offset().top,
+              left : $i.offset().left,
+              width : $i.width(),
+              height : $i.height()
+            }
           }
+
+          var images = [];
 
           $('.dribbble-img img').each(function() {
               var img = getImgDimensions($(this));
               images.push(img);
           });
 
-
           return images;
         }, function(result) {
 
-          page.clicRect = result[0];
-          page.render('images/1.png');
-          // result.forEach(function(imageObj, index, array){
-          //     page.clipRect = imageObj;
-          //     page.render('images/'+index+'.png')
-          // });
+          result.forEach(function(imageObj, index, array){
+            // page.clipRect = imageObj;
+            page.set('clipRect', imageObj);
+            page.render('images/' + index + '.png');
+          });
 
           ph.exit();
         });
+        // }, 1000);
       });
     });
-
   });
 });
 
@@ -50,7 +52,8 @@ phantom.create(function(ph) {
 //     return page.open('https://twitter.com/', function(status) {
 //       console.log('page loaded:', status);
 
-//       page.render('twitter.png');
+//       page.set('clipRect', { top: 186, left: 22, width: 179, height: 134 });
+//       page.render('twitter5.png');
 //       ph.exit();
 //     });
 //   });
