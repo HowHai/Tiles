@@ -16,7 +16,7 @@ exports.create = function(req, res) {
   var text = comment.content;
   var user = comment.user;
   var time = comment.created
-  data.push([user, text, time]);
+  data.push(user, text, time);
 
   Tile.findById(id, function(err, doc) {
     doc.comments.push(data);

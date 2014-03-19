@@ -21,17 +21,17 @@
 
   <div id="testId" ng-hide="true">{{tile._id}}</div>
 
-  <h4>Comments</h4>
+  <h3>Comments</h3>
   <div data-ng-repeat="content in tile.comments">
     <!-- Comment -->
-    <p style="font-weight: bold;">{{content[0][1]}}</p> 
+    <p style="font-weight: bold;">{{content[1]}}</p> 
     <!-- Username/Time Create -->
-    <p style="font-style: italic;">({{content[0][0]}} / {{content[0][2] | date:'medium'}})</p>
+    <p style="font-style: italic;">({{content[0]}} / {{content[2] | date:'medium'}})</p>
   </div>
 </section>
 
 <section data-ng-controller="CommentsCtrl">
-<h4>Add comment</h4>
+<h3>Add comment</h3>
   <form  data- ng-submit="create()">
     <fieldset> 
       <textarea data-ng-model="content" cols="60" rows="2" placeholder="Comment"></textarea>
