@@ -1,0 +1,27 @@
+<style>
+  #smallTile {
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    text-align: center;
+    display: inline-block;
+  }
+  .small-box-image{
+    height: 150px;
+    width: 150px;
+  }
+</style>
+
+<section >
+  <h1>{{bitch}}</h1>
+  <a ui-sref="showTile">Just One</a>
+  <button>Make Tile</button>
+
+
+
+  <div id="smallTile" ng-repeat="tile in tiles">
+    <h2>{{tile.name}}</h2>
+    <img class="small-box-image"src="/modules/tiles/img/profiles/{{tile.imgUrl}}" alt="Splash">
+    <p>{{tile.content}}</p>
+  </div>
+</section>

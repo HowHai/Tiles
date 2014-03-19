@@ -4,7 +4,8 @@ angular.module('mean.core').controller('HeaderController', ['$scope', 'Authentic
 	function($scope, Authentication) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
-
+		console.log("Sexy Bitch");
+		$scope.bitch = "hello";
 		$scope.menu = [{
 			title: 'Articles',
 			link: 'articles',

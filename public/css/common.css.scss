@@ -1,0 +1,15 @@
+.content {
+	margin-top: 50px;
+}
+a.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+#mainTile {
+    width: 450px;
+    height: 450px;
+    border: 1px solid black;
+    text-align: center;
+  }
