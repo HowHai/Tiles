@@ -30,26 +30,63 @@ exports.create = function(req, res){
           setTimeout(function() {
             return page.evaluate(function() {
 
+              // Get Images
+              var images = [];
+
+              function getImgDimensions($i) {
+                return {
+                  top : $i.offset().top,
+                  left : $i.offset().left,
+                  width : $i.width(),
+                  height : $i.height()
+                }
+              }
+
+              jQuery('article .item img').each(function() {
+                var img = getImgDimensions(jQuery(this));
+                images.push(img);
+              });
+              // END
+
               var titleArr = [];
               var contentArr = [];
 
-              // Get title and content
-              titleArr.push(jQuery('article h1 a')[0].text);
-              contentArr.push(jQuery('article .details .desc p')[0].innerText);
+              // Get titles
+              jQuery('article h1 a').each(function() {
+                titleArr.push(jQuery(this)[0].title);
+              });
+              console.log(titleArr);
 
-              return {name: titleArr[0], content: contentArr[0], imgUrl: 'photo1.jpg'};
+              // Get contents
+              jQuery('article .details .desc p').each(function() {
+                contentArr.push(jQuery(this)[0].innerText);
+              });
+              console.log(contentArr);
+
+              // Create an array of objects containing titles and contents
+              var tilesArr = []
+              for(var i = 0; i < titleArr.length; i++) {
+                var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
+
+                tilesArr.push({name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+              }
+
+              return [tilesArr, images];
             }, function(result) {
-
-                var tile = new Tile(result);
-
-                tile.save(function(error, data) {
-                  if (error)
-                    res.send(error);
-                  else
-                    res.json(data); // Return created tile object
-
-                  ph.exit();
+                // Save pulled images
+                result[1].forEach(function(imageObj, index, array){
+                  page.set('clipRect', imageObj);
+                  page.render('public/modules/tiles/img/tiles/' + result[0][index].imgUrl);
                 });
+
+                // Create new tiles using pulled data
+                for(var i = 0; i < result[0].length; i++) {
+
+                  var tile = new Tile(result[0][i]);
+
+                  tile.save();
+                }
+                ph.exit();
             });
           }, 1000);
         });

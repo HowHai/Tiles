@@ -1,7 +1,7 @@
 var phantom = require('phantom');
 phantom.create(function(ph) {
   return ph.createPage(function(page) {
-    return page.open('http://dribbble.com/', function(status) {
+    return page.open('http://www.thisiswhyimbroke.com/new/', function(status) {
       console.log(status);
 
       page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',function() {
@@ -20,18 +20,15 @@ phantom.create(function(ph) {
             }
           }
 
-          var images = [];
-
-          $('.dribbble-img img').each(function() {
-              var img = getImgDimensions($(this));
-              images.push(img);
+          jQuery('article .item img').each(function() {
+            var img = getImgDimensions(jQuery(this));
+            images.push(img);
           });
 
           return images;
         }, function(result) {
 
           result.forEach(function(imageObj, index, array){
-            // page.clipRect = imageObj;
             page.set('clipRect', imageObj);
             page.render('images/' + index + '.png');
           });
