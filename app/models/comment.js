@@ -5,8 +5,7 @@ var mongoose = require('mongoose'),
 
 var CommentSchema = new Schema({
   user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+    type: String
   },
   tile: {
     type: String

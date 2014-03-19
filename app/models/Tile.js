@@ -11,7 +11,7 @@ var TileSchema = new Schema({
   name: {type: String},
   content: {type: String},
   imgUrl: {type: String},
-  comments: []
+  comments: [],
 });
 
 TileSchema.statics = {

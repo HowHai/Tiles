@@ -21,9 +21,12 @@
 
   <div id="testId" ng-hide="true">{{tile._id}}</div>
 
-  <h5>Comments</h5>
+  <h4>Comments</h4>
   <div data-ng-repeat="content in tile.comments">
-    <p>{{content}}</p>
+    <!-- Comment -->
+    <p style="font-weight: bold;">{{content[0][1]}}</p> 
+    <!-- Username/Time Create -->
+    <p style="font-style: italic;">({{content[0][0]}} / {{content[0][2] | date:'medium'}})</p>
   </div>
 </section>
 

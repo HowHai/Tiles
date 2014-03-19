@@ -9,14 +9,18 @@ var mongoose = require('mongoose'),
 // Create comment
 exports.create = function(req, res) {
   var comment = new Comment(req.body);
-  comment.user = req.user;
+  comment.user = req.user.username;
 
   var id = comment.tile;
-  var data = comment.content
+  var data = [];
+  var text = comment.content;
+  var user = comment.user;
+  var time = comment.created
+  data.push([user, text, time]);
 
   Tile.findById(id, function(err, doc) {
-    // console.log(data);
     doc.comments.push(data);
+    // console.log(data);
     doc.save();
   });
 
