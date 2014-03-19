@@ -1,2 +1,56 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700,800);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic);
+.content {
+  margin-top: 50px; }
+
+a.undecorated-link:hover {
+  text-decoration: none; }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
+html {
+  font-family: 'Open Sans', sans-serif; }
+
 body {
-  background-color: black; }
+  background-color: white; }
+
+.navbar-header {
+  background-color: white; }
+
+.navbar-inverse .navbar-brand {
+  color: black;
+  text-shadow: none; }
+  .navbar-inverse .navbar-brand:hover {
+    color: black; }
+.navbar-inverse .navbar-toggle {
+  background-color: black;
+  border-radius: 0px;
+  color: black; }
+  .navbar-inverse .navbar-toggle .icon-bar {
+    background-color: white; }
+  .navbar-inverse .navbar-toggle:active, .navbar-inverse .navbar-toggle:hover {
+    background-color: #333333; }
+    .navbar-inverse .navbar-toggle:active .icon-bar, .navbar-inverse .navbar-toggle:hover .icon-bar {
+      background-color: black; }
+
+.container {
+  padding: 0; }
+
+#showTile {
+  width: 100%;
+  padding: 0;
+  margin: 0; }
+  #showTile img {
+    width: 100%; }
+  #showTile #tile-title {
+    text-align: center;
+    margin: 10px 0;
+    font-weight: 700; }
+  #showTile #tile-desc {
+    text-align: center;
+    margin: 0 10px; }
+  #showTile #exploded-view {
+    position: absolute;
+    bottom: 10;
+    margin-top: 50px; }

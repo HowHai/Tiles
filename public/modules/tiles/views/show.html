@@ -1,12 +1,6 @@
-<section>
-  <h1>Cracked Tiles</h1>
-
-  <button ng-click="createTile()">Make Tile</button>
-
-  <div id="mainTile">
-    <h2>{{tileMain.name}}</h2>
-    <img src="/modules/tiles/img/profiles/{{tileMain.imgUrl}}" alt="Splash">
-    <p>{{tileMain.content}}</p>
-  </div>
-  <a ui-sref="explodedTiles">Click Me</a>
+<section id="showTile">
+  <img src="/modules/tiles/img/profiles/{{tileMain.imgUrl}}" alt="Splash">
+  <h2 id="tile-title">{{tileMain.name}}</h2>
+  <p id="tile-desc">{{tileMain.content}}</p>
+  <a ui-sref="explodedTiles" id="exploded-view">Exploded View</a>
 </section>
