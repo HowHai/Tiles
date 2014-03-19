@@ -7,5 +7,5 @@ module.exports = function(app) {
   app.get('/tiles', tiles.list);
 
   // Create tiles *seeded currently*
-  app.post('/tiles', tiles.create);
+  app.get('/tilesnew', tiles.create);
 }

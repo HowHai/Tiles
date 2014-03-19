@@ -31,12 +31,23 @@ module.exports = function(grunt) {
 					livereload: false,
 				}
 			},
+			sass: {
+			    files: ['sass/**/*.{scss,sass}','sass/_partials/**/*.{scss,sass}'],
+			    tasks: ['sass:dist']
+			},
 			clientCSS: {
 				files: ['public/**/css/*.css'],
 				options: {
 					livereload: false,
 				}
-			}
+			},
+			source: {
+			  files: ['sass/**/*.scss'],
+			  tasks: ['sass'],
+			  options: {
+			    livereload: true, // needed to run LiveReload
+			  }
+			},
 		},
 		jshint: {
 			all: {
@@ -72,6 +83,13 @@ module.exports = function(grunt) {
 				require: 'server.js'
 			}
 		},
+		sass: {
+        dist: {
+            files: {
+                'public/css/master.css': 'public/sass/master.scss'
+            }
+        }
+    },
 		karma: {
 			unit: {
 				configFile: 'karma.conf.js'
@@ -82,6 +100,7 @@ module.exports = function(grunt) {
 	//Load NPM tasks
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-mocha-test');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-nodemon');
@@ -93,6 +112,7 @@ module.exports = function(grunt) {
 
 	//Default task(s).
 	grunt.registerTask('default', ['jshint', 'concurrent']);
+	grunt.registerTask('default', ['sass', 'concurrent']);
 
 	//Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
