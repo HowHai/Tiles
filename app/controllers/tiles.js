@@ -33,6 +33,7 @@ exports.create = function(req, res){
               var titleArr = [];
               var contentArr = [];
 
+              // Get title and content
               titleArr.push(jQuery('article h1 a')[0].text);
               contentArr.push(jQuery('article .details .desc p')[0].innerText);
 
@@ -46,6 +47,8 @@ exports.create = function(req, res){
                     res.send(error);
                   else
                     res.json(data); // Return created tile object
+
+                  ph.exit();
                 });
             });
           }, 1000);
