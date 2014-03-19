@@ -21,6 +21,7 @@ body {
 
 .navbar-header {
   background-color: white;
+  padding: 0 10px;
 }
 
 .navbar-inverse {
@@ -32,14 +33,14 @@ body {
     }
   }
   .navbar-toggle {
-    background-color: black;
+    // background-color: black;
     border-radius: 0px;
-    color: black;
+    border-color: tomato;
     .icon-bar {
-      background-color: white;
+      background-color: tomato;
     }
     &:active, &:hover {
-      background-color: #333;
+      background-color: white;
       .icon-bar {
         background-color: black;
       } 
@@ -49,23 +50,31 @@ body {
 
 .container {
   padding: 0;
+  height: 100%;
 }
 
 #showTile {
   width: 100%;
   padding: 0;
   margin: 0;
+  height: 100%;
   img {
     width: 100%;
+    height: 65%;
   }
-  #tile-title {
-    text-align: center;
-    margin: 10px 0;
-    font-weight: 700;
-  }
-  #tile-desc {
-    text-align: center;
-    margin: 0 10px;
+  .tile-info {
+    border: 15px solid tomato;
+    height: 25%;
+    padding: 20px 0;
+    .tile-title {
+      text-align: center;
+      margin: 10px 0;
+      font-weight: 700;
+    }
+    .tile-desc {
+      text-align: center;
+      margin: 0 10px;
+    }
   }
   #exploded-view {
     position: absolute;

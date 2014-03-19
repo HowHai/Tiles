@@ -31,8 +31,9 @@ module.exports = function(grunt) {
 					livereload: false,
 				}
 			},
+			// Sass Setup -- May be duplication of below
 			sass: {
-			    files: ['sass/**/*.{scss,sass}','sass/_partials/**/*.{scss,sass}'],
+			    files: ['public/sass/**/*.{scss,sass}','sass/_partials/**/*.{scss,sass}'],
 			    tasks: ['sass:dist']
 			},
 			clientCSS: {
@@ -41,8 +42,9 @@ module.exports = function(grunt) {
 					livereload: false,
 				}
 			},
+			// Sass Setup
 			source: {
-			  files: ['sass/**/*.scss'],
+			  files: ['public/sass/**/*.scss'],
 			  tasks: ['sass'],
 			  options: {
 			    livereload: true, // needed to run LiveReload
@@ -83,6 +85,7 @@ module.exports = function(grunt) {
 				require: 'server.js'
 			}
 		},
+		// Compile Task Scss to Css
 		sass: {
         dist: {
             files: {
@@ -100,6 +103,7 @@ module.exports = function(grunt) {
 	//Load NPM tasks
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+		// Grunt Sass Task
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-mocha-test');
 	grunt.loadNpmTasks('grunt-karma');
@@ -112,6 +116,7 @@ module.exports = function(grunt) {
 
 	//Default task(s).
 	grunt.registerTask('default', ['jshint', 'concurrent']);
+		// Run grunt sass as concurrent task
 	grunt.registerTask('default', ['sass', 'concurrent']);
 
 	//Test task.

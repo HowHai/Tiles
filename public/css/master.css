@@ -16,7 +16,8 @@ body {
   background-color: white; }
 
 .navbar-header {
-  background-color: white; }
+  background-color: white;
+  padding: 0 10px; }
 
 .navbar-inverse .navbar-brand {
   color: black;
@@ -24,33 +25,39 @@ body {
   .navbar-inverse .navbar-brand:hover {
     color: black; }
 .navbar-inverse .navbar-toggle {
-  background-color: black;
   border-radius: 0px;
-  color: black; }
+  border-color: tomato; }
   .navbar-inverse .navbar-toggle .icon-bar {
-    background-color: white; }
+    background-color: tomato; }
   .navbar-inverse .navbar-toggle:active, .navbar-inverse .navbar-toggle:hover {
-    background-color: #333333; }
+    background-color: white; }
     .navbar-inverse .navbar-toggle:active .icon-bar, .navbar-inverse .navbar-toggle:hover .icon-bar {
       background-color: black; }
 
 .container {
-  padding: 0; }
+  padding: 0;
+  height: 100%; }
 
 #showTile {
   width: 100%;
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  height: 100%; }
   #showTile img {
-    width: 100%; }
-  #showTile #tile-title {
-    text-align: center;
-    margin: 10px 0;
-    font-weight: 700; }
-  #showTile #tile-desc {
-    text-align: center;
-    margin: 0 10px; }
+    width: 100%;
+    height: 65%; }
+  #showTile .tile-info {
+    border: 15px solid tomato;
+    height: 25%;
+    padding: 20px 0; }
+    #showTile .tile-info .tile-title {
+      text-align: center;
+      margin: 10px 0;
+      font-weight: 700; }
+    #showTile .tile-info .tile-desc {
+      text-align: center;
+      margin: 0 10px; }
   #showTile #exploded-view {
     position: absolute;
     bottom: 10;
-    margin-top: 50px; }
+    margin-top: 100px; }

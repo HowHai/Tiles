@@ -1,6 +1,9 @@
 <section id="showTile">
   <img src="/modules/tiles/img/profiles/{{tileMain.imgUrl}}" alt="Splash">
-  <h2 id="tile-title">{{tileMain.name}}</h2>
-  <p id="tile-desc">{{tileMain.content}}</p>
-  <a ui-sref="explodedTiles" id="exploded-view">Exploded View</a>
+
+  <div class="tile-info text-center">
+    <h2 class="tile-title">{{tileMain.name}}</h2>
+    <p class="tile-desc">{{tileMain.content}}</p>
+    <a ui-sref="explodedTiles" id="exploded-view">Exploded View</a>
+  </div>
 </section>
