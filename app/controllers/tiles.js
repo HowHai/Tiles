@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  Comment = mongoose.model('Comment'),
   Tile = mongoose.model('Tile'),
   _ = require('lodash'),
   phantom = require('phantom');

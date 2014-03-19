@@ -4,6 +4,7 @@
     height: 450px;
     border: 1px solid black;
     text-align: center;
+    padding:5px;
   }
 </style>
 
@@ -14,7 +15,30 @@
 
   <div id="mainTile">
     <h2>{{tile.name}}</h2>
-    <img src="/modules/tiles/img/tiles/{{tile.imgUrl}}" alt="Splash">
-    <p>{{tile.content}}</p>
+
+   <img src="/modules/tiles/img/tiles/{{tile.imgUrl}}" alt="Splash">
+    <h5>{{tile.content}}</h5>
   </div>
+
+  <div id="testId" ng-hide="true">{{tile._id}}</div>
+
+  <h3>Comments</h3>
+  <div data-ng-repeat="content in tile.comments">
+    <!-- Comment -->
+    <p style="font-weight: bold;">{{content[1]}}</p> 
+    <!-- Username/Time Create -->
+    <p style="font-style: italic;">({{content[0]}} / {{content[2] | date:'medium'}})</p>
+
+  </div>
+</section>
+
+<section data-ng-controller="CommentsCtrl">
+<h3>Add comment</h3>
+  <form  data- ng-submit="create()">
+    <fieldset> 
+      <textarea data-ng-model="content" cols="60" rows="2" placeholder="Comment"></textarea>
+      <br>
+      <input type="submit" />
+    </fieldset>
+  </form>
 </section>
