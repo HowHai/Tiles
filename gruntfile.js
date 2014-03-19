@@ -11,6 +11,17 @@ module.exports = function(grunt) {
 					livereload: false,
 				}
 			},
+			sass: {
+			    files: ['sass/**/*.{scss,sass}','sass/_partials/**/*.{scss,sass}'],
+			    tasks: ['sass:dist']
+			},
+			source: {
+			  files: ['sass/**/*.scss'],
+			  tasks: ['sass'],
+			  options: {
+			    livereload: true, // needed to run LiveReload
+			  }
+			},
 			serverJS: {
 				files: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 				tasks: ['jshint'],
@@ -38,6 +49,13 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		sass: {
+        dist: {
+            files: {
+                'public/css/style.css': 'public/sass/style.scss'
+            }
+        }
+    },
 		jshint: {
 			all: {
 				src: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', 'public/js/**/*.js', 'public/modules/**/*.js'],
@@ -95,6 +113,7 @@ module.exports = function(grunt) {
 
 	//Default task(s).
 	grunt.registerTask('default', ['jshint', 'concurrent']);
+	// grunt.registerTask('default', ['sass']);
 
 	//Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);

@@ -13,6 +13,8 @@ var express = require('express'),
 	path = require('path'),
 	utilities = require('./utilities');
 
+var sass = require('node-sass');
+
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
@@ -104,6 +106,14 @@ module.exports = function(db) {
 
 	// Setting the app router and static folder
 	app.use(express.static(config.root + '/public'));
+
+	app.use(
+	    sass.middleware({
+	        src: __dirname + '/public/sass/', 
+	        dest: __dirname + '/public/css/',
+	        debug: true 
+	    })
+	);
 
 	// Load Routes
 	utilities.walk('./app/routes', /(.*)\.(js$|coffee$)/).forEach(function(routePath) {
