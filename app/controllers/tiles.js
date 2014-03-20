@@ -19,6 +19,18 @@ exports.list = function(req, res){
   });
 };
 
+// GET all tiles within a category
+exports.category = function(req, res){
+  var tilesCategory = req.params.categoryName;
+
+  Tile.find({category: tilesCategory}, function(error, data){
+    if (error)
+      res.send(error);
+    else
+      res.json(data);
+  })
+}
+
 // Create tile
 exports.create = function(req, res){
   // PhantomJS testt
