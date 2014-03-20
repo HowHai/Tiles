@@ -4,7 +4,7 @@ module.exports = {
 	db: 'mongodb://localhost/mean-travis',
 	port: 3001,
 	app: {
-		title: 'MEAN.JS - Travis Environment'
+		title: 'Cracked Tiles'
 	},
 	facebook: {
 		clientID: '1438896579687548',
