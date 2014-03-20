@@ -13,6 +13,8 @@ var express = require('express'),
 	path = require('path'),
 	utilities = require('./utilities');
 
+var sass = require('node-sass');
+
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
@@ -95,6 +97,15 @@ module.exports = function(db) {
 	// use passport session
 	app.use(passport.initialize());
 	app.use(passport.session());
+
+	// compile sass
+	app.use(
+	    sass.middleware({
+	        src: __dirname + '/public/sass/', 
+	        dest: __dirname + '/public/css/',
+	        debug: true 
+	    })
+	);
 
 	// connect flash for flash messages
 	app.use(flash());

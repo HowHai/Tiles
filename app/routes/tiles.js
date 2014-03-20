@@ -14,4 +14,5 @@ module.exports = function(app) {
 
   // GET all categories
   // app.get('/tiles/categories', tiles.categories);
+
 }

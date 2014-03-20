@@ -1,0 +1,10 @@
+<section >
+  <a ui-sref="showTile">Just One</a>
+  <button>Make Tile</button>
+
+  <div id="smallTile" ng-repeat="tile in tiles track by $index">
+    <h2>{{tile.name}}</h2>
+    <img class="small-box-image col-xs-12" src="{{tile.imgUrl}}" alt="Splash">
+    <p>{{tile.content}}</p>
+  </div>
+</section>
