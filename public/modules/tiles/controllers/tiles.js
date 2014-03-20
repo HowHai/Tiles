@@ -70,7 +70,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     // Create a random tile and save to database
     $scope.createTile = function() {
-      $http.get('/tiles', null)
+      $http.post('/tiles', null)
         .success(function(response) {
 
           // Assigns created tile object to $scope.tile

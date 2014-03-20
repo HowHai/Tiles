@@ -1,7 +1,7 @@
 var phantom = require('phantom');
 phantom.create(function(ph) {
   return ph.createPage(function(page) {
-    return page.open('http://www.thisiswhyimbroke.com/new/', function(status) {
+    return page.open('http://uncrate.com/', function(status) {
       console.log(status);
 
       page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',function() {
@@ -20,10 +20,16 @@ phantom.create(function(ph) {
             }
           }
 
-          jQuery('article .item img').each(function() {
-            var img = getImgDimensions(jQuery(this));
-            images.push(img);
-          });
+          console.log(jQuery('article .item img').length);
+
+          // jQuery('article .item img').each(function() {
+          //   var img = getImgDimensions(jQuery(this));
+          //   images.push(img);
+          // });
+            $('.article-list.grid li .image-wrapper img').each(function() {
+                var img = getImgDimensions($(this));
+                images.push(img);
+            });
 
           return images;
         }, function(result) {

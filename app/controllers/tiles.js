@@ -24,14 +24,13 @@ exports.categories = function(req, res){
   var sportsCategory = null;
   var geekyToysCategory = null;
 
-  Tile.find({category: 'sports'}, function(error, data) {
+  Tile.find({category: 'tech'}, function(error, data) {
     sportsCategory = data;
     return sportsCategory;
   });
 
-  Tile.find({category: 'geekytoys'}, function(error, data) {
+  Tile.find({category: 'style'}, function(error, data) {
     geekyToysCategory = data;
-    res.cookie('haiii', "Hai");
     res.json([sportsCategory, geekyToysCategory]);
   });
 
@@ -54,7 +53,7 @@ exports.create = function(req, res){
   // PhantomJS testt
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open('http://www.thisiswhyimbroke.com/new/', function(status) {
+      return page.open('http://uncrate.com/tech/', function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -73,33 +72,52 @@ exports.create = function(req, res){
                 }
               }
 
-              jQuery('article .item img').each(function() {
-                var img = getImgDimensions(jQuery(this));
-                images.push(img);
+              // thisiswhyiambroke.com images
+              // http://www.thisiswhyimbroke.com/new/
+              // jQuery('article .item img').each(function() {
+              //   var img = getImgDimensions(jQuery(this));
+              //   images.push(img);
+              // });
+
+              // uncrate.com images
+              $('.article-list.grid li .image-wrapper img').each(function() {
+                  var img = getImgDimensions($(this));
+                  images.push(img);
               });
+
+
               // END
 
               var titleArr = [];
               var contentArr = [];
 
+              // thisiswhyiambroke.com content
               // Get titles
-              jQuery('article h1 a').each(function() {
-                titleArr.push(jQuery(this)[0].title);
-              });
-              console.log(titleArr);
+              // jQuery('article h1 a').each(function() {
+              //   titleArr.push(jQuery(this)[0].title);
+              // });
 
+              // // Get contents
+              // jQuery('article .details .desc p').each(function() {
+              //   contentArr.push(jQuery(this)[0].innerText);
+              // });
+              //
+
+              // uncrate.com content
               // Get contents
-              jQuery('article .details .desc p').each(function() {
-                contentArr.push(jQuery(this)[0].innerText);
+              $('.article-list.grid li .content-wrapper .copy-wrapper p:first-of-type').each(function() {
+                contentArr.push($(this)[0].innerText);
               });
-              console.log(contentArr);
+
+              // Get titles
+              $('.article-list.grid li .content-wrapper .copy-wrapper h1 a').each(function() { titleArr.push($(this)[0].text); });
 
               // Create an array of objects containing titles and contents
               var tilesArr = []
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: 'tech', name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -119,7 +137,7 @@ exports.create = function(req, res){
                 }
                 ph.exit();
             });
-          }, 1000);
+          }, 5000);
         });
       });
     });
