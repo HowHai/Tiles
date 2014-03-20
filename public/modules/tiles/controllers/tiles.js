@@ -3,6 +3,9 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
   function($scope, $http) {
 
+    var horizontal = [];    
+    var hPosition = 1;
+
     $scope.loadTiles = function() {
       $http.get('/tiles', null)
         .success(function(response) {
@@ -15,7 +18,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             }
             if (!found) randomTiles[randomTiles.length] = randomNumber;
           }
-
           console.log(randomTiles);
           console.log(response.length);
 
@@ -25,15 +27,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           $scope.tileUp = response[randomTiles[3]];
           $scope.tileDown = response[randomTiles[4]];
 
-          $scope.horizontal = [];
-          $scope.horizontal.push($scope.tileLeft, $scope.tileMain, $scope.tileRight);
-          console.log($scope.horizontal);
+          horizontal.push($scope.tileLeft, $scope.tileMain, $scope.tileRight);
+          console.log(horizontal);
         });
     }
 
     $scope.moveUp = function() {
-      // $scope.tileMain = $scope.tileUp;
-      $scope.loadTiles();
+      $scope.tileMain = $scope.tileUp;
     }
 
     $scope.moveDown = function() {
@@ -41,11 +41,52 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     }
 
     $scope.moveLeft = function() {
-      $scope.tileMain = $scope.tileLeft; 
+      hPosition -= 1;
+      $scope.tileMain = horizontal[hPosition];
+      console.log(hPosition);
+      console.log(horizontal.length);
+
+      if (hPosition < 1) {
+        $http.get('/tiles', null)
+          .success(function(response) {
+            var randomTiles = [];
+            while (randomTiles.length < 3) {
+              var randomNumber = Math.floor(Math.random() * (response.length));
+              var found = false;
+              for (var i = 0; i < randomTiles.length; i++) {
+                if (randomTiles[i] == randomNumber) {found = true; break}
+              }
+              if (!found) randomTiles[randomTiles.length] = randomNumber;
+            }
+            horizontal.unshift(response[randomTiles[0]]);
+            hPosition += 1;
+            console.log(horizontal);
+          });        
+      }
     }
 
     $scope.moveRight = function() {
-      $scope.tileMain = $scope.tileRight; 
+      hPosition += 1;
+      $scope.tileMain = horizontal[hPosition];
+      console.log(hPosition);
+      console.log(horizontal.length);
+
+      if (horizontal.length - hPosition <= 1) {
+        $http.get('/tiles', null)
+          .success(function(response) {
+            var randomTiles = [];
+            while (randomTiles.length < 3) {
+              var randomNumber = Math.floor(Math.random() * (response.length));
+              var found = false;
+              for (var i = 0; i < randomTiles.length; i++) {
+                if (randomTiles[i] == randomNumber) {found = true; break}
+              }
+              if (!found) randomTiles[randomTiles.length] = randomNumber;
+            }
+            horizontal.push(response[randomTiles[0]]);
+            console.log(horizontal);
+          });
+      }
     }
 
     // Create a random tile and save to database
