@@ -35,7 +35,8 @@
 		"bower": "~1.2.8",
 		"grunt-cli": "~0.1.13",
 		"grunt-sass": "0.6.1",
-		"node-sass": "*"
+		"node-sass": "*",
+		"phantom": "*"
 
 	},
 	"devDependencies": {
