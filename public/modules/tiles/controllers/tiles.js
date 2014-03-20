@@ -3,15 +3,20 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
   function($scope, $http) {
 
-    $http.get('/tiles', null)
-      .success(function(response) {
-        $scope.tileMain = response[0];
-        $scope.tileTop = response[1];
-        $scope.tileLeft = response[2];
-        $scope.tileRight = response[3];
-        $scope.tileBottom = response[4];
-        $scope.tiles = response;
-      })
+    // $http.get('/tiles', null)
+    //   .success(function(response) {
+    //     $scope.tiles = response;
+    //     console.log(response);
+    //   })
+
+    $scope.tiles = [];
+    var tile = {name: "iPhone5s", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, eligendi, placeat quae repellat voluptas officiis quisquam quo numquam corrupti odit amet animi tempore consectetur modi dicta fugit voluptatum aspernatur labore.", imgUrl: "http://s1.ibtimes.com/sites/www.ibtimes.com/files/styles/v2_article_large/public/2013/08/26/iphone-5s.JPG"};
+
+    $scope.tiles.push(tile);
+    $scope.tiles.push(tile);
+    $scope.tiles.push(tile);
+    $scope.tiles.push(tile);
+    $scope.tiles.push(tile);
 
     // Create a random tile and save to database
     $scope.createTile = function() {

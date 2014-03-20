@@ -9,20 +9,40 @@ var mongoose = require('mongoose'),
 
 // Get list of all tiles
 exports.list = function(req, res){
-  Tile.find(function(error, data) {
-    if (error)
-      res.send(error);
-    else
-      res.json(data);
-  });
+
+  var tileMain = new Tile(randomTileObject());
+  var tileLeft = new Tile(randomTileObject());
+  var tileRight = new Tile(randomTileObject());
+  var tileTop = new Tile(randomTileObject());
+  var tileBottom = new Tile(randomTileObject());
+  var tiles = [tileMain, tileLeft, tileRight, tileTop, tileBottom]
+
+  // tiles.save(function(error, data) {
+  //   if (error)
+  //     res.send(error);
+  //   else
+  //     res.json(data); // Return created tile object
+  // });
+
+  // Tile.find(function(error, data) {
+  //   if (error)
+  //     res.send(error);
+  //   else
+  //     res.json(data);
+  // });
 };
 
 // Create tile
 exports.create = function(req, res){
   // Create a random tile from seed data
-  var tile = new Tile(randomTileObject());
+  var tileMain = new Tile(randomTileObject());
+  var tileLeft = new Tile(randomTileObject());
+  var tileRight = new Tile(randomTileObject());
+  var tileTop = new Tile(randomTileObject());
+  var tileBottom = new Tile(randomTileObject());
+  var tiles = [tileMain, tileLeft, tileRight, tileTop, tileBottom]
 
-  tile.save(function(error, data) {
+  tiles.save(function(error, data) {
     if (error)
       res.send(error);
     else

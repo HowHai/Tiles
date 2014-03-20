@@ -54,17 +54,18 @@ body {
 }
 
 #showTile {
-  width: 100%;
+  // width: 100%;
   padding: 0;
   margin: 0;
-  height: 100%;
+  // height: 100%;
   img {
     width: 100%;
-    height: 65%;
+    // height: 65%;
   }
   .tile-info {
-    border: 15px solid tomato;
-    height: 25%;
+    // border: 15px solid tomato;
+    // height: 25%;
+    width: 100%;
     padding: 20px 0;
     .tile-title {
       text-align: center;
@@ -80,5 +81,12 @@ body {
     position: absolute;
     bottom: 10;
     margin-top: 100px;
+  }
+  .btn {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+    margin: 0;
   }
 }

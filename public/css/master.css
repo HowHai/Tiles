@@ -39,16 +39,12 @@ body {
   height: 100%; }
 
 #showTile {
-  width: 100%;
   padding: 0;
-  margin: 0;
-  height: 100%; }
+  margin: 0; }
   #showTile img {
-    width: 100%;
-    height: 65%; }
+    width: 100%; }
   #showTile .tile-info {
-    border: 15px solid tomato;
-    height: 25%;
+    width: 100%;
     padding: 20px 0; }
     #showTile .tile-info .tile-title {
       text-align: center;
@@ -61,3 +57,9 @@ body {
     position: absolute;
     bottom: 10;
     margin-top: 100px; }
+  #showTile .btn {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+    margin: 0; }
