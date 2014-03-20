@@ -8,4 +8,10 @@ module.exports = function(app) {
 
   // Create tiles *seeded currently*
   app.post('/tiles', tiles.create);
+
+  // GET tiles within a category
+  app.get('/tiles/category/:categoryName', tiles.category);
+
+  // GET all categories
+  // app.get('/tiles/categories', tiles.categories);
 }
