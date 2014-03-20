@@ -1,19 +1,25 @@
 <style>
-  #mainTile {
+  #mainTile, #singleTile {
     width: 450px;
     height: 450px;
     border: 1px solid black;
     text-align: center;
     padding:5px;
   }
+
+  #spritz {
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 16px;
+  }
 </style>
 
 <section>
   <h1>Cracked Tiles</h1>
 
-  <button ng-click="createTile()">Make Tile</button>
-
-  <div id="mainTile">
+  <div id="mainTile" ng-hide="true">
     <h2>{{tile.name}}</h2>
 
    <img src="http://cracked.herokuapp.com/modules/tiles/img/tiles/{{tile.imgUrl}}" alt="Splash">
@@ -31,15 +37,37 @@
 
   </div>
 
+  <!-- Spritz test -->
 
-  <!-- Moving tiles test -->
-  <button>UP</button>
-  <button>DOWN</button>
-  <button>LEFT</button>
-  <button>RIGHT</button>
+  <div id="spritzBox">
+    <button ng-click="spritzNow(singleTile.content)">Spritz!</button>
+    <p id="spritz"></p>
+  </div>
 
   <!-- END -->
 
+
+  <!-- Moving tiles test -->
+  <button ng-click="changeCategory(1)">UP</button>
+  <button ng-click="changeCategory(-1)">DOWN</button>
+  <button ng-click="changeTile(1)">RIGHT</button>
+  <button ng-click="changeTile(-1)">LEFT</button>
+
+
+  <div id="singleTile">
+    <h2>{{singleTile.name}}</h2>
+   <img src="modules/tiles/img/tiles/{{singleTile.imgUrl}}" alt="Splash">
+   <p>{{singleTile.content}}</p>
+  </div>
+
+  <!-- END -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 </section>
 

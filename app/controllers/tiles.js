@@ -19,6 +19,24 @@ exports.list = function(req, res){
   });
 };
 
+// GET all tiles in all categories and return as an array
+exports.categories = function(req, res){
+  var sportsCategory = null;
+  var geekyToysCategory = null;
+
+  Tile.find({category: 'sports'}, function(error, data) {
+    sportsCategory = data;
+    return sportsCategory;
+  });
+
+  Tile.find({category: 'geekytoys'}, function(error, data) {
+    geekyToysCategory = data;
+    res.cookie('haiii', "Hai");
+    res.json([sportsCategory, geekyToysCategory]);
+  });
+
+}
+
 // GET all tiles within a category
 exports.category = function(req, res){
   var tilesCategory = req.params.categoryName;

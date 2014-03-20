@@ -13,6 +13,5 @@ module.exports = function(app) {
   app.get('/tiles/category/:categoryName', tiles.category);
 
   // GET all categories
-  // app.get('/tiles/categories', tiles.categories);
-
+  app.get('/tiles/categories', tiles.categories);
 }
