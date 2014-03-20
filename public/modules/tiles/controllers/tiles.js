@@ -43,9 +43,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         if (counter >= contentArr.length - 1)
           window.clearInterval(startSpritz);
 
-        console.log(counter);
-        console.log(contentArr.length);
-
         var avgNumber = Math.round(contentArr[counter].length * 0.29);
         var wordArr = contentArr[counter].split('');
         wordArr.splice(avgNumber, 1, "<span class='red'>" + contentArr[counter][avgNumber] + "</span>")
@@ -53,7 +50,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
         $('#spritz').html(wordArr);
         counter++;
-      }, 150);
+      }, 250);
     };
     // END
 
