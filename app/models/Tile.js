@@ -23,4 +23,9 @@ TileSchema.statics = {
   }
 };
 
+TileSchema.path('content').validate(function(content) {
+  return content.length;
+}, 'content cannot be blank');
+
+
 mongoose.model('Tile', TileSchema);
