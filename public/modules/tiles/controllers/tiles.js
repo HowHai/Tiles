@@ -8,25 +8,25 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     $(function() {  
 
-      $("#main").swipe( {swipeStatus: swipe2,
+      $("#tileMain").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
          
           if(direction=="right"){
-            $("#main").css("background-color","blue");
+            $scope.moveRight();     
           }
           else if(direction=="left"){
-
+            $scope.moveLeft();
           }
           else if(direction=="up"){
-
+            $scope.moveUp();
           }
           else if(direction=="down"){
-            
+            $scope.moveDown();
           }
         },
         //Default is 75px, set to 0 for demo so any distance triggers swipe
-         threshold:100
+         threshold:50
       });
 
 
@@ -40,19 +40,19 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             $(".tile").css("margin-left", -distance);
           }
           else if (direction == 'down'){
-            $("#main").css("bottom", -distance);
-            $("#top").css("bottom", 400-distance);
-            $("#down").css("bottom", -400-distance);
-            $("#left").css("bottom", -distance);
-            $("#right").css("bottom", -distance);
+            $("#tileMain").css("bottom", -distance);
+            $("#tileUp").css("bottom", 400-distance);
+            $("#tileDown").css("bottom", -400-distance);
+            $("#tileLeft").css("bottom", -distance);
+            $("#tileRight").css("bottom", -distance);
           }
           
           else if (direction == 'up'){
-            $("#main").css("bottom", distance);
-            $("#down").css("bottom", -400+distance);
-            $("#top").css("bottom", 400+distance);
-            $("#left").css("bottom", distance);
-            $("#right").css("bottom", distance);
+            $("#tileMain").css("bottom", distance);
+            $("#tileDown").css("bottom", -400+distance);
+            $("#tileUp").css("bottom", 400+distance);
+            $("#tileLeft").css("bottom", distance);
+            $("#tileRight").css("bottom", distance);
           }
            
         }
@@ -60,19 +60,19 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           console.log(distance);
           if(distance>100){
            $(".tile").css("margin", "10px");
-           $("#down").css("bottom","-100%");
-           $("#top").css("bottom","100%");
-           $("#main").css("bottom", 0);
-           $("#left").css("bottom", 0);
-           $("#right").css("bottom", 0);
+           $("#tileDown").css("bottom","-100%");
+           $("#tileUp").css("bottom","100%");
+           $("#tileMain").css("bottom", 0);
+           $("#tileLeft").css("bottom", 0);
+           $("#tileRight").css("bottom", 0);
           }
           else{
             $(".tile").css("margin", "10px");
-            $("#down").css("bottom","-100%");
-           $("#top").css("bottom","100%");
-           $("#main").css("bottom", 0);
-           $("#left").css("bottom", 0);
-           $("#right").css("bottom", 0);
+            $("#tileDown").css("bottom","-100%");
+           $("#tileUp").css("bottom","100%");
+           $("#tileMain").css("bottom", 0);
+           $("#tileLeft").css("bottom", 0);
+           $("#tileRight").css("bottom", 0);
           }
         }
       };

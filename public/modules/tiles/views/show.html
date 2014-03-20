@@ -7,31 +7,22 @@
       <button ng-click="moveRight()">RIGHT</button>
     </div> -->
 
-    <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
-<!-- 
-    <div id="top" class="tile">
-      
-    </div>
-    <div id="down" class="tile">
-      
-    </div>
-    <div id="main" class="tile">
-      
-    </div>
-    <div id="right" class="tile">
-      
-    </div>
-    <div id="left" class="tile">
-      
-    </div>
- -->
-<!-- 
-    <div class="tile-info text-center">
-      <h2 class="tile-title">{{tileMain.name}}</h2>
-      <p class="tile-desc">{{tileMain.content}}</p>
-    </div>
 
+  <div>
+    <div class="tile" id="tileUp"></div>
+    <div class="tile" id="tileDown"></div>
+    <div class="tile" id="tileMain">
+      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileMain.name}}</h1>
+        <p class="tile-desc">{{tileMain.content}}</p>
+      </div>
+    </div>
+    <div class="tile" id="tileRight"></div>
+    <div class="tile" id="tileLeft"></div>
+  </div>
 
+<!-- 
     <div class="col-xs-12 btn-group">
       <button type="button" class="btn btn-primary col-xs-4">Share</button>
       <button type="button" class="btn btn-danger col-xs-4">Buy</button>

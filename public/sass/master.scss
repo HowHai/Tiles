@@ -51,12 +51,11 @@ a.undecorated-link:hover {
 
 .navbar-header {
   background-color: white;
-  padding: 0 10px;
 }
 
 .navbar-inverse {
   .navbar-brand {
-    color: gray;
+    color: #1D7A9E;
     font-weight: 300;
     text-shadow: none;
     &:active, &:hover {
@@ -65,7 +64,7 @@ a.undecorated-link:hover {
   }
   .navbar-toggle {
     border-radius: 0px;
-    border-color: #CCC;
+    border-color: #58c9f3;
     .icon-bar {
       background-color: tomato;
     }
@@ -87,56 +86,66 @@ a.undecorated-link:hover {
 // Show Tile View
 
 #showTile {
-  border: 4px solid tomato;
-  height: 100%;
+  border: 4px solid #58c9f3;
+  text-align: center;
+  height: 90%;
+  height: calc(100% - 50px);
+  overflow: hidden;
+  h1 {
+    margin: 0;
+    margin-top: 5px;
+    font-size: 1.6em;
+  }
+  p {
+    margin-top: 10px;
+  }
   img {
     width: 100%;
   }
-//   overflow: hidden;
-//   position: absolute;
+  .tile-info {
+    padding: 15px 12px;
+  }
+  position: absolute;
 //   height: 100vh;
-//   .tile{
-//     // width: 83%;
-//     // height: 85%;
-//     height: 90vh;
-//     float: left;
-//     bottom: 0px;
-//     margin: 10px;
+  .tile{
+    width: 100%;
+    // height: 100%;
+    float: left;
+    bottom: 0px;
+    margin: 0px;
 //     padding: 15px;
 //     background-color: #ccc;
 //     color: white;
 //     font-family: Helvetica Neue;
 //     font-size: 30px;
 //     text-align: center;
-//     position: absolute;
-//   }
-//   #main{
-//     left: 0;
-//     bottom: 0px;
-//     margin: 10px;
-//     width: 83%;
-//     height: 90vh;
-
-//     // height: 85%;
-//   }
-//   #top{
-//     background-color: red;
-//     bottom: 100%;
-//     left: 0px;
-//   }
-//   #down{
-//     background-color: red;
-//     bottom: -100%;
-//     left: 0px;
-//   }
-//   #right{
-//     background-color: red;
-//     left: 100%;
-//   }
-//   #left{
-//     background-color: red;
-//     left: -100%;
-//   }
+    position: absolute;
+  }
+  #tileMain{
+    left: 0;
+    bottom: 0px;
+    margin: 0px;
+    // width: 100%;
+    // height: 100%;
+  }
+  #tileUp{
+    background-color: #58c9f3;
+    bottom: 100%;
+    left: 0px;
+  }
+  #tileDown{
+    background-color: #58c9f3;
+    bottom: -100%;
+    left: 0px;
+  }
+  #tileRight{
+    background-color: #58c9f3;
+    left: 100%;
+  }
+  #tileLeft{
+    background-color: #58c9f3;
+    left: -100%;
+  }
 //   padding: 0;
 //   margin: 0;
 //   img {
