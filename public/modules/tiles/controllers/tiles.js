@@ -36,16 +36,22 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     // SPRITZ test
     $scope.spritzNow = function(content) {
-      var contentArr = content.split(/\W/);
+      var contentArr = content.split(/\W/).filter(function(n) { return n != undefined });
       var counter = 0;
 
       var startSpritz = setInterval(function() {
-        $('#spritz').text(contentArr[counter]);
+        var avgNumber = Math.round(contentArr[counter].length * 0.29);
+        var wordArr = contentArr[counter] != "" ? contentArr[counter].split('') : [];
+        wordArr.splice(avgNumber, 1, "<span class='red'>" + contentArr[counter][avgNumber] + "</span>")
+        wordArr = wordArr.join('');
+        console.log(wordArr);
+
+        $('#spritz').html(wordArr);
         console.log("Running");
         counter++;
         if (counter > contentArr.length)
           window.clearInterval(startSpritz);
-      }, 200);
+      }, 250);
     };
     // END
 
