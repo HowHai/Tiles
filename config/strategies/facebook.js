@@ -24,7 +24,7 @@ module.exports = function() {
 						firstName: profile.name.givenName,
 						lastName: profile.name.familyName,
 						displayName: profile.displayName,
-						email: profile.emails[0].value,
+						// email: profile.emails[0].value,
 						username: profile.username,
 						provider: 'facebook',
 						providerData: profile._json
