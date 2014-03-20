@@ -8,7 +8,7 @@
   }
 </style>
 
-<section data-ng-controller="TilesCtrl">
+<section>
   <h1>Cracked Tiles</h1>
 
   <button ng-click="createTile()">Make Tile</button>
@@ -16,7 +16,7 @@
   <div id="mainTile">
     <h2>{{tile.name}}</h2>
 
-   <img src="/modules/tiles/img/tiles/{{tile.imgUrl}}" alt="Splash">
+   <img src="http://cracked.herokuapp.com/modules/tiles/img/tiles/{{tile.imgUrl}}" alt="Splash">
     <h5>{{tile.content}}</h5>
   </div>
 
