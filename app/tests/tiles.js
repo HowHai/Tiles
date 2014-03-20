@@ -5,14 +5,14 @@ var should = require('should'),
     mongoose = require('mongoose'),
     express = require('express'),
     User = mongoose.model('User'),
-    Comment = mongoose.model('Comment');
+    Tile = mongoose.model('Tile');
 
-var comment;
+var tile;
 var user;
 var app = express();
 
 describe ('<Unit Test>', function () {
-  describe('Model Comment:', function() { 
+  describe('Model Tile:', function() { 
     beforeEach(function(done) { 
       user = new User ({
         firstName: 'Full',
@@ -24,11 +24,13 @@ describe ('<Unit Test>', function () {
       });
 
       user.save(function() {
-        comment = new Comment({
-          user: user,
-          content: 'Dont comment on me, bro',
+        tile = new Tile({
           created: Date.now(),
-          tile: 'Im a tile'
+          name: 'Towelie',
+          content: 'Wanna get hai',
+          imgUrl: 'www.towelie.com/towel.jpg',
+          category: 'Towels',
+          comments: []
         });
 
         done();
@@ -36,16 +38,16 @@ describe ('<Unit Test>', function () {
      });
 
     describe('Method Save', function() {
-      it('should be able to save comments without problmem', function(done) {
-        return comment.save(function(err) {
+      it('should be able to save tiles without problmem', function(done) {
+        return tile.save(function(err) {
           should.not.exist(err);
           done();
         });
       });
 
       it('should show an error when content is empty', function(done) {
-        comment.content = '';
-        return comment.save(function(err) {
+        tile.content = '';
+        return tile.save(function(err) {
           should.exist(err);
           done();
         });
@@ -54,18 +56,18 @@ describe ('<Unit Test>', function () {
 
     // Remove items or else they stay in database
     afterEach(function(done) {
-      Comment.remove().exec();
+      Tile.remove().exec();
       User.remove().exec();
       done();
     });
   });
 
 
-  describe('HTTP Comments', function() {
-    describe('GET /comments', function() {
+  describe('HTTP Tiles', function() {
+    describe('GET /tiles', function() {
       it ('should response with json', function(done){
         supertest(app)
-        .get('/comments')
+        .get('/tiles')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         done();

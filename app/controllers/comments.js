@@ -58,7 +58,7 @@ exports.delete = function(req, res) {
 
 // List of comments 
 exports.list = function(req, res) {
-  Comment.find().sort('-created').populate('user', 'displayName').exec(function(err, comments) {
+  Comment.find().exec(function(err, comments) {
     if (err) {
       res.render('error', {
         status: 500
