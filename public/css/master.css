@@ -72,6 +72,19 @@ a.undecorated-link:hover {
     width: 100%; }
   #showTile .tile-info {
     padding: 15px 12px; }
+    #showTile .tile-info #bottom-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.4), #ffffff);
+      width: 100%;
+      height: 60px; }
+      #showTile .tile-info #bottom-fade h2 {
+        margin-top: 30px;
+        background-color: white;
+        font-size: 0.7em;
+        text-transform: capitalize; }
   #showTile .tile {
     width: 100%;
     height: 100%;
