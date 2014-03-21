@@ -184,27 +184,25 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         };
     });
 
-    // Ultimately, we'll probably went to select 5 random, unique tiles on the server side and only return those
     $scope.loadTiles = function() {
       $scope.nav_open = false;
-      $http.get('/tiles', null)
+      $http.get('/tiles/categories', null)
         .success(function(response) {
-          var randomTiles = [];
-          while (randomTiles.length < 5) {
-            var randomNumber = Math.floor(Math.random() * (response.length));
-            var found = false;
-            for (var i = 0; i < randomTiles.length; i++) {
-              if (randomTiles[i] == randomNumber) {found = true; break}
-            }
-            if (!found) randomTiles[randomTiles.length] = randomNumber;
-          }
-          console.log(randomTiles);
-          console.log(response.length);
+          // var randomTiles = [];
+          // while (randomTiles.length < 5) {
+          //   var randomNumber = Math.floor(Math.random() * (response.length));
+          //   var found = false;
+          //   for (var i = 0; i < randomTiles.length; i++) {
+          //     if (randomTiles[i] == randomNumber) {found = true; break}
+          //   }
+          //   if (!found) randomTiles[randomTiles.length] = randomNumber;
+          // }
+          // console.log(randomTiles);
+          console.log(response);
 
-          $scope.tileLeft = response[randomTiles[0]];
-          // $scope.tileMain = response[0][0];
-          $scope.tileMain = response[randomTiles[1]];
-          $scope.tileRight = response[randomTiles[2]];
+          $scope.tileLeft = response[0][0];
+          $scope.tileMain = response[0][0];
+          $scope.tileRight = response[0][0];
 
           $scope.tileUp = response[0][3];
           $scope.tileDown = response[0][4];
@@ -213,6 +211,35 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           console.log(horizontal);
         });
     }
+
+    // $scope.loadTiles = function() {
+    //   $scope.nav_open = false;
+    //   $http.get('/tiles', null)
+    //     .success(function(response) {
+    //       var randomTiles = [];
+    //       while (randomTiles.length < 5) {
+    //         var randomNumber = Math.floor(Math.random() * (response.length));
+    //         var found = false;
+    //         for (var i = 0; i < randomTiles.length; i++) {
+    //           if (randomTiles[i] == randomNumber) {found = true; break}
+    //         }
+    //         if (!found) randomTiles[randomTiles.length] = randomNumber;
+    //       }
+    //       console.log(randomTiles);
+    //       console.log(response.length);
+
+    //       $scope.tileLeft = response[randomTiles[0]];
+    //       // $scope.tileMain = response[0][0];
+    //       $scope.tileMain = response[randomTiles[1]];
+    //       $scope.tileRight = response[randomTiles[2]];
+
+    //       $scope.tileUp = response[0][3];
+    //       $scope.tileDown = response[0][4];
+
+    //       horizontal.push($scope.tileLeft, $scope.tileMain, $scope.tileRight);
+    //       console.log(horizontal);
+    //     });
+    // }
 
     $scope.moveUp = function() {
       $scope.tileMain = $scope.tileUp;
@@ -310,6 +337,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     // Create a random tile and save to database
     // Leave this alone!!!!!!!!!!!!!
+
+    // CANT TOUCH THISSSSSS, HAI *fsssttt*
+
     $scope.createTile = function() {
       $http.post('/tiles', null)
         .success(function(response) {

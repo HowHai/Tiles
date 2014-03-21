@@ -21,6 +21,7 @@ exports.list = function(req, res){
 
 // GET all tiles in all categories and return as an array
 exports.categories = function(req, res){
+
   var gearCategory = null;
   var styleCategory = null;
   var carsCategory = null;
@@ -73,11 +74,8 @@ exports.categories = function(req, res){
 
   Tile.find({category: 'food'}, function(error, data) {
     foodCategory = data;
-    return foodCategory
+    res.json([gearCategory, styleCategory, carsCategory, techCategory, vicesCategory, mediaCategory, bodyCategory, homeCategory, foodCategory]);
   });
-  
-  res.json([gearCategory, styleCategory, carsCategory, techCategory, vicesCategory, mediaCategory, bodyCategory, homeCategory, foodCategory]);
-
 }
 
 // GET all tiles within a category
