@@ -51,6 +51,7 @@ a.undecorated-link:hover {
 
 #showTile {
   border: 4px solid #58c9f3;
+  background-color: black;
   text-align: center;
   height: 90%;
   height: calc(100% - 50px);
@@ -74,6 +75,7 @@ a.undecorated-link:hover {
     margin: 0px;
     position: absolute; }
   #showTile #tileMain {
+    background-color: white;
     left: 0;
     bottom: 0px;
     margin: 0px; }
@@ -91,3 +93,26 @@ a.undecorated-link:hover {
   #showTile #tileLeft {
     background-color: #58c9f3;
     left: -108%; }
+  #showTile #navigation-instructions {
+    display: none;
+    opacity: 0;
+    transition: 0.9s;
+    position: fixed;
+    z-index: 10;
+    height: 90%;
+    height: calc(100% - 50px);
+    width: 100%;
+    color: white;
+    font-size: 3em;
+    padding: 20px;
+    padding-top: 10px; }
+    #showTile #navigation-instructions .center-vertical {
+      padding-top: 47%; }
+    #showTile #navigation-instructions .clear {
+      clear: both; }
+    #showTile #navigation-instructions .bottom {
+      padding-top: 58%; }
+    #showTile #navigation-instructions .tutorial-text {
+      width: 100%;
+      position: relative;
+      line-height: 10px; }
