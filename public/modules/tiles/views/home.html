@@ -74,13 +74,19 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-
 </section>
 
+<!-- Voting -->
+<section data-ng-controller="VotesCtrl">
+  <button ng-click="create('up')">UpVote</button>
+  total: {{totalUp}}
+  <button ng-click="create('down')">DownVote</button>
+  total: {{totalDown}}
+  <br>
+  <!-- total votes: {{voteTotal}} -->
+</section>
+
+<!-- ADD Comments -->
 <section data-ng-controller="CommentsCtrl">
 <h3>Add comment</h3>
   <form  data- ng-submit="create()">
@@ -91,3 +97,4 @@
     </fieldset>
   </form>
 </section>
+

@@ -8,15 +8,24 @@ var VoteSchema = new Schema({
     type: String
   },
   choice: {
-    type: Boolean
+    type: String
+  },
+  tile: {
+    type: String
   }
+  // upVotes: {
+  //   type: String
+  // },
+  // downVotes: {
+  //   type: String
+  // }
 });
 
 VoteSchema.statics = {
   load: function(id, cb) {
     this.findOne({
       _id: id
-    }).populate('user', 'displayName').exec(cb);
+    }).populate('user', 'displayName', 'tile').exec(cb);
   }
 };
 

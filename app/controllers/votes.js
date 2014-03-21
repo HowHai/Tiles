@@ -35,6 +35,24 @@ exports.create = function(req, res) {
   });
 };
 
+// Update a vote
+
+exports.update = function(req, res) {
+  var vote = req.vote;
+
+  vote = _.extend(vote, req.body);
+
+  vote.save(function(err) {
+    if (err) {
+      res.render('error', {
+        status: 500
+      });
+    } else {
+      res.jsonp(vote);
+    }
+  });
+};
+
 // Show current vote
 exports.read = function(req, res) {
   res.jsonp(req.vote);

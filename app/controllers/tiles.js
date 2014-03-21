@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
   Comment = mongoose.model('Comment'),
   Tile = mongoose.model('Tile'),
+  Vote = mongoose.model('Vote'),
   _ = require('lodash'),
   phantom = require('phantom');
 

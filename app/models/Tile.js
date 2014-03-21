@@ -12,14 +12,15 @@ var TileSchema = new Schema({
   content: {type: String},
   imgUrl: {type: String},
   category: {type: String},
-  comments: []
+  comments: [],
+  votes: []
 });
 
 TileSchema.statics = {
   load: function(id, cb) {
     this.findOne({
       _id: id
-    }).populate('user', 'displayName', 'comments').exec(cb);
+    }).populate('user', 'displayName', 'comments', 'votes').exec(cb);
   }
 };
 
