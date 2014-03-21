@@ -50,6 +50,20 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     };
     // END
 
+    $scope.closeNav = function(){
+
+      $("#tileMain").removeClass("nav-open");
+      $("#tileMain").addClass("nav-close");
+      $("#navigation-instructions").css("transition","1s");
+      $("#navigation-instructions").css("opacity", "0");
+      setTimeout(function(){
+        $("#navigation-instructions").css("display", "none");
+        $("#tileMain").removeClass("nav-close");
+      },500);
+      $scope.nav_open = false;
+    
+    };
+
 
 
     // $scope.tiles = [];
@@ -79,39 +93,39 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           }
           else if(distance == 0 && direction == null){
             // $("#tileMain").addClass("bounce-out");
-            $("#tileMain").css("transition","0.25s");
-            $("#tileMain .tile-info").css("transition","0.25s");
-            $("#navigation-instructions").css("transition","1s");
-            $("#tileMain").css("height","99.9%");
-            $("#tileMain").css("width","99.9%");
-            $("#tileMain").css("padding","10px");
-            $("#tileMain").css("opacity","0.3");
-            $("#navigation-instructions").css("display", "block");
-            $("#navigation-instructions").css("opacity", "1");
-            $("#tileMain .tile-info").css("font-size","0.8em");
-            $("#tileMain .tile-info").css("padding-top","10px");
+            if($scope.nav_open == false){
+              $("#tileMain").addClass("nav-open");
+              $("#tileMain").removeClass("nav-close");
+              $("#navigation-instructions").css("transition","1s");
+              $("#navigation-instructions").css("display", "block");
+              $("#navigation-instructions").css("opacity", "1");
+              $scope.nav_open = true;
+            }
+           
 
 
-            setTimeout(function(){
-              // $("#tileMain").addClass("bounce-in");
-              // $("#tileMain").removeClass("bounce-out");
-            $("#tileMain").css("transition","0.25s");
-            $("#tileMain .tile-info").css("transition","0.25s");
-            $("#navigation-instructions").css("transition","1s");
-            $("#tileMain").css("height","100%");
-            $("#tileMain").css("width","100%");
-            $("#tileMain").css("padding","0px");
-            $("#tileMain").css("opacity","1");
-            $("#navigation-instructions").css("opacity", "0");
-            $("#tileMain .tile-info").css("font-size","1em");
-            $("#tileMain .tile-info").css("padding-top","15px");
-            }, 250);
+            // setTimeout(function(){
+            //   // $("#tileMain").addClass("bounce-in");
+            //   // $("#tileMain").removeClass("bounce-out");
+            // $("#tileMain").removeClass("nav-open");
+            // $("#tileMain").addClass("nav-close");
+            // // $("#tileMain").css("transition","0.25s");
+            // // $("#tileMain .tile-info").css("transition","0.25s");
+            // $("#navigation-instructions").css("transition","1s");
+            // // $("#tileMain").css("height","100%");
+            // // $("#tileMain").css("width","100%");
+            // // $("#tileMain").css("padding","0px");
+            // // $("#tileMain").css("opacity","1");
+            // $("#navigation-instructions").css("opacity", "0");
+            // // $("#tileMain .tile-info").css("font-size","1em");
+            // // $("#tileMain .tile-info").css("padding-top","15px");
+            // }, 250);
 
-            setTimeout(function(){
-              $("#tileMain").css("transition","0s");
-              $("#tileMain .tile-info").css("transition","0s");
-              $("#navigation-instructions").css("display", "none");
-            },500);
+            // setTimeout(function(){
+            //   $("#tileMain").css("transition","0s");
+            //   $("#tileMain .tile-info").css("transition","0s");
+            //   $("#navigation-instructions").css("display", "none");
+            // },500);
 
             
               
@@ -188,6 +202,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     // Ultimately, we'll probably went to select 5 random, unique tiles on the server side and only return those
     $scope.loadTiles = function() {
+      $scope.nav_open = false;
       $http.get('/tiles', null)
         .success(function(response) {
           var randomTiles = [];
