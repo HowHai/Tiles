@@ -5,28 +5,28 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
 
     // Testing Tile categories and movement
-    // $scope.allTiles;
-    // $scope.singleTile;
-    // var categoryPosition;
-    // var tilePosition;
+    $scope.allTiles;
+    $scope.singleTile;
+    var categoryPosition;
+    var tilePosition;
 
-    // $http.get('/tiles/categories', null)
-    //   .success(function(response) {
-    //     $scope.allTiles = response;
-    //     $scope.singleTile = $scope.allTiles[0][0];
-    //     categoryPosition = 0;
-    //     tilePosition = 0;
-    //   });
+    $http.get('/tiles/categories', null)
+      .success(function(response) {
+        $scope.allTiles = response;
+        $scope.singleTile = $scope.allTiles[0][0];
+        categoryPosition = 0;
+        tilePosition = 0;
+      });
 
-    // $scope.changeCategory = function(num) {
-    //   categoryPosition += num;
-    //   $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
-    // }
+    $scope.changeCategory = function(num) {
+      categoryPosition += num;
+      $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
+    }
 
-    // $scope.changeTile = function(num) {
-    //   tilePosition += num;
-    //   $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
-    // }
+    $scope.changeTile = function(num) {
+      tilePosition += num;
+      $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
+    }
 
     // END
 
@@ -54,22 +54,22 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     // $scope.tiles = [];
     // var tile = {name: "iPhone5s", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, eligendi, placeat quae repellat voluptas officiis quisquam quo numquam corrupti odit amet animi tempore consectetur modi dicta fugit voluptatum aspernatur labore.", imgUrl: "http://s1.ibtimes.com/sites/www.ibtimes.com/files/styles/v2_article_large/public/2013/08/26/iphone-5s.JPG"};
-    var horizontal = [];    
+    var horizontal = [];
     var hPosition = 1;
 
-    $(function() {  
+    $(function() {
 
       //Main SWIPE FUNCTION
       $("#tileMain").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
-          
+
           console.log("EVENT: "+ event + "  DIRECTION: " + "  DISTANCE" + distance + "  DURATION: " + duration + "FINGERCOUNT " + fingerCount);
           if(direction=="right" && distance > 50){
             $scope.moveLeft();
           }
           else if(direction=="left" && distance > 50){
-            $scope.moveRight();     
+            $scope.moveRight();
           }
           else if(direction=="up" && distance > 50){
             $scope.moveUp();
@@ -113,8 +113,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#navigation-instructions").css("display", "none");
             },500);
 
-            
-              
+
+
           }
 
         },
@@ -124,7 +124,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
       function pinchMe(event, phase, direction, distance , duration , fingerCount, pinchZoom){
           $("#tileMain").css("opacity",pinchZoom);
-        
+
       };
 
       //SWIPE 2 FUNCTION FOR ANIMATION
@@ -147,7 +147,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#tileRight").css("bottom", -distance);
               $("#tileUp").css("opacity", distance/100);
             }
-            
+
             else if (direction == 'up'){
               $("#tileMain").css("bottom", distance);
               $("#tileUp").css("bottom", 100+((distance/document.documentElement.clientHeight)*100)+"%");
@@ -156,7 +156,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#tileRight").css("bottom", distance);
               $("#tileDown").css("opacity", distance/100);
             }
-             
+
           }
           else if (phase == "end"){
             //console.log(distance);
@@ -180,8 +180,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         };
 
 
-     
-    
+
+
 
 
     });
@@ -218,7 +218,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     }
 
     $scope.moveDown = function() {
-      $scope.tileMain = $scope.tileDown; 
+      $scope.tileMain = $scope.tileDown;
     }
 
     $scope.moveLeft = function() {
@@ -250,7 +250,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             console.log($scope.tileRight);
             console.log(horizontal);
             console.log("Loaded NEW");
-          });        
+          });
       } else {
         $scope.$apply(function(){
           $scope.tileLeft = horizontal[hPosition - 1];

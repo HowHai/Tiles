@@ -37,9 +37,8 @@ exports.categories = function(req, res){
 
   Tile.find({category: 'style'}, function(error, data) {
     geekyToysCategory = data;
-    res.json([sportsCategory, geekyToysCategory, uncrateVices]);
+    res.json([uncrateVices, sportsCategory, geekyToysCategory]);
   });
-
 }
 
 // GET all tiles within a category

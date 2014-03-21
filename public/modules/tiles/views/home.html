@@ -21,7 +21,8 @@
 </style>
 
 <section>
-  <button ng-click="createTile()">Make Tile</button>
+  <!-- <button ng-click="createTile()">Make Tile</button> -->
+  <button onload="loadTiles()">Make Tile</button>
 
   <h1>Cracked Tiles</h1>
   <!-- dfdfdfd -->
@@ -70,6 +71,27 @@
    <p>{{singleTile.content}}</p>
   </div>
 
+  <div ng-controller="CommentsCtrl">
+    <form class="form-horizontal" data-ng-submit="create(singleTile._id)">
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label" for="content">Content</label>
+          <div class="controls">
+              <textarea data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-default">
+        </div>
+      </fieldset>
+    </form>
+
+    <button ng-click="find()">Find Comment</button>
+    <div ng-repeat="comment in comments">
+      <li>Content: {{comment.content}}</li>
+      <li>User: {{comment.user.displayName}}</li>
+    </div>
+  </div>
   <!-- END -->
 <br>
 <br>
