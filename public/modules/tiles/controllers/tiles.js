@@ -50,15 +50,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     };
     // END
 
-
-
-    // $scope.tiles = [];
-    // var tile = {name: "iPhone5s", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, eligendi, placeat quae repellat voluptas officiis quisquam quo numquam corrupti odit amet animi tempore consectetur modi dicta fugit voluptatum aspernatur labore.", imgUrl: "http://s1.ibtimes.com/sites/www.ibtimes.com/files/styles/v2_article_large/public/2013/08/26/iphone-5s.JPG"};
     var horizontal = [];    
     var hPosition = 1;
 
     $(function() {  
-
       //Main SWIPE FUNCTION
       $("#tileMain").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
@@ -112,9 +107,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#tileMain .tile-info").css("transition","0s");
               $("#navigation-instructions").css("display", "none");
             },500);
-
-            
-              
           }
 
         },
@@ -124,7 +116,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
       function pinchMe(event, phase, direction, distance , duration , fingerCount, pinchZoom){
           $("#tileMain").css("opacity",pinchZoom);
-        
       };
 
       //SWIPE 2 FUNCTION FOR ANIMATION
@@ -178,12 +169,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             }
           }
         };
-
-
-     
-    
-
-
     });
 
     // Ultimately, we'll probably went to select 5 random, unique tiles on the server side and only return those
@@ -202,11 +187,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           console.log(randomTiles);
           console.log(response.length);
 
-          $scope.tileMain = response[randomTiles[0]];
-          $scope.tileLeft = response[randomTiles[1]];
+          $scope.tileLeft = response[randomTiles[0]];
+          // $scope.tileMain = response[0][0];
+          $scope.tileMain = response[randomTiles[1]];
           $scope.tileRight = response[randomTiles[2]];
-          $scope.tileUp = response[randomTiles[3]];
-          $scope.tileDown = response[randomTiles[4]];
+
+          $scope.tileUp = response[0][3];
+          $scope.tileDown = response[0][4];
 
           horizontal.push($scope.tileLeft, $scope.tileMain, $scope.tileRight);
           console.log(horizontal);

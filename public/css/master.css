@@ -50,7 +50,6 @@ a.undecorated-link:hover {
   height: 100%; }
 
 #showTile {
-  border: 4px solid #58c9f3;
   background-color: black;
   text-align: center;
   height: 90%;
@@ -80,18 +79,14 @@ a.undecorated-link:hover {
     bottom: 0px;
     margin: 0px; }
   #showTile #tileUp {
-    background-color: #58c9f3;
     bottom: 108%;
     left: 0px; }
   #showTile #tileDown {
-    background-color: #58c9f3;
     bottom: -108%;
     left: 0px; }
   #showTile #tileRight {
-    background-color: #58c9f3;
     left: 108%; }
   #showTile #tileLeft {
-    background-color: #58c9f3;
     left: -108%; }
   #showTile #navigation-instructions {
     display: none;

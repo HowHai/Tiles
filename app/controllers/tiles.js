@@ -21,24 +21,62 @@ exports.list = function(req, res){
 
 // GET all tiles in all categories and return as an array
 exports.categories = function(req, res){
-  var sportsCategory = null;
-  var geekyToysCategory = null;
-  var uncrateVices = null;
+  var gearCategory = null;
+  var styleCategory = null;
+  var carsCategory = null;
+  var techCategory = null;
+  var vicesCategory = null;
+  var mediaCategory = null;
+  var bodyCategory = null;
+  var homeCategory = null;
+  var foodCategory = null;
 
-  Tile.find({category: 'tech'}, function(error, data) {
-    sportsCategory = data;
-    return sportsCategory;
-  });
-
-  Tile.find({category: 'vices'}, function(error, data) {
-    uncrateVices = data;
-    return uncrateVices;
+  Tile.find({category: 'gear'}, function(error, data) {
+    gearCategory = data;
+    return gearCategory;
   });
 
   Tile.find({category: 'style'}, function(error, data) {
-    geekyToysCategory = data;
-    res.json([sportsCategory, geekyToysCategory, uncrateVices]);
+    styleCategory = data;
+    return styleCategory;
   });
+
+  Tile.find({category: 'cars'}, function(error, data) {
+    carsCategory = data;
+    return carsCategory;
+  });
+
+  Tile.find({category: 'tech'}, function(error, data) {
+    techCategory = data;
+    return techCategory;
+  });
+
+  Tile.find({category: 'vices'}, function(error, data) {
+    vicesCategory = data;
+    return vicesCategory;
+  });
+
+  Tile.find({category: 'media'}, function(error, data) {
+    mediaCategory = data;
+    return mediaCategory;
+  });
+
+  Tile.find({category: 'body'}, function(error, data) {
+    bodyCategory = data;
+    return bodyCategory;
+  });
+
+  Tile.find({category: 'home'}, function(error, data) {
+    homeCategory = data;
+    return homeCategory;
+  });
+
+  Tile.find({category: 'food'}, function(error, data) {
+    foodCategory = data;
+    return foodCategory
+  });
+  
+  res.json([gearCategory, styleCategory, carsCategory, techCategory, vicesCategory, mediaCategory, bodyCategory, homeCategory, foodCategory]);
 
 }
 
@@ -59,7 +97,7 @@ exports.create = function(req, res){
   // PhantomJS testt
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open('http://uncrate.com/vices/', function(status) {
+      return page.open('http://uncrate.com/food/', function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -123,7 +161,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: 'vices', name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: 'food', name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
