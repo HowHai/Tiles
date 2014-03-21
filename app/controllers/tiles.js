@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
   Comment = mongoose.model('Comment'),
   Tile = mongoose.model('Tile'),
+  User = mongoose.model('User'),
   _ = require('lodash'),
   phantom = require('phantom');
 
@@ -30,14 +31,33 @@ exports.categories = function(req, res){
     return sportsCategory;
   });
 
-  Tile.find({category: 'vices'}, function(error, data) {
-    uncrateVices = data;
-    return uncrateVices;
+  // Tile.find({category: 'vices'}, function(error, data) {
+  //   uncrateVices = data;
+  //   return uncrateVices;
+  // });
+
+  Tile.find({category: 'vices'}).populate('comments').exec(function(error, tiles) {
+    if (error) {
+      console.log(error);
+    } else {
+      // Populate comments with respective user
+      Comment.populate(tiles, {
+        path: 'comments.user',
+        model: User
+      }, function(error, data) {
+        if (error) {
+          console.log(error);
+        } else {
+          uncrateVices = tiles;
+          res.json([uncrateVices, sportsCategory, geekyToysCategory]);
+        }
+      })
+    }
   });
 
   Tile.find({category: 'style'}, function(error, data) {
     geekyToysCategory = data;
-    res.json([uncrateVices, sportsCategory, geekyToysCategory]);
+    // res.json([uncrateVices, sportsCategory, geekyToysCategory]);
   });
 }
 

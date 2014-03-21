@@ -25,7 +25,7 @@ exports.create = function(req, res) {
   //   doc.save();
   // });
 
-  comment.save(function(err) {
+  comment.save(function(err, comment) {
     if (err) {
       console.log(err);
       return res.send('users/signup', {
@@ -33,7 +33,24 @@ exports.create = function(req, res) {
         comment: comment
       });
     } else {
-      res.jsonp(comment);
+
+      Tile.findById(comment.tile, function(err, tile) {
+        console.log(tile);
+        tile.comments.push(comment._id);
+        tile.save();
+        res.json(tile);
+      })
+
+      // Find tile, push comment and save.
+      // Tile.findById(comment.tile).comments.push(comment._id).save();
+      // tile.save(function(err) {
+      //   if (err) {
+      //     console.log(err);
+      //   } else {
+      //     res.json(tile);
+      //   }
+      // });
+      // res.jsonp(comment);
     }
   });
 };
