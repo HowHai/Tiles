@@ -36,8 +36,8 @@
 		"grunt-cli": "~0.1.13",
 		"grunt-sass": "0.6.1",
 		"node-sass": "*",
-		"phantom": "*"
-
+		"phantom": "*",
+		"socket.io": "*"
 	},
 	"devDependencies": {
 		"supertest": "~0.9.0",
