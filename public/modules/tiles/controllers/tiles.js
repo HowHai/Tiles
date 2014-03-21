@@ -78,11 +78,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           else if(direction=="left" && distance > (document.documentElement.clientWidth)*0.4){
             $scope.moveRight();     
           }
-          else if(direction=="up" && distance > (document.documentElement.clientHeight)*0.4){
-            $scope.moveUp();
-          }
-          else if(direction=="down" && distance > (document.documentElement.clientHeight)*0.4){
+          else if(direction=="up" && distance > 25){
+            console.log("Trying to go down!");
             $scope.moveDown();
+          }
+          else if(direction=="down" && distance > 25){
+            console.log("Trying to go up!");
+            $scope.moveUp();
           }
           else if(distance == 0 && direction == null){
             // $("#tileMain").addClass("bounce-out");
@@ -199,67 +201,52 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     };
 
     $scope.hPosition = 9;
+    $scope.currentCategory;
     var horizontal = [];
-    var randomCategory;
-    var category0, category1, category2, category3, category4, category5, category6, category7, category8;
 
     $scope.loadTiles = function() {
       $scope.nav_open = false;
       $http.get('/tiles/categories', null)
         .success(function(response) {
-          // var randomTiles = [];
-          // while (randomTiles.length < 5) {
-          //   var randomNumber = Math.floor(Math.random() * (response.length));
-          //   var found = false;
-          //   for (var i = 0; i < randomTiles.length; i++) {
-          //     if (randomTiles[i] == randomNumber) {found = true; break}
-          //   }
-          //   if (!found) randomTiles[randomTiles.length] = randomNumber;
-          // }
-          // console.log(randomTiles);
-
-          // category0 = response[0];
-          // category1 = response[1];
-          // category2 = response[2];
-          // category3 = response[3];
-          // category4 = response[4];
-          // category5 = response[5];
-          // category6 = response[6];
-          // category7 = response[7];
-          // category8 = response[8];
-
-          randomCategory = Math.floor(Math.random() * 9);
-          // console.log(randomCategory);
-          console.log(response);
 
           $scope.allTiles = response;
-          $scope.currentCategory = response[randomCategory];
-          console.log($scope.currentCategory);
+          $scope.currentCategory = Math.floor(Math.random() * 9);
+          console.log(response);
 
-          $scope.tileLeft = response[randomCategory][8];
-          $scope.tileMain = response[randomCategory][9];
-          $scope.tileRight = response[randomCategory][10];
+          $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
+          $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
+          $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
 
-          $scope.tileUp = response[categoryRotator(randomCategory, "up")][9];
-          $scope.tileDown = response[categoryRotator(randomCategory, "down")][9];
+          $scope.tileUp = response[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+          $scope.tileDown = response[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
         });
     }
 
     $scope.moveUp = function() {
       $scope.tileMain = $scope.tileUp;
-      $scope.currentCategory = $scope.allTiles[categoryRotator(randomCategory, "up")];
-
+      $scope.currentCategory = categoryRotator($scope.currentCategory, "up");
+      $scope.$apply(function() {
+        $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+        $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+        $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
+        $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+      });
     }
 
     $scope.moveDown = function() {
       $scope.tileMain = $scope.tileDown;
-      $scope.currentCategory = $scope.allTiles[categoryRotator(randomCategory, "down")];
-
+      $scope.currentCategory = categoryRotator($scope.currentCategory, "down");
+      $scope.$apply(function() {
+        $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+        $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+        $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
+        $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+      });
     }
 
     $scope.moveLeft = function() {
       $scope.hPosition -= 1;
-      $scope.tileMain = $scope.currentCategory[$scope.hPosition];
+      $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
 
       if ($scope.hPosition < 1) {
         $http.get('/tiles', null)
@@ -281,17 +268,18 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           });        
 
       } else {
-        $scope.$apply(function(){
-          $scope.tileLeft = $scope.currentCategory[$scope.hPosition - 1];
-          $scope.tileRight = $scope.currentCategory[$scope.hPosition + 1];
-          console.log("Didn't load new");
+        $scope.$apply(function() {
+          $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+          $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+          $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
+          $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
         });
       };
     };
 
     $scope.moveRight = function() {
       $scope.hPosition += 1;
-      $scope.tileMain = $scope.currentCategory[$scope.hPosition];
+      $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
 
       if ($scope.currentCategory.length - $scope.hPosition <= 1) {
         $http.get('/tiles', null)
@@ -312,10 +300,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           });
 
       } else {
-        $scope.$apply(function(){
-          $scope.tileLeft = $scope.currentCategory[$scope.hPosition - 1];
-          $scope.tileRight = $scope.currentCategory[$scope.hPosition + 1];
-          console.log("Didn't load new");
+        $scope.$apply(function() {
+          $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+          $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+          $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
+          $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
         });
       };
     }
