@@ -1,15 +1,15 @@
 'use strict';
 
 var should = require('should'),
-    supertest = require('supertest'),
+    request = require('supertest'),
     mongoose = require('mongoose'),
     express = require('express'),
     User = mongoose.model('User'),
-    Comment = mongoose.model('Comment');
+    Comment = mongoose.model('Comment'),
+    app = express();
 
 var comment;
 var user;
-var app = express();
 
 describe ('<Unit Test>', function () {
   describe('Model Comment:', function() { 
@@ -60,15 +60,14 @@ describe ('<Unit Test>', function () {
     });
   });
 
-
   describe('HTTP Comments', function() {
     describe('GET /comments', function() {
       it ('should response with json', function(done){
-        supertest(app)
+        request(app)
         .get('/comments')
-        .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        done();
+        .expect(200)
+      done(); 
       });
     });
   });
