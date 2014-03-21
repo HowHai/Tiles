@@ -134,8 +134,31 @@ a.undecorated-link:hover {
     padding-top: 10px; }
     #showTile #navigation-instructions .center-vertical {
       padding-top: 47%; }
+    #showTile #navigation-instructions #navi-content {
+      position: absolute;
+      z-index: 10;
+      height: 83%;
+      top: 33px;
+      left: 8%;
+      width: 83%; }
     #showTile #navigation-instructions .kiss {
       position: fixed; }
+      #showTile #navigation-instructions .kiss.buttons {
+        position: absolute;
+        bottom: 0px;
+        width: 100%; }
+        #showTile #navigation-instructions .kiss.buttons button {
+          margin: 0 auto;
+          border-radius: 0;
+          background-color: rgba(0, 0, 0, 0);
+          outline: 2px solid white;
+          font-size: 0.6em; }
+          #showTile #navigation-instructions .kiss.buttons button.left {
+            color: gold; }
+          #showTile #navigation-instructions .kiss.buttons button.right {
+            right: 10px; }
+          #showTile #navigation-instructions .kiss.buttons button.red {
+            color: red; }
       #showTile #navigation-instructions .kiss.top {
         position: absolute;
         top: 0px;

@@ -197,8 +197,40 @@ a.undecorated-link:hover {
     .center-vertical{
       padding-top: 47%;
     }
+    #navi-content{
+      position: absolute;
+      z-index: 10;
+      height: 83%;
+      top: 33px;
+      left: 8%;
+      width: 83%;
+    }
+
     .kiss{
       position: fixed;
+      &.buttons{
+        position:absolute;
+        bottom: 0px;
+        width: 100%;
+        button{
+          &.left{
+            color: gold;
+          }
+          &.right{
+            right: 10px;
+          }
+          &.red{
+            color: red;
+          }
+          // position: relative;
+          margin:0 auto;
+          border-radius: 0;
+          background-color: rgba(0,0,0,0);
+          outline: 2px solid white;
+          font-size: 0.6em;
+        }
+      }
+      
       &.top{
         position: absolute;
         top: 0px;
