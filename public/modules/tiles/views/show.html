@@ -1,15 +1,85 @@
-<div class="row">
+<div class="row" ng-init="loadTiles()">
   <section id="showTile" class="col-xs-12">
-    <img src="/modules/tiles/img/profiles/{{tileMain.imgUrl}}" alt="Splash">
+    <!--     <div class="text-center">
+      <button ng-click="moveUp()">UP</button>
+      <button ng-click="moveDown()">DOWN</button>
+      <button ng-click="moveLeft()">LEFT</button>
+      <button ng-click="moveRight()">RIGHT</button>
+    </div> -->
 
-    <div class="tile-info text-center">
-      <h2 class="tile-title">{{tileMain.name}}</h2>
-      <p class="tile-desc">{{tileMain.content}}</p>
+
+  <div>
+    <div class="tile" id="tileUp">
+      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileUp.name}}</h1>
+        <p class="tile-desc">{{tileUp.content}}</p>
+      </div>
     </div>
+    <div class="tile" id="tileDown">
+      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileDown.name}}</h1>
+        <p class="tile-desc">{{tileDown.content}}</p>
+      </div>
+    </div>
+    <div class="tile" id="tileMain">
+      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileMain.name}}</h1>
+        <p class="tile-desc">{{tileMain.content}}</p>
+      </div>
+    </div>
+    <div class="tile" id="tileRight">
+      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileRight.name}}</h1>
+        <p class="tile-desc">{{tileRight.content}}</p>
+      </div>
+    </div>
+    <div class="tile" id="tileLeft">
+      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileLeft.name}}</h1>
+        <p class="tile-desc">{{tileLeft.content}}</p>
+      </div>
+    </div>
+  </div>
+  <div id="navigation-instructions">
+      <i class="fa fa-chevron-up"></i>
+      <div class="center-vertical">
+        <i class="fa fa-chevron-left pull-left"></i>
+        <span class="tutorial-text"></span>
+        <i class="fa fa-chevron-right pull-right"></i>
+      </div>
+      <i class="fa fa-chevron-down bottom"></i>
+  </div>
+
+<!-- 
     <div class="col-xs-12 btn-group">
       <button type="button" class="btn btn-primary col-xs-4">Share</button>
       <button type="button" class="btn btn-danger col-xs-4">Buy</button>
       <button type="button" class="btn btn-primary col-xs-4">Fav</button>
     </div>
+
+    <div>
+      <h3>Comments</h3>
+      <div data-ng-repeat="content in tile.comments">
+        <p style="font-weight: bold;">{{content[1]}}</p>
+        <p style="font-style: italic;">({{content[0]}} / {{content[2] | date:'medium'}})</p>
+      
+      </div>
+    </div>
+
+    <section data-ng-controller="CommentsCtrl">
+    <h3>Add comment</h3>
+      <form  data- ng-submit="create()">
+        <fieldset>
+          <textarea data-ng-model="content" cols="60" rows="2" placeholder="Comment"></textarea>
+          <br>
+          <input type="submit" />
+        </fieldset>
+      </form>
+    </section> -->
   </section>
 </div>
