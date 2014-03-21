@@ -38,14 +38,22 @@
       </div>
     </div>
   </div>
-  <div id="navigation-instructions">
-      <i class="fa fa-chevron-up"></i>
-      <div class="center-vertical">
-        <i class="fa fa-chevron-left pull-left"></i>
-        <span class="tutorial-text"></span>
-        <i class="fa fa-chevron-right pull-right"></i>
-      </div>
-      <i class="fa fa-chevron-down bottom"></i>
+  
+  <div id="navigation-instructions" ng-click="closeNav()">
+    
+      <i class="fa fa-chevron-up kiss top"></i>
+        <i class="fa fa-chevron-left kiss left"></i>
+        <div id ="navi-content">
+        <span class="tutorial-text">Welcome to Gloss</span>
+        <div class="kiss buttons">
+          <button class="btn left"><i class="fa fa-star"></i></button>
+          <button class="btn right">Share</button>
+          <button class="btn red"><i class="fa fa-frown-o"></i></button>
+        </div>
+        </div>
+        <i class="fa fa-chevron-right kiss right"></i>
+      <i class="fa fa-chevron-down kiss bottom"></i>
+      
   </div>
 
 <!-- 

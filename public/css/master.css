@@ -50,6 +50,12 @@ a.undecorated-link:hover {
   height: 100%; }
 
 #showTile {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background-color: black;
   text-align: center;
   height: 90%;
@@ -78,6 +84,26 @@ a.undecorated-link:hover {
     left: 0;
     bottom: 0px;
     margin: 0px; }
+    #showTile #tileMain.nav-open {
+      transition: 0.25s;
+      height: 99.9%;
+      width: 99.9%;
+      padding: 10px;
+      opacity: 0.3; }
+      #showTile #tileMain.nav-open .tile-info {
+        transition: 0.25s;
+        font-size: 0.8em;
+        padding-top: 10px; }
+    #showTile #tileMain.nav-close {
+      transition: 0.25s;
+      height: 100%;
+      width: 100%;
+      padding: 0px;
+      opacity: 1; }
+      #showTile #tileMain.nav-close .tile-info {
+        transition: 0.25s;
+        font-size: 1em;
+        padding-top: 15px; }
   #showTile #tileUp {
     bottom: 108%;
     left: 0px; }
@@ -103,11 +129,47 @@ a.undecorated-link:hover {
     padding-top: 10px; }
     #showTile #navigation-instructions .center-vertical {
       padding-top: 47%; }
-    #showTile #navigation-instructions .clear {
-      clear: both; }
-    #showTile #navigation-instructions .bottom {
-      padding-top: 58%; }
+    #showTile #navigation-instructions #navi-content {
+      position: absolute;
+      z-index: 10;
+      height: 83%;
+      top: 33px;
+      left: 8%;
+      width: 83%; }
+    #showTile #navigation-instructions .kiss {
+      position: fixed; }
+      #showTile #navigation-instructions .kiss.buttons {
+        position: absolute;
+        bottom: 0px;
+        width: 100%; }
+        #showTile #navigation-instructions .kiss.buttons button {
+          margin: 0 auto;
+          border-radius: 0;
+          background-color: rgba(0, 0, 0, 0);
+          outline: 2px solid white;
+          font-size: 0.6em; }
+          #showTile #navigation-instructions .kiss.buttons button.left {
+            color: gold; }
+          #showTile #navigation-instructions .kiss.buttons button.right {
+            right: 10px; }
+          #showTile #navigation-instructions .kiss.buttons button.red {
+            color: red; }
+      #showTile #navigation-instructions .kiss.top {
+        position: absolute;
+        top: 0px;
+        left: 45%; }
+      #showTile #navigation-instructions .kiss.left {
+        top: 45%;
+        left: 10px; }
+      #showTile #navigation-instructions .kiss.right {
+        top: 45%;
+        right: 10px; }
+      #showTile #navigation-instructions .kiss.bottom {
+        position: absolute;
+        bottom: 10px;
+        left: 45%; }
     #showTile #navigation-instructions .tutorial-text {
+      font-size: 0.75em;
       width: 100%;
       position: relative;
-      line-height: 10px; }
+      margin-top: 10px; }
