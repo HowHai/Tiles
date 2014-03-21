@@ -8,29 +8,77 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     $(function() {  
 
+      //Main SWIPE FUNCTION
       $("#tileMain").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
-         
-          if(direction=="right"){
+          
+          console.log("EVENT: "+ event + "  DIRECTION: " + "  DISTANCE" + distance + "  DURATION: " + duration + "FINGERCOUNT " + fingerCount);
+          if(direction=="right" && distance > 50){
             $scope.moveLeft();
           }
-          else if(direction=="left"){
+          else if(direction=="left" && distance > 50){
             $scope.moveRight();     
           }
-          else if(direction=="up"){
+          else if(direction=="up" && distance > 50){
             $scope.moveUp();
           }
-          else if(direction=="down"){
+          else if(direction=="down" && distance > 50){
             $scope.moveDown();
           }
+          else if(distance == 0 && direction == null){
+            // $("#tileMain").addClass("bounce-out");
+            $("#tileMain").css("transition","0.25s");
+            $("#tileMain .tile-info").css("transition","0.25s");
+            $("#navigation-instructions").css("transition","1s");
+            $("#tileMain").css("height","99.9%");
+            $("#tileMain").css("width","99.9%");
+            $("#tileMain").css("padding","10px");
+            $("#tileMain").css("opacity","0.3");
+            $("#navigation-instructions").css("display", "block");
+            $("#navigation-instructions").css("opacity", "1");
+            $("#tileMain .tile-info").css("font-size","0.8em");
+            $("#tileMain .tile-info").css("padding-top","10px");
+
+
+            setTimeout(function(){
+              // $("#tileMain").addClass("bounce-in");
+              // $("#tileMain").removeClass("bounce-out");
+            $("#tileMain").css("transition","0.25s");
+            $("#tileMain .tile-info").css("transition","0.25s");
+            $("#navigation-instructions").css("transition","1s");
+            $("#tileMain").css("height","100%");
+            $("#tileMain").css("width","100%");
+            $("#tileMain").css("padding","0px");
+            $("#tileMain").css("opacity","1");
+            $("#navigation-instructions").css("opacity", "0");
+            $("#tileMain .tile-info").css("font-size","1em");
+            $("#tileMain .tile-info").css("padding-top","15px");
+            }, 250);
+
+            setTimeout(function(){
+              $("#tileMain").css("transition","0s");
+              $("#tileMain .tile-info").css("transition","0s");
+              $("#navigation-instructions").css("display", "none");
+            },500);
+
+            
+              
+          }
+
         },
         //Default is 75px, set to 0 for demo so any distance triggers swipe
-         threshold:50
+         threshold:0
       });
 
+      function pinchMe(event, phase, direction, distance , duration , fingerCount, pinchZoom){
+          $("#tileMain").css("opacity",pinchZoom);
+        
+      };
+
+      //SWIPE 2 FUNCTION FOR ANIMATION
       function swipe2(event, phase, direction, distance) {
-          //console.log( phase +" you have swiped " + distance + "px in direction:" + direction );
+          console.log( phase +" you have swiped " + distance + "px in direction:" + direction );
           if(phase == "move"){
             if(direction == 'right'){
               $(".tile").css("margin-left", distance);
@@ -80,6 +128,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           }
         };
 
+
+     
+    
+
+
     });
 
     // Ultimately, we'll probably went to select 5 random, unique tiles on the server side and only return those
@@ -121,6 +174,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
       hPosition -= 1;
       $scope.tileMain = horizontal[hPosition];
       console.log(hPosition);
+      console.log("----");
+      console.log($scope.tileMain);
+      console.log("----");
       console.log(horizontal.length);
 
       if (hPosition < 1) {
@@ -145,11 +201,14 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             console.log("Loaded NEW");
           });        
       } else {
-        $scope.tileLeft = horizontal[hPosition - 1];
-        $scope.tileRight = horizontal[hPosition + 1];
-        console.log($scope.tileLeft);
-        console.log($scope.tileRight);
-        console.log("Didn't load new");
+        $scope.$apply(function(){
+          $scope.tileLeft = horizontal[hPosition - 1];
+          $scope.tileRight = horizontal[hPosition + 1];
+          console.log($scope.tileLeft);
+          console.log($scope.tileRight);
+          console.log("Didn't load new");
+          console.log($scope.tileMain);
+        });
       };
     };
 
@@ -158,6 +217,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
       // console.log(horizontal[hPosition]);
       $scope.tileMain = horizontal[hPosition];
       console.log(hPosition);
+      console.log("----");
+      console.log($scope.tileMain);
+      console.log("----");
       // console.log(horizontal.length);
 
       if (horizontal.length - hPosition <= 1) {
@@ -180,12 +242,15 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             console.log("Loaded NEW");
           });
       } else {
-        $scope.tileLeft = horizontal[hPosition - 1];
-        $scope.tileRight = horizontal[hPosition + 1];
-        console.log($scope.tileLeft);
-        console.log($scope.tileRight);
-        console.log(hPosition);
-        console.log("Didn't load new");
+        $scope.$apply(function(){
+          $scope.tileLeft = horizontal[hPosition - 1];
+          $scope.tileRight = horizontal[hPosition + 1];
+          console.log($scope.tileLeft);
+          console.log($scope.tileRight);
+          console.log(hPosition);
+          console.log("Didn't load new");
+          console.log($scope.tileMain);
+        });
       };
 
       console.log(horizontal);
