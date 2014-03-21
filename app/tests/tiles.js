@@ -69,6 +69,7 @@ describe ('<Unit Test>', function () {
         .get('/tiles')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
+        .expect(200)
       done();
       });
     });
@@ -79,6 +80,7 @@ describe ('<Unit Test>', function () {
         .get('/tiles/categories')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
+        .expect(200)
       done();
       });
     });
@@ -90,6 +92,7 @@ describe ('<Unit Test>', function () {
         .get('/tiles/categories' + categoryName)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
+        .expect(200)
       done();
       });
     });
