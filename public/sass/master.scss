@@ -1,41 +1,70 @@
+///////////////////////
+// MASTER STYLESHEET //
+///////////////////////
+
+// Font Imports
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700,800);
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic);
 
-.content {
-  margin-top: 50px;
-}
-a.undecorated-link:hover {
-  text-decoration: none;
-}
+// System-wide Styles
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
-html {
-  font-family: 'Open Sans', sans-serif;
+body {
+  font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif;
 }
 
-body {
-  background-color: white;
+a.undecorated-link:hover {
+  text-decoration: none;
+}
+
+// Correcting Boostraps Bullshit
+
+.container {
+  height: 100%;
+  height: 100vh;
+  padding: 0;
+}
+
+.content {
+  margin-top: 50px;
+  height: 90%;
+  height: calc(100% - 50px);
+}
+
+.row {
+  margin: 0;
+  height: 100%;
+}
+
+.col-xs-12 {
+  padding: 0;
+}
+
+// Navbar Styles
+
+.navbar {
 }
 
 .navbar-header {
   background-color: white;
-  padding: 0 10px;
 }
 
 .navbar-inverse {
   .navbar-brand {
-    color: black;
+    color: #1D7A9E;
+    font-weight: 300;
     text-shadow: none;
-    &:hover {
+    &:active, &:hover {
       color: black;
     }
   }
   .navbar-toggle {
-    // background-color: black;
     border-radius: 0px;
-    border-color: tomato;
+    border-color: #58c9f3;
     .icon-bar {
       background-color: tomato;
     }
@@ -48,45 +77,133 @@ body {
   }  
 }
 
-.container {
-  padding: 0;
+// Content Styles
+
+#ui-view {
   height: 100%;
 }
 
+// Show Tile View
+
 #showTile {
-  // width: 100%;
-  padding: 0;
-  margin: 0;
-  // height: 100%;
+  border: 4px solid #58c9f3;
+  background-color: black;
+  text-align: center;
+  height: 90%;
+  height: calc(100% - 50px);
+  overflow: hidden;
+  h1 {
+    margin: 0;
+    margin-top: 5px;
+    font-size: 1.6em;
+  }
+  p {
+    margin-top: 10px;
+  }
   img {
     width: 100%;
-    // height: 65%;
   }
   .tile-info {
-    // border: 15px solid tomato;
-    // height: 25%;
+    padding: 15px 12px;
+  }
+  position: absolute;
+//   height: 100vh;
+  .tile{
     width: 100%;
-    padding: 20px 0;
-    .tile-title {
-      text-align: center;
-      margin: 10px 0;
-      font-weight: 700;
-    }
-    .tile-desc {
-      text-align: center;
-      margin: 0 10px;
-    }
-  }
-  #exploded-view {
+    height: 100%;
+    float: left;
+    bottom: 0px;
+    margin: 0px;
+//     padding: 15px;
+//     background-color: #ccc;
+//     color: white;
+//     font-family: Helvetica Neue;
+//     font-size: 30px;
+//     text-align: center;
     position: absolute;
-    bottom: 10;
-    margin-top: 100px;
   }
-  .btn {
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    background-image: none;
-    margin: 0;
+  #tileMain{
+    background-color:white;
+    left: 0;
+    bottom: 0px;
+    margin: 0px;
+    // width: 100%;
+    // height: 100%;
   }
+  #tileUp{
+    background-color: #58c9f3;
+    bottom: 108%;
+    left: 0px;
+  }
+  #tileDown{
+    background-color: #58c9f3;
+    bottom: -108%;
+    left: 0px;
+  }
+  #tileRight{
+    background-color: #58c9f3;
+    left: 108%;
+  }
+  #tileLeft{
+    background-color: #58c9f3;
+    left: -108%;
+  }
+  #navigation-instructions{
+    display: none;
+    opacity: 0;
+    transition: 0.9s;
+    position: fixed;
+    z-index: 10;
+    height: 90%;
+    height: calc(100% - 50px);
+    width: 100%;
+    color: white;
+    font-size: 3em;
+    padding: 20px;
+    padding-top: 10px;
+    .center-vertical{
+      padding-top: 47%;
+    }
+    .clear{
+      clear: both;
+    }
+    .bottom{
+      padding-top: 58%;
+    }
+    .tutorial-text{
+      width: 100%;
+      position: relative;
+      line-height: 10px;
+    }
+  }
+//   padding: 0;
+//   margin: 0;
+//   img {
+//     // width: 100%;
+//   }
+//   .tile-info {
+//     // width: 100%;
+//     // padding: 20px 0;
+//     .tile-title {
+//       text-align: center;
+//       // margin: 10px 0;
+//       font-weight: 700;
+//     }
+//     .tile-desc {
+//       text-align: center;
+//       // margin: 0 10px;
+//     }
+//   }
+//   #exploded-view {
+//     position: absolute;
+//     bottom: 10;
+//     margin-top: 100px;
+//   }
+//   .btn {
+//     border-radius: 0;
+//     border: none;
+//     box-shadow: none;
+//     background-image: none;
+//     margin: 0;
+//   }
 }

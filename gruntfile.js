@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 			clientViews: {
 				files: ['public/modules/**/views/*.html'],
 				options: {
-					livereload: false,
+					livereload: true,
 				}
 			},
 			clientJS: {

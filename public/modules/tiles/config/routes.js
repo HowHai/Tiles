@@ -5,7 +5,7 @@ angular.module('mean.tiles').config(['$stateProvider',
     $stateProvider.
     state('showTile', {
       url: '/',
-      templateUrl: 'modules/tiles/views/home.html',
+      templateUrl: 'modules/tiles/views/show.html',
       controller: 'TilesCtrl'
     }).state('explodedTiles', {
       url: '/exploded',
@@ -14,27 +14,3 @@ angular.module('mean.tiles').config(['$stateProvider',
     });
   }
 ]);
-
-//Setting up route
-// angular.module('mean.articles').config(['$stateProvider',
-//   function($stateProvider) {
-//     // Articles state routing
-//     $stateProvider.
-//     state('listArticles', {
-//       url: '/articles',
-//       templateUrl: 'modules/articles/views/list.html'
-//     }).
-//     state('createArticle', {
-//       url: '/articles/create',
-//       templateUrl: 'modules/articles/views/create.html'
-//     }).
-//     state('viewArticle', {
-//       url: '/articles/:articleId',
-//       templateUrl: 'modules/articles/views/view.html'
-//     }).
-//     state('editArticle', {
-//       url: '/articles/:articleId/edit',
-//       templateUrl: 'modules/articles/views/edit.html'
-//     });
-//   }
-// ]);
