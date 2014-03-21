@@ -73,7 +73,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
           
-          console.log(document.documentElement.clientWidth);
+          // console.log(document.documentElement.clientWidth);
           if(direction=="right" && distance > (document.documentElement.clientWidth)*0.4){
             $scope.moveLeft();
           }
@@ -133,7 +133,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
       //SWIPE 2 FUNCTION FOR ANIMATION
       function swipe2(event, phase, direction, distance) {
-          console.log( phase +" you have swiped " + distance + "px in direction:" + direction );
+          // console.log( phase +" you have swiped " + distance + "px in direction:" + direction );
           if(phase == "move"){
             if(direction == 'right'){
               $(".tile").css("margin-left", distance);
@@ -184,6 +184,24 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         };
     });
 
+    var categoryRotator = function(categoryNum, direction) {
+      if (direction == "up") {
+        if (categoryNum == 0) {
+          return 8;
+        } else {
+          return (categoryNum - 1);
+        };
+      } else if (direction == "down") {
+        if (categoryNum == 8) {
+          return 0;
+        } else {
+          return (categoryNum + 1);
+        };
+      };
+    };
+
+    var category0, category1, category2, category3, category4, category5, category6, category7, category8;
+
     $scope.loadTiles = function() {
       $scope.nav_open = false;
       $http.get('/tiles/categories', null)
@@ -198,17 +216,33 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           //   if (!found) randomTiles[randomTiles.length] = randomNumber;
           // }
           // console.log(randomTiles);
+
+          category0 = response[0];
+          category1 = response[1];
+          category2 = response[2];
+          category3 = response[3];
+          category4 = response[4];
+          category5 = response[5];
+          category6 = response[6];
+          category7 = response[7];
+          category8 = response[8];
+
+          var randomCategory = Math.floor(Math.random() * 9);
+          // console.log(randomCategory);
           console.log(response);
 
-          $scope.tileLeft = response[0][0];
-          $scope.tileMain = response[0][0];
-          $scope.tileRight = response[0][0];
+          $scope.tileLeft = response[randomCategory][8];
+          $scope.tileMain = response[randomCategory][9];
+          $scope.tileRight = response[randomCategory][10];
 
-          $scope.tileUp = response[0][3];
-          $scope.tileDown = response[0][4];
+          // console.log("up: " + categoryRotator(randomCategory, "up"));
+          // console.log("down: " + categoryRotator(randomCategory, "down"));
+
+          $scope.tileUp = response[categoryRotator(randomCategory, "up")][9];
+          $scope.tileDown = response[categoryRotator(randomCategory, "down")][9];
 
           horizontal.push($scope.tileLeft, $scope.tileMain, $scope.tileRight);
-          console.log(horizontal);
+          // console.log(horizontal);
         });
     }
 
@@ -252,11 +286,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     $scope.moveLeft = function() {
       hPosition -= 1;
       $scope.tileMain = horizontal[hPosition];
-      console.log(hPosition);
-      console.log("----");
-      console.log($scope.tileMain);
-      console.log("----");
-      console.log(horizontal.length);
+      // console.log(hPosition);
 
       if (hPosition < 1) {
         $http.get('/tiles', null)
@@ -274,31 +304,24 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             hPosition += 1;
             $scope.tileLeft = horizontal[hPosition - 1];
             $scope.tileRight = horizontal[hPosition + 1];
-            console.log($scope.tileLeft);
-            console.log($scope.tileRight);
-            console.log(horizontal);
-            console.log("Loaded NEW");
+            // console.log($scope.tileLeft);
+            // console.log($scope.tileRight);
+            // console.log("Loaded NEW");
           });        
       } else {
         $scope.$apply(function(){
           $scope.tileLeft = horizontal[hPosition - 1];
           $scope.tileRight = horizontal[hPosition + 1];
-          console.log($scope.tileLeft);
-          console.log($scope.tileRight);
-          console.log("Didn't load new");
-          console.log($scope.tileMain);
+          // console.log($scope.tileLeft);
+          // console.log($scope.tileRight);
+          // console.log("Didn't load new");
         });
       };
     };
 
     $scope.moveRight = function() {
       hPosition += 1;
-      // console.log(horizontal[hPosition]);
       $scope.tileMain = horizontal[hPosition];
-      console.log(hPosition);
-      console.log("----");
-      console.log($scope.tileMain);
-      console.log("----");
       // console.log(horizontal.length);
 
       if (horizontal.length - hPosition <= 1) {
@@ -316,23 +339,20 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             horizontal.push(response[randomTiles[0]]);
             $scope.tileLeft = horizontal[hPosition - 1];
             $scope.tileRight = horizontal[hPosition + 1];
-            console.log($scope.tileLeft);
-            console.log($scope.tileRight);
-            console.log("Loaded NEW");
+            // console.log($scope.tileLeft);
+            // console.log($scope.tileRight);
+            // console.log("Loaded NEW");
           });
       } else {
         $scope.$apply(function(){
           $scope.tileLeft = horizontal[hPosition - 1];
           $scope.tileRight = horizontal[hPosition + 1];
-          console.log($scope.tileLeft);
-          console.log($scope.tileRight);
-          console.log(hPosition);
-          console.log("Didn't load new");
-          console.log($scope.tileMain);
+          // console.log($scope.tileLeft);
+          // console.log($scope.tileRight);
+          // console.log("Didn't load new");
         });
       };
-
-      console.log(horizontal);
+      // console.log(horizontal);
     }
 
     // Create a random tile and save to database

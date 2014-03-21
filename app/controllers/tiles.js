@@ -76,6 +76,7 @@ exports.categories = function(req, res){
     foodCategory = data;
     res.json([gearCategory, styleCategory, carsCategory, techCategory, vicesCategory, mediaCategory, bodyCategory, homeCategory, foodCategory]);
   });
+
 }
 
 // GET all tiles within a category
