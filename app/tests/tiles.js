@@ -62,16 +62,39 @@ describe ('<Unit Test>', function () {
     });
   });
 
-
   describe('HTTP Tiles', function() {
     describe('GET /tiles', function() {
-      it ('should response with json', function(done){
+      it ('should respond with json data', function(done) {
         supertest(app)
         .get('/tiles')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        done();
+        .expect(200)
+      done();
+      });
+    });
+
+    describe('GET /tiles/categories', function() {
+      it('should respond with json data', function(done) {
+        supertest(app)
+        .get('/tiles/categories')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+      done();
+      });
+    });
+
+    describe('GET /tiles/categories/:categoryName', function() {
+      it('should respond with json data', function(done) {
+        var categoryName = 'sportsCategory';
+        supertest(app)
+        .get('/tiles/categories' + categoryName)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+      done();
       });
     });
   });
-});
+});  

@@ -4,7 +4,7 @@ module.exports = {
 	// db: 'mongodb://localhost/tiles-dev',
 	db: 'mongodb://tilesUser:tiles123@ds033419.mongolab.com:33419/heroku_app23022989',
 	app: {
-		title: 'MEAN.JS - Development Environment'
+		title: 'Cracked Tiles'
 	},
 	facebook: {
 		clientID: '1438896579687548',
