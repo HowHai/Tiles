@@ -56,7 +56,6 @@ a.undecorated-link:hover {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: black;
   text-align: center;
   height: 90%;
   height: calc(100% - 50px);
@@ -71,19 +70,33 @@ a.undecorated-link:hover {
   #showTile img {
     width: 100%; }
   #showTile .tile-info {
-    padding: 15px 12px; }
+    padding: 15px 12px;
+    color: #e42525; }
   #showTile .tile {
     width: 100%;
     height: 100%;
     float: left;
     bottom: 0px;
     margin: 0px;
-    position: absolute; }
+    position: absolute;
+    background-color: black; }
+  #showTile .show {
+    opacity: 1;
+    z-index: 100; }
+  #showTile .slow {
+    transition: 0.35s; }
+  #showTile #tileLeft.center-tile, #showTile #tileRight.center-tile, #showTile #tileUp.center-tile, #showTile #tileDown.center-tile {
+    left: 0%;
+    bottom: 0%; }
   #showTile #tileMain {
     background-color: white;
     left: 0;
     bottom: 0px;
     margin: 0px; }
+    #showTile #tileMain.hide {
+      opacity: 0; }
+    #showTile #tileMain.fader {
+      opacity: 1; }
     #showTile #tileMain.nav-open {
       transition: 0.25s;
       height: 99.9%;
@@ -126,7 +139,8 @@ a.undecorated-link:hover {
     color: white;
     font-size: 3em;
     padding: 20px;
-    padding-top: 10px; }
+    padding-top: 10px;
+    background-color: rgba(0, 0, 0, 0.5); }
     #showTile #navigation-instructions .center-vertical {
       padding-top: 47%; }
     #showTile #navigation-instructions #navi-content {
