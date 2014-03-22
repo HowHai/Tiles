@@ -23,36 +23,25 @@ exports.list = function(req, res){
 
 // GET all tiles in all categories and return as an array
 exports.categories = function(req, res){
-  var sportsCategory = null;
-  var geekyToysCategory = null;
-  var uncrateVices = null;
-
-  Tile.find({category: 'tech'}, function(error, data) {
-    sportsCategory = data;
-    return sportsCategory;
-  });
-
-  Tile.find({category: 'Vices'}).populate('comments').exec(function(error, tiles) {
-    if (error) {
-      console.log(error);
-    } else {
-      // Populate comments with respective user
-      Comment.populate(tiles, {
-        path: 'comments.user',
+  // TODO: Errors handling
+  // Find all categories and populate tiles data within category.
+  Category.find({}, { tiles: 1, _id: 0 }).populate('tiles').exec(function(error, categories) {
+    // Populate comments data within each tile.
+    Tile.populate(categories, {
+      path: 'tiles.comments',
+      model: Comment,
+    }, function(error, categories) {
+      // Populate user data within each comment.
+      Comment.populate(categories, {
+        path: 'tiles.comments.user',
+        select: 'displayName',
         model: User
-      }, function(error, data) {
-        if (error) {
-          console.log(error);
-        } else {
-          uncrateVices = tiles;
-          res.json([uncrateVices, sportsCategory, geekyToysCategory]);
-        }
-      })
-    }
-  });
-
-  Tile.find({category: 'style'}, function(error, data) {
-    geekyToysCategory = data;
+      }, function(error, categories) {
+        // Return each category with tiles inside as an array. [[cat1], [cat2]]
+        var categoriesArray = categories.map(function(cat) { return cat.tiles });
+        res.json(categoriesArray);
+      });
+    });
   });
 }
 
