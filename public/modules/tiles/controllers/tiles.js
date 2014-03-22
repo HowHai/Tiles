@@ -3,52 +3,114 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
   function($scope, $http) {
 
+    $scope.loadTiles = function() {
+      $scope.nav_open = false;
+      $http.get('/tiles/categories', null)
+        .success(function(response) {
 
-    // Testing Tile categories and movement
-    // $scope.allTiles;
-    // $scope.singleTile;
-    // var categoryPosition;
-    // var tilePosition;
+          $scope.allTiles = response;
+          $scope.currentCategory = Math.floor(Math.random() * 9);
+          $scope.hPosition = 9;
+          console.log(response);
 
-    // $http.get('/tiles/categories', null)
-    //   .success(function(response) {
-    //     $scope.allTiles = response;
-    //     $scope.singleTile = $scope.allTiles[0][0];
-    //     categoryPosition = 0;
-    //     tilePosition = 0;
-    //   });
+          $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
+          $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
+          $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
 
-    // $scope.changeCategory = function(num) {
-    //   categoryPosition += num;
-    //   $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
-    // }
+          $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+          $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+        });
+    }
 
-    // $scope.changeTile = function(num) {
-    //   tilePosition += num;
-    //   $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
-    // }
+    var resetTiles = function() {
+      $scope.$apply(function() {
+        $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+        $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+        $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
+        $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+      });
+    }
 
-    // END
+    $scope.moveUp = function() {
+      $scope.tileMain = $scope.tileUp;
+      $scope.currentCategory = categoryRotator($scope.currentCategory, "up");
+      resetTiles();
+    }
 
-    // SPRITZ test
-    $scope.spritzNow = function(content) {
-      var contentArr = content.split(/\W/).filter(function(n) { return n != "" });
-      var counter = 0;
+    $scope.moveDown = function() {
+      $scope.tileMain = $scope.tileDown;
+      $scope.currentCategory = categoryRotator($scope.currentCategory, "down");
+      resetTiles();
+    }
 
-      var startSpritz = setInterval(function() {
-        if (counter >= contentArr.length - 1)
-          window.clearInterval(startSpritz);
+    $scope.moveLeft = function() {
+      $scope.hPosition -= 1;
+      $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
 
-        var avgNumber = Math.round(contentArr[counter].length * 0.29);
-        var wordArr = contentArr[counter].split('');
-        wordArr.splice(avgNumber, 1, "<span class='red'>" + contentArr[counter][avgNumber] + "</span>")
-        wordArr = wordArr.join('');
+      if ($scope.hPosition < 1) {
+        $http.get('/tiles/categories', null)
+          .success(function(response) {
+            console.log($scope.allTiles);
+            for (var i = 0; i < response.length; i++) {
+              for (var j = (response[i].length - 1); j >= 0; j--) {
+                $scope.allTiles[i].unshift(response[i][j]);
+              };
+            };
+            console.log($scope.allTiles);
 
-        $('#spritz').html(wordArr);
-        counter++;
-      }, 250);
+            $scope.hPosition += 18;
+            $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+            $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+            $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
+            $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+          });        
+
+      } else {
+        resetTiles();
+      };
     };
-    // END
+
+    $scope.moveRight = function() {
+      $scope.hPosition += 1;
+      $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
+
+      if (($scope.allTiles[$scope.currentCategory].length - 1) - $scope.hPosition < 1) {
+        $http.get('/tiles/categories', null)
+          .success(function(response) {
+            console.log($scope.allTiles);
+            for (var i = 0; i < response.length; i++) {
+              for (var j = 0; j <= (response[i].length - 1); j++) {
+                $scope.allTiles[i].push(response[i][j]);
+              };
+            };
+            console.log($scope.allTiles);
+
+            $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+            $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+            $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
+            $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+          });
+
+      } else {
+        resetTiles();
+      };
+    }
+
+    var categoryRotator = function(categoryNum, direction) {
+      if (direction == "up") {
+        if (categoryNum == 0) {
+          return 8;
+        } else {
+          return (categoryNum - 1);
+        };
+      } else if (direction == "down") {
+        if (categoryNum == 8) {
+          return 0;
+        } else {
+          return (categoryNum + 1);
+        };
+      };
+    };
 
     $scope.closeNav = function(){
 
@@ -217,117 +279,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         };
     });
 
-    var categoryRotator = function(categoryNum, direction) {
-      if (direction == "up") {
-        if (categoryNum == 0) {
-          return 8;
-        } else {
-          return (categoryNum - 1);
-        };
-      } else if (direction == "down") {
-        if (categoryNum == 8) {
-          return 0;
-        } else {
-          return (categoryNum + 1);
-        };
-      };
-    };
-
-    $scope.hPosition = 9;
-    $scope.currentCategory;
-    var horizontal = [];
-
-    $scope.loadTiles = function() {
-      $scope.nav_open = false;
-      $http.get('/tiles/categories', null)
-        .success(function(response) {
-
-          $scope.allTiles = response;
-          $scope.currentCategory = Math.floor(Math.random() * 9);
-          console.log(response);
-
-          $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
-          $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
-          $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
-
-          $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
-          $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
-        });
-    }
-
-    var resetTiles = function() {
-      $scope.$apply(function() {
-        $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
-        $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
-        $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
-        $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
-      });
-    }
-
-    $scope.moveUp = function() {
-      $scope.tileMain = $scope.tileUp;
-      $scope.currentCategory = categoryRotator($scope.currentCategory, "up");
-      resetTiles();
-    }
-
-    $scope.moveDown = function() {
-      $scope.tileMain = $scope.tileDown;
-      $scope.currentCategory = categoryRotator($scope.currentCategory, "down");
-      resetTiles();
-    }
-
-    $scope.moveLeft = function() {
-      $scope.hPosition -= 1;
-      $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
-
-      if ($scope.hPosition < 1) {
-        $http.get('/tiles/categories', null)
-          .success(function(response) {
-            console.log($scope.allTiles);
-            for (var i = 0; i < response.length; i++) {
-              for (var j = (response[i].length - 1); j >= 0; j--) {
-                $scope.allTiles[i].unshift(response[i][j]);
-              };
-            };
-            console.log($scope.allTiles);
-
-            $scope.hPosition += 18;
-            $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
-            $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
-            $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
-            $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
-          });        
-
-      } else {
-        resetTiles();
-      };
-    };
-
-    $scope.moveRight = function() {
-      $scope.hPosition += 1;
-      $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
-
-      if (($scope.allTiles[$scope.currentCategory].length - 1) - $scope.hPosition < 1) {
-        $http.get('/tiles/categories', null)
-          .success(function(response) {
-            console.log($scope.allTiles);
-            for (var i = 0; i < response.length; i++) {
-              for (var j = 0; j <= (response[i].length - 1); j++) {
-                $scope.allTiles[i].push(response[i][j]);
-              };
-            };
-            console.log($scope.allTiles);
-
-            $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
-            $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
-            $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
-            $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
-          });
-
-      } else {
-        resetTiles();
-      };
-    }
 
     // Create a random tile and save to database
     // Leave this alone!!!!!!!!!!!!!
@@ -342,5 +293,25 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           $scope.tile = response;
         })
     }
+
+    // SPRITZ test
+    $scope.spritzNow = function(content) {
+      var contentArr = content.split(/\W/).filter(function(n) { return n != "" });
+      var counter = 0;
+
+      var startSpritz = setInterval(function() {
+        if (counter >= contentArr.length - 1)
+          window.clearInterval(startSpritz);
+
+        var avgNumber = Math.round(contentArr[counter].length * 0.29);
+        var wordArr = contentArr[counter].split('');
+        wordArr.splice(avgNumber, 1, "<span class='red'>" + contentArr[counter][avgNumber] + "</span>")
+        wordArr = wordArr.join('');
+
+        $('#spritz').html(wordArr);
+        counter++;
+      }, 250);
+    };
+    // END
   }
 ]);
