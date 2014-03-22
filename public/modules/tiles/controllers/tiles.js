@@ -7,6 +7,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     // Testing Tile categories and movement
     $scope.allTiles;
     $scope.singleTile;
+    $scope.sharedTile;
+    $scope.sharedTileArray;
     var categoryPosition;
     var tilePosition;
 
@@ -21,26 +23,38 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     $scope.changeCategory = function(num) {
       categoryPosition += num;
       $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
+      $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
     }
 
     $scope.changeTile = function(num) {
       tilePosition += num;
       $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
+      $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
     }
 
     // END
 
-    // Share a til      // Give user a url to tile when user click on share tile.
+    // Share a tile
+    // Give user a url to tile when user click on share tile.
         // give url function here
 
       // Return shared tile and random tiles around it (shared tile in center of return array)
       $scope.getOneTile = function(currentTileId) {
-        $http.get('/tile/' + currentTileId, null)
-          .success(function(tile) {
-            console.log(tile);
-            $scope.oneTile = tile;
-          })
-      }
+        $http.get('/tile/shared/' + currentTileId, null)
+          .success(function(sharedTileArray) {
+            // Get position of shared tile.
+            $scope.sharedTileArray = sharedTileArray;
+            var sharedTileCatPosition = Math.round((sharedTileArray.length / 2) - 1);
+            var sharedTilePosition = Math.round((sharedTileArray[0].length / 2));
+
+            categoryPosition = sharedTileCatPosition;
+            tilePosition = sharedTilePosition;
+
+            console.log(categoryPosition, tilePosition);
+
+            $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+          });
+      };
 
     // ShareEND
 

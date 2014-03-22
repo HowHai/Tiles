@@ -6,8 +6,12 @@ module.exports = function(app) {
   // Get a list of all tiles
   app.get('/tiles', tiles.list);
 
+  // GET shared tile, placed in center of other random tiles
+  app.get('/tile/shared/:tileId', tiles.shared);
+
   // GET one tile
   app.get('/tile/:tileId', tiles.show);
+
 
   // Create tiles
   app.post('/tiles', tiles.create);

@@ -13,12 +13,57 @@ var mongoose = require('mongoose'),
 
 // Get a tile
 exports.show = function(req, res){
-  var tileId = req.params.tileId
+  var tileId = req.params.tileId;
   Tile.findById(tileId, function(error, tile) {
     if(error)
       console.log(error);
     else
       res.json(tile);
+  });
+};
+
+// GET shared tile, placed in center of other random tiles
+exports.shared = function(req, res){
+  var sharedTileId = req.params.tileId;
+
+  Tile.findById(sharedTileId, function(error, sharedTile) {
+    if(error)
+      console.log(error);
+    else
+      // Return shared tile in center
+      Category.find({},{}).populate({path: 'tiles', match: { _id: { $ne: sharedTile._id }} }).exec(function(error, categories) {
+        // Populate comments data within each tile.
+        Tile.populate(categories, {
+          path: 'tiles.comments',
+          model: Comment,
+        }, function(error, categories) {
+          // Populate user data within each comment.
+          Comment.populate(categories, {
+            path: 'tiles.comments.user',
+            select: 'displayName',
+            model: User
+          }, function(error, categories) {
+            // Return each category with tiles inside as an array. [[cat1], [cat2]]
+            var categoriesArray = categories.map(function(cat) { return cat.tiles });
+
+            // Find category of sharedTile and move to center.
+            var categoryIndex;
+            categoriesArray.forEach(function(cat, index){
+              if (cat[0].category == sharedTile.category)
+                categoryIndex = index;
+            });
+
+            // Add shared tile to center of its category.
+            categoriesArray[categoryIndex].splice(9, 0, sharedTile);
+
+            var categoryCenter = Math.round((categoriesArray.length / 2) - 1);
+            var centeredCategoriesArray = categoriesArray.move(categoryIndex, categoryCenter);
+
+            // res.json(categoryIndex)
+            res.json(centeredCategoriesArray);
+          });
+        });
+      });
   });
 };
 
@@ -71,9 +116,10 @@ exports.category = function(req, res){
 // Create tile
 exports.create = function(req, res){
   // PhantomJS testt
+  // TODO: Make this dynamic
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open('http://uncrate.com/tech/', function(status) {
+      return page.open('http://uncrate.com/gear/', function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -137,7 +183,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: 'Tech', name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: 'Gear', name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -149,7 +195,7 @@ exports.create = function(req, res){
                 });
 
                 // Find category. Create new one if none exist.
-                var categoryName = "Tech";
+                var categoryName = "Gear";
 
                 Category.findOne({name: categoryName}, function(error, cat){
                   if (cat === null) {
@@ -185,4 +231,17 @@ exports.create = function(req, res){
     });
   });
   // END
+};
+
+// MISC.
+// Array method to swap old_index with new_index
+Array.prototype.move = function (old_index, new_index) {
+    if (new_index >= this.length) {
+        var k = new_index - this.length;
+        while ((k--) + 1) {
+            this.push(undefined);
+        }
+    }
+    this.splice(new_index, 0, this.splice(old_index, 1)[0]);
+    return this; // for testing purposes
 };
