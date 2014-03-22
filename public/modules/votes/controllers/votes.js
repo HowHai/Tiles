@@ -5,9 +5,6 @@ angular.module('mean.votes').controller('VotesCtrl', ['$scope', '$stateParams', 
 
   var vote;
   var tileId;
-  $scope.totalUp = 0;
-  $scope.totalDown = 0;
-  $scope.voteTotal = $scope.totalUp + $scope.totalDown;
 
   // Create a vote, checking for 'up' vs 'down' first before saving
   $scope.create = function(option) {
@@ -30,19 +27,4 @@ angular.module('mean.votes').controller('VotesCtrl', ['$scope', '$stateParams', 
       $location.path('votes/' + response._id);
     })
   };
-
-  // $scope.find = function() {
-  //   Votes.query(function(votes) {
-  //     $scope.votes;
-  //   });
-  // };
-
-  // $scope.findOne = function() {
-  //   Votes.get({
-  //       voteId: $stateParams.voteId
-  //   }, function(vote) {
-  //       $scope.vote = vote;
-  //     });
-  //   };
-  }
-]);
+}]);

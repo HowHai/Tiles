@@ -12,13 +12,7 @@ var VoteSchema = new Schema({
   },
   tile: {
     type: String
-  },
-  upVotes: {
-    type: Number
-  },
-  downVotes: {
-    type: Number
-  },
+  }
 });
 
 VoteSchema.statics = {

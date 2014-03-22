@@ -14,28 +14,49 @@ exports.create = function(req, res) {
   var choice = vote.choice;
   var user = req.user.username;
 
+  //Grab choice from angular controller
   if (choice == 'upVote') {
     Tile.findById(id, function(err, doc) {
-      if (Tile.find({userVotes: user})){
-        console.log(user + ' already voted!');
+      if (doc.votes.length > 0) {
+        for (var i = 0; i < doc.votes.length; i++){
+          if (doc.votes[i] == user) {
+            console.log('ALREADY VOTED');
+          } 
+          else {
+            // Add user name to votesUp
+            doc.votesUp.push(user);
+            doc.votes.push(user);
+            doc.save();
+            console.log(user + ' has vote for ' + id);
+          }
+        }
       } else {
-        // Add user name to votesUp
         doc.votesUp.push(user);
-        doc.userVotes.push(user);
-        console.log(data);
+        doc.votes.push(user);
         doc.save();
+        console.log(user + ' has vote for ' + id);
       }
     });
-  } else {
+  } else if (choice == 'downVote') {
     Tile.findById(id, function(err, doc) {
-      if (Tile.find({userVotes: user})){
-        console.log(user + ' already voted!');
-      } else {
-        // Add user name to votesDown
-        doc.votesDown.push(user);
-        doc.userVotes.push(user);
-        console.log(data);
+      if (doc.votes.length > 0) {
+        for (var i = 0; i < doc.votes.length; i++){
+          if (doc.votes[i] == user) {
+            console.log('ALREADY VOTED');
+          } else {
+            // Add user name to votesUp
+            doc.votesUp.push(user);
+            doc.votes.push(user);
+            doc.save();
+            console.log(user + ' has vote for ' + id);
+          }
+        }
+      }
+      else {
+        doc.votesUp.push(user);
+        doc.votes.push(user);
         doc.save();
+        console.log(user + ' has vote for ' + id);
       }
     });
   }

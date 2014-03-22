@@ -66,9 +66,7 @@
   </div>
 
   <!-- END -->
-<br>
-<br>
-<br>
+  <br>
 </section>
 
 <!-- Voting -->
@@ -77,13 +75,19 @@
   <button ng-click="create('down')">DownVote</button>
 </section>
 
-<div ng-repeat="vote in tile.votesUp">
-  UpVotes: {{vote[0].length}}
+<div ng-repeat="up in tile.votesUp">
+  UpVotes: {{up[0].length}}
 </div>
-<div ng-repeat="vote in tile.votesDown">
-  DownVotes: -{{vote[0].length}}
+<div ng-hide="tile.votesUp.length > 0">
+  UpVotes: 0
 </div>
 
+<div ng-repeat="down in tile.votesDown">
+  DownVotes: -{{down[0].length}}
+</div>
+<div ng-hide="tile.votesDown.length > 0">
+  DownVotes: 0
+</div>
 
 <!-- ADD Comments -->
 <section data-ng-controller="CommentsCtrl">
@@ -96,4 +100,3 @@
     </fieldset>
   </form>
 </section>
-
