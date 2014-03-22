@@ -112,7 +112,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
       };
     };
 
-    $scope.closeNav = function(){
+    $scope.closeNav = function() {
 
       $("#tileMain").removeClass("nav-open");
       $("#tileMain").addClass("nav-close");
@@ -135,6 +135,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           
           var colorMain = $("#tileMain").css("background-color");
           var colorOffset = $("#tileLeft").css("background-color");
+          console.log(colorMain);
+          console.log(colorOffset);
 
           if(direction=="right" && distance > (document.documentElement.clientWidth)*0.45){
             animateAndMove("Left", $scope.tileLeft, colorMain, colorOffset);
@@ -171,6 +173,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         $("#tileRight").css("background-color", colorMain);
         $("#tileUp").css("background-color", colorMain);
         $("#tileDown").css("background-color", colorMain);
+        $("#tileMain").css("color", colorMain);
+        $("#tileLeft").css("color", colorOffset);
+        $("#tileRight").css("color", colorOffset);
+        $("#tileUp").css("color", colorOffset);
+        $("#tileDown").css("color", colorOffset);
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
@@ -178,7 +185,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         $("#tile" + direction).addClass("show");
         $("#tileMain").addClass("hide");
 
+        // Added this to match bg color to new tile, but needs some work with the animation
+        // $("#showTile").css("background-color", colorMain);
+
         $("#tileMain").css("background-color", colorOffset);
+        $("#tileMain").css("color", colorMain);
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
@@ -187,7 +198,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           $("#tileMain").removeClass("hide");
           $("#tile" + direction).removeClass("show");
           switchColors(colorMain,colorOffset);
-          
         },100);
 
       };

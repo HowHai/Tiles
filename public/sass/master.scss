@@ -110,7 +110,7 @@ a.undecorated-link:hover {
 
     .tile-info {
       padding: 15px 12px;
-      color: #E42525;
+      font-weight: 300;
       h1 {
         margin: 0;
         margin-top: 5px;
@@ -118,6 +118,7 @@ a.undecorated-link:hover {
       }
       p {
         margin-top: 10px;
+        font-style: italic;
       }
       #bottom-fade {
         position: absolute;
@@ -178,15 +179,19 @@ a.undecorated-link:hover {
     #tileUp {
       bottom: 108%;
       left: 0px;
+      color: white;
     }
     #tileDown {
       bottom: -108%;
       left: 0px;
-    }
+      color: white;
+          }
     #tileRight {
+      color: white;
       left: 108%;
     }
     #tileLeft {
+      color: white;
       left: -108%;
     }
   }

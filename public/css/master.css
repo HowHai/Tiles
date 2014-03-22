@@ -74,13 +74,14 @@ a.undecorated-link:hover {
     overflow: hidden; }
   #showTile #loadedTiles .tile-info {
     padding: 15px 12px;
-    color: #e42525; }
+    font-weight: 300; }
     #showTile #loadedTiles .tile-info h1 {
       margin: 0;
       margin-top: 5px;
       font-size: 1.6em; }
     #showTile #loadedTiles .tile-info p {
-      margin-top: 10px; }
+      margin-top: 10px;
+      font-style: italic; }
     #showTile #loadedTiles .tile-info #bottom-fade {
       position: absolute;
       bottom: 0;
@@ -127,13 +128,17 @@ a.undecorated-link:hover {
     bottom: 0%; }
   #showTile #loadedTiles #tileUp {
     bottom: 108%;
-    left: 0px; }
+    left: 0px;
+    color: white; }
   #showTile #loadedTiles #tileDown {
     bottom: -108%;
-    left: 0px; }
+    left: 0px;
+    color: white; }
   #showTile #loadedTiles #tileRight {
+    color: white;
     left: 108%; }
   #showTile #loadedTiles #tileLeft {
+    color: white;
     left: -108%; }
   #showTile #navigation-instructions {
     display: none;
