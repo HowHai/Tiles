@@ -71,21 +71,22 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
           
-          // console.log(document.documentElement.clientWidth);
-          if(direction=="right" && distance > (document.documentElement.clientWidth)*0.4){
-            $scope.moveLeft();
+          var colorMain = $("#tileMain").css("background-color");
+          var colorOffset = $("#tileLeft").css("background-color");
+
+          if(direction=="right" && distance > (document.documentElement.clientWidth)*0.45){
+            animateAndMove("Left", $scope.tileLeft, colorMain, colorOffset);
           }
-          else if(direction=="left" && distance > (document.documentElement.clientWidth)*0.4){
-            $scope.moveRight();     
+          else if(direction=="left" && distance > (document.documentElement.clientWidth)*0.45){
+            animateAndMove("Right", $scope.tileRight, colorMain, colorOffset);    
           }
-          else if(direction=="up" && distance > (document.documentElement.clientHeight)*0.2){
-            $scope.moveDown();
+          else if(direction=="up" && distance > (document.documentElement.clientHeight)*0.45){
+            animateAndMove("Down", $scope.tileUp, colorMain, colorOffset);
           }
-          else if(direction=="down" && distance > (document.documentElement.clientHeight)*0.2){
-            $scope.moveUp();
+          else if(direction=="down" && distance > (document.documentElement.clientHeight)*0.45){
+            animateAndMove("Up", $scope.tileDown, colorMain, colorOffset);
           }
           else if(distance == 0 && direction == null){
-            // $("#tileMain").addClass("bounce-out");
 
             if($scope.nav_open == false){
               $("#tileMain").addClass("nav-open");
@@ -96,34 +97,54 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $scope.nav_open = true;
             }
 
-            // setTimeout(function(){
-            //   // $("#tileMain").addClass("bounce-in");
-            //   // $("#tileMain").removeClass("bounce-out");
-            // $("#tileMain").removeClass("nav-open");
-            // $("#tileMain").addClass("nav-close");
-            // // $("#tileMain").css("transition","0.25s");
-            // // $("#tileMain .tile-info").css("transition","0.25s");
-            // $("#navigation-instructions").css("transition","1s");
-            // // $("#tileMain").css("height","100%");
-            // // $("#tileMain").css("width","100%");
-            // // $("#tileMain").css("padding","0px");
-            // // $("#tileMain").css("opacity","1");
-            // $("#navigation-instructions").css("opacity", "0");
-            // // $("#tileMain .tile-info").css("font-size","1em");
-            // // $("#tileMain .tile-info").css("padding-top","15px");
-            // }, 250);
-
-            // setTimeout(function(){
-            //   $("#tileMain").css("transition","0s");
-            //   $("#tileMain .tile-info").css("transition","0s");
-            //   $("#navigation-instructions").css("display", "none");
-            // },500);
           }
-
         },
         //Default is 75px, set to 0 for demo so any distance triggers swipe
          threshold:0
       });
+
+      function switchColors(colorMain, colorOffset){
+        $("#tileMain").css("background-color", colorOffset);
+        $("#tileLeft").css("background-color", colorMain);
+        $("#tileRight").css("background-color", colorMain);
+        $("#tileUp").css("background-color", colorMain);
+        $("#tileDown").css("background-color", colorMain);
+      };
+
+      function animateAndMove(direction, tile, colorMain, colorOffset){
+        $("#tile" + direction).addClass("center-tile");
+        $("#tile" + direction).addClass("show");
+        $("#tileMain").addClass("hide");
+
+        $("#tileMain").css("background-color", colorOffset);
+        $scope.$apply(function(){$scope.tileMain = tile;});
+
+        setTimeout(function(){
+          move(direction);
+          $("#tile" + direction).removeClass("center-tile");
+          $("#tileMain").removeClass("hide");
+          $("#tile" + direction).removeClass("show");
+          switchColors(colorMain,colorOffset);
+          
+        },100);
+
+      };
+
+      function move(direction){
+        if(direction == "Left"){
+          $scope.moveLeft();
+        }
+        else if(direction == "Right"){
+          $scope.moveRight();
+        }
+        else if(direction == "Up"){
+          $scope.moveUp();
+        }
+        else if(direction == "Down"){
+          $scope.moveDown();
+        }
+
+      }
 
       function pinchMe(event, phase, direction, distance , duration , fingerCount, pinchZoom){
           $("#tileMain").css("opacity",pinchZoom);
@@ -132,14 +153,19 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
       //SWIPE 2 FUNCTION FOR ANIMATION
       function swipe2(event, phase, direction, distance) {
           // console.log( phase +" you have swiped " + distance + "px in direction:" + direction );
+          $(".tile").removeClass("slow");
+          $("#tileMain").addClass("fader");
           if(phase == "move"){
             if(direction == 'right'){
               $(".tile").css("margin-left", distance);
-              $("#tileLeft").css("opacity", distance/100);
+              $("#tileLeft").css("opacity", (1.5*distance)/document.documentElement.clientWidth);
+              $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
+
             }
             else if (direction == 'left'){
               $(".tile").css("margin-left", -distance);
-              $("#tileRight").css("opacity", distance/100);
+              $("#tileRight").css("opacity", (1.5*distance)/document.documentElement.clientWidth);
+              $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
             else if (direction == 'down'){
               $("#tileMain").css("bottom", -distance);
@@ -147,7 +173,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#tileDown").css("bottom", -100-((distance/document.documentElement.clientHeight)*100)+"%");
               $("#tileLeft").css("bottom", -distance);
               $("#tileRight").css("bottom", -distance);
-              $("#tileUp").css("opacity", distance/100);
+              $("#tileUp").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
+              $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
             
             else if (direction == 'up'){
@@ -156,27 +183,35 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#tileDown").css("bottom", -100+((distance/document.documentElement.clientHeight)*100)+"%");
               $("#tileLeft").css("bottom", distance);
               $("#tileRight").css("bottom", distance);
-              $("#tileDown").css("opacity", distance/100);
+              $("#tileDown").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
+              $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
              
           }
           else if (phase == "end"){
             //console.log(distance);
-            if(distance>100){
+            if(distance>(document.documentElement.clientHeight)*0.45){
              $(".tile").css("margin", "0px");
              $("#tileDown").css("bottom","-100%");
              $("#tileUp").css("bottom","100%");
              $("#tileMain").css("bottom", 0);
              $("#tileLeft").css("bottom", 0);
              $("#tileRight").css("bottom", 0);
+             $("#tileMain.fader").css("opacity", 1);
             }
             else{
+              $(".tile").addClass("slow");
               $(".tile").css("margin", "0px");
               $("#tileDown").css("bottom","-100%");
               $("#tileUp").css("bottom","100%");
               $("#tileMain").css("bottom", 0);
               $("#tileLeft").css("bottom", 0);
               $("#tileRight").css("bottom", 0);
+              $("#tileMain.fader").css("opacity", 1);
+
+              setTimeout(function(){
+                $(".tile").removeClass("slow");
+              },100);
             }
           }
         };

@@ -94,7 +94,7 @@ a.undecorated-link:hover {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: black;
+  // background-color: red;
   text-align: center;
   height: 90%;
   height: calc(100% - 50px);
@@ -113,6 +113,7 @@ a.undecorated-link:hover {
   }
   .tile-info {
     padding: 15px 12px;
+    color: #E42525;
     #bottom-fade {
       position: absolute;
       bottom: 0;
@@ -136,12 +137,34 @@ a.undecorated-link:hover {
     bottom: 0px;
     margin: 0px;
     position: absolute;
+    background-color: black;
+  }
+  .show{
+    opacity: 1;
+    z-index: 100;
+  }
+  .slow{
+    transition: 0.35s;
+    // -webkit-transition-timing-function: ease-in-out;
+    // -moz-transition-timing-function: ease-in-out;
+    // -o-transition-timing-function: ease-in-out;
+    // transition-timing-function: ease-in-out;
+  }
+  #tileLeft.center-tile,#tileRight.center-tile,#tileUp.center-tile,#tileDown.center-tile{
+    left: 0%;
+    bottom: 0%;
   }
   #tileMain{
     background-color: white;
     left: 0;
     bottom: 0px;
     margin: 0px;
+    &.hide{
+      opacity: 0;
+    }
+    &.fader{
+      opacity: 1;
+    }
     &.nav-open{
       transition: 0.25s;
       height: 99.9%;
@@ -194,6 +217,7 @@ a.undecorated-link:hover {
     font-size: 3em;
     padding: 20px;
     padding-top: 10px;
+    background-color: rgba(0,0,0,0.5);
     .center-vertical{
       padding-top: 47%;
     }
