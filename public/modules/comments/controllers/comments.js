@@ -4,18 +4,11 @@ angular.module('mean.comments').controller('CommentsCtrl', ['$scope', '$statePar
   $scope.authentication = Authentication;
 
   $scope.create = function(tileObj) {
-    // Grab current tile ID by div element
-    // var tileId = $('#testId')[0].innerText;
-
-    // var comment = new Comments ({
-    //   content: this.content,
-    //   tile: tileId,
-    // });
-
     var comment = new Comments ({
       content: this.content,
       tile: tileObj
     });
+    console.log(comment);
 
     comment.$save(function(response) {
       $location.path('comments/' + response._id);

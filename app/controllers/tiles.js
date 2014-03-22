@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
   Comment = mongoose.model('Comment'),
   Tile = mongoose.model('Tile'),
   User = mongoose.model('User'),
+  Category = mongoose.model('Category'),
   _ = require('lodash'),
   phantom = require('phantom');
 
@@ -31,12 +32,7 @@ exports.categories = function(req, res){
     return sportsCategory;
   });
 
-  // Tile.find({category: 'vices'}, function(error, data) {
-  //   uncrateVices = data;
-  //   return uncrateVices;
-  // });
-
-  Tile.find({category: 'vices'}).populate('comments').exec(function(error, tiles) {
+  Tile.find({category: 'Vices'}).populate('comments').exec(function(error, tiles) {
     if (error) {
       console.log(error);
     } else {
@@ -57,7 +53,6 @@ exports.categories = function(req, res){
 
   Tile.find({category: 'style'}, function(error, data) {
     geekyToysCategory = data;
-    // res.json([uncrateVices, sportsCategory, geekyToysCategory]);
   });
 }
 
@@ -78,7 +73,7 @@ exports.create = function(req, res){
   // PhantomJS testt
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open('http://uncrate.com/vices/', function(status) {
+      return page.open('http://uncrate.com/tech/', function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -142,7 +137,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: 'vices', name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: 'Tech', name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -153,14 +148,36 @@ exports.create = function(req, res){
                   page.render('public/modules/tiles/img/tiles/' + result[0][index].imgUrl);
                 });
 
+                // Find category. Create new one if none exist.
+                var categoryName = "Tech";
+
+                Category.findOne({name: categoryName}, function(error, cat){
+                  if (cat === null) {
+                    console.log(error);
+                    console.log(cat);
+                    var category = new Category({name: categoryName});
+                    makeTiles(result, category);
+                  } else {
+                    console.log("This ran");
+                    var category = cat;
+                    makeTiles(result, category);
+                  }
+                });
+
                 // Create new tiles using pulled data
-                for(var i = 0; i < result[0].length; i++) {
+                var makeTiles = function(result, category) {
+                  for(var i = 0; i < result[0].length; i++) {
 
-                  var tile = new Tile(result[0][i]);
+                    var tile = new Tile(result[0][i]);
 
-                  tile.save();
+                    console.log(category);
+                    category.tiles.push(tile);
+                    category.save();
+
+                    tile.save();
+                  }
+                  ph.exit();
                 }
-                ph.exit();
             });
           }, 5000);
         });

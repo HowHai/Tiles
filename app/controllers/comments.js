@@ -12,18 +12,6 @@ exports.create = function(req, res) {
   comment.user = req.user;
 
   console.log(comment);
-  // var id = comment.tile;
-  // var data = [];
-  // var text = comment.content;
-  // var user = comment.user;
-  // var time = comment.created
-  // data.push(user, text, time);
-
-  // Tile.findById(id, function(err, doc) {
-  //   doc.comments.push(data);
-  //   // console.log(data);
-  //   doc.save();
-  // });
 
   comment.save(function(err, comment) {
     if (err) {
@@ -33,24 +21,14 @@ exports.create = function(req, res) {
         comment: comment
       });
     } else {
-
       Tile.findById(comment.tile, function(err, tile) {
         console.log(tile);
+        console.log(comment._id);
         tile.comments.push(comment._id);
-        tile.save();
-        res.json(tile);
-      })
-
-      // Find tile, push comment and save.
-      // Tile.findById(comment.tile).comments.push(comment._id).save();
-      // tile.save(function(err) {
-      //   if (err) {
-      //     console.log(err);
-      //   } else {
-      //     res.json(tile);
-      //   }
-      // });
-      // res.jsonp(comment);
+        tile.save(function(tile){
+          res.json(tile);
+        });
+      });
     }
   });
 };
