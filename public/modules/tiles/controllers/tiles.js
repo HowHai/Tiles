@@ -30,6 +30,20 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     // END
 
+    // Share a til      // Give user a url to tile when user click on share tile.
+        // give url function here
+
+      // Return shared tile and random tiles around it (shared tile in center of return array)
+      $scope.getOneTile = function(currentTileId) {
+        $http.get('/tile/' + currentTileId, null)
+          .success(function(tile) {
+            console.log(tile);
+            $scope.oneTile = tile;
+          })
+      }
+
+    // ShareEND
+
     // SPRITZ test
     $scope.spritzNow = function(content) {
       var contentArr = content.split(/\W/).filter(function(n) { return n != "" });

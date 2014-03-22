@@ -6,12 +6,15 @@ module.exports = function(app) {
   // Get a list of all tiles
   app.get('/tiles', tiles.list);
 
-  // Create tiles *seeded currently*
+  // GET one tile
+  app.get('/tile/:tileId', tiles.show);
+
+  // Create tiles
   app.post('/tiles', tiles.create);
 
   // GET tiles within a category
   app.get('/tiles/category/:categoryName', tiles.category);
 
-  // GET all categories
+  // GET all categories.
   app.get('/tiles/categories', tiles.categories);
 }

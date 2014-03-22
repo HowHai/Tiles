@@ -11,6 +11,17 @@ var mongoose = require('mongoose'),
   _ = require('lodash'),
   phantom = require('phantom');
 
+// Get a tile
+exports.show = function(req, res){
+  var tileId = req.params.tileId
+  Tile.findById(tileId, function(error, tile) {
+    if(error)
+      console.log(error);
+    else
+      res.json(tile);
+  });
+};
+
 // Get list of all tiles
 exports.list = function(req, res){
   Tile.find(function(error, data) {
