@@ -16,19 +16,27 @@ exports.create = function(req, res) {
 
   if (choice == 'upVote') {
     Tile.findById(id, function(err, doc) {
-      // Add user name to votesUp
-      doc.votesUp.push(user);
-      doc.userVotes.push(user);
-      console.log(data);
-      doc.save();
+      if (Tile.find({userVotes: user})){
+        console.log(user + ' already voted!');
+      } else {
+        // Add user name to votesUp
+        doc.votesUp.push(user);
+        doc.userVotes.push(user);
+        console.log(data);
+        doc.save();
+      }
     });
   } else {
     Tile.findById(id, function(err, doc) {
-      // Add user name to votesDown
-      doc.votesDown.push(user);
-      doc.userVotes.push(user);
-      console.log(data);
-      doc.save();
+      if (Tile.find({userVotes: user})){
+        console.log(user + ' already voted!');
+      } else {
+        // Add user name to votesDown
+        doc.votesDown.push(user);
+        doc.userVotes.push(user);
+        console.log(data);
+        doc.save();
+      }
     });
   }
 

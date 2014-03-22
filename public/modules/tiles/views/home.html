@@ -78,10 +78,10 @@
 </section>
 
 <div ng-repeat="vote in tile.votesUp">
-  UpVotes: {{vote.length}}
+  UpVotes: {{vote[0].length}}
 </div>
 <div ng-repeat="vote in tile.votesDown">
-  DownVotes: -{{vote.length}}
+  DownVotes: -{{vote[0].length}}
 </div>
 
 

@@ -29,25 +29,20 @@ angular.module('mean.votes').controller('VotesCtrl', ['$scope', '$stateParams', 
     vote.$save(function(response) {
       $location.path('votes/' + response._id);
     })
-
-    // if (voted == false) {
-    //   voted = true;
-    //   $scope.totalUp++;
-    // };
   };
 
-  $scope.find = function() {
-    Votes.query(function(votes) {
-      $scope.votes;
-    });
-  };
+  // $scope.find = function() {
+  //   Votes.query(function(votes) {
+  //     $scope.votes;
+  //   });
+  // };
 
-  $scope.findOne = function() {
-    Votes.get({
-        voteId: $stateParams.voteId
-    }, function(vote) {
-        $scope.vote = vote;
-      });
-    };
+  // $scope.findOne = function() {
+  //   Votes.get({
+  //       voteId: $stateParams.voteId
+  //   }, function(vote) {
+  //       $scope.vote = vote;
+  //     });
+  //   };
   }
 ]);
