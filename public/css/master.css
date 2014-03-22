@@ -50,95 +50,90 @@ a.undecorated-link:hover {
   height: 100%; }
 
 #showTile {
+  height: 90%;
+  height: calc(100% - 50px);
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
-  text-align: center;
-  height: 90%;
-  height: calc(100% - 50px);
-  overflow: hidden;
-  position: absolute; }
-  #showTile h1 {
-    margin: 0;
-    margin-top: 5px;
-    font-size: 1.6em; }
-  #showTile p {
-    margin-top: 10px; }
+  user-select: none; }
   #showTile img {
     width: 100%; }
-  #showTile .tile-info {
-    padding: 15px 12px;
-    color: #e42525; }
-    #showTile .tile-info #bottom-fade {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.4), #ffffff);
-      width: 100%;
-      height: 60px; }
-      #showTile .tile-info #bottom-fade h2 {
-        margin-top: 30px;
-        background-color: white;
-        font-size: 0.7em;
-        text-transform: capitalize; }
-  #showTile .tile {
+  #showTile #loadedTiles .tile {
     width: 100%;
     height: 100%;
     float: left;
     bottom: 0px;
     margin: 0px;
     position: absolute;
-    background-color: black; }
-  #showTile .show {
-    opacity: 1;
-    z-index: 100; }
-  #showTile .slow {
-    transition: 0.35s; }
-  #showTile #tileLeft.center-tile, #showTile #tileRight.center-tile, #showTile #tileUp.center-tile, #showTile #tileDown.center-tile {
-    left: 0%;
-    bottom: 0%; }
-  #showTile #tileMain {
+    background-color: black;
+    overflow: hidden; }
+  #showTile #loadedTiles .tile-info {
+    padding: 15px 12px;
+    color: #e42525; }
+    #showTile #loadedTiles .tile-info h1 {
+      margin: 0;
+      margin-top: 5px;
+      font-size: 1.6em; }
+    #showTile #loadedTiles .tile-info p {
+      margin-top: 10px; }
+    #showTile #loadedTiles .tile-info #bottom-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 60px; }
+      #showTile #loadedTiles .tile-info #bottom-fade h2 {
+        color: darkblue;
+        margin-top: 30px;
+        font-size: 0.7em;
+        text-transform: capitalize; }
+  #showTile #loadedTiles #tileMain {
     background-color: white;
     left: 0;
     bottom: 0px;
     margin: 0px; }
-    #showTile #tileMain.hide {
+    #showTile #loadedTiles #tileMain.hide {
       opacity: 0; }
-    #showTile #tileMain.fader {
+    #showTile #loadedTiles #tileMain.fader {
       opacity: 1; }
-    #showTile #tileMain.nav-open {
+    #showTile #loadedTiles #tileMain.nav-open {
       transition: 0.25s;
       height: 99.9%;
       width: 99.9%;
       padding: 10px;
       opacity: 0.3; }
-      #showTile #tileMain.nav-open .tile-info {
+      #showTile #loadedTiles #tileMain.nav-open .tile-info {
         transition: 0.25s;
         font-size: 0.8em;
         padding-top: 10px; }
-    #showTile #tileMain.nav-close {
+    #showTile #loadedTiles #tileMain.nav-close {
       transition: 0.25s;
       height: 100%;
       width: 100%;
       padding: 0px;
       opacity: 1; }
-      #showTile #tileMain.nav-close .tile-info {
+      #showTile #loadedTiles #tileMain.nav-close .tile-info {
         transition: 0.25s;
         font-size: 1em;
         padding-top: 15px; }
-  #showTile #tileUp {
+  #showTile #loadedTiles #tileLeft.center-tile, #showTile #loadedTiles #tileRight.center-tile, #showTile #loadedTiles #tileUp.center-tile, #showTile #loadedTiles #tileDown.center-tile {
+    left: 0%;
+    bottom: 0%; }
+  #showTile #loadedTiles #tileUp {
     bottom: 108%;
     left: 0px; }
-  #showTile #tileDown {
+  #showTile #loadedTiles #tileDown {
     bottom: -108%;
     left: 0px; }
-  #showTile #tileRight {
+  #showTile #loadedTiles #tileRight {
     left: 108%; }
-  #showTile #tileLeft {
+  #showTile #loadedTiles #tileLeft {
     left: -108%; }
   #showTile #navigation-instructions {
     display: none;
@@ -200,3 +195,8 @@ a.undecorated-link:hover {
       width: 100%;
       position: relative;
       margin-top: 10px; }
+  #showTile .show {
+    opacity: 1;
+    z-index: 100; }
+  #showTile .slow {
+    transition: 0.35s; }

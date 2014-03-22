@@ -250,8 +250,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
           $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
 
-          $scope.tileUp = response[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
-          $scope.tileDown = response[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+          $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
+          $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
         });
     }
 

@@ -86,125 +86,112 @@ a.undecorated-link:hover {
 // Show Tile View
 
 #showTile {
-  // border: 4px solid #58c9f3;
-  //Prevent user from selecting text
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  // background-color: red;
-  text-align: center;
+
   height: 90%;
   height: calc(100% - 50px);
   overflow: hidden;
   position: absolute;
-  h1 {
-    margin: 0;
-    margin-top: 5px;
-    font-size: 1.6em;
-  }
-  p {
-    margin-top: 10px;
-  }
+  text-align: center;
   img {
     width: 100%;
   }
-  .tile-info {
-    padding: 15px 12px;
-    color: #E42525;
-    #bottom-fade {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      background-image: linear-gradient(rgba(255,255,255,0.4), white);
+
+  #loadedTiles {
+    .tile {
       width: 100%;
-      height: 60px;
-      h2 {
-        margin-top: 30px;
-        background-color: white;
-        font-size: 0.7em;
-        text-transform: capitalize;
-      }
-    }
-  }
-  .tile{
-    width: 100%;
-    height: 100%;
-    float: left;
-    bottom: 0px;
-    margin: 0px;
-    position: absolute;
-    background-color: black;
-  }
-  .show{
-    opacity: 1;
-    z-index: 100;
-  }
-  .slow{
-    transition: 0.35s;
-    // -webkit-transition-timing-function: ease-in-out;
-    // -moz-transition-timing-function: ease-in-out;
-    // -o-transition-timing-function: ease-in-out;
-    // transition-timing-function: ease-in-out;
-  }
-  #tileLeft.center-tile,#tileRight.center-tile,#tileUp.center-tile,#tileDown.center-tile{
-    left: 0%;
-    bottom: 0%;
-  }
-  #tileMain{
-    background-color: white;
-    left: 0;
-    bottom: 0px;
-    margin: 0px;
-    &.hide{
-      opacity: 0;
-    }
-    &.fader{
-      opacity: 1;
-    }
-    &.nav-open{
-      transition: 0.25s;
-      height: 99.9%;
-      width: 99.9%;
-      padding: 10px;
-      opacity: 0.3;
-      .tile-info{
-        transition: 0.25s;
-        font-size: 0.8em;
-        padding-top: 10px;
-      }
-    }
-    &.nav-close{
-      transition: 0.25s;
       height: 100%;
-      width: 100%;
-      padding: 0px;
-      opacity: 1;
-      .tile-info{
-        transition: 0.25s;
-        font-size: 1em;
-        padding-top: 15px;
+      float: left;
+      bottom: 0px;
+      margin: 0px;
+      position: absolute;
+      background-color: black;
+      overflow: hidden;
+    }
+
+    .tile-info {
+      padding: 15px 12px;
+      color: #E42525;
+      h1 {
+        margin: 0;
+        margin-top: 5px;
+        font-size: 1.6em;
+      }
+      p {
+        margin-top: 10px;
+      }
+      #bottom-fade {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+        width: 100%;
+        height: 60px;
+        h2 {
+          color: darkblue;
+          margin-top: 30px;
+          font-size: 0.7em;
+          text-transform: capitalize;
+        }
       }
     }
+
+    #tileMain {
+      background-color: white;
+      left: 0;
+      bottom: 0px;
+      margin: 0px;
+      &.hide {
+        opacity: 0;
+      }
+      &.fader {
+        opacity: 1;
+      }
+      &.nav-open {
+        transition: 0.25s;
+        height: 99.9%;
+        width: 99.9%;
+        padding: 10px;
+        opacity: 0.3;
+        .tile-info{
+          transition: 0.25s;
+          font-size: 0.8em;
+          padding-top: 10px;
+        }
+      }
+      &.nav-close {
+        transition: 0.25s;
+        height: 100%;
+        width: 100%;
+        padding: 0px;
+        opacity: 1;
+        .tile-info{
+          transition: 0.25s;
+          font-size: 1em;
+          padding-top: 15px;
+        }
+      }
+    }
+    #tileLeft.center-tile, #tileRight.center-tile, #tileUp.center-tile, #tileDown.center-tile {
+      left: 0%;
+      bottom: 0%;
+    }
+    #tileUp {
+      bottom: 108%;
+      left: 0px;
+    }
+    #tileDown {
+      bottom: -108%;
+      left: 0px;
+    }
+    #tileRight {
+      left: 108%;
+    }
+    #tileLeft {
+      left: -108%;
+    }
   }
-  #tileUp{
-    bottom: 108%;
-    left: 0px;
-  }
-  #tileDown{
-    bottom: -108%;
-    left: 0px;
-  }
-  #tileRight{
-    left: 108%;
-  }
-  #tileLeft{
-    left: -108%;
-  }
-  #navigation-instructions{
+
+  #navigation-instructions {
     display: none;
     opacity: 0;
     transition: 0.9s;
@@ -218,10 +205,10 @@ a.undecorated-link:hover {
     padding: 20px;
     padding-top: 10px;
     background-color: rgba(0,0,0,0.5);
-    .center-vertical{
+    .center-vertical {
       padding-top: 47%;
     }
-    #navi-content{
+    #navi-content {
       position: absolute;
       z-index: 10;
       height: 83%;
@@ -229,21 +216,20 @@ a.undecorated-link:hover {
       left: 8%;
       width: 83%;
     }
-
-    .kiss{
+    .kiss {
       position: fixed;
-      &.buttons{
+      &.buttons {
         position:absolute;
         bottom: 0px;
         width: 100%;
-        button{
-          &.left{
+        button {
+          &.left {
             color: gold;
           }
-          &.right{
+          &.right {
             right: 10px;
           }
-          &.red{
+          &.red {
             color: red;
           }
           // position: relative;
@@ -254,61 +240,51 @@ a.undecorated-link:hover {
           font-size: 0.6em;
         }
       }
-      
-      &.top{
+      &.top {
         position: absolute;
         top: 0px;
         left: 45%;
       }
-      &.left{
+      &.left {
         top: 45%;
         left: 10px;
       }
-      &.right{
+      &.right {
         top: 45%;
         right: 10px;
       }
-      &.bottom{
+      &.bottom {
         position: absolute;
         bottom: 10px;
         left: 45%;
       }
     }
-    .tutorial-text{
+    .tutorial-text {
       font-size: 0.75em;
       width: 100%;
       position: relative;
       margin-top: 10px;
     }
   }
-//   padding: 0;
-//   margin: 0;
-//   img {
-//     // width: 100%;
-//   }
-//   .tile-info {
-//     // width: 100%;
-//     // padding: 20px 0;
-//     .tile-title {
-//       text-align: center;
-//       // margin: 10px 0;
-//       font-weight: 700;
-//     }
-//     .tile-desc {
-//       text-align: center;
-//       // margin: 0 10px;
-//     }
-//   }
-//   #exploded-view {
-//     position: absolute;
-//     bottom: 10;
-//     margin-top: 100px;
-//   }
-//   .btn {
-//     border-radius: 0;
-//     border: none;
-//     box-shadow: none;
-//     background-image: none;
-//     margin: 0;
-//   }
+
+  .show{
+    opacity: 1;
+    z-index: 100;
+  }
+
+  .slow{
+    transition: 0.35s;
+    // -webkit-transition-timing-function: ease-in-out;
+    // -moz-transition-timing-function: ease-in-out;
+    // -o-transition-timing-function: ease-in-out;
+    // transition-timing-function: ease-in-out;
+  }
+
+  // Prevent user from selecting text
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
