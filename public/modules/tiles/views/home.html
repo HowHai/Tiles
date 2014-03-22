@@ -1,7 +1,7 @@
 <style>
   #mainTile, #singleTile {
-    width: 450px;
-    height: 450px;
+    width: 100%;
+    height: 100%;
     border: 1px solid black;
     text-align: center;
     padding:5px;
@@ -14,7 +14,6 @@
     text-align: center;
     font-size: 16px;
   }
-
   .red {
     color: red;
   }
@@ -22,10 +21,6 @@
 
 <section>
   <button ng-click="createTile()">Make Tile</button>
-
-  <h1>Cracked Tiles</h1>
-  <!-- dfdfdfd -->
-
 
   <div id="mainTile" ng-hide="true">
     <h2>{{tile.name}}</h2>
@@ -36,7 +31,7 @@
     <h5>{{tile.content}}</h5>
   </div>
 
-  <div id="testId" ng-hide="true">{{tile._id}}</div>
+  <div id="testId" ng-hide="true">{{singleTile._id}}</div>
 
   <h3>Comments</h3>
   <div data-ng-repeat="content in tile.comments">
@@ -49,10 +44,10 @@
 
   <!-- Spritz test -->
 
-  <div id="spritzBox">
+<!--   <div id="spritzBox">
     <button ng-click="spritzNow(singleTile.content)">Spritz!</button>
     <p id="spritz"></p>
-  </div>
+  </div> -->
 
   <!-- END -->
 
@@ -79,12 +74,16 @@
 <!-- Voting -->
 <section data-ng-controller="VotesCtrl">
   <button ng-click="create('up')">UpVote</button>
-  total: {{totalUp}}
   <button ng-click="create('down')">DownVote</button>
-  total: {{totalDown}}
-  <br>
-  <!-- total votes: {{voteTotal}} -->
 </section>
+
+<div ng-repeat="vote in tile.votesUp">
+  UpVotes: {{vote.length}}
+</div>
+<div ng-repeat="vote in tile.votesDown">
+  DownVotes: -{{vote.length}}
+</div>
+
 
 <!-- ADD Comments -->
 <section data-ng-controller="CommentsCtrl">

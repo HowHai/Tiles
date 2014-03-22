@@ -9,19 +9,28 @@ var mongoose = require('mongoose'),
 // Create vote
 exports.create = function(req, res) {
   var vote = new Vote(req.body);
-  vote.user = req.user.username;
-
   var id = vote.tile;
   var data = [];
   var choice = vote.choice;
-  var user = vote.user;
-  data.push(user, choice);
+  var user = req.user.username;
 
-  Tile.findById(id, function(err, doc) {
-    doc.votes.push(data);
-    // console.log(data);
-    doc.save();
-  });
+  if (choice == 'upVote') {
+    Tile.findById(id, function(err, doc) {
+      // Add user name to votesUp
+      doc.votesUp.push(user);
+      doc.userVotes.push(user);
+      console.log(data);
+      doc.save();
+    });
+  } else {
+    Tile.findById(id, function(err, doc) {
+      // Add user name to votesDown
+      doc.votesDown.push(user);
+      doc.userVotes.push(user);
+      console.log(data);
+      doc.save();
+    });
+  }
 
   vote.save(function(err) {
     if (err) {
