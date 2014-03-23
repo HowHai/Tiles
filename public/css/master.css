@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700,800);
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic);
+@import url(http://fonts.googleapis.com/css?family=Great+Vibes);
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
@@ -35,19 +36,20 @@ h1, h2, h3 {
 
 .navbar-inverse .navbar-brand {
   color: #1d7a9e;
-  font-weight: 300;
-  text-shadow: none; }
-  .navbar-inverse .navbar-brand:active, .navbar-inverse .navbar-brand:hover {
-    color: black; }
+  margin-left: 2px;
+  font-weight: 400;
+  font-size: 2em;
+  letter-spacing: 0.05em;
+  text-shadow: none;
+  font-family: 'Great Vibes', 'Lato', cursive; }
 .navbar-inverse .navbar-toggle {
   border-radius: 0px;
-  border-color: #58c9f3; }
+  border-color: #cccccc; }
   .navbar-inverse .navbar-toggle .icon-bar {
-    background-color: tomato; }
+    background-color: black; }
   .navbar-inverse .navbar-toggle:active, .navbar-inverse .navbar-toggle:hover {
-    background-color: white; }
-    .navbar-inverse .navbar-toggle:active .icon-bar, .navbar-inverse .navbar-toggle:hover .icon-bar {
-      background-color: black; }
+    background-color: white;
+    border-color: #888888; }
 
 #ui-view {
   height: 100%; }
