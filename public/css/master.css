@@ -72,7 +72,8 @@ h1, h2, h3 {
   -ms-user-select: none;
   user-select: none; }
   #showTile img {
-    width: 100%; }
+    width: 100%;
+    height: 213px; }
   #showTile #loadedTiles .tile {
     width: 100%;
     height: 100%;
@@ -120,13 +121,13 @@ h1, h2, h3 {
     #showTile #loadedTiles #tileMain.fader {
       opacity: 1; }
     #showTile #loadedTiles #tileMain.nav-open {
-      transition: 0.25s;
+      transition: 0.7s;
       height: 99.9%;
       width: 99.9%;
       padding: 10px;
       opacity: 0.3; }
       #showTile #loadedTiles #tileMain.nav-open .tile-info {
-        transition: 0.25s;
+        transition: 0.7s;
         font-size: 0.8em;
         padding-top: 10px; }
     #showTile #loadedTiles #tileMain.nav-close {

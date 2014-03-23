@@ -114,10 +114,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
     $scope.closeNav = function() {
 
-      $("#tileMain").removeClass("nav-open");
-      $("#tileMain").addClass("nav-close");
-      $("#navigation-instructions").css("transition","1s");
-      $("#navigation-instructions").css("opacity", "0");
+      $("#tileMain").removeClass("nav-open").addClass("nav-close");
+      $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
       setTimeout(function(){
         $("#navigation-instructions").css("display", "none");
         $("#tileMain").removeClass("nav-close");
@@ -134,29 +132,26 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           
           var colorMain = $("#tileMain").css("background-color");
           var colorOffset = $("#tileLeft").css("background-color");
-          console.log(colorMain);
-          console.log(colorOffset);
+          var windowHeight = document.documentElement.clientHeight;
+          var windowWidth = document.documentElement.clientWidth;
 
-          if(direction=="right" && distance > (document.documentElement.clientWidth)*0.45){
+          if(direction=="right" && distance > (windowWidth)*0.45){
             animateAndMove("Left", $scope.tileLeft, colorMain, colorOffset);
           }
-          else if(direction=="left" && distance > (document.documentElement.clientWidth)*0.45){
+          else if(direction=="left" && distance > (windowWidth)*0.45){
             animateAndMove("Right", $scope.tileRight, colorMain, colorOffset);    
           }
-          else if(direction=="up" && distance > (document.documentElement.clientHeight)*0.45){
+          else if(direction=="up" && distance > (windowHeight)*0.45){
             animateAndMove("Down", $scope.tileUp, colorMain, colorOffset);
           }
-          else if(direction=="down" && distance > (document.documentElement.clientHeight)*0.45){
+          else if(direction=="down" && distance > (windowHeight)*0.45){
             animateAndMove("Up", $scope.tileDown, colorMain, colorOffset);
           }
           else if(distance == 0 && direction == null){
 
             if($scope.nav_open == false){
-              $("#tileMain").addClass("nav-open");
-              $("#tileMain").removeClass("nav-close");
-              $("#navigation-instructions").css("transition","1s");
-              $("#navigation-instructions").css("display", "block");
-              $("#navigation-instructions").css("opacity", "1");
+              $("#tileMain").addClass("nav-open").removeClass("nav-close");
+              $("#navigation-instructions").css({"transition":"0,5s","display":"block","opacity":"1"});
               $scope.nav_open = true;
             }
 
@@ -167,16 +162,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
       });
 
       function switchColors(colorMain, colorOffset){
-        $("#tileMain").css("background-color", colorOffset);
-        $("#tileLeft").css("background-color", colorMain);
-        $("#tileRight").css("background-color", colorMain);
-        $("#tileUp").css("background-color", colorMain);
-        $("#tileDown").css("background-color", colorMain);
-        $("#tileMain").css("color", colorMain);
-        $("#tileLeft").css("color", colorOffset);
-        $("#tileRight").css("color", colorOffset);
-        $("#tileUp").css("color", colorOffset);
-        $("#tileDown").css("color", colorOffset);
+        $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
+        $("#tileLeft").css({"background-color":colorMain,"color":colorOffset});
+        $("#tileRight").css({"background-color":colorMain,"color":colorOffset});
+        $("#tileUp").css({"background-color":colorMain,"color":colorOffset});
+        $("#tileDown").css({"background-color":colorMain,"color":colorOffset});
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset); 
         $(".buyNotMain").css("background-color", colorOffset);
@@ -184,28 +174,25 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
-        $("#tile" + direction).addClass("center-tile");
-        $("#tile" + direction).addClass("show");
+        $("#tile" + direction).addClass("center-tile", "show");
         $("#tileMain").addClass("hide");
 
         // Added this to match bg color to new tile, but needs some work with the animation
         // $("#showTile").css("background-color", colorMain);
 
-        $("#tileMain").css("background-color", colorOffset);
-        $("#tileMain").css("color", colorMain);
+        $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
           move(direction);
-          $("#tile" + direction).removeClass("center-tile");
+          $("#tile" + direction).removeClass("center-tile", "show");
           $("#tileMain").removeClass("hide");
-          $("#tile" + direction).removeClass("show");
           $(".buyNotMain").css("background-color", colorOffset);
           $(".buyNotMain h3").css("color", colorMain);
           switchColors(colorMain,colorOffset);
-        },100);
+        },400);
 
       };
 
@@ -247,21 +234,29 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
             else if (direction == 'down'){
-              $("#tileMain").css("bottom", -distance);
-              $("#tileUp").css("bottom", 100-((distance/document.documentElement.clientHeight)*100)+"%");
-              $("#tileDown").css("bottom", -100-((distance/document.documentElement.clientHeight)*100)+"%");
-              $("#tileLeft").css("bottom", -distance);
-              $("#tileRight").css("bottom", -distance);
+              $("#tileMain").css("margin-bottom", -distance);
+              // $("#tileUp").css("bottom", 100-((distance/document.documentElement.clientHeight)*100)+"%");
+              // $("#tileDown").css("bottom", -100-((distance/document.documentElement.clientHeight)*100)+"%");
+              // $("#tileLeft").css("bottom", -distance);
+              // $("#tileRight").css("bottom", -distance);
+              $("#tileUp").css("margin-bottom", -distance);
+              $("#tileDown").css("margin-bottom", -distance);
+              $("#tileLeft").css("margin-bottom", -distance);
+              $("#tileRight").css("margin-bottom", -distance);
               $("#tileUp").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
             
             else if (direction == 'up'){
-              $("#tileMain").css("bottom", distance);
-              $("#tileUp").css("bottom", 100+((distance/document.documentElement.clientHeight)*100)+"%");
-              $("#tileDown").css("bottom", -100+((distance/document.documentElement.clientHeight)*100)+"%");
-              $("#tileLeft").css("bottom", distance);
-              $("#tileRight").css("bottom", distance);
+              $("#tileMain").css("margin-bottom", distance);
+              $("#tileUp").css("margin-bottom", distance);
+              $("#tileDown").css("margin-bottom", distance);
+              $("#tileLeft").css("margin-bottom", distance);
+              $("#tileRight").css("margin-bottom", distance);
+              // $("#tileUp").css("bottom", 100+((distance/document.documentElement.clientHeight)*100)+"%");
+              // $("#tileDown").css("bottom", -100+((distance/document.documentElement.clientHeight)*100)+"%");
+              // $("#tileLeft").css("bottom", distance);
+              // $("#tileRight").css("bottom", distance);
               $("#tileDown").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
@@ -271,21 +266,21 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             //console.log(distance);
             if(distance>(document.documentElement.clientHeight)*0.45){
              $(".tile").css("margin", "0px");
-             $("#tileDown").css("bottom","-100%");
-             $("#tileUp").css("bottom","100%");
-             $("#tileMain").css("bottom", 0);
-             $("#tileLeft").css("bottom", 0);
-             $("#tileRight").css("bottom", 0);
+             $("#tileDown").css({"margin-bottom":"0px","opacity":"1"});
+             $("#tileUp").css({"margin-bottom":"0px","opacity":"1"});
+             $("#tileMain").css("margin-bottom", 0);
+             $("#tileLeft").css({"margin-bottom":"0px","opacity":"1"});
+             $("#tileRight").css({"margin-bottom":"0px","opacity":"1"});
              $("#tileMain.fader").css("opacity", 1);
             }
             else{
               $(".tile").addClass("slow");
               $(".tile").css("margin", "0px");
-              $("#tileDown").css("bottom","-100%");
-              $("#tileUp").css("bottom","100%");
-              $("#tileMain").css("bottom", 0);
-              $("#tileLeft").css("bottom", 0);
-              $("#tileRight").css("bottom", 0);
+              $("#tileDown").css({"margin-bottom":"0px","opacity":"1"});
+              $("#tileUp").css({"margin-bottom":"0px","opacity":"1"});
+              $("#tileMain").css("margin-bottom", 0);
+              $("#tileLeft").css({"margin-bottom":"0px","opacity":"1"});
+              $("#tileRight").css({"margin-bottom":"0px","opacity":"1"});
               $("#tileMain.fader").css("opacity", 1);
 
               setTimeout(function(){
