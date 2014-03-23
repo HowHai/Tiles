@@ -121,6 +121,7 @@ exports.categories = function(req, res){
           // Return each category with tiles inside as an array. [[cat1], [cat2]]
           var categoriesArray = categories.map(function(cat) { return shuffle(cat.tiles) });
 
+          // Get all tiles'ID and push to new array.
           var allTilesId = [];
           for(var i = 0; i < categoriesArray.length; i++) {
             var getTilesId = categoriesArray[i].map(function(tilee) {
@@ -128,10 +129,10 @@ exports.categories = function(req, res){
             });
             allTilesId.push(getTilesId);
           }
-
+          // Store user's grid to cookie.
           res.cookie("savedTiles", JSON.stringify(allTilesId));
-          console.log(allTilesId);
-          // Randomize
+
+          // Randomize category
           categoriesArray = shuffle(categoriesArray);
           res.json(categoriesArray);
         });
