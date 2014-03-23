@@ -9,6 +9,9 @@ body {
 a.undecorated-link:hover {
   text-decoration: none; }
 
+h1, h2, h3 {
+  font-weight: 300; }
+
 .container {
   height: 100%;
   height: 100vh;
@@ -74,31 +77,37 @@ a.undecorated-link:hover {
     overflow: hidden; }
   #showTile #loadedTiles .tile-info {
     padding: 15px 12px;
-    font-weight: 300; }
+    overflow: hidden; }
     #showTile #loadedTiles .tile-info h1 {
       margin: 0;
       margin-top: 5px;
       font-size: 1.6em; }
-    #showTile #loadedTiles .tile-info p {
+    #showTile #loadedTiles .tile-info .tile-desc {
       margin-top: 10px;
-      font-style: italic; }
-    #showTile #loadedTiles .tile-info #bottom-fade {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 60px; }
-      #showTile #loadedTiles .tile-info #bottom-fade h2 {
-        color: darkblue;
-        margin-top: 30px;
-        font-size: 0.7em;
-        text-transform: capitalize; }
+      line-height: 20px;
+      max-height: 140px;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 7; }
   #showTile #loadedTiles #tileMain {
     background-color: white;
     left: 0;
     bottom: 0px;
     margin: 0px; }
+    #showTile #loadedTiles #tileMain #buyMain {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 50px;
+      background-color: black; }
+      #showTile #loadedTiles #tileMain #buyMain h3 {
+        font-size: 1.6em;
+        letter-spacing: 6px;
+        line-height: 50px;
+        margin: 0;
+        color: white; }
     #showTile #loadedTiles #tileMain.hide {
       opacity: 0; }
     #showTile #loadedTiles #tileMain.fader {
@@ -130,16 +139,72 @@ a.undecorated-link:hover {
     bottom: 108%;
     left: 0px;
     color: white; }
+    #showTile #loadedTiles #tileUp .buyNotMain {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 50px;
+      background-color: white; }
+      #showTile #loadedTiles #tileUp .buyNotMain h3 {
+        font-size: 1.6em;
+        letter-spacing: 6px;
+        line-height: 50px;
+        margin: 0;
+        color: black; }
   #showTile #loadedTiles #tileDown {
     bottom: -108%;
     left: 0px;
     color: white; }
+    #showTile #loadedTiles #tileDown .buyNotMain {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 50px;
+      background-color: white; }
+      #showTile #loadedTiles #tileDown .buyNotMain h3 {
+        font-size: 1.6em;
+        letter-spacing: 6px;
+        line-height: 50px;
+        margin: 0;
+        color: black; }
   #showTile #loadedTiles #tileRight {
     color: white;
     left: 108%; }
+    #showTile #loadedTiles #tileRight .buyNotMain {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 50px;
+      background-color: white; }
+      #showTile #loadedTiles #tileRight .buyNotMain h3 {
+        font-size: 1.6em;
+        letter-spacing: 6px;
+        line-height: 50px;
+        margin: 0;
+        color: black; }
   #showTile #loadedTiles #tileLeft {
     color: white;
     left: -108%; }
+    #showTile #loadedTiles #tileLeft .buyNotMain {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 50px;
+      background-color: white; }
+      #showTile #loadedTiles #tileLeft .buyNotMain h3 {
+        font-size: 1.6em;
+        letter-spacing: 6px;
+        line-height: 50px;
+        margin: 0;
+        color: black; }
   #showTile #navigation-instructions {
     display: none;
     opacity: 0;

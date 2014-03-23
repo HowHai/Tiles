@@ -10,7 +10,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
           $scope.allTiles = response;
           $scope.currentCategory = Math.floor(Math.random() * 9);
-          $scope.hPosition = 9;
+          $scope.hPosition = 12;
           console.log(response);
 
           $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
@@ -126,7 +126,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     
     };
 
-
     $(function() {  
       //Main SWIPE FUNCTION
       $("#tileMain").swipe( {swipeStatus: swipe2,
@@ -178,6 +177,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         $("#tileRight").css("color", colorOffset);
         $("#tileUp").css("color", colorOffset);
         $("#tileDown").css("color", colorOffset);
+        $("#buyMain").css("background-color", colorMain);
+        $("#buyMain h3").css("color", colorOffset); 
+        $(".buyNotMain").css("background-color", colorOffset);
+        $(".buyNotMain h3").css("color", colorMain);
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
@@ -190,6 +193,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
 
         $("#tileMain").css("background-color", colorOffset);
         $("#tileMain").css("color", colorMain);
+        $("#buyMain").css("background-color", colorMain);
+        $("#buyMain h3").css("color", colorOffset);
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
@@ -197,6 +202,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           $("#tile" + direction).removeClass("center-tile");
           $("#tileMain").removeClass("hide");
           $("#tile" + direction).removeClass("show");
+          $(".buyNotMain").css("background-color", colorOffset);
+          $(".buyNotMain h3").css("color", colorMain);
           switchColors(colorMain,colorOffset);
         },100);
 

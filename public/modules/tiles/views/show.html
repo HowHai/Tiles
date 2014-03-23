@@ -6,23 +6,31 @@
       <img src="modules/tiles/img/tiles/{{tileUp.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileUp.name}}</h1>
-        <p class="tile-desc">{{tileUp.content | limitTo:350 }}</p>
+        <p class="tile-desc">{{tileUp.content}}</p>
+      </div>
+      <div class="buyNotMain">
+        <h3>BUY NOW</h3>
       </div>
     </div>
     <div class="tile" id="tileLeft">
       <img src="modules/tiles/img/tiles/{{tileLeft.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileLeft.name}}</h1>
-        <p class="tile-desc">{{tileLeft.content | limitTo:350 }}</p>
+        <p class="tile-desc">{{tileLeft.content}}</p>
+      </div>
+      <div class="buyNotMain">
+        <h3>BUY NOW</h3>
       </div>
     </div>
     <div class="tile" id="tileMain">
       <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileMain.name}}</h1>
-        <p class="tile-desc">{{tileMain.content | limitTo:350 }}</p>
-        <div id="bottom-fade">
-          <h2>Category: {{tileMain.category}} | hPosition: {{hPosition}}</h2>
+        <div class="tile-desc">
+          <p>{{tileMain.content}}</p>
+        </div>
+        <div id="buyMain">
+          <h3>BUY NOW</h3>
         </div>
       </div>
     </div>
@@ -30,14 +38,20 @@
       <img src="modules/tiles/img/tiles/{{tileRight.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileRight.name}}</h1>
-        <p class="tile-desc">{{tileRight.content | limitTo:350 }}</p>
+        <p class="tile-desc">{{tileRight.content}}</p>
+      </div>
+      <div class="buyNotMain">
+        <h3>BUY NOW</h3>
       </div>
     </div>
     <div class="tile" id="tileDown">
       <img src="modules/tiles/img/tiles/{{tileDown.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileDown.name}}</h1>
-        <p class="tile-desc">{{tileDown.content | limitTo:350 }}</p>
+        <p class="tile-desc">{{tileDown.content}}</p>
+      </div>
+      <div class="buyNotMain">
+        <h3>BUY NOW</h3>
       </div>
     </div>
   </div>
