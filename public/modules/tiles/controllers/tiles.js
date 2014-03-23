@@ -3,6 +3,13 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
   function($scope, $http) {
 
+      // Socket.io testing
+      var socket = io.connect();
+      socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+      });
+      // ENDsocket
 
     // Testing Tile categories and movement
     $scope.allTiles;

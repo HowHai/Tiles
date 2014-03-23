@@ -19,6 +19,7 @@ module.exports = function(db) {
 	// Initialize express app
 	var app = express();
 
+
 	// Initialize models
 	utilities.walk('./app/models', /(.*)\.(js$|coffee$)/).forEach(function(modelPath) {
 		require(path.resolve(modelPath));
@@ -60,7 +61,7 @@ module.exports = function(db) {
 
 	// Application Configuration for development environment
 	app.configure('development', function() {
-		// Enable logger 
+		// Enable logger
 		app.use(express.logger('dev'));
 
 		// Disable views cache
@@ -101,9 +102,9 @@ module.exports = function(db) {
 	// compile sass
 	app.use(
 	    sass.middleware({
-	        src: __dirname + '/public/sass/', 
+	        src: __dirname + '/public/sass/',
 	        dest: __dirname + '/public/css/',
-	        debug: true 
+	        debug: true
 	    })
 	);
 

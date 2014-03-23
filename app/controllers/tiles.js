@@ -97,7 +97,7 @@ exports.categories = function(req, res){
           savedTilesArray.push(tiles);
 
           if(savedTilesArray.length == tilesArray.length) {
-            console.log(savedTilesArray);
+            // console.log(savedTilesArray);
             res.json(savedTilesArray);
           }
         });
