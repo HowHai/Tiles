@@ -46,7 +46,7 @@ exports.shared = function(req, res){
             // Return each category with tiles inside as an array. [[cat1], [cat2]]
             var categoriesArray = categories.map(function(cat) { return cat.tiles });
 
-            // Find category of sharedTile and move to center.
+            // Find category of sharedTile.
             var categoryIndex;
             categoriesArray.forEach(function(cat, index){
               if (cat[0].category == sharedTile.category)
@@ -56,6 +56,7 @@ exports.shared = function(req, res){
             // Add shared tile to center of its category.
             categoriesArray[categoryIndex].splice(9, 0, sharedTile);
 
+            // Swap sharedTile's category to center of categories array.
             var categoryCenter = Math.round((categoriesArray.length / 2) - 1);
             var centeredCategoriesArray = categoriesArray.move(categoryIndex, categoryCenter);
 
@@ -80,25 +81,63 @@ exports.list = function(req, res){
 // GET all tiles in all categories and return as an array
 exports.categories = function(req, res){
   // TODO: Errors handling
-  // Find all categories and populate tiles data within category.
-  Category.find({}, { tiles: 1, _id: 0 }).populate('tiles').exec(function(error, categories) {
-    // Populate comments data within each tile.
-    Tile.populate(categories, {
-      path: 'tiles.comments',
-      model: Comment,
-    }, function(error, categories) {
-      // Populate user data within each comment.
-      Comment.populate(categories, {
-        path: 'tiles.comments.user',
-        select: 'displayName',
-        model: User
+
+  if(req.cookies.savedTiles){
+    var tilesArray = JSON.parse(req.cookies.savedTiles)
+    var savedTilesArray = [];
+
+    // Populate all savedTiles into two dimensional array.
+    for(var i = 0; i < tilesArray.length; i++) {
+      Tile.find({_id: { $in: tilesArray[i]} }).populate('comments').exec(function(error, tiles) {
+        Comment.populate(tiles, {
+          path: 'comments.user',
+          select: 'displayName',
+          model: User
+        }, function(error, tiles) {
+          savedTilesArray.push(tiles);
+
+          if(savedTilesArray.length == tilesArray.length) {
+            console.log(savedTilesArray);
+            res.json(savedTilesArray);
+          }
+        });
+      });
+    }
+  } else {
+    // Find all categories and populate tiles data within category.
+    Category.find({}, { tiles: 1, _id: 0 }).populate('tiles').exec(function(error, categories) {
+      // Populate comments data within each tile.
+      Tile.populate(categories, {
+        path: 'tiles.comments',
+        model: Comment,
       }, function(error, categories) {
-        // Return each category with tiles inside as an array. [[cat1], [cat2]]
-        var categoriesArray = categories.map(function(cat) { return cat.tiles });
-        res.json(categoriesArray);
+        // Populate user data within each comment.
+        Comment.populate(categories, {
+          path: 'tiles.comments.user',
+          select: 'displayName',
+          model: User
+        }, function(error, categories) {
+
+          // Return each category with tiles inside as an array. [[cat1], [cat2]]
+          var categoriesArray = categories.map(function(cat) { return shuffle(cat.tiles) });
+
+          var allTilesId = [];
+          for(var i = 0; i < categoriesArray.length; i++) {
+            var getTilesId = categoriesArray[i].map(function(tilee) {
+              return tilee._id;
+            });
+            allTilesId.push(getTilesId);
+          }
+
+          res.cookie("savedTiles", JSON.stringify(allTilesId));
+          console.log(allTilesId);
+          // Randomize
+          categoriesArray = shuffle(categoriesArray);
+          res.json(categoriesArray);
+        });
       });
     });
-  });
+  }
 }
 
 // GET all tiles within a category
@@ -244,4 +283,10 @@ Array.prototype.move = function (old_index, new_index) {
     }
     this.splice(new_index, 0, this.splice(old_index, 1)[0]);
     return this; // for testing purposes
+};
+
+// Function to shuffle an array
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
 };
