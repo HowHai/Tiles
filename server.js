@@ -25,7 +25,8 @@ var app = require('./config/express')(db);
 require('./config/passport')();
 
 // Start the app by listening on <port>
-app.listen(config.port);
+// app.listen(config.port);
+var io = require('socket.io').listen(app.listen(config.port));
 
 // Expose app
 exports = module.exports = app;
@@ -33,13 +34,11 @@ exports = module.exports = app;
 // Logging initialization
 console.log('Express app started on port ' + config.port);
 
-// // Socket.io
-// var http = require('http');
-// var server = http.createServer(app);
-// var io = require('socket.io').listen(server);
-// var routes = require('./app/routes/tiles')
-
-// // io.sockets.on('connection', routes.vote);
+// Socket.io
+var http = require('http');
+var server = http.createServer(app);
+var routes = require('./app/controllers/votes')
+io.sockets.on('connection', routes.create);
 
 // server.listen(config.port, function(){
 //   console.log('Express server listening on port ' + config.port);

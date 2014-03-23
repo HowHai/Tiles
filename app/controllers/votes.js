@@ -34,7 +34,18 @@ exports.create = function(req, res) {
         doc.votesUp.push(user);
         doc.votes.push(user);
         doc.save();
-        console.log(user + ' has vote for ' + id);
+        console.log(user + ' has voted for ' + id);
+
+        vote.save(function(err) {
+          if (err) {
+            return res.send('users/signup', {
+              errors: err.errors,
+              vote: vote
+            });
+          } else {
+            res.jsonp(vote);
+          }
+       });
       }
     });
   } else if (choice == 'downVote') {
@@ -48,7 +59,7 @@ exports.create = function(req, res) {
             doc.votesUp.push(user);
             doc.votes.push(user);
             doc.save();
-            console.log(user + ' has vote for ' + id);
+            console.log(user + ' has voted for ' + id);
           }
         }
       }
@@ -57,20 +68,20 @@ exports.create = function(req, res) {
         doc.votes.push(user);
         doc.save();
         console.log(user + ' has vote for ' + id);
-      }
+
+        vote.save(function(err) {
+          if (err) {
+            return res.send('users/signup', {
+              errors: err.errors,
+              vote: vote
+            });
+          } else {
+            res.jsonp(vote);
+          }
+       });
+      };
     });
   }
-
-  vote.save(function(err) {
-    if (err) {
-      return res.send('users/signup', {
-        errors: err.errors,
-        vote: vote
-      });
-    } else {
-      res.jsonp(vote);
-    }
-  });
 };
 
 // Update a vote

@@ -6,7 +6,7 @@ module.exports = function(app) {
 
   // votes Routes
   app.get('/votes', votes.list);
-  app.post('/votes', votes.create);
+  app.post('/votes', users.requiresLogin, votes.create);
   app.get('/votes/:voteId', votes.read);
   app.del('/votes/:voteId', users.requiresLogin, votes.hasAuthorization, votes.delete);
 
