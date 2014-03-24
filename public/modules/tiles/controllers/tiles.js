@@ -20,10 +20,27 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
 
+          $scope.tileMain = $scope.allTiles[3][11];
           // Send current user's tileId to server.
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
         });
     }
+
+    // Likes testing
+
+    $scope.updateLikes = function() {
+      $http.put('/tiles', { tileId: $scope.tileMain._id })
+        .success(function(data){
+          console.log(data);
+        });
+    };
+
+
+
+
+
+    // endLikes
+
 
     // Testing Tile categories and movement
     // $scope.allTiles;

@@ -23,6 +23,28 @@ exports.show = function(req, res){
   });
 };
 
+// Update a tile's likes count.
+exports.update = function(req, res){
+  var tileId = req.body.tileId;
+  console.log(req.body.tileId);
+
+  Tile.findById(tileId, function(error, tile){
+    if (error) {
+      console.log("This did not run:" + error);
+    } else {
+      var newLikesCount = tile.likes + 1;
+      console.log(newLikesCount);
+      tile.update({likes: newLikesCount}, function(error, tile){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("This ran");
+        }
+      });
+    }
+  })
+}
+
 // GET shared tile, placed in center of other random tiles
 exports.shared = function(req, res){
   var sharedTileId = req.params.tileId;
@@ -122,7 +144,8 @@ exports.categories = function(req, res){
         }, function(error, categories) {
 
           // Return each category with tiles inside as an array. [[cat1], [cat2]]
-          var categoriesArray = categories.map(function(cat) { return shuffle(cat.tiles) });
+          // var categoriesArray = categories.map(function(cat) { return shuffle(cat.tiles) });
+          var categoriesArray = categories.map(function(cat) { return cat.tiles });
 
           // Get all tiles'ID and push to new array.
           var allTilesId = [];
@@ -136,7 +159,8 @@ exports.categories = function(req, res){
           res.cookie("savedTiles", JSON.stringify(allTilesId));
 
           // Randomize category
-          categoriesArray = shuffle(categoriesArray);
+          // categoriesArray = shuffle(categoriesArray);
+          categoriesArray = (categoriesArray);
           res.json(categoriesArray);
         });
       });
@@ -164,7 +188,7 @@ exports.create = function(req, res){
 
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open("http://uncrate.com/entertainment/", function(status) {
+      return page.open("http://uncrate.com/cars/", function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -228,7 +252,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: "Media", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: "Cars", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -240,7 +264,7 @@ exports.create = function(req, res){
                 });
 
                 // Find category. Create new one if none exist.
-                var categoryName = "Media";
+                var categoryName = "Cars";
 
                 Category.findOne({name: categoryName}, function(error, cat){
                   if (cat === null) {
