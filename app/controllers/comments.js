@@ -9,29 +9,26 @@ var mongoose = require('mongoose'),
 // Create comment
 exports.create = function(req, res) {
   var comment = new Comment(req.body);
-  comment.user = req.user.username;
+  comment.user = req.user;
 
-  var id = comment.tile;
-  var data = [];
-  var text = comment.content;
-  var user = comment.user;
-  var time = comment.created
-  data.push(user, text, time);
+  console.log(comment);
 
-  Tile.findById(id, function(err, doc) {
-    doc.comments.push(data);
-    // console.log(data);
-    doc.save();
-  });
-
-  comment.save(function(err) {
+  comment.save(function(err, comment) {
     if (err) {
+      console.log(err);
       return res.send('users/signup', {
         errors: err.errors,
         comment: comment
       });
     } else {
-      res.jsonp(comment);
+      Tile.findById(comment.tile, function(err, tile) {
+        console.log(tile);
+        console.log(comment._id);
+        tile.comments.push(comment._id);
+        tile.save(function(tile){
+          res.json(tile);
+        });
+      });
     }
   });
 };
@@ -56,9 +53,9 @@ exports.delete = function(req, res) {
   });
 };
 
-// List of comments 
+// List of comments
 exports.list = function(req, res) {
-  Comment.find().exec(function(err, comments) {
+  Comment.find().populate('user', 'displayName').exec(function(err, comments) {
     if (err) {
       res.render('error', {
         status: 500
@@ -68,6 +65,8 @@ exports.list = function(req, res) {
     }
   });
 };
+
+  // Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
 
 // Comment middleware
 exports.commentByID = function(req, res, next, id) {

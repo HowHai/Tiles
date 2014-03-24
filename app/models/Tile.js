@@ -12,10 +12,11 @@ var TileSchema = new Schema({
   content: {type: String},
   imgUrl: {type: String},
   category: {type: String},
-  comments: [],
   votesUp: [String],
   votesDown: [String],
-  votes: [String]
+  votes: [String],
+  location: [],
+  comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 TileSchema.statics = {

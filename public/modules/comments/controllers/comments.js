@@ -3,14 +3,12 @@
 angular.module('mean.comments').controller('CommentsCtrl', ['$scope', '$stateParams', '$location', 'Authentication', 'Comments', function($scope, $stateParams, $location, Authentication, Comments) {
   $scope.authentication = Authentication;
 
-  $scope.create = function() {
-    // Grab current tile ID by div element
-    var tileId = $('#testId')[0].innerText;
-
+  $scope.create = function(tileObj) {
     var comment = new Comments ({
       content: this.content,
-      tile: tileId,
+      tile: tileObj
     });
+    console.log(comment);
 
     comment.$save(function(response) {
       $location.path('comments/' + response._id);
@@ -35,7 +33,7 @@ angular.module('mean.comments').controller('CommentsCtrl', ['$scope', '$statePar
   };
 
   $scope.find = function() {
-    Comments.query(function(comments) { 
+    Comments.query(function(comments) {
       $scope.comments = comments;
     });
   };
@@ -47,6 +45,6 @@ angular.module('mean.comments').controller('CommentsCtrl', ['$scope', '$statePar
         $scope.comment = comment;
     });
    };
-   
+
   }
 ]);
