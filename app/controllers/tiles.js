@@ -82,7 +82,9 @@ exports.list = function(req, res){
 exports.categories = function(req, res){
   // TODO: Errors handling
 
-  if(req.cookies.savedTiles){
+  // TODO: Uncomment this after done with testing.
+  // if(req.cookies.savedTiles){
+  if(false){
     var tilesArray = JSON.parse(req.cookies.savedTiles)
     var savedTilesArray = [];
 

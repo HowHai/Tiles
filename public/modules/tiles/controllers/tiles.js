@@ -22,22 +22,36 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       socket.on('connect', function() {
         socket.on("takeTile", function(data){
           console.log(data);
-          var result = $.grep($scope.allTiles[0], function(eArr, indexArr) {
-            if(eArr._id === data.tileId){
-              $scope.allTiles[0][indexArr].current_user = true;
-              console.log($scope.allTiles);
-            }
-          });
+          // Find tile and remove current_user.
+          for(var i = 0; i < $scope.allTiles.length; i++){
+            var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+              if(eArr.current_user === data.socketId){
+                $scope.allTiles[i][indexArr].current_user = false;
+                console.log($scope.allTiles);
+              }
+            });
+          }
+
+          // Find tile and add current_user.
+          for(var i = 0; i < $scope.allTiles.length; i++){
+            var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+              if(eArr._id === data.tileId){
+                $scope.allTiles[i][indexArr].current_user = data.socketId;
+                console.log($scope.allTiles);
+              }
+            });
+          }
           console.log($scope.allTiles);
           // Send new data back to server.
           socket.emit('newGrid', $scope.allTiles);
         });
 
+        // Might not even need this... can probably change it in 'takeTile' without setTimeout..
         socket.on('sendNewGrid', function(data) {
           setTimeout(function() {
             console.log("Thisran");
             $scope.changeAll(data);
-          }, 2000);
+          }, 50);
         });
       });
 

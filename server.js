@@ -38,13 +38,14 @@ server.listen(config.port);
 io.sockets.on('connection', function (socket) {
   // Get user's current tile
   socket.on('giveTile', function(data) {
+    data.socketId = socket.id;
+    console.log(socket);
     socket.broadcast.emit("takeTile", data);
     // io.sockets.emit("takeTile", data);
   });
 
   // Get new grid from client.
   socket.on('newGrid', function(data){
-    console.log(data);
     // Send it back to client to update Grid.
     socket.emit('sendNewGrid', data);
   });
