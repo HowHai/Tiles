@@ -31,7 +31,7 @@
     <h5>{{tile.content}}</h5>
   </div>
 
-  <div id="testId" ng-hide="true">{{singleTile._id}}</div>
+  <div id="testId" ng-hide="true">{{tileMain._id}}</div>
 
   <h3>Comments</h3>
   <div data-ng-repeat="content in tile.comments">
@@ -71,8 +71,7 @@
 
 <!-- Voting -->
 <section data-ng-controller="VotesCtrl">
-  <button ng-click="create('up')">UpVote</button>
-  <button ng-click="create('down')">DownVote</button>
+  <button ng-click="create('up')">Like</button>
 </section>
 
 <div ng-repeat="up in tile.votesUp">
@@ -80,16 +79,16 @@
 </div>
 <!-- Show when no UpVotes, else nothing will show -->
 <div ng-hide="tile.votesUp.length > 0">
-  UpVotes: 0
+  Likes: 0
 </div>
 
-<div ng-repeat="down in tile.votesDown">
+<!-- <div ng-repeat="down in tile.votesDown">
   DownVotes: -{{down[0].length}}
 </div>
-<!-- Show when no DownVotes, else nothing will show -->
+Show when no DownVotes, else nothing will show
 <div ng-hide="tile.votesDown.length > 0">
   DownVotes: 0
-</div>
+</div> -->
 <!-- End Voting -->
 
 <!-- ADD Comments -->

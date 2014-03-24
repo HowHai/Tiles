@@ -16,7 +16,7 @@ angular.module('mean.votes').controller('VotesCtrl', ['$scope', '$stateParams', 
         choice: 'upVote',
         tile: tileId,
       });
-      alertify.success("Thank you for voting!");
+      alertify.success("Tile liked!");
     } else {
       vote = new Votes ({
         choice: 'downVote',
