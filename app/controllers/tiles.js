@@ -98,7 +98,7 @@ exports.categories = function(req, res){
           model: User
         }, function(error, tiles) {
           savedTilesArray.push(tiles);
-          
+
           if(savedTilesArray.length == tilesArray.length) {
             // console.log(savedTilesArray);
             res.json(savedTilesArray);
@@ -164,7 +164,7 @@ exports.create = function(req, res){
 
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open("http://uncrate.com/style/", function(status) {
+      return page.open("http://uncrate.com/vices/", function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -228,7 +228,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: "Style", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: "Vices", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -240,7 +240,7 @@ exports.create = function(req, res){
                 });
 
                 // Find category. Create new one if none exist.
-                var categoryName = "Style";
+                var categoryName = "Vices";
 
                 Category.findOne({name: categoryName}, function(error, cat){
                   if (cat === null) {

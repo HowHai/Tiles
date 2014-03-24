@@ -35,7 +35,7 @@ io.sockets.on('connection', function (socket) {
   // Get user's current tileId
   socket.on('giveTile', function(data) {
     data.socketId = socket.id;
-
+    console.log(data);
     // Emits user's tileId and socketId to all users except sender.
     socket.broadcast.emit("takeTile", data);
   });

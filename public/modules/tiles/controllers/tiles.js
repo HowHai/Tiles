@@ -9,7 +9,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         .success(function(response) {
 
           $scope.allTiles = response;
-          $scope.currentCategory = 0;
+          $scope.currentCategory = 1;
           $scope.hPosition = 9;
           console.log(response);
 
