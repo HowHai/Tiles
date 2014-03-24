@@ -58,6 +58,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.changeAll(data);
         }, 50);
       });
+
+      // Get test emit to current user and display in browser's console.
+      socket.on('currentPosition', function(data) {
+        console.log(data);
+      });
     });
 
     $scope.changeAll = function(data){
@@ -76,6 +81,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         categoryPosition = 0;
         tilePosition = 0;
 
+        // Emit user's tileId to server.
         socket.emit('giveTile', { tileId: $scope.singleTile._id})
       });
 
