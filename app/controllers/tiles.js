@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
   Comment = mongoose.model('Comment'),
   Tile = mongoose.model('Tile'),
+  Vote = mongoose.model('Vote'),
   User = mongoose.model('User'),
   Category = mongoose.model('Category'),
   _ = require('lodash'),
@@ -97,7 +98,7 @@ exports.categories = function(req, res){
           model: User
         }, function(error, tiles) {
           savedTilesArray.push(tiles);
-
+          
           if(savedTilesArray.length == tilesArray.length) {
             // console.log(savedTilesArray);
             res.json(savedTilesArray);

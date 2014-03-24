@@ -12,6 +12,9 @@ var TileSchema = new Schema({
   content: {type: String},
   imgUrl: {type: String},
   category: {type: String},
+  votesUp: [String],
+  votesDown: [String],
+  votes: [String],
   location: [],
   comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
 });
@@ -20,7 +23,7 @@ TileSchema.statics = {
   load: function(id, cb) {
     this.findOne({
       _id: id
-    }).populate('user', 'displayName', 'comments').exec(cb);
+    }).populate('user', 'displayName', 'comments', 'votesUp', 'votesDown', 'votes').exec(cb);
   }
 };
 

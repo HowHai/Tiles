@@ -48,6 +48,11 @@
 	<!-- Application CSS -->
 	<link rel="stylesheet" href="/css/master.css">
 
+	<!-- Alertify-->
+	<link rel="stylesheet" href="/lib/alertify/themes/alertify.core.css">
+	<link rel="stylesheet" href="/lib/alertify/themes/alertify.default.css">
+	<script src="/lib/alertify/lib/alertify.min.js"></script>
+
 	<!--Application Modules CSS-->
 	{% for modulesCSSFile in modulesCSSFiles %}
 	<link rel="stylesheet" href="{{modulesCSSFile}}">{% endfor %}
@@ -88,6 +93,9 @@
 	<!--AngularJS Application Init-->
 	<script type="text/javascript" src="/js/config.js"></script>
 	<script type="text/javascript" src="/js/application.js"></script>
+
+	<!-- SocketIO -->
+	<script type="text/javascript" src='/socket.io/socket.io.js'> </script>
 
 	<!--Application Modules-->
 	{% for modulesJSFile in modulesJSFiles %}

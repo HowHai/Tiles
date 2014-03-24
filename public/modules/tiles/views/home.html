@@ -1,0 +1,105 @@
+<style>
+  #mainTile, #singleTile {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    text-align: center;
+    padding:5px;
+  }
+
+  #spritz {
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 16px;
+  }
+  .red {
+    color: red;
+  }
+</style>
+
+<section>
+  <button ng-click="createTile()">Make Tile</button>
+
+  <div id="mainTile" ng-hide="true">
+    <h2>{{tile.name}}</h2>
+
+
+   <img src="modules/tiles/img/tiles/{{tile.imgUrl}}" alt="Splash">
+
+    <h5>{{tile.content}}</h5>
+  </div>
+
+  <div id="testId" ng-hide="true">{{singleTile._id}}</div>
+
+  <h3>Comments</h3>
+  <div data-ng-repeat="content in tile.comments">
+    <!-- Comment -->
+    <p style="font-weight: bold;">{{content[1]}}</p>
+    <!-- Username/Time Create -->
+    <p style="font-style: italic;">({{content[0]}} / {{content[2] | date:'medium'}})</p>
+
+  </div>
+
+  <!-- Spritz test -->
+
+<!--   <div id="spritzBox">
+    <button ng-click="spritzNow(singleTile.content)">Spritz!</button>
+    <p id="spritz"></p>
+  </div> -->
+
+  <!-- END -->
+
+
+  <!-- Moving tiles test -->
+  <button ng-click="changeCategory(1)">UP</button>
+  <button ng-click="changeCategory(-1)">DOWN</button>
+  <button ng-click="changeTile(1)">RIGHT</button>
+  <button ng-click="changeTile(-1)">LEFT</button>
+
+
+  <div id="singleTile">
+    <h2>{{singleTile.name}}</h2>
+   <img src="modules/tiles/img/tiles/{{singleTile.imgUrl}}" alt="Splash">
+   <p>{{singleTile.content}}</p>
+  </div>
+
+  <!-- END -->
+  <br>
+</section>
+
+<!-- Voting -->
+<section data-ng-controller="VotesCtrl">
+  <button ng-click="create('up')">UpVote</button>
+  <button ng-click="create('down')">DownVote</button>
+</section>
+
+<div ng-repeat="up in tile.votesUp">
+  UpVotes: {{up[0].length}}
+</div>
+<!-- Show when no UpVotes, else nothing will show -->
+<div ng-hide="tile.votesUp.length > 0">
+  UpVotes: 0
+</div>
+
+<div ng-repeat="down in tile.votesDown">
+  DownVotes: -{{down[0].length}}
+</div>
+<!-- Show when no DownVotes, else nothing will show -->
+<div ng-hide="tile.votesDown.length > 0">
+  DownVotes: 0
+</div>
+<!-- End Voting -->
+
+<!-- ADD Comments -->
+<section data-ng-controller="CommentsCtrl">
+<h3>Add comment</h3>
+  <form  data- ng-submit="create()">
+    <fieldset>
+      <textarea data-ng-model="content" cols="60" rows="2" placeholder="Comment"></textarea>
+      <br>
+      <input type="submit" />
+    </fieldset>
+  </form>
+</section>
