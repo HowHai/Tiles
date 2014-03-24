@@ -1,0 +1,132 @@
+<style>
+  #userGrid, #mainTile, #singleTile {
+    width: 450px;
+    height: 650px;
+    border: 1px solid black;
+    text-align: center;
+    padding:5px;
+  }
+
+  #spritz {
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .red {
+    color: red;
+  }
+
+  #userGrid {
+    font-size: 8px;
+  }
+
+  .location-populated {
+    color: red;
+  }
+</style>
+
+<section>
+  <h2>Radar</h2>
+
+  <button ng-click="runMe()">click me</button>
+  <div id="testMe">{{singleTile._id}}</div>
+
+  <div id="userGrid">
+    <ul ng-repeat="alltile in allTiles">
+      <ul ng-repeat="myTiles in alltile">
+        <li class="location-populated" ng-show="myTiles.location.length > 0">{{myTiles._id}}</li>
+        <li ng-show="myTiles.location.length === 0">{{myTiles._id}}</li>
+      </ul>
+    </ul>
+  </div>
+
+
+<br><br><br><br>
+<br><br><br><br>
+</section>
+  <div id="chatTest">
+
+  </div>
+<section ng-hide="false">
+  <button ng-click="createTile()">Make Tile</button>
+  <!-- <button onload="loadTiles()">Make Tile</button> -->
+
+  <h1>Cracked Tiles</h1>
+
+  <div id="sharedTile">
+    <button ng-click="getOneTile('532cd94a691b8628a9a1d1ec')">Share</button>
+    <p>http://localhost:3000/#!/{{singleTile._id}}</p>
+    <h2>Shared Tile</h2>
+    <button ng-click="changeCategory(1)">UP</button>
+    <button ng-click="changeCategory(-1)">DOWN</button>
+    <button ng-click="changeTile(1)">RIGHT</button>
+    <button ng-click="changeTile(-1)">LEFT</button>
+
+    <div id="singleTile">
+      <h2>{{sharedTile.name}}</h2>
+      <img src="modules/tiles/img/tiles/{{sharedTile.imgUrl}}" alt="Splash">
+      <p>{{sharedTile.content}}</p>
+    </div>
+  </div>
+
+  <!-- <button ng-click="createTile()">Make Tile</button> -->
+
+
+  <!-- Spritz test -->
+
+  <div id="spritzBox" ng-hide="true">
+    <button ng-click="spritzNow(singleTile.content)">Spritz!</button>
+    <p id="spritz"></p>
+  </div>
+
+  <!-- END -->
+
+
+  <!-- Moving tiles test -->
+  <button ng-click="changeCategory(1)">UP</button>
+  <button ng-click="changeCategory(-1)">DOWN</button>
+  <button ng-click="changeTile(1)">RIGHT</button>
+  <button ng-click="changeTile(-1)">LEFT</button>
+
+
+  <div id="singleTile">
+    <h2>{{singleTile.name}}</h2>
+   <img src="modules/tiles/img/tiles/{{singleTile.imgUrl}}" alt="Splash">
+   <p>{{singleTile.content}}</p>
+  </div>
+
+  <div ng-controller="CommentsCtrl">
+    <form class="form-horizontal" data-ng-submit="create(singleTile._id)">
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label" for="content">Content</label>
+          <div class="controls">
+              <textarea data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-default">
+        </div>
+      </fieldset>
+    </form>
+
+    <div ng-repeat="comment in singleTile.comments">
+      <li>Content: {{comment.content}}</li>
+      <li>User: {{comment.user.displayName}}</li>
+    </div>
+
+  </div>
+  <!-- END -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</section>
+

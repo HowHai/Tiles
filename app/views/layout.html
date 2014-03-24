@@ -38,6 +38,9 @@
 	<!-- Jquery -->
 	<script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
 
+	<!-- Socket.io -->
+	<script src="/socket.io/socket.io.js"></script>
+
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-theme.css">
@@ -89,11 +92,12 @@
 	<!--Application Modules-->
 	{% for modulesJSFile in modulesJSFiles %}
 		<script type="text/javascript" src="{{modulesJSFile}}"></script>
-	{% endfor %} 
+	{% endfor %}
+
+
 
 	{% if process.env.NODE_ENV === 'development' %}
 		<!--Livereload script rendered -->
-		<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 	{% endif %}
 </body>
 

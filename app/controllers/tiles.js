@@ -6,8 +6,67 @@
 var mongoose = require('mongoose'),
   Comment = mongoose.model('Comment'),
   Tile = mongoose.model('Tile'),
+  User = mongoose.model('User'),
+  Category = mongoose.model('Category'),
   _ = require('lodash'),
   phantom = require('phantom');
+
+// Get a tile
+exports.show = function(req, res){
+  var tileId = req.params.tileId;
+  Tile.findById(tileId, function(error, tile) {
+    if(error)
+      console.log(error);
+    else
+      res.json(tile);
+  });
+};
+
+// GET shared tile, placed in center of other random tiles
+exports.shared = function(req, res){
+  var sharedTileId = req.params.tileId;
+
+  Tile.findById(sharedTileId, function(error, sharedTile) {
+    if(error)
+      console.log(error);
+    else
+      // Return shared tile in center
+      Category.find({},{}).populate({path: 'tiles', match: { _id: { $ne: sharedTile._id }} }).exec(function(error, categories) {
+        // Populate comments data within each tile.
+        Tile.populate(categories, {
+          path: 'tiles.comments',
+          model: Comment,
+        }, function(error, categories) {
+          // Populate user data within each comment.
+          Comment.populate(categories, {
+            path: 'tiles.comments.user',
+            select: 'displayName',
+            model: User
+          }, function(error, categories) {
+            // Return each category with tiles inside as an array. [[cat1], [cat2]]
+            var categoriesArray = categories.map(function(cat) { return cat.tiles });
+
+            // Find category of sharedTile.
+            var categoryIndex;
+            categoriesArray.forEach(function(cat, index){
+              if (cat[0].category == sharedTile.category)
+                categoryIndex = index;
+            });
+
+            // Add shared tile to center of its category.
+            categoriesArray[categoryIndex].splice(9, 0, sharedTile);
+
+            // Swap sharedTile's category to center of categories array.
+            var categoryCenter = Math.round((categoriesArray.length / 2) - 1);
+            var centeredCategoriesArray = categoriesArray.move(categoryIndex, categoryCenter);
+
+            // res.json(categoryIndex)
+            res.json(centeredCategoriesArray);
+          });
+        });
+      });
+  });
+};
 
 // Get list of all tiles
 exports.list = function(req, res){
@@ -21,62 +80,67 @@ exports.list = function(req, res){
 
 // GET all tiles in all categories and return as an array
 exports.categories = function(req, res){
+  // TODO: Errors handling
 
-  var gearCategory = null;
-  var styleCategory = null;
-  var carsCategory = null;
-  var techCategory = null;
-  var vicesCategory = null;
-  var mediaCategory = null;
-  var bodyCategory = null;
-  var homeCategory = null;
-  var foodCategory = null;
+  // TODO: Uncomment this after done with testing.
+  // if(req.cookies.savedTiles){
+  if(false){
+    var tilesArray = JSON.parse(req.cookies.savedTiles)
+    var savedTilesArray = [];
 
-  Tile.find({category: 'gear'}, function(error, data) {
-    gearCategory = data;
-    return gearCategory;
-  });
+    // Populate all savedTiles into two dimensional array.
+    for(var i = 0; i < tilesArray.length; i++) {
+      Tile.find({_id: { $in: tilesArray[i]} }).populate('comments').exec(function(error, tiles) {
+        Comment.populate(tiles, {
+          path: 'comments.user',
+          select: 'displayName',
+          model: User
+        }, function(error, tiles) {
+          savedTilesArray.push(tiles);
 
-  Tile.find({category: 'style'}, function(error, data) {
-    styleCategory = data;
-    return styleCategory;
-  });
+          if(savedTilesArray.length == tilesArray.length) {
+            // console.log(savedTilesArray);
+            res.json(savedTilesArray);
+          }
+        });
+      });
+    }
+  } else {
+    // Find all categories and populate tiles data within category.
+    Category.find({}, { tiles: 1, _id: 0 }).populate('tiles').exec(function(error, categories) {
+      // Populate comments data within each tile.
+      Tile.populate(categories, {
+        path: 'tiles.comments',
+        model: Comment,
+      }, function(error, categories) {
+        // Populate user data within each comment.
+        Comment.populate(categories, {
+          path: 'tiles.comments.user',
+          select: 'displayName',
+          model: User
+        }, function(error, categories) {
 
-  Tile.find({category: 'cars'}, function(error, data) {
-    carsCategory = data;
-    return carsCategory;
-  });
+          // Return each category with tiles inside as an array. [[cat1], [cat2]]
+          var categoriesArray = categories.map(function(cat) { return shuffle(cat.tiles) });
 
-  Tile.find({category: 'tech'}, function(error, data) {
-    techCategory = data;
-    return techCategory;
-  });
+          // Get all tiles'ID and push to new array.
+          var allTilesId = [];
+          for(var i = 0; i < categoriesArray.length; i++) {
+            var getTilesId = categoriesArray[i].map(function(tilee) {
+              return tilee._id;
+            });
+            allTilesId.push(getTilesId);
+          }
+          // Store user's grid to cookie.
+          res.cookie("savedTiles", JSON.stringify(allTilesId));
 
-  Tile.find({category: 'vices'}, function(error, data) {
-    vicesCategory = data;
-    return vicesCategory;
-  });
-
-  Tile.find({category: 'media'}, function(error, data) {
-    mediaCategory = data;
-    return mediaCategory;
-  });
-
-  Tile.find({category: 'body'}, function(error, data) {
-    bodyCategory = data;
-    return bodyCategory;
-  });
-
-  Tile.find({category: 'home'}, function(error, data) {
-    homeCategory = data;
-    return homeCategory;
-  });
-
-  Tile.find({category: 'food'}, function(error, data) {
-    foodCategory = data;
-    res.json([gearCategory, styleCategory, carsCategory, techCategory, vicesCategory, mediaCategory, bodyCategory, homeCategory, foodCategory]);
-  });
-
+          // Randomize category
+          categoriesArray = shuffle(categoriesArray);
+          res.json(categoriesArray);
+        });
+      });
+    });
+  }
 }
 
 // GET all tiles within a category
@@ -94,9 +158,12 @@ exports.category = function(req, res){
 // Create tile
 exports.create = function(req, res){
   // PhantomJS testt
+    var siteUrl = "http://uncrate.com/vices/";
+    var siteCategory = "Vices";
+
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open('http://uncrate.com/food/', function(status) {
+      return page.open("http://uncrate.com/style/", function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -160,7 +227,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: 'food', name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: "Style", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -171,14 +238,36 @@ exports.create = function(req, res){
                   page.render('public/modules/tiles/img/tiles/' + result[0][index].imgUrl);
                 });
 
+                // Find category. Create new one if none exist.
+                var categoryName = "Style";
+
+                Category.findOne({name: categoryName}, function(error, cat){
+                  if (cat === null) {
+                    console.log(error);
+                    console.log(cat);
+                    var category = new Category({name: categoryName});
+                    makeTiles(result, category);
+                  } else {
+                    console.log("This ran");
+                    var category = cat;
+                    makeTiles(result, category);
+                  }
+                });
+
                 // Create new tiles using pulled data
-                for(var i = 0; i < result[0].length; i++) {
+                var makeTiles = function(result, category) {
+                  for(var i = 0; i < result[0].length; i++) {
 
-                  var tile = new Tile(result[0][i]);
+                    var tile = new Tile(result[0][i]);
 
-                  tile.save();
+                    console.log(category);
+                    category.tiles.push(tile);
+                    category.save();
+
+                    tile.save();
+                  }
+                  ph.exit();
                 }
-                ph.exit();
             });
           }, 5000);
         });
@@ -186,4 +275,23 @@ exports.create = function(req, res){
     });
   });
   // END
+};
+
+// MISC.
+// Array method to swap old_index with new_index
+Array.prototype.move = function (old_index, new_index) {
+    if (new_index >= this.length) {
+        var k = new_index - this.length;
+        while ((k--) + 1) {
+            this.push(undefined);
+        }
+    }
+    this.splice(new_index, 0, this.splice(old_index, 1)[0]);
+    return this; // for testing purposes
+};
+
+// Function to shuffle an array
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
 };

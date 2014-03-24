@@ -5,17 +5,19 @@ var mongoose = require('mongoose'),
 
 var CommentSchema = new Schema({
   user: {
-    type: String
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
   tile: {
-    type: String
+    type: Schema.Types.ObjectId,
+    ref: 'Tile'
   },
   content: {
     type: String,
     default: '',
   },
   created: {
-    type: Date, 
+    type: Date,
     default: Date.now
   }
 });

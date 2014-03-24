@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
-  function($scope, $http) {
+angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
+  function($scope, $http, $cookies) {
 
     $scope.loadTiles = function() {
       $scope.nav_open = false;
@@ -13,16 +13,114 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           $scope.hPosition = 12;
           console.log(response);
 
+
           $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
           $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
           $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
 
           $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
+
+          // Send current user's tileId to server.
+          socket.emit('giveTile', { tileId: $scope.tileMain._id})
         });
     }
 
+    // Testing Tile categories and movement
+    // $scope.allTiles;
+    // $scope.singleTile;
+    // var categoryPosition;
+    // var tilePosition;
+
+
+    // Socket.io testing
+    var socket = io.connect();
+    socket.on('connect', function() {
+      socket.on("takeTile", function(data){
+        console.log(data);
+        // Find tile and remove current_user.
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            console.log(eArr.location.indexOf(data.socketId));
+            if(eArr.location.indexOf(data.socketId) != -1){
+              var populatedIndex = eArr.location.indexOf(data.socketId);
+
+              console.log("Deleted!");
+              $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
+              console.log($scope.allTiles);
+            }
+          });
+        }
+
+        // Find tile and add current_user.
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr._id === data.tileId){
+              $scope.allTiles[i][indexArr].location.push(data.socketId);
+              console.log($scope.allTiles);
+              console.log("i ran!");
+            }
+          });
+        }
+        console.log($scope.allTiles);
+        // Send new data back to server.
+        socket.emit('newGrid', $scope.allTiles);
+      });
+
+      // Might not even need this... can probably change it in 'takeTile' without setTimeout..
+      socket.on('sendNewGrid', function(data) {
+        setTimeout(function() {
+          console.log("Thisran");
+          $scope.changeAll(data);
+        }, 50);
+      });
+
+      // Get test emit to current user and display in browser's console.
+      socket.on('currentPosition', function(data) {
+        console.log(data);
+      });
+    });
+
+    $scope.changeAll = function(data){
+      $scope.$apply(function() {
+        $scope.allTiles = data;
+      });
+    };
+
+    // ENDsocket
+
+    // $http.get('/tiles/categories', null)
+    //   .success(function(response) {
+    //     $scope.allTiles = response;
+    //     console.log($scope.allTiles);
+    //     $scope.singleTile = $scope.allTiles[0][0];
+    //     categoryPosition = 0;
+    //     tilePosition = 0;
+
+    //     // Emit user's tileId to server.
+    //     socket.emit('giveTile', { tileId: $scope.singleTile._id})
+    //   });
+
+    // $scope.changeCategory = function(num) {
+    //   categoryPosition += num;
+    //   $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
+    //   // $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+    //   console.log("This ran");
+    //   socket.emit('giveTile', { tileId: $scope.singleTile._id})
+    // }
+
+    // $scope.changeTile = function(num) {
+    //   tilePosition += num;
+    //   $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
+    //   // $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+    //   console.log("This ran");
+    //   socket.emit('giveTile', { tileId: $scope.singleTile._id})
+    // }
+
     var resetTiles = function() {
+      // Emit user's current position to server.
+      socket.emit('giveTile', { tileId: $scope.tileMain._id})
+
       $scope.$apply(function() {
         $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
         $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
@@ -63,7 +161,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
             $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
             $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
-          });        
+
+            // Send current user's tileId to server.
+            socket.emit('giveTile', { tileId: $scope.tileMain._id})
+          });
 
       } else {
         resetTiles();
@@ -96,6 +197,34 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
       };
     }
 
+    // Share a tile
+    // Give user a url to tile when user click on share tile.
+    // give url function here
+
+      // Return shared tile and random tiles around it (shared tile in center of return array)
+      $scope.sharedTile;
+      $scope.sharedTileArray;
+
+      $scope.getOneTile = function(currentTileId) {
+        $http.get('/tile/shared/' + currentTileId, null)
+          .success(function(sharedTileArray) {
+            // Get position of shared tile.
+            $scope.sharedTileArray = sharedTileArray;
+            var sharedTileCatPosition = Math.round((sharedTileArray.length / 2) - 1);
+            var sharedTilePosition = Math.round((sharedTileArray[0].length / 2));
+
+            categoryPosition = sharedTileCatPosition;
+            tilePosition = sharedTilePosition;
+
+            console.log(categoryPosition, tilePosition);
+
+            $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+          });
+      };
+
+    // ShareEND
+
+
     var categoryRotator = function(categoryNum, direction) {
       if (direction == "up") {
         if (categoryNum == 0) {
@@ -122,12 +251,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
       $scope.nav_open = false;
     };
 
-    $(function() {  
+
+
+    $(function() {
       //Main SWIPE FUNCTION
       $("#tileMain").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
-          
           var colorMain = $("#tileMain").css("background-color");
           var colorOffset = $("#tileLeft").css("background-color");
           var windowHeight = document.documentElement.clientHeight;
@@ -137,7 +267,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
             animateAndMove("Left", $scope.tileLeft, colorMain, colorOffset);
           }
           else if(direction=="left" && distance > (windowWidth)*0.45){
-            animateAndMove("Right", $scope.tileRight, colorMain, colorOffset);    
+            animateAndMove("Right", $scope.tileRight, colorMain, colorOffset);
           }
           else if(direction=="up" && distance > (windowHeight)*0.45){
             animateAndMove("Down", $scope.tileUp, colorMain, colorOffset);
@@ -152,7 +282,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#navigation-instructions").css({"transition":"0,5s","display":"block","opacity":"1"});
               $scope.nav_open = true;
             }
-
           }
         },
         //Default is 75px, set to 0 for demo so any distance triggers swipe
@@ -166,7 +295,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         $("#tileUp").css({"background-color":colorMain,"color":colorOffset});
         $("#tileDown").css({"background-color":colorMain,"color":colorOffset});
         $("#buyMain").css("background-color", colorMain);
-        $("#buyMain h3").css("color", colorOffset); 
+        $("#buyMain h3").css("color", colorOffset);
         $(".buyNotMain").css("background-color", colorOffset);
         $(".buyNotMain h3").css("color", colorMain);
       };
@@ -244,7 +373,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#tileUp").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
-            
+
             else if (direction == 'up'){
               $("#tileMain").css("margin-bottom", distance);
               $("#tileUp").css("margin-bottom", distance);
@@ -258,7 +387,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
               $("#tileDown").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
-             
+
           }
           else if (phase == "end"){
             //console.log(distance);
@@ -288,7 +417,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
           }
         };
     });
-
 
     // Create a random tile and save to database
     // Leave this alone!!!!!!!!!!!!!
