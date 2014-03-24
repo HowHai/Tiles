@@ -9,10 +9,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         .success(function(response) {
 
           $scope.allTiles = response;
-          $scope.currentCategory = Math.floor(Math.random() * 9);
-          $scope.hPosition = 12;
+          $scope.currentCategory = 0;
+          $scope.hPosition = 9;
           console.log(response);
-
 
           $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
           $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];

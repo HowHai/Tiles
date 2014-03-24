@@ -28,11 +28,11 @@
   }
 </style>
 
-<section>
+<section ng-init="loadTiles()">
   <h2>Radar</h2>
 
   <button ng-click="runMe()">click me</button>
-  <div id="testMe">{{singleTile._id}}</div>
+  <div id="testMe">{{tileMain._id}}</div>
 
   <div id="userGrid">
     <ul ng-repeat="alltile in allTiles">
@@ -93,9 +93,9 @@
 
 
   <div id="singleTile">
-    <h2>{{singleTile.name}}</h2>
-   <img src="modules/tiles/img/tiles/{{singleTile.imgUrl}}" alt="Splash">
-   <p>{{singleTile.content}}</p>
+    <h2>{{tileMain.name}}</h2>
+   <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Splash">
+   <p>{{tileMain.content}}</p>
   </div>
 
   <div ng-controller="CommentsCtrl">
