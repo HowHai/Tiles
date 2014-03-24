@@ -8,7 +8,7 @@ angular.module('mean.votes').controller('VotesCtrl', ['$scope', '$stateParams', 
 
   // Create a vote, checking for 'up' vs 'down' first before saving
   $scope.create = function(option) {
-    tileId = $('#testId')[0].innerText;
+    tileId = $('#testMe')[0].innerText;
     console.log(tileId);
 
     if (option == 'up') { 

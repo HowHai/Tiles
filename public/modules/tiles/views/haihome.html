@@ -98,6 +98,21 @@
    <p>{{tileMain.content}}</p>
   </div>
 
+  <!-- Voting -->
+  <br>
+  <section data-ng-controller="VotesCtrl">
+    <button ng-click="create('up')">Like</button>
+  </section>
+
+  <div ng-repeat="up in tile.votesUp">
+    Likes: {{up[0].length}}
+  </div>
+  <!-- Show when no UpVotes, else nothing will show -->
+  <div ng-hide="tile.votesUp.length > 0">
+    Likes: 0
+  </div>
+  <!-- END VOTING -->
+
   <div ng-controller="CommentsCtrl">
     <form class="form-horizontal" data-ng-submit="create(singleTile._id)">
       <fieldset>
