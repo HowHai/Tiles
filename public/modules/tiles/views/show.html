@@ -1,58 +1,83 @@
 <div class="row" ng-init="loadTiles()">
   <section id="showTile" class="col-xs-12">
-    <!--     <div class="text-center">
-      <button ng-click="moveUp()">UP</button>
-      <button ng-click="moveDown()">DOWN</button>
-      <button ng-click="moveLeft()">LEFT</button>
-      <button ng-click="moveRight()">RIGHT</button>
-    </div> -->
 
-
-  <div>
+  <div id="loadedTiles">
     <div class="tile" id="tileUp">
-      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
+      <img src="modules/tiles/img/tiles/{{tileUp.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileUp.name}}</h1>
         <p class="tile-desc">{{tileUp.content}}</p>
       </div>
-    </div>
-    <div class="tile" id="tileDown">
-      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
-      <div class="tile-info">
-        <h1 class="tile-title">{{tileDown.name}}</h1>
-        <p class="tile-desc">{{tileDown.content}}</p>
-      </div>
-    </div>
-    <div class="tile" id="tileMain">
-      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
-      <div class="tile-info">
-        <h1 class="tile-title">{{tileMain.name}}</h1>
-        <p class="tile-desc">{{tileMain.content}}</p>
-      </div>
-    </div>
-    <div class="tile" id="tileRight">
-      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
-      <div class="tile-info">
-        <h1 class="tile-title">{{tileRight.name}}</h1>
-        <p class="tile-desc">{{tileRight.content}}</p>
+      <div class="buyNotMain">
+        <h3>BUY NOW</h3>
       </div>
     </div>
     <div class="tile" id="tileLeft">
-      <img src="http://fc00.deviantart.net/fs71/f/2012/329/5/0/wonderland___landscape_calendar__2_by_ivanandreevich-d4u0odw.jpg" alt="Splash">
+      <img src="modules/tiles/img/tiles/{{tileLeft.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileLeft.name}}</h1>
         <p class="tile-desc">{{tileLeft.content}}</p>
       </div>
+      <div class="buyNotMain">
+        <h3>BUY NOW</h3>
+      </div>
+    </div>
+    <div class="tile" id="tileMain">
+      <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileMain.name}}</h1>
+        <div class="tile-desc">
+          <div id="white-fade"></div>
+          <p>{{tileMain.content}}</p>
+        </div>
+        <div id="buyMain">
+          <h3>BUY NOW</h3>
+        </div>
+      </div>
+    </div>
+    <div class="tile" id="tileRight">
+      <img src="modules/tiles/img/tiles/{{tileRight.imgUrl}}" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileRight.name}}</h1>
+        <p class="tile-desc">{{tileRight.content}}</p>
+      </div>
+      <div class="buyNotMain">
+        <h3>BUY NOW</h3>
+      </div>
+    </div>
+    <div class="tile" id="tileDown">
+      <img src="modules/tiles/img/tiles/{{tileDown.imgUrl}}" alt="Splash">
+      <div class="tile-info">
+        <h1 class="tile-title">{{tileDown.name}}</h1>
+        <p class="tile-desc">{{tileDown.content}}</p>
+      </div>
+      <div class="buyNotMain">
+        <h3>BUY NOW</h3>
+      </div>
     </div>
   </div>
-  <div id="navigation-instructions">
-      <i class="fa fa-chevron-up"></i>
-      <div class="center-vertical">
-        <i class="fa fa-chevron-left pull-left"></i>
-        <span class="tutorial-text"></span>
-        <i class="fa fa-chevron-right pull-right"></i>
-      </div>
-      <i class="fa fa-chevron-down bottom"></i>
+
+  <div id="navigation-instructions" ng-click="closeNav()">
+      <i class="fa fa-angle-up kiss top"></i>
+      <i class="fa fa-angle-left kiss left"></i>
+        <div id ="navi-content">
+          <div id="navi-text">
+            <h1>welcome to <br><br><span>gloss</span></h1>
+          </div>
+          <div class="kiss buttons">
+            <button class="btn left">
+              <i class="fa fa-star"></i>
+            </button>
+            <button class="btn right">
+              Share
+            </button>
+            <button class="btn red">
+              <i class="fa fa-frown-o"></i>
+            </button>
+          </div>
+        </div>
+      <i class="fa fa-angle-right kiss right"></i>
+      <i class="fa fa-angle-down kiss bottom"></i>
   </div>
 
 <!-- 
