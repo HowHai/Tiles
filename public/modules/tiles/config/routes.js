@@ -5,8 +5,7 @@ angular.module('mean.tiles').config(['$stateProvider',
     $stateProvider.
     state('showTile', {
       url: '/',
-      // templateUrl: 'modules/tiles/views/show.html',
-      templateUrl: 'modules/tiles/views/home.html',
+      templateUrl: 'modules/tiles/views/show.html',
       controller: 'TilesCtrl'
     }).state('explodedTiles', {
       url: '/exploded',
