@@ -22,7 +22,7 @@ angular.module('mean.votes').controller('VotesCtrl', ['$scope', '$stateParams', 
         choice: 'downVote',
         tile: tileId
       });
-      alertify.success("Thank you for voting!");
+      alertify.error("Thank you for voting!");
     }
 
     vote.$save(function(response) {
