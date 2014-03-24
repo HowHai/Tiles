@@ -22,13 +22,6 @@ exports.create = function(req, res) {
         for (var i = 0; i < doc.votes.length; i++){
           if (doc.votes[i] == sessionID) {
             console.log('ALREADY VOTED');
-          } 
-          else {
-            // Add sessionID name to votesUp
-            doc.votesUp.push(sessionID);
-            doc.votes.push(sessionID);
-            doc.save();
-            console.log(sessionID + ' has vote for ' + id);
           }
         }
       } else {
@@ -55,13 +48,7 @@ exports.create = function(req, res) {
         for (var i = 0; i < doc.votes.length; i++){
           if (doc.votes[i] == sessionID) {
             console.log('ALREADY VOTED');
-          } else {
-            // Add sessionID name to votesUp
-            doc.votesUp.push(sessionID);
-            doc.votes.push(sessionID);
-            doc.save();
-            console.log(sessionID + ' has voted for ' + id);
-          }
+          } 
         }
       }
       else {
