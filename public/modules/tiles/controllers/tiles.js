@@ -76,7 +76,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
       // Get test emit to current user and display in browser's console.
       socket.on('currentPosition', function(data) {
-        console.log(data);
+        // console.log(data);
       });
     });
 
@@ -189,6 +189,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
             $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
             $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+
+            // Send current user's tileId to server.
+            socket.emit('giveTile', { tileId: $scope.tileMain._id})
           });
 
       } else {
@@ -293,10 +296,14 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#tileRight").css({"background-color":colorMain,"color":colorOffset});
         $("#tileUp").css({"background-color":colorMain,"color":colorOffset});
         $("#tileDown").css({"background-color":colorMain,"color":colorOffset});
+
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
+        $("#buyMain i").css("color", colorOffset);
+        
         $(".buyNotMain").css("background-color", colorOffset);
         $(".buyNotMain h3").css("color", colorMain);
+        $(".buyNotMain i").css("color", colorMain);
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
@@ -309,6 +316,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
+        $("#buyMain i").css("color", colorOffset);
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
@@ -317,6 +325,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $("#tileMain").removeClass("hide");
           $(".buyNotMain").css("background-color", colorOffset);
           $(".buyNotMain h3").css("color", colorMain);
+          $(".buyNotMain i").css("color", colorMain);
           switchColors(colorMain,colorOffset);
         },400);
 

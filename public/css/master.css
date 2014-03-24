@@ -111,28 +111,32 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: black; }
+      #showTile #loadedTiles #tileMain #buyMain i {
+        float: left;
+        color: white;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
       #showTile #loadedTiles #tileMain #buyMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: white; }
+        margin-left: -40px;
+        color: white;
+        display: inline-block; }
     #showTile #loadedTiles #tileMain.hide {
       opacity: 0; }
     #showTile #loadedTiles #tileMain.fader {
       opacity: 1; }
     #showTile #loadedTiles #tileMain.nav-open {
-      transition: 0.4s;
-      height: 99.9%;
-      width: 99.9%;
-      padding: 10px;
+      transition: 0.25s;
       opacity: 0.3;
       -webkit-filter: blur(5px);
+      -moz-filter: blur(5px);
       filter: blur(5px); }
-      #showTile #loadedTiles #tileMain.nav-open .tile-info {
-        transition: 0.7s;
-        font-size: 0.8em;
-        padding-top: 10px; }
     #showTile #loadedTiles #tileMain.nav-close {
       transition: 0.25s;
       height: 100%;
@@ -158,12 +162,22 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: white; }
+      #showTile #loadedTiles #tileUp .buyNotMain i {
+        float: left;
+        color: black;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
       #showTile #loadedTiles #tileUp .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: black; }
+        margin-left: -40px;
+        color: black;
+        display: inline-block; }
   #showTile #loadedTiles #tileDown {
     bottom: -108%;
     left: 0px;
@@ -176,12 +190,22 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: white; }
+      #showTile #loadedTiles #tileDown .buyNotMain i {
+        float: left;
+        color: black;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
       #showTile #loadedTiles #tileDown .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: black; }
+        margin-left: -40px;
+        color: black;
+        display: inline-block; }
   #showTile #loadedTiles #tileRight {
     color: white;
     left: 108%; }
@@ -193,12 +217,22 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: white; }
+      #showTile #loadedTiles #tileRight .buyNotMain i {
+        float: left;
+        color: black;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
       #showTile #loadedTiles #tileRight .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: black; }
+        margin-left: -40px;
+        color: black;
+        display: inline-block; }
   #showTile #loadedTiles #tileLeft {
     color: white;
     left: -108%; }
@@ -210,12 +244,22 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: white; }
+      #showTile #loadedTiles #tileLeft .buyNotMain i {
+        float: left;
+        color: black;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
       #showTile #loadedTiles #tileLeft .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: black; }
+        margin-left: -40px;
+        color: black;
+        display: inline-block; }
   #showTile #navigation-instructions {
     display: none;
     opacity: 0;
@@ -225,7 +269,7 @@ h1, h2, h3 {
     height: 90%;
     height: calc(100% - 50px);
     width: 100%;
-    color: #222222;
+    color: white;
     font-size: 3em;
     padding: 20px;
     padding-top: 10px;
@@ -246,10 +290,11 @@ h1, h2, h3 {
         display: table; }
         #showTile #navigation-instructions #navi-content #navi-text h1 {
           color: white;
-          opacity: 0.5;
+          opacity: 0.8;
           display: table-cell;
           vertical-align: middle;
           font-size: 0.6em;
+          letter-spacing: 4px;
           font-weight: 300;
           font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif; }
           #showTile #navigation-instructions #navi-content #navi-text h1 span {
@@ -267,32 +312,36 @@ h1, h2, h3 {
           margin: 0 auto;
           border-radius: 0;
           background-color: rgba(0, 0, 0, 0);
-          outline: 1px solid #aaaaaa;
+          opacity: 0.7;
+          outline: 1px solid white;
           font-size: 0.6em; }
           #showTile #navigation-instructions .kiss.buttons button.left {
             color: gold; }
           #showTile #navigation-instructions .kiss.buttons button.right {
             font-weight: 300;
             text-transform: uppercase;
-            right: 10px;
             font-size: 0.5em;
-            height: 49px; }
+            margin-bottom: 20px; }
             #showTile #navigation-instructions .kiss.buttons button.right:active, #showTile #navigation-instructions .kiss.buttons button.right:hover {
               color: black; }
           #showTile #navigation-instructions .kiss.buttons button.red {
             color: red; }
       #showTile #navigation-instructions .kiss.top {
         position: absolute;
+        color: white;
         top: 0px;
         left: 45%; }
       #showTile #navigation-instructions .kiss.left {
+        color: white;
         top: 45%;
         left: 10px; }
       #showTile #navigation-instructions .kiss.right {
         top: 45%;
+        color: white;
         right: 10px; }
       #showTile #navigation-instructions .kiss.bottom {
         position: absolute;
+        color: white;
         bottom: 10px;
         left: 45%; }
   #showTile .show {

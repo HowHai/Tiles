@@ -1,7 +1,8 @@
 <div class="row" ng-init="loadTiles()">
   <section id="showTile" class="col-xs-12">
-
+  <!-- <button ng-click="createTile()">Herroo Prease</button> -->
   <div id="loadedTiles">
+
     <div class="tile" id="tileUp">
       <img src="modules/tiles/img/tiles/{{tileUp.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -9,9 +10,11 @@
         <p class="tile-desc">{{tileUp.content}}</p>
       </div>
       <div class="buyNotMain">
+        <i class="fa fa-heart"></i>
         <h3>BUY NOW</h3>
       </div>
     </div>
+
     <div class="tile" id="tileLeft">
       <img src="modules/tiles/img/tiles/{{tileLeft.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -19,9 +22,11 @@
         <p class="tile-desc">{{tileLeft.content}}</p>
       </div>
       <div class="buyNotMain">
+        <i class="fa fa-heart"></i>
         <h3>BUY NOW</h3>
       </div>
     </div>
+
     <div class="tile" id="tileMain">
       <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -31,10 +36,12 @@
           <p>{{tileMain.content}}</p>
         </div>
         <div id="buyMain">
+          <i class="fa fa-heart"></i>
           <h3>BUY NOW</h3>
         </div>
       </div>
     </div>
+
     <div class="tile" id="tileRight">
       <img src="modules/tiles/img/tiles/{{tileRight.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -42,9 +49,11 @@
         <p class="tile-desc">{{tileRight.content}}</p>
       </div>
       <div class="buyNotMain">
+        <i class="fa fa-heart"></i>
         <h3>BUY NOW</h3>
       </div>
     </div>
+
     <div class="tile" id="tileDown">
       <img src="modules/tiles/img/tiles/{{tileDown.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -52,9 +61,11 @@
         <p class="tile-desc">{{tileDown.content}}</p>
       </div>
       <div class="buyNotMain">
+        <i class="fa fa-heart"></i>
         <h3>BUY NOW</h3>
       </div>
     </div>
+
   </div>
 
   <div id="navigation-instructions" ng-click="closeNav()">
@@ -62,49 +73,23 @@
       <i class="fa fa-angle-left kiss left"></i>
         <div id ="navi-content">
           <div id="navi-text">
-            <h1>welcome to <br><br><span>gloss</span></h1>
+            <h1>welcome to<br><br><span>gloss</span></h1>
           </div>
           <div class="kiss buttons">
-            <button class="btn left">
-              <i class="fa fa-star"></i>
-            </button>
+            <!-- <button class="btn left"> -->
+              <!-- <i class="fa fa-star"></i> -->
+            <!-- </button> -->
             <button class="btn right">
               Share
             </button>
-            <button class="btn red">
-              <i class="fa fa-frown-o"></i>
-            </button>
+            <!-- <button class="btn red"> -->
+              <!-- <i class="fa fa-frown-o"></i> -->
+            <!-- </button> -->
           </div>
         </div>
       <i class="fa fa-angle-right kiss right"></i>
       <i class="fa fa-angle-down kiss bottom"></i>
   </div>
 
-<!-- 
-    <div class="col-xs-12 btn-group">
-      <button type="button" class="btn btn-primary col-xs-4">Share</button>
-      <button type="button" class="btn btn-danger col-xs-4">Buy</button>
-      <button type="button" class="btn btn-primary col-xs-4">Fav</button>
-    </div>
-
-    <div>
-      <h3>Comments</h3>
-      <div data-ng-repeat="content in tile.comments">
-        <p style="font-weight: bold;">{{content[1]}}</p>
-        <p style="font-style: italic;">({{content[0]}} / {{content[2] | date:'medium'}})</p>
-      
-      </div>
-    </div>
-
-    <section data-ng-controller="CommentsCtrl">
-    <h3>Add comment</h3>
-      <form  data- ng-submit="create()">
-        <fieldset>
-          <textarea data-ng-model="content" cols="60" rows="2" placeholder="Comment"></textarea>
-          <br>
-          <input type="submit" />
-        </fieldset>
-      </form>
-    </section> -->
   </section>
 </div>
