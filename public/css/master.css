@@ -116,15 +116,17 @@ h1, h2, h3 {
         color: white;
         line-height: 50px;
         margin-top: 1px;
-        margin-left: 20px;
+        padding: 0 20px;
         font-size: 1.5em;
         display: inline-block; }
+        #showTile #loadedTiles #tileMain #buyMain i:hover, #showTile #loadedTiles #tileMain #buyMain i:active {
+          color: tomato !important; }
       #showTile #loadedTiles #tileMain #buyMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        margin-left: -40px;
+        margin-left: -60px;
         color: white;
         display: inline-block; }
     #showTile #loadedTiles #tileMain.hide {
@@ -136,7 +138,10 @@ h1, h2, h3 {
       opacity: 0.3;
       -webkit-filter: blur(5px);
       -moz-filter: blur(5px);
-      filter: blur(5px); }
+      -ms-filter: blur(5px);
+      -o-filter: blur(5px);
+      filter: blur(5px);
+      filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='5'); }
     #showTile #loadedTiles #tileMain.nav-close {
       transition: 0.25s;
       height: 100%;

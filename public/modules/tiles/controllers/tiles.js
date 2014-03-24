@@ -257,12 +257,12 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $(function() {
       //Main SWIPE FUNCTION
-      $("#tileMain").swipe( {swipeStatus: swipe2,
+      $("#tile-content").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
           var colorMain = $("#tileMain").css("background-color");
           var colorOffset = $("#tileLeft").css("background-color");
-          var windowHeight = document.documentElement.clientHeight;
+          var windowHeight = document.documentElement.clientHeight - 100;
           var windowWidth = document.documentElement.clientWidth;
 
           if(direction=="right" && distance > (windowWidth)*0.45){
@@ -281,7 +281,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
             if($scope.nav_open == false){
               $("#tileMain").addClass("nav-open").removeClass("nav-close");
-              $("#navigation-instructions").css({"transition":"0,5s","display":"block","opacity":"1"});
+              $("#navigation-instructions").css({"transition":"0.5s","display":"block","opacity":"1"});
               $scope.nav_open = true;
             }
           }
@@ -300,10 +300,12 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
         $("#buyMain i").css("color", colorOffset);
-        
+        // $("#buyMain i").hover(function(){this.css("color", "tomato")});
+
         $(".buyNotMain").css("background-color", colorOffset);
         $(".buyNotMain h3").css("color", colorMain);
         $(".buyNotMain i").css("color", colorMain);
+        // $(".buyNotMain i").hover(function(){this.css("color", "tomato")});
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
@@ -317,6 +319,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
         $("#buyMain i").css("color", colorOffset);
+        // $("#buyMain i").hover(function(){this.css("color", "tomato")});
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
@@ -326,6 +329,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $(".buyNotMain").css("background-color", colorOffset);
           $(".buyNotMain h3").css("color", colorMain);
           $(".buyNotMain i").css("color", colorMain);
+          // $(".buyNotMain i").hover(function(){this.css("color", "tomato")});
           switchColors(colorMain,colorOffset);
         },400);
 
