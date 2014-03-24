@@ -16,11 +16,13 @@ angular.module('mean.votes').controller('VotesCtrl', ['$scope', '$stateParams', 
         choice: 'upVote',
         tile: tileId,
       });
+      alertify.success("Thank you for voting!");
     } else {
       vote = new Votes ({
         choice: 'downVote',
         tile: tileId
       });
+      alertify.success("Thank you for voting!");
     }
 
     vote.$save(function(response) {
