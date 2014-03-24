@@ -17,51 +17,56 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         console.log($scope.allTiles[0]);
       }
 
-      // Socket.io testing
-      var socket = io.connect();
-      socket.on('connect', function() {
-        socket.on("takeTile", function(data){
-          console.log(data);
-          // Find tile and remove current_user.
-          for(var i = 0; i < $scope.allTiles.length; i++){
-            var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-              if(eArr.current_user === data.socketId){
-                $scope.allTiles[i][indexArr].current_user = false;
-                console.log($scope.allTiles);
-              }
-            });
-          }
+    // Socket.io testing
+    var socket = io.connect();
+    socket.on('connect', function() {
+      socket.on("takeTile", function(data){
+        console.log(data);
+        // Find tile and remove current_user.
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            console.log(eArr.location.indexOf(data.socketId));
+            if(eArr.location.indexOf(data.socketId) != -1){
+              var populatedIndex = eArr.location.indexOf(data.socketId);
 
-          // Find tile and add current_user.
-          for(var i = 0; i < $scope.allTiles.length; i++){
-            var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-              if(eArr._id === data.tileId){
-                $scope.allTiles[i][indexArr].current_user = data.socketId;
-                console.log($scope.allTiles);
-              }
-            });
-          }
-          console.log($scope.allTiles);
-          // Send new data back to server.
-          socket.emit('newGrid', $scope.allTiles);
-        });
+              console.log("Deleted!");
+              $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
+              console.log($scope.allTiles);
+            }
+          });
+        }
 
-        // Might not even need this... can probably change it in 'takeTile' without setTimeout..
-        socket.on('sendNewGrid', function(data) {
-          setTimeout(function() {
-            console.log("Thisran");
-            $scope.changeAll(data);
-          }, 50);
-        });
+        // Find tile and add current_user.
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr._id === data.tileId){
+              $scope.allTiles[i][indexArr].location.push(data.socketId);
+              console.log($scope.allTiles);
+              console.log("i ran!");
+            }
+          });
+        }
+        console.log($scope.allTiles);
+        // Send new data back to server.
+        socket.emit('newGrid', $scope.allTiles);
       });
 
-      $scope.changeAll = function(data){
-        $scope.$apply(function() {
-          $scope.allTiles = data;
-        });
-      };
+      // Might not even need this... can probably change it in 'takeTile' without setTimeout..
+      socket.on('sendNewGrid', function(data) {
+        setTimeout(function() {
+          console.log("Thisran");
+          $scope.changeAll(data);
+        }, 50);
+      });
+    });
 
-      // ENDsocket
+    $scope.changeAll = function(data){
+      $scope.$apply(function() {
+        $scope.allTiles = data;
+      });
+    };
+
+    // ENDsocket
 
     $http.get('/tiles/categories', null)
       .success(function(response) {

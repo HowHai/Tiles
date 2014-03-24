@@ -37,8 +37,8 @@
   <div id="userGrid">
     <ul ng-repeat="alltile in allTiles">
       <ul ng-repeat="myTiles in alltile">
-        <li class="location-populated" ng-show="myTiles.current_user">{{myTiles._id}}</li>
-        <li ng-show="!myTiles.current_user">{{myTiles._id}}</li>
+        <li class="location-populated" ng-show="myTiles.location.length > 0">{{myTiles._id}}</li>
+        <li ng-show="myTiles.location.length === 0">{{myTiles._id}}</li>
       </ul>
     </ul>
   </div>
@@ -51,7 +51,7 @@
 
   </div>
 <section ng-hide="false">
-  <!-- <button ng-click="createTile()">Make Tile</button> -->
+  <button ng-click="createTile()">Make Tile</button>
   <!-- <button onload="loadTiles()">Make Tile</button> -->
 
   <h1>Cracked Tiles</h1>
