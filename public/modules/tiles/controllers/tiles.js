@@ -113,7 +113,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     };
 
     $scope.closeNav = function() {
-
       $("#tileMain").removeClass("nav-open").addClass("nav-close");
       $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
       setTimeout(function(){
@@ -121,7 +120,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
         $("#tileMain").removeClass("nav-close");
       },500);
       $scope.nav_open = false;
-    
     };
 
     $(function() {  
@@ -307,23 +305,23 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     }
 
     // SPRITZ test
-    $scope.spritzNow = function(content) {
-      var contentArr = content.split(/\W/).filter(function(n) { return n != "" });
-      var counter = 0;
+    // $scope.spritzNow = function(content) {
+    //   var contentArr = content.split(/\W/).filter(function(n) { return n != "" });
+    //   var counter = 0;
 
-      var startSpritz = setInterval(function() {
-        if (counter >= contentArr.length - 1)
-          window.clearInterval(startSpritz);
+    //   var startSpritz = setInterval(function() {
+    //     if (counter >= contentArr.length - 1)
+    //       window.clearInterval(startSpritz);
 
-        var avgNumber = Math.round(contentArr[counter].length * 0.29);
-        var wordArr = contentArr[counter].split('');
-        wordArr.splice(avgNumber, 1, "<span class='red'>" + contentArr[counter][avgNumber] + "</span>")
-        wordArr = wordArr.join('');
+    //     var avgNumber = Math.round(contentArr[counter].length * 0.29);
+    //     var wordArr = contentArr[counter].split('');
+    //     wordArr.splice(avgNumber, 1, "<span class='red'>" + contentArr[counter][avgNumber] + "</span>")
+    //     wordArr = wordArr.join('');
 
-        $('#spritz').html(wordArr);
-        counter++;
-      }, 250);
-    };
+    //     $('#spritz').html(wordArr);
+    //     counter++;
+    //   }, 250);
+    // };
     // END
   }
 ]);

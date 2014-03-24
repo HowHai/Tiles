@@ -27,6 +27,7 @@
       <div class="tile-info">
         <h1 class="tile-title">{{tileMain.name}}</h1>
         <div class="tile-desc">
+          <div id="white-fade"></div>
           <p>{{tileMain.content}}</p>
         </div>
         <div id="buyMain">
@@ -57,18 +58,26 @@
   </div>
 
   <div id="navigation-instructions" ng-click="closeNav()">
-      <i class="fa fa-chevron-up kiss top"></i>
-        <i class="fa fa-chevron-left kiss left"></i>
+      <i class="fa fa-angle-up kiss top"></i>
+      <i class="fa fa-angle-left kiss left"></i>
         <div id ="navi-content">
-        <span class="tutorial-text">Welcome to Gloss</span>
-        <div class="kiss buttons">
-          <button class="btn left"><i class="fa fa-star"></i></button>
-          <button class="btn right">Share</button>
-          <button class="btn red"><i class="fa fa-frown-o"></i></button>
+          <div id="navi-text">
+            <h1>welcome to <br><br><span>gloss</span></h1>
+          </div>
+          <div class="kiss buttons">
+            <button class="btn left">
+              <i class="fa fa-star"></i>
+            </button>
+            <button class="btn right">
+              Share
+            </button>
+            <button class="btn red">
+              <i class="fa fa-frown-o"></i>
+            </button>
+          </div>
         </div>
-        </div>
-        <i class="fa fa-chevron-right kiss right"></i>
-      <i class="fa fa-chevron-down kiss bottom"></i>
+      <i class="fa fa-angle-right kiss right"></i>
+      <i class="fa fa-angle-down kiss bottom"></i>
   </div>
 
 <!-- 
