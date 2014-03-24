@@ -29,14 +29,24 @@ require('./config/passport')();
 // app.listen(config.port);
 
 // Socket.io test
+var Comment = mongoose.model('Comment');
+
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 server.listen(config.port);
 
 io.sockets.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
+  // Get user's current tile
+  socket.on('giveTile', function(data) {
+    socket.broadcast.emit("takeTile", data);
+    // io.sockets.emit("takeTile", data);
+  });
+
+  // Get new grid from client.
+  socket.on('newGrid', function(data){
     console.log(data);
+    // Send it back to client to update Grid.
+    socket.emit('sendNewGrid', data);
   });
 });
 
@@ -48,15 +58,3 @@ exports = module.exports = app;
 // Logging initialization
 console.log('Express app started on port ' + config.port);
 
-
-// var server = http.createServer(app);
-// server.listen(app.get('port'), function(){
-//   console.log('Express server listening on port ' + app.get('port'));
-// });
-
-// // Socket.io
-// var io = require('socket.io').listen(server);
-// io.sockets.on('connection', function (socket) {
-//   socket.on('setPseudo', function (data) {
-//     socket.set('pseudo', data);
-//   });

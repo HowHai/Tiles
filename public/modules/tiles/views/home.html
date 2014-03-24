@@ -1,5 +1,5 @@
 <style>
-  #mainTile, #singleTile {
+  #userGrid, #mainTile, #singleTile {
     width: 450px;
     height: 650px;
     border: 1px solid black;
@@ -18,10 +18,36 @@
   .red {
     color: red;
   }
+
+  #userGrid {
+    font-size: 8px;
+  }
 </style>
 
 <section>
-  <button ng-click="createTile()">Make Tile</button>
+  <h2>Radar</h2>
+
+  <button ng-click="runMe()">click me</button>
+  <div id="testMe">{{singleTile._id}}</div>
+
+  <div id="userGrid">
+    <ul ng-repeat="alltile in allTiles">
+      <ul ng-repeat="myTiles in alltile">
+        <li ng-show="myTiles.current_user">Yo</li>
+        <li>{{myTiles._id}}</li>
+      </ul>
+    </ul>
+  </div>
+
+
+<br><br><br><br>
+<br><br><br><br>
+</section>
+  <div id="chatTest">
+
+  </div>
+<section ng-hide="false">
+  <!-- <button ng-click="createTile()">Make Tile</button> -->
   <!-- <button onload="loadTiles()">Make Tile</button> -->
 
   <h1>Cracked Tiles</h1>

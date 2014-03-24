@@ -1,15 +1,8 @@
 'use strict';
 
-angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
-  function($scope, $http) {
+angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
+  function($scope, $http, $cookies) {
 
-      // Socket.io testing
-      var socket = io.connect();
-      socket.on('news', function (data) {
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
-      });
-      // ENDsocket
 
     // Testing Tile categories and movement
     $scope.allTiles;
@@ -19,24 +12,68 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http',
     var categoryPosition;
     var tilePosition;
 
+
+      $scope.clickMe = function() {
+        console.log($scope.allTiles[0]);
+      }
+
+      // Socket.io testing
+      var socket = io.connect();
+      socket.on('connect', function() {
+        socket.on("takeTile", function(data){
+          console.log(data);
+          var result = $.grep($scope.allTiles[0], function(eArr, indexArr) {
+            if(eArr._id === data.tileId){
+              $scope.allTiles[0][indexArr].current_user = true;
+              console.log($scope.allTiles);
+            }
+          });
+          console.log($scope.allTiles);
+          // Send new data back to server.
+          socket.emit('newGrid', $scope.allTiles);
+        });
+
+        socket.on('sendNewGrid', function(data) {
+          setTimeout(function() {
+            console.log("Thisran");
+            $scope.changeAll(data);
+          }, 2000);
+        });
+      });
+
+      $scope.changeAll = function(data){
+        $scope.$apply(function() {
+          $scope.allTiles = data;
+        });
+      };
+
+      // ENDsocket
+
     $http.get('/tiles/categories', null)
       .success(function(response) {
         $scope.allTiles = response;
+        console.log($scope.allTiles);
         $scope.singleTile = $scope.allTiles[0][0];
         categoryPosition = 0;
         tilePosition = 0;
+
+        socket.emit('giveTile', { tileId: $scope.singleTile._id})
       });
 
     $scope.changeCategory = function(num) {
       categoryPosition += num;
       $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
-      $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+      // $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+      console.log("This ran");
+      socket.emit('giveTile', { tileId: $scope.singleTile._id})
     }
 
     $scope.changeTile = function(num) {
       tilePosition += num;
       $scope.singleTile = $scope.allTiles[categoryPosition][tilePosition];
-      $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+      // $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+      console.log("This ran");
+      socket.emit('giveTile', { tileId: $scope.singleTile._id})
     }
 
     // END
