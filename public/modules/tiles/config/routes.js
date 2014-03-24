@@ -3,8 +3,13 @@
 angular.module('mean.tiles').config(['$stateProvider',
   function($stateProvider) {
     $stateProvider.
-    state('showTile', {
+    state('haihome', {
       url: '/',
+      templateUrl: 'modules/tiles/views/haihome.html',
+      controller: 'TilesCtrl'
+    }).
+    state('showTile', {
+      url: '/fsfs',
       templateUrl: 'modules/tiles/views/show.html',
       controller: 'TilesCtrl'
     }).state('explodedTiles', {

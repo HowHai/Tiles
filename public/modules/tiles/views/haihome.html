@@ -28,11 +28,11 @@
   }
 </style>
 
-<section>
+<section ng-init="loadTiles()">
   <h2>Radar</h2>
 
   <button ng-click="runMe()">click me</button>
-  <div id="testMe">{{singleTile._id}}</div>
+  <div id="testMe">{{tileMain._id}}</div>
 
   <div id="userGrid">
     <ul ng-repeat="alltile in allTiles">
