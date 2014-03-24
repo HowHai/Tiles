@@ -12,29 +12,30 @@ exports.create = function(req, res) {
   var id = vote.tile;
   var data = [];
   var choice = vote.choice;
-  var user = req.user.username;
+  // var user = req.user.displayName;
+  var sessionID = req.sessionID;
 
   //Grab choice from angular controller
   if (choice == 'upVote') {
     Tile.findById(id, function(err, doc) {
       if (doc.votes.length > 0) {
         for (var i = 0; i < doc.votes.length; i++){
-          if (doc.votes[i] == user) {
+          if (doc.votes[i] == sessionID) {
             console.log('ALREADY VOTED');
           } 
           else {
-            // Add user name to votesUp
-            doc.votesUp.push(user);
-            doc.votes.push(user);
+            // Add sessionID name to votesUp
+            doc.votesUp.push(sessionID);
+            doc.votes.push(sessionID);
             doc.save();
-            console.log(user + ' has vote for ' + id);
+            console.log(sessionID + ' has vote for ' + id);
           }
         }
       } else {
-        doc.votesUp.push(user);
-        doc.votes.push(user);
+        doc.votesUp.push(sessionID);
+        doc.votes.push(sessionID);
         doc.save();
-        console.log(user + ' has voted for ' + id);
+        console.log(sessionID + ' has voted for ' + id);
 
         vote.save(function(err) {
           if (err) {
@@ -52,22 +53,22 @@ exports.create = function(req, res) {
     Tile.findById(id, function(err, doc) {
       if (doc.votes.length > 0) {
         for (var i = 0; i < doc.votes.length; i++){
-          if (doc.votes[i] == user) {
+          if (doc.votes[i] == sessionID) {
             console.log('ALREADY VOTED');
           } else {
-            // Add user name to votesUp
-            doc.votesUp.push(user);
-            doc.votes.push(user);
+            // Add sessionID name to votesUp
+            doc.votesUp.push(sessionID);
+            doc.votes.push(sessionID);
             doc.save();
-            console.log(user + ' has voted for ' + id);
+            console.log(sessionID + ' has voted for ' + id);
           }
         }
       }
       else {
-        doc.votesUp.push(user);
-        doc.votes.push(user);
+        doc.votesUp.push(sessionID);
+        doc.votes.push(sessionID);
         doc.save();
-        console.log(user + ' has vote for ' + id);
+        console.log(sessionID + ' has vote for ' + id);
 
         vote.save(function(err) {
           if (err) {

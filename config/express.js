@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
+var express = require('express.io'),
 	passport = require('passport'),
 	mongoStore = require('connect-mongo')(express),
 	flash = require('connect-flash'),

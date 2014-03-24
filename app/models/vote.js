@@ -4,9 +4,6 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var VoteSchema = new Schema({
-  user: {
-    type: String
-  },
   choice: {
     type: String
   },

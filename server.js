@@ -37,9 +37,9 @@ console.log('Express app started on port ' + config.port);
 // Socket.io
 var http = require('http');
 var server = http.createServer(app);
-var routes = require('./app/controllers/votes')
-io.sockets.on('connection', routes.create);
+var routes = require('./app/controllers/votes');
 
-// server.listen(config.port, function(){
-//   console.log('Express server listening on port ' + config.port);
-// });
+io.sockets.on('connection', routes.create, function (socket) {
+  var ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address.address;
+  console.log('Client connected from: ' + ip);
+}); 
