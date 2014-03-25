@@ -6,7 +6,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     var socket = io.connect();
 
-
     $scope.loadTiles = function() {
       $scope.nav_open = false;
       $http.get('/tiles/categories', null)
@@ -30,7 +29,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
           var likeCheck = JSON.parse($cookies.likes);
           console.log($scope.tileMain._id)
-     
+
           for (var i = 0; i < likeCheck.length; i++) {
             if (likeCheck[i] == $scope.tileMain._id) {
               $scope.votedOnTile = true;
@@ -127,7 +126,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           });
         }
         $scope.$apply(function(){
-          showOccupied();        
+          showOccupied();
         });
       });
 
@@ -158,6 +157,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             };
           });
         };
+        showOccupied();
       });
 
       // Give all location
@@ -517,7 +517,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         deg = 0,
         rad = 80.5; //   = 321/2
 
-    (function rotate() {      
+    (function rotate() {
       $rad.css({transform: 'rotate('+ deg +'deg)'});
       $('[data-atDeg='+deg+']').stop().fadeTo(0,1).fadeTo(1700,0.2);
 
