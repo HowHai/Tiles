@@ -122,6 +122,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           });
         }
+
         showOccupied();
       });
 
@@ -161,9 +162,32 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         showOccupied();
       });
 
-      // Give all location
-      socket.on('needAllLocations', function(data){
-        console.log(data);
+      // Send current user's location to new user.
+      socket.on('iAmNew', function(data){
+        socket.emit('sendLocationToNewUser', { tileId: $scope.tileMain._id, socketId: data.socketId });
+      });
+
+      // Get everyone's location as a new user and update.
+      $scope.allUsersLocation = [];
+      socket.on('newUserGetsLocation', function(data){
+
+        // Find tile and add other user.
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr._id === data.tileId){
+              $scope.$apply(function() {
+                $scope.allTiles[i][indexArr].location.push(data.socketId);
+              });
+            }
+          });
+        }
+        // console.log($scope.allUsersLocation);
+        // $scope.allUsersLocation.push(data.socketId);
+        // console.log("This ran2!");
+        // console.log("My tile: " + $scope.tileMain._id);
+        // console.log(data.tileId);
+        // console.log(data.clientsCount);
+        // console.log(data.socketId);
       });
     });
     // ENDsocket
