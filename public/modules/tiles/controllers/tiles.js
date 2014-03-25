@@ -45,7 +45,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       if (likesArray.length > 0) {
         for (var i = 0; i < likesArray.length; i++) {
           if (likesArray[i] == $scope.tileMain._id){
-            alertify.error(" You've already liked this tile");
+            toastr.success();
             console.log("Already Voted");
           }
         }
@@ -60,7 +60,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           });
 
         socket.emit('sendLike', $scope.tileMain);
-        alertify.success("Liked!");
+        toastr.success("Liked!");
       };
     }
 
