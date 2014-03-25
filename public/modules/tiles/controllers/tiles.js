@@ -3,8 +3,8 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
+    var likeCheck;
     var socket = io.connect();
-    // $('header').css("display","none");
 
     $scope.loadTiles = function() {
       $scope.nav_open = false;
@@ -23,18 +23,18 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
 
-          $scope.tileMain = $scope.allTiles[3][11];
+          // $scope.tileMain = $scope.allTiles[3][11];
           // Send current user's tileId to server.
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
 
-          var likeCheck = JSON.parse($cookies.likes);
-          console.log($scope.tileMain._id)
+          likeCheck = JSON.parse($cookies.likes);
+          // console.log($scope.tileMain._id)
      
           for (var i = 0; i < likeCheck.length; i++) {
             if (likeCheck[i] == $scope.tileMain._id) {
               $scope.votedOnTile = true;
             }
-         }
+          }
       });
     }
 
@@ -45,24 +45,29 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
       // Save user's likes history
       var likesArray;
+      var count = 0;
       if ($cookies.likes) {
         likesArray = JSON.parse($cookies.likes);
-        console.log("created");
+        // console.log("created");
       } else {
         likesArray = [];
-        console.log('likesss');
+        // console.log('likesss');
       }
 
       if (likesArray.length > 0) {
         for (var i = 0; i < likesArray.length; i++) {
           if (likesArray[i] == $scope.tileMain._id){
-            toastr.success();
-            console.log("Already Voted");
+            // toastr.success();
+            // console.log("Already Voted");
+            count = 1;
+            break;
           }
         }
-      } else {
+      }
 
-        console.log("You voted!");
+      if(count == 0){
+
+        // console.log("You voted!");
         likesArray.push($scope.tileMain._id);
         $cookies.likes = angular.toJson(likesArray);
 
@@ -75,11 +80,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $scope.votedOnTile = true;
       };
     }
-
     // endLikes
 
     // Favorite feature
-
     $scope.addFavorite = function() {
       console.log("You clicked on favorite");
 
@@ -196,6 +199,17 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     //   socket.emit('giveTile', { tileId: $scope.singleTile._id})
     // }
 
+    var cookieCheck = function() {
+      likeCheck = JSON.parse($cookies.likes);
+      console.log($scope.tileMain._id)
+      
+      for (var i = 0; i < likeCheck.length; i++) {
+        if (likeCheck[i] == $scope.tileMain._id) {
+          $scope.votedOnTile = true;
+        }
+      }
+    }
+
     var resetTiles = function() {
       // Emit user's current position to server.
       socket.emit('giveTile', { tileId: $scope.tileMain._id})
@@ -205,17 +219,22 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
         $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
         $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+
       });
     }
 
     $scope.moveUp = function() {
       $scope.tileMain = $scope.tileUp;
+      cookieCheck();
+
       $scope.currentCategory = categoryRotator($scope.currentCategory, "up");
       resetTiles();
     }
 
     $scope.moveDown = function() {
       $scope.tileMain = $scope.tileDown;
+      cookieCheck();
+
       $scope.currentCategory = categoryRotator($scope.currentCategory, "down");
       resetTiles();
     }
@@ -223,6 +242,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     $scope.moveLeft = function() {
       $scope.hPosition -= 1;
       $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
+      cookieCheck();
 
       if ($scope.hPosition < 1) {
         $http.get('/tiles/categories', null)
@@ -233,13 +253,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
                 $scope.allTiles[i].unshift(response[i][j]);
               };
             };
-            console.log($scope.allTiles);
-
+            // console.log($scope.allTiles);
             $scope.hPosition += 18;
-            $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
-            $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
-            $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
-            $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+            resetTiles();
 
             // Send current user's tileId to server.
             socket.emit('giveTile', { tileId: $scope.tileMain._id})
@@ -253,6 +269,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     $scope.moveRight = function() {
       $scope.hPosition += 1;
       $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
+      cookieCheck();
 
       if (($scope.allTiles[$scope.currentCategory].length - 1) - $scope.hPosition < 1) {
         $http.get('/tiles/categories', null)
@@ -263,12 +280,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
                 $scope.allTiles[i].push(response[i][j]);
               };
             };
-            console.log($scope.allTiles);
-
-            $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
-            $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
-            $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
-            $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+            // console.log($scope.allTiles);
+            resetTiles();
 
             // Send current user's tileId to server.
             socket.emit('giveTile', { tileId: $scope.tileMain._id})
@@ -382,12 +395,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
         $("#buyMain i").css("color", colorOffset);
-        // $("#buyMain i").hover(function(){this.css("color", "tomato")});
+        $("#buyMain span").css("color", colorOffset);
+
 
         $(".buyNotMain").css("background-color", colorOffset);
         $(".buyNotMain h3").css("color", colorMain);
         $(".buyNotMain i").css("color", colorMain);
-        // $(".buyNotMain i").hover(function(){this.css("color", "tomato")});
+        $(".buyNotMain span").css("color", colorMain);
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
@@ -401,7 +415,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
         $("#buyMain i").css("color", colorOffset);
-        // $("#buyMain i").hover(function(){this.css("color", "tomato")});
+        $("#buyMain span").css("color", colorOffset);
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
@@ -411,7 +425,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $(".buyNotMain").css("background-color", colorOffset);
           $(".buyNotMain h3").css("color", colorMain);
           $(".buyNotMain i").css("color", colorMain);
-          // $(".buyNotMain i").hover(function(){this.css("color", "tomato")});
+          $(".buyNotMain span").css("color", colorMain);
           switchColors(colorMain,colorOffset);
         },400);
 
