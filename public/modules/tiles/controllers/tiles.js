@@ -31,12 +31,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
      
           for (var i = 0; i < likeCheck.length; i++) {
             if (likeCheck[i] == $scope.tileMain._id) {
-            $scope.votedOnTile = true;
-        }
-      }
-
-$scope.votedOnTile = true;
-        });
+              $scope.votedOnTile = true;
+            }
+         }
+      });
     }
 
     //
