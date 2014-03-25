@@ -73,8 +73,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         likesArray.push($scope.tileMain._id);
         $cookies.likes = angular.toJson(likesArray);
 
-        $http.put('/tiles', { tileId: $scope.tileMain._id })
+        $http.put('/tiles/update', { tileId: $scope.tileMain._id })
           .success(function(data){
+            $scope.tileMain = data;
           });
 
         socket.emit('sendLike', $scope.tileMain);
@@ -141,10 +142,16 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
       // Listen for likes
       socket.on('giveBackLike', function(data){
-        $scope.$apply(function() {
-          data.likes = data.likes + 1;
-          $scope.tileMain = data;
-        });
+       for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr._id === data._id){
+              $scope.$apply(function() {
+                data.likes = data.likes + 1;
+                $scope.allTiles[i][indexArr] = data;
+              });
+            }
+          });
+        }
       });
 
       // Listen for disconnect?
@@ -206,7 +213,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       
       for (var i = 0; i < likeCheck.length; i++) {
         if (likeCheck[i] == $scope.tileMain._id) {
-          $scope.votedOnTile = true;
+          $scope.$apply(function() {
+            $scope.votedOnTile = true;
+          });
         }
       }
     }

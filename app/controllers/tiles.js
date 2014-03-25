@@ -28,21 +28,12 @@ exports.update = function(req, res){
   var tileId = req.body.tileId;
   console.log(req.body.tileId);
 
-  Tile.findById(tileId, function(error, tile){
-    if (error) {
-      console.log("This did not run:" + error);
-    } else {
-      var newLikesCount = tile.likes + 1;
-      console.log(newLikesCount);
-      tile.update({likes: newLikesCount}, function(error, tile){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("This ran");
-        }
-      });
-    }
-  })
+  Tile.update({_id: tileId}, { $inc: { likes: 1 } }, function(error, doc){
+    Tile.findById(tileId, function(error, data){
+      res.json(data);
+    });
+    
+  });
 }
 
 // GET shared tile, placed in center of other random tiles
