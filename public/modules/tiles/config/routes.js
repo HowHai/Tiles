@@ -5,7 +5,7 @@ angular.module('mean.tiles').config(['$stateProvider',
     $stateProvider.
     state('haihome', {
       url: '/',
-      templateUrl: 'modules/tiles/views/haihome.html',
+      templateUrl: 'modules/tiles/views/show.html',
       controller: 'TilesCtrl'
     }).
     state('showTile', {
