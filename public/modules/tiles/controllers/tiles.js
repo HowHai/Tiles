@@ -29,11 +29,35 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // Likes testing
 
     $scope.updateLikes = function() {
-      $http.put('/tiles', { tileId: $scope.tileMain._id })
-        .success(function(data){
-          console.log(data);
-        });
-    };
+
+      // Save user's likes history
+      var likesArray;
+      if ($cookies.likes) {
+        likesArray = JSON.parse($cookies.likes);
+        console.log("created");
+      } else {
+        likesArray = [];
+        console.log('likesss');
+      }
+
+      if (likesArray.length > 0) {
+        for (var i = 0; i < likesArray.length; i++) {
+          if (likesArray[i] == $scope.tileMain._id){
+            alertify.error(" You've already liked this tile");
+            console.log("Already Voted");
+          }
+        }
+      } else {
+        console.log("You voted!");
+        likesArray.push($scope.tileMain._id);
+        $cookies.likes = angular.toJson(likesArray);
+
+        $http.put('/tiles', { tileId: $scope.tileMain._id })
+          .success(function(data){
+          });
+        alertify.success("Liked!");
+      };
+    }
 
 
 
