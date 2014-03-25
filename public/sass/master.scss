@@ -409,6 +409,40 @@ h1, h2, h3 {
     }
     .kiss {
       position: fixed;
+      button {
+        // &.left {
+        //   color: gold;
+        // }
+        position:absolute;
+        bottom: 0px;
+        z-index: 9999;
+        &.share {
+          font-weight: 300;
+          text-transform: uppercase;
+          font-size: 0.5em;
+          margin-bottom: 20px;
+          a {
+            color: white;
+            &:active, &:hover {
+              color: black;
+              text-decoration: none;
+            }
+          }
+        }
+        // &.red {
+        //   color: red;
+        // }
+        margin:0 auto;
+        border-radius: 0;
+        background-color: rgba(0,0,0,0);
+        opacity: 0.7;
+        outline: 1px solid white;
+        font-size: 0.6em;
+        &:hover, &:active {
+          // background-color: #333;
+          // color: white;
+        }
+      }
       &.buttons {
         position:absolute;
         bottom: 0px;
@@ -460,38 +494,4 @@ h1, h2, h3 {
   // -ms-user-select: none;
   // user-select: none;
 
-  button {
-    // &.left {
-    //   color: gold;
-    // }
-    position:absolute;
-    bottom: 0px;
-    z-index: 9999;
-    &.share {
-      font-weight: 300;
-      text-transform: uppercase;
-      font-size: 0.5em;
-      margin-bottom: 20px;
-      a {
-        color: white;
-        &:active, &:hover {
-          color: black;
-          text-decoration: none;
-        }
-      }
-    }
-    // &.red {
-    //   color: red;
-    // }
-    margin:0 auto;
-    border-radius: 0;
-    background-color: rgba(0,0,0,0);
-    opacity: 0.7;
-    outline: 1px solid white;
-    font-size: 0.6em;
-    &:hover, &:active {
-      // background-color: #333;
-      // color: white;
-    }
-  }
 }

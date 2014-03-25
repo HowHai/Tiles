@@ -244,13 +244,16 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     };
 
     $scope.closeNav = function() {
-      $("#tileMain").removeClass("nav-open").addClass("nav-close");
-      $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
-      setTimeout(function(){
-        $("#navigation-instructions").css("display", "none");
-        $("#tileMain").removeClass("nav-close");
-      },500);
-      $scope.nav_open = false;
+      if (!$(".share").is(":focus")) {
+        console.log("wahoo!");
+        $("#tileMain").removeClass("nav-open").addClass("nav-close");
+        $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
+        setTimeout(function(){
+          $("#navigation-instructions").css("display", "none");
+          $("#tileMain").removeClass("nav-close");
+        },500);
+        $scope.nav_open = false;
+      };
     };
 
     $(function() {
