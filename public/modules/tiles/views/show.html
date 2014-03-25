@@ -1,6 +1,9 @@
 <div class="row" ng-init="loadTiles()">
   <section id="showTile" class="col-xs-12">
   <!-- <button ng-click="createTile()">Herroo Prease</button> -->
+  
+    ADDING FOOD CATEGORY RIGHT NOW
+
   <div id="loadedTiles">
 
     <div class="tile" id="tileUp">
@@ -10,8 +13,8 @@
         <p class="tile-desc">{{tileUp.content}}</p>
       </div>
       <div class="buyNotMain">
-        <i class="fa fa-heart"></i>
-        <span>4</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileUp.likes}}</span>
         <h3>BUY NOW</h3>
       </div>
     </div>
@@ -23,8 +26,8 @@
         <p class="tile-desc">{{tileLeft.content}}</p>
       </div>
       <div class="buyNotMain">
-        <i class="fa fa-heart"></i>
-        <span>18</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileLeft.likes}}</span>
         <h3>BUY NOW</h3>
       </div>
     </div>
@@ -41,11 +44,8 @@
         </div>
       </div>
       <div id="buyMain">
-        <!-- <button class="btn left" style="float:left" ng-class="votedOnTile? 'btn-left' : 'btn-success'" ng-disabled="votedOnTile" ng-click="updateLikes()"> -->
-          <!-- <i class="fa fa-heart"> {{tileMain.likes}}</i> -->
-        <!-- </button> -->
-        <i class="fa fa-heart" ng-class="{'liked': liked}" ng-click="liked = !liked"></i>
-        <span>12</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
       </div>
     </div>
@@ -57,8 +57,8 @@
         <p class="tile-desc">{{tileRight.content}}</p>
       </div>
       <div class="buyNotMain">
-        <i class="fa fa-heart"></i>
-        <span>16</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileRight.likes}}</span>
         <h3>BUY NOW</h3>
       </div>
     </div>
@@ -70,8 +70,8 @@
         <p class="tile-desc">{{tileDown.content}}</p>
       </div>
       <div class="buyNotMain">
-        <i class="fa fa-heart"></i>
-        <span>2</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileDown.likes}}</span>
         <h3>BUY NOW</h3>
       </div>
     </div>
