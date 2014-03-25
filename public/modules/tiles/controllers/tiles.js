@@ -97,23 +97,30 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         for(var i = 0; i < $scope.allTiles.length; i++){
           var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
             if(eArr._id === data.tileId){
-              $scope.allTiles[i][indexArr].location.push(data.socketId);
-              console.log($scope.allTiles);
-              console.log("i ran!");
+              $scope.$apply(function() {
+                $scope.allTiles[i][indexArr].location.push(data.socketId);
+              });
             }
           });
         }
         // Send new data back to server.
-        socket.emit('newGrid', $scope.allTiles);
+        // socket.emit('newGrid', $scope.allTiles);
       });
 
       // Might not even need this... can probably change it in 'takeTile' without setTimeout..
-      socket.on('sendNewGrid', function(data) {
-        setTimeout(function() {
-          console.log("Thisran");
-          $scope.changeAll(data);
-        }, 50);
-      });
+      // Deleted... not sure... save this for now
+      // socket.on('sendNewGrid', function(data) {
+      //   setTimeout(function() {
+      //     console.log("Thisran");
+      //     $scope.changeAll(data);
+      //   }, 50);
+      // });
+
+      // $scope.changeAll = function(data){
+      //   $scope.$apply(function() {
+      //     $scope.allTiles = data;
+      //   });
+      // };
 
       // Get test emit to current user and display in browser's console.
       socket.on('currentPosition', function(data) {
@@ -132,11 +139,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     });
     // ENDsocket
 
-    $scope.changeAll = function(data){
-      $scope.$apply(function() {
-        $scope.allTiles = data;
-      });
-    };
 
 
     // $http.get('/tiles/categories', null)
