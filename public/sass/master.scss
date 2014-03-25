@@ -35,9 +35,9 @@ h1, h2, h3 {
 }
 
 .content {
-  margin-top: 50px;
-  height: 90%;
-  height: calc(100% - 50px);
+  // margin-top: 50px;
+  height: 100%;
+  // height: calc(100% - 50px);
 }
 
 .row {
@@ -56,6 +56,10 @@ h1, h2, h3 {
 
 .navbar-header {
   background-color: white;
+}
+.navbar-fixed-top{
+  transition: 1s;
+  display: none;
 }
 
 .navbar-inverse {
@@ -100,8 +104,8 @@ h1, h2, h3 {
 // Show Tile View
 
 #showTile {
-  height: 90%;
-  height: calc(100% - 50px);
+  height: 100%;
+  // height: calc(100% - 50px);
   overflow: hidden;
   position: absolute;
   text-align: center;
@@ -122,6 +126,18 @@ h1, h2, h3 {
       position: absolute;
       background-color: black;
       overflow: hidden;
+      .brand{
+          position:absolute;
+          top: 0px;
+          left: 10px;
+          height: 50px;
+          font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+          color: rgba(255,255,255,0.8);
+          text-align: left;
+          font-size: 1.5em;
+          font-weight: 300;
+          padding-top: 2px; 
+        }
     }
 
     .tile-info {
@@ -187,7 +203,6 @@ h1, h2, h3 {
         }
         span {
           position: absolute;
-          // display: inline-block;
           font-size: 0.8em;
           bottom: 11px;
           margin-left: 38px;
@@ -411,8 +426,8 @@ h1, h2, h3 {
     transition: 0.9s;
     position: fixed;
     z-index: 10;
-    height: 90%;
-    height: calc(100% - 50px);
+    height: 100%;
+    // height: calc(100% - 50px);
     width: 100%;
     color: white;
     font-size: 3em;
@@ -423,7 +438,33 @@ h1, h2, h3 {
     .center-vertical {
       padding-top: 47%;
     }
+    #nav-header{
+      position:absolute;
+      top: 0px;
+      height: 50px;
+      font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+      color: rgba(255,255,255,0.8);
+      text-align: left;
+      font-size: 0.7em;
+      font-weight: 300;
+      padding-top: 2px;
+      button{
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        height: 30px;
+        width: 40px;
+        background: none;
+        // border: 1px solid rgba(255,255,255,0.8);
+        border: none;
+        background-image: url(../img/brand/list.svg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
     #navi-content {
+      margin-top: 50px;
       position: absolute;
       z-index: 10;
       height: 83%;
@@ -533,14 +574,14 @@ h1, h2, h3 {
       position: fixed;
       &.buttons {
         position:absolute;
-        bottom: 0px;
+        bottom: 15px;
         width: 100%;
         button {
           &.share {
             font-weight: 300;
             text-transform: uppercase;
             font-size: 0.5em;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             a {
               color: white;
               &:active, &:hover {
@@ -562,6 +603,12 @@ h1, h2, h3 {
         }
         #share-link {
           font-size: 0.34em;
+          -webkit-touch-callout: text;
+          -webkit-user-select: text;
+          -khtml-user-select: text;
+          -moz-user-select: text;
+          -ms-user-select: text;
+          user-select: text;
         }
       }
       &.top {
@@ -601,4 +648,11 @@ h1, h2, h3 {
     // -o-transition-timing-function: ease-in-out;
     // transition-timing-function: ease-in-out;
   }
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

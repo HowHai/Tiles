@@ -4,86 +4,93 @@
   <div id="loadedTiles">
 
     <div class="tile" id="tileUp">
+      <div class="brand">gloss</div>
       <img src="modules/tiles/img/tiles/{{tileUp.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileUp.name}}</h1>
         <p class="tile-desc">{{tileUp.content}}</p>
       </div>
       <div class="buyNotMain">
-        <i class="fa fa-heart"></i>
-        <span>4</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileUp.likes}}</span>
         <h3>BUY NOW</h3>
       </div>
     </div>
 
     <div class="tile" id="tileLeft">
+      <div class="brand">gloss</div>
       <img src="modules/tiles/img/tiles/{{tileLeft.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileLeft.name}}</h1>
         <p class="tile-desc">{{tileLeft.content}}</p>
       </div>
       <div class="buyNotMain">
-        <i class="fa fa-heart"></i>
-        <span>18</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileLeft.likes}}</span>
         <h3>BUY NOW</h3>
       </div>
     </div>
 
     <div class="tile" id="tileMain">
-      <div id="tile-content">
-        <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Splash">
-        <div class="tile-info">
-          <h1 class="tile-title">{{tileMain.name}}</h1>
-          <div class="tile-desc">
-            <div id="white-fade"></div>
-            <p>{{tileMain.content}}</p>
+      <div class="swipeable">
+        <div id="tile-content">
+          <div class="brand">gloss</div>
+          <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Splash">
+          <div class="tile-info">
+            <h1 class="tile-title">{{tileMain.name}}</h1>
+            <div class="tile-desc">
+              <div id="white-fade"></div>
+              <p>{{tileMain.content}}</p>
+            </div>
           </div>
         </div>
       </div>
       <div id="buyMain">
-        <!-- <button class="btn left" style="float:left" ng-class="votedOnTile? 'btn-left' : 'btn-success'" ng-disabled="votedOnTile" ng-click="updateLikes()"> -->
-          <!-- <i class="fa fa-heart"> {{tileMain.likes}}</i> -->
-        <!-- </button> -->
-        <i class="fa fa-heart" ng-class="{'liked': liked}" ng-click="liked = !liked"></i>
-        <span>12</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
       </div>
     </div>
 
     <div class="tile" id="tileRight">
+      <div class="brand">gloss</div>
       <img src="modules/tiles/img/tiles/{{tileRight.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileRight.name}}</h1>
         <p class="tile-desc">{{tileRight.content}}</p>
       </div>
       <div class="buyNotMain">
-        <i class="fa fa-heart"></i>
-        <span>16</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileRight.likes}}</span>
         <h3>BUY NOW</h3>
       </div>
     </div>
 
     <div class="tile" id="tileDown">
+      <div class="brand">gloss</div>
       <img src="modules/tiles/img/tiles/{{tileDown.imgUrl}}" alt="Splash">
       <div class="tile-info">
         <h1 class="tile-title">{{tileDown.name}}</h1>
         <p class="tile-desc">{{tileDown.content}}</p>
       </div>
       <div class="buyNotMain">
-        <i class="fa fa-heart"></i>
-        <span>2</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+        <span>{{tileDown.likes}}</span>
         <h3>BUY NOW</h3>
       </div>
     </div>
 
   </div>
 
-  <div id="navigation-instructions" ng-click="closeNav()">
+  <div id="navigation-instructions" class="swipeable" ng-click="closeNav()">
+      <div id="nav-header">gloss
+        <button></button>
+      </div>
       <i class="fa fa-angle-up kiss top"></i>
       <i class="fa fa-angle-left kiss left"></i>
         <div id ="navi-content">
           <div id="navi-text">
-            <h1>welcome to<br><br><span>gloss</span></h1>
+            <!-- <h1>welcome to<br><br><span>gloss</span></h1> -->
           </div>
           <div id="radar">
             <div id="rad"></div>
