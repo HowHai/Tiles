@@ -23,6 +23,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
 
           $scope.tileMain = $scope.allTiles[3][11];
+
           // Send current user's tileId to server.
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
 
@@ -90,13 +91,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     }
 
     // END FAVORITE
-
-    // Testing Tile categories and movement
-    // $scope.allTiles;
-    // $scope.singleTile;
-    // var categoryPosition;
-    // var tilePosition;
-
 
     // Socket.io testing
     socket.on('connect', function() {
