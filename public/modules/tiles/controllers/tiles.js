@@ -352,7 +352,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $(function() {
       //Main SWIPE FUNCTION
-      $("#tile-content").swipe( {swipeStatus: swipe2,
+      $("#showTile").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
           var colorMain = $("#tileMain").css("background-color");
@@ -379,6 +379,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
               $("#navigation-instructions").css({"transition":"0,5s","display":"block","opacity":"1"});
               showOccupied();
               $scope.nav_open = true;
+            }
+            else{
+              $scope.closeNav();
             }
           }
         },
@@ -408,7 +411,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       function animateAndMove(direction, tile, colorMain, colorOffset){
         $("#tile" + direction).addClass("center-tile", "show");
         $("#tileMain").addClass("hide");
-
+        showOccupied();
         // Added this to match bg color to new tile, but needs some work with the animation
         // $("#showTile").css("background-color", colorMain);
 
