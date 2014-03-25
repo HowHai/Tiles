@@ -32,13 +32,17 @@ var io = require('socket.io').listen(server);
 server.listen(config.port);
 
 io.sockets.on('connection', function (socket) {
-  // Get everyone's current location when connected.
-  socket.broadcast.emit('needAllLocations', {data: socket.id});
+  // Send current user's location to new user.
+  socket.on('sendLocationToNewUser', function(data){
+    var clients = io.sockets.clients().length;
+    console.log("This ran!");
+    console.log(data.socketId);
+    io.sockets.socket(data.socketId).emit("newUserGetsLocation", {clientsCount: clients});
+  });
 
   // Get user's current tileId
   socket.on('giveTile', function(data) {
     data.socketId = socket.id;
-    console.log(socket);
     // Emits user's tileId and socketId to all users except sender.
     socket.broadcast.emit("takeTile", data);
   });
@@ -48,7 +52,6 @@ io.sockets.on('connection', function (socket) {
 
   // Response to sendVote
   socket.on('sendLike', function(data) {
-    console.log(data);
     io.sockets.emit('giveBackLike', data);
   });
 

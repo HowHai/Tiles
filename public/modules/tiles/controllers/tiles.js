@@ -118,6 +118,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           });
         }
+        // Send current user's location to new user.
+        socket.emit('sendLocationToNewUser', { tileId: $scope.tileMain._id, socketId: data.socketId });
+
         showOccupied();
       });
 
@@ -151,9 +154,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         showOccupied();
       });
 
-      // Give all location
-      socket.on('needAllLocations', function(data){
-        console.log(data);
+      // Get everyone's location as a new user.
+      socket.on('newUserGetsLocation', function(data){
+        console.log("This ran2!");
+        console.log("Here it is! :" + data);
       });
     });
     // ENDsocket
