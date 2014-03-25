@@ -9,7 +9,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         .success(function(response) {
 
           $scope.allTiles = response;
-          $scope.currentCategory = 0;
+          $scope.currentCategory = 4;
           $scope.hPosition = 9;
           console.log(response);
 
@@ -253,8 +253,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       $scope.nav_open = false;
     };
 
-
-
     $(function() {
       //Main SWIPE FUNCTION
       $("#tile-content").swipe( {swipeStatus: swipe2,
@@ -429,6 +427,15 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
         };
     });
+
+    $scope.shareShow = false;
+    $scope.share = function() {
+      $scope.shareShow = !$scope.shareShow;
+      $('.test')
+      $('.test').focus(function(){
+          $(this).select();
+      });
+    }
 
     // Create a random tile and save to database
     // Leave this alone!!!!!!!!!!!!!

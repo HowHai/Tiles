@@ -165,7 +165,10 @@ h1, h2, h3 {
         height: 50px;
         background-color: black;
         &:hover {
-
+          // background-color: white;
+          h3 {
+            // color: black;
+          }
         }
         i {
           float: left;
@@ -177,6 +180,9 @@ h1, h2, h3 {
           display: inline-block;
           &:hover, &:active {
             color: tomato !important;
+          }
+          &.liked {
+            color: tomato;
           }
         }
         h3 {
@@ -362,6 +368,7 @@ h1, h2, h3 {
     color: white;
     font-size: 3em;
     padding: 20px;
+    word-wrap: break-word;
     padding-top: 10px;
     background-color: rgba(0,0,0,0.4);
     .center-vertical {
@@ -374,6 +381,9 @@ h1, h2, h3 {
       top: 33px;
       left: 8%;
       width: 83%;
+      h3 {
+        font-size: 0.4em;
+      }
       #navi-text {
         margin-top: -54px;
         width: 100%;
@@ -403,53 +413,26 @@ h1, h2, h3 {
         position:absolute;
         bottom: 0px;
         width: 100%;
-        button {
-          &.left {
-            color: gold;
-          }
-          &.right {
-            font-weight: 300;
-            text-transform: uppercase;
-            font-size: 0.5em;
-            margin-bottom: 20px;
-            &:active, &:hover {
-              color: black;
-            }
-          }
-          &.red {
-            color: red;
-          }
-          margin:0 auto;
-          border-radius: 0;
-          background-color: rgba(0,0,0,0);
-          opacity: 0.7;
-          outline: 1px solid white;
-          font-size: 0.6em;
-          &:hover, &:active {
-            // background-color: #333;
-            // color: white;
-          }
-        }
       }
       &.top {
         position: absolute;
-        color: white;
+        color: tomato;
         top: 0px;
         left: 45%;
       }
       &.left {
-        color: white;
+        color: tomato;
         top: 45%;
         left: 10px;
       }
       &.right {
         top: 45%;
-        color: white;
+        color: tomato;
         right: 10px;
       }
       &.bottom {
         position: absolute;
-        color: white;
+        color: tomato;
         bottom: 10px;
         left: 45%;
       }
@@ -470,10 +453,45 @@ h1, h2, h3 {
   }
 
   // Prevent user from selecting text
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  // -webkit-touch-callout: none;
+  // -webkit-user-select: none;
+  // -khtml-user-select: none;
+  // -moz-user-select: none;
+  // -ms-user-select: none;
+  // user-select: none;
+
+  button {
+    // &.left {
+    //   color: gold;
+    // }
+    position:absolute;
+    bottom: 0px;
+    z-index: 9999;
+    &.share {
+      font-weight: 300;
+      text-transform: uppercase;
+      font-size: 0.5em;
+      margin-bottom: 20px;
+      a {
+        color: white;
+        &:active, &:hover {
+          color: black;
+          text-decoration: none;
+        }
+      }
+    }
+    // &.red {
+    //   color: red;
+    // }
+    margin:0 auto;
+    border-radius: 0;
+    background-color: rgba(0,0,0,0);
+    opacity: 0.7;
+    outline: 1px solid white;
+    font-size: 0.6em;
+    &:hover, &:active {
+      // background-color: #333;
+      // color: white;
+    }
+  }
 }
