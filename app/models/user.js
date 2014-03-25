@@ -41,6 +41,7 @@ var UserSchema = new Schema({
 		type: String,
 		required: true
 	},
+	favorites: [],
 	hashed_password: String,
 	salt: String,
 	providerData: {}

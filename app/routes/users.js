@@ -7,6 +7,9 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 	app.get('/users/me', users.me);
 
+	// Add favorite
+	app.put('/users/favorite', users.addFavorite);
+
 	// Setting up the users api
 	app.post('/auth/signup', users.signup);
 	app.post('/auth/signin', users.signin);

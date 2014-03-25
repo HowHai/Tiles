@@ -32,20 +32,23 @@ var io = require('socket.io').listen(server);
 server.listen(config.port);
 
 io.sockets.on('connection', function (socket) {
+  // Get everyone's current location when connected.
+  socket.broadcast.emit('needAllLocations', {data: socket.id});
+
   // Get user's current tileId
   socket.on('giveTile', function(data) {
     data.socketId = socket.id;
-    console.log(data);
+    console.log(socket);
     // Emits user's tileId and socketId to all users except sender.
     socket.broadcast.emit("takeTile", data);
   });
 
   // Get new grid from client.
   // TODO: This might not be necessary. Check!
-  socket.on('newGrid', function(data){
-    // Send it back to client to update Grid.
-    socket.emit('sendNewGrid', data);
-  });
+  // socket.on('newGrid', function(data){
+  //   // Send it back to client to update Grid.
+  //   socket.emit('sendNewGrid', data);
+  // });
 
   // Emit current user's position.
   socket.emit('currentPosition', 'this is a test, only I can see it');
@@ -54,6 +57,10 @@ io.sockets.on('connection', function (socket) {
   socket.on('sendLike', function(data) {
     console.log(data);
     io.sockets.emit('giveBackLike', data);
+  });
+
+  socket.on('disconnect', function() {
+    io.sockets.emit('user disconnected', { socketId: socket.id });
   });
 });
 

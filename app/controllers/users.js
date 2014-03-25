@@ -7,6 +7,25 @@ var mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User');
 
+// Add favorite tile.
+exports.addFavorite = function(req, res){
+// Find user and add tile to their favorite list.
+	var currentUserId = req.user._id;
+
+	if (req.user.favorites.indexOf(req.body.tileId)) {
+		User.update({_id: currentUserId}, {$push: { favorites: req.body.tileId }}, function(error, user){
+			if (error) {
+				console.log(error);
+			} else {
+				console.log(user);
+				res.json(user);
+			}
+		});
+	} else {
+		res.json(req.user);
+	}
+}
+
 /**
  * Signup
  */

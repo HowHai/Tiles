@@ -3,7 +3,7 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
-  var socket = io.connect();
+    var socket = io.connect();
 
     $scope.loadTiles = function() {
       $scope.nav_open = false;
@@ -28,8 +28,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         });
     }
 
-    // Likes testing
-
+    //
+    // Like feature
+    //
     $scope.updateLikes = function() {
 
       // Save user's likes history
@@ -64,12 +65,21 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       };
     }
 
-
-
-
-
     // endLikes
 
+    // Favorite feature
+
+    $scope.addFavorite = function() {
+      console.log("You clicked on favorite");
+
+      $http.put('/users/favorite', { tileId: $scope.tileMain._id})
+        .success(function(data){
+          $('#addFavorite').hide();
+          console.log(data);
+        });
+    }
+
+    // END FAVORITE
 
     // Testing Tile categories and movement
     // $scope.allTiles;
@@ -97,23 +107,30 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         for(var i = 0; i < $scope.allTiles.length; i++){
           var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
             if(eArr._id === data.tileId){
-              $scope.allTiles[i][indexArr].location.push(data.socketId);
-              console.log($scope.allTiles);
-              console.log("i ran!");
+              $scope.$apply(function() {
+                $scope.allTiles[i][indexArr].location.push(data.socketId);
+              });
             }
           });
         }
         // Send new data back to server.
-        socket.emit('newGrid', $scope.allTiles);
+        // socket.emit('newGrid', $scope.allTiles);
       });
 
       // Might not even need this... can probably change it in 'takeTile' without setTimeout..
-      socket.on('sendNewGrid', function(data) {
-        setTimeout(function() {
-          console.log("Thisran");
-          $scope.changeAll(data);
-        }, 50);
-      });
+      // Deleted... not sure... save this for now
+      // socket.on('sendNewGrid', function(data) {
+      //   setTimeout(function() {
+      //     console.log("Thisran");
+      //     $scope.changeAll(data);
+      //   }, 50);
+      // });
+
+      // $scope.changeAll = function(data){
+      //   $scope.$apply(function() {
+      //     $scope.allTiles = data;
+      //   });
+      // };
 
       // Get test emit to current user and display in browser's console.
       socket.on('currentPosition', function(data) {
@@ -123,20 +140,34 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       // Listen for likes
       socket.on('giveBackLike', function(data){
         $scope.$apply(function() {
-          console.log(data);
           data.likes = data.likes + 1;
-          console.log(data);
           $scope.tileMain = data;
         });
       });
+
+
+      // Listen for disconnect?
+      socket.on('user disconnected', function(data){
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr.location.indexOf(data.socketId) != -1){
+              var populatedIndex = eArr.location.indexOf(data.socketId);
+
+              $scope.$apply(function() {
+                $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
+              });
+            };
+          });
+        };
+      });
+
+      // Give all location
+      socket.on('needAllLocations', function(data){
+        console.log(data);
+      })
     });
     // ENDsocket
 
-    $scope.changeAll = function(data){
-      $scope.$apply(function() {
-        $scope.allTiles = data;
-      });
-    };
 
 
     // $http.get('/tiles/categories', null)
@@ -263,8 +294,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             var sharedTileCatPosition = Math.round((sharedTileArray.length / 2) - 1);
             var sharedTilePosition = Math.round((sharedTileArray[0].length / 2));
 
-            categoryPosition = sharedTileCatPosition;
-            tilePosition = sharedTilePosition;
+            var categoryPosition = sharedTileCatPosition;
+            var tilePosition = sharedTilePosition;
 
             console.log(categoryPosition, tilePosition);
 

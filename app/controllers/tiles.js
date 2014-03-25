@@ -48,6 +48,7 @@ exports.update = function(req, res){
 // GET shared tile, placed in center of other random tiles
 exports.shared = function(req, res){
   var sharedTileId = req.params.tileId;
+  console.log("shared: " + req.params.tileId);
 
   Tile.findById(sharedTileId, function(error, sharedTile) {
     if(error)
