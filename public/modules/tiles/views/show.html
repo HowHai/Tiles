@@ -29,6 +29,7 @@
         <div class="tile-desc">
           <div id="white-fade"></div>
           <p>{{tileMain.content}}</p>
+          <!-- <button ng-click="createTile()">CLICK ME</button> -->
         </div>
         <div id="buyMain">
           <h3>BUY NOW</h3>
@@ -61,8 +62,19 @@
       <i class="fa fa-angle-up kiss top"></i>
       <i class="fa fa-angle-left kiss left"></i>
         <div id ="navi-content">
-          <div id="navi-text">
+          <div ng-show="" id="navi-text">
             <h1>welcome to <br><br><span>gloss</span></h1>
+          </div>
+          <div id="radar">
+            <div id="rad"></div>
+            <div class="centerDot"></div>
+
+            <div ng-repeat="xcord in xcords">
+              <div id="{{xcord+''+ycord}}" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
+            </div>
+            <!-- <div class="obj" data-x="130" data-y="60"></div> -->
+
+            <!-- <div class="obj" data-x="70" data-y="35"></div> -->
           </div>
           <div class="kiss buttons">
             <button class="btn left">

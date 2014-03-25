@@ -46,13 +46,19 @@ io.sockets.on('connection', function (socket) {
 
   // Get new grid from client.
   // TODO: This might not be necessary. Check!
-  socket.on('newGrid', function(data){
-    // Send it back to client to update Grid.
-    socket.emit('sendNewGrid', data);
-  });
+  // socket.on('newGrid', function(data){
+  //   // Send it back to client to update Grid.
+  //   socket.emit('sendNewGrid', data);
+  // });
 
   // Emit current user's position.
   socket.emit('currentPosition', 'this is a test, only I can see it');
+
+  // On disconnect, remove user from location.
+  // socket.on('disconnect', {socketId: socket.id});
+  // socket.on('disconnect', function() {
+    // socket.broadcast.emit('removeOnDisconnect', {socketId: socket.id});
+  // });
 });
 
 // ENDsocket
