@@ -6,6 +6,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     var likeCheck;
     var socket = io.connect();
 
+    // $(".navbar-fixed-top").hide();
+
     $scope.loadTiles = function() {
       $scope.nav_open = false;
       $http.get('/tiles/categories', null)
@@ -128,9 +130,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           });
         }
-        $scope.$apply(function(){
-          showOccupied();        
-        });
+        showOccupied();        
       });
 
 
@@ -160,6 +160,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             };
           });
         };
+        showOccupied();
       });
 
       // Give all location

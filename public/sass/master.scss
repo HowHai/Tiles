@@ -35,9 +35,9 @@ h1, h2, h3 {
 }
 
 .content {
-  margin-top: 50px;
-  height: 90%;
-  height: calc(100% - 50px);
+  // margin-top: 50px;
+  height: 100%;
+  // height: calc(100% - 50px);
 }
 
 .row {
@@ -56,6 +56,10 @@ h1, h2, h3 {
 
 .navbar-header {
   background-color: white;
+}
+.navbar-fixed-top{
+  transition: 1s;
+  display: none;
 }
 
 .navbar-inverse {
@@ -100,8 +104,8 @@ h1, h2, h3 {
 // Show Tile View
 
 #showTile {
-  height: 90%;
-  height: calc(100% - 50px);
+  height: 100%;
+  // height: calc(100% - 50px);
   overflow: hidden;
   position: absolute;
   text-align: center;
@@ -410,8 +414,8 @@ h1, h2, h3 {
     transition: 0.9s;
     position: fixed;
     z-index: 10;
-    height: 90%;
-    height: calc(100% - 50px);
+    height: 100%;
+    // height: calc(100% - 50px);
     width: 100%;
     color: white;
     font-size: 3em;
@@ -422,7 +426,28 @@ h1, h2, h3 {
     .center-vertical {
       padding-top: 47%;
     }
+    #nav-header{
+      position:absolute;
+      top: 0px;
+      height: 50px;
+      font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+      color: rgba(255,255,255,0.8);
+      text-align: left;
+      font-size: 0.7em;
+      font-weight: 400;
+      padding-top: 2px;
+      button{
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        height: 30px;
+        width: 40px;
+        background: none;
+        border: 1px solid rgba(255,255,255,0.8);
+      }
+    }
     #navi-content {
+      margin-top: 50px;
       position: absolute;
       z-index: 10;
       height: 83%;
@@ -437,6 +462,7 @@ h1, h2, h3 {
         width: 100%;
         height: 100%;
         display: table;
+        position: absolute;
         h1 {
           color: white;
           opacity: 0.8;
