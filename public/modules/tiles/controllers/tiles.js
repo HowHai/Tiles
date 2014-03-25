@@ -244,8 +244,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     };
 
     $scope.closeNav = function() {
-      if (!$(".share").is(":focus")) {
-        console.log("wahoo!");
+      if (!$("button").is(":focus")) {
         $("#tileMain").removeClass("nav-open").addClass("nav-close");
         $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
         setTimeout(function(){
@@ -431,14 +430,30 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         };
     });
 
-    $scope.shareShow = false;
-    $scope.share = function() {
-      $scope.shareShow = !$scope.shareShow;
-      $('.test')
-      $('.test').focus(function(){
-          $(this).select();
-      });
-    }
+    // Functions to select text when share button is clicked
+    jQuery.fn.selectText = function(){
+        var doc = document
+            , element = this[0]
+            , range, selection
+        ;
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(element);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(function() {
+        $('.buttons').click(function() {
+            $(this).selectText();
+        });
+    });
 
     // Create a random tile and save to database
     // Leave this alone!!!!!!!!!!!!!

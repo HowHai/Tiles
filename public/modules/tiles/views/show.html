@@ -40,7 +40,7 @@
       </div>
       <div id="buyMain">
         <i class="fa fa-heart" ng-class="{'liked': liked}" ng-click="liked = !liked"></i>
-        <h3>BUY NOW</h3>
+        <h3 id="buy" ng-click="test()">BUY NOW</h3>
       </div>
     </div>
 
@@ -78,17 +78,9 @@
             <h1>welcome to<br><br><span>gloss</span></h1>
           </div>
           <div class="kiss buttons">
-            <!-- <button class="btn left"> -->
-              <!-- <i class="fa fa-star"></i> -->
-            <!-- </button> -->
-
             <!-- <a href="/#!/tile/shared/{{tileMain._id}}"></a> -->
-            <button class="btn share" ng-click="share()">Share</button>
-            <h3 class="test" ng-show="shareShow">http://localhost:3000/#!tile/shared/{{tileMain._id}}</h3>
-
-            <!-- <button class="btn red"> -->
-              <!-- <i class="fa fa-frown-o"></i> -->
-            <!-- </button> -->
+            <h3 ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3>
+            <button class="btn share" ng-click="share = !share">Share</button>
           </div>
         </div>
       <i class="fa fa-angle-right kiss right"></i>
