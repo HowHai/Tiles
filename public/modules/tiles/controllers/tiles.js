@@ -201,7 +201,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     var cookieCheck = function() {
       likeCheck = JSON.parse($cookies.likes);
-      console.log($scope.tileMain._id)
+      // console.log($scope.tileMain._id)
       
       for (var i = 0; i < likeCheck.length; i++) {
         if (likeCheck[i] == $scope.tileMain._id) {
