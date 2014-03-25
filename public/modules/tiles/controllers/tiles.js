@@ -28,8 +28,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         });
     }
 
-    // Likes testing
-
+    //
+    // Like feature
+    //
     $scope.updateLikes = function() {
 
       // Save user's likes history
@@ -64,12 +65,21 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       };
     }
 
-
-
-
-
     // endLikes
 
+    // Favorite feature
+
+    $scope.addFavorite = function() {
+      console.log("You clicked on favorite");
+
+      $http.put('/users/favorite', { tileId: $scope.tileMain._id})
+        .success(function(data){
+          $('#addFavorite').hide();
+          console.log(data);
+        });
+    }
+
+    // END FAVORITE
 
     // Testing Tile categories and movement
     // $scope.allTiles;

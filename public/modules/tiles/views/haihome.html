@@ -108,9 +108,11 @@
   <!-- Favorites -->
 
   <br>
-  <button ng-click="updateLikes()">Favorite</button>
+  <button id="addFavorite" ng-click="addFavorite()">Favoritej</button>
 
   <!-- END FAVORITES -->
+
+
   <div ng-controller="CommentsCtrl">
     <form class="form-horizontal" data-ng-submit="create(tileMain._id)">
       <fieldset>
