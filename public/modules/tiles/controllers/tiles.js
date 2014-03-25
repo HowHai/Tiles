@@ -3,6 +3,8 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
+    // $('header').css("display","none");
+
     $scope.loadTiles = function() {
       $scope.nav_open = false;
       $http.get('/tiles/categories', null)
