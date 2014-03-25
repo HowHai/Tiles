@@ -3,9 +3,8 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
-
     var socket = io.connect();
-
+    // $('header').css("display","none");
 
     $scope.loadTiles = function() {
       $scope.nav_open = false;
@@ -13,7 +12,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         .success(function(response) {
 
           $scope.allTiles = response;
-          $scope.currentCategory = 1;
+          $scope.currentCategory = 4;
           $scope.hPosition = 9;
           console.log(response);
 
@@ -134,7 +133,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
       // Get test emit to current user and display in browser's console.
       socket.on('currentPosition', function(data) {
-        console.log(data);
+        // console.log(data);
       });
 
       // Listen for likes
@@ -270,6 +269,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
             $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
             $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
+
+            // Send current user's tileId to server.
+            socket.emit('giveTile', { tileId: $scope.tileMain._id})
           });
 
       } else {
@@ -322,26 +324,26 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     };
 
     $scope.closeNav = function() {
-      $("#tileMain").removeClass("nav-open").addClass("nav-close");
-      $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
-
-      setTimeout(function(){
-        $("#navigation-instructions").css("display", "none");
-        $("#tileMain").removeClass("nav-close");
-      },500);
-      $scope.nav_open = false;
+      if (!$("button").is(":focus")) {
+        $scope.share = false;
+        $("#tileMain").removeClass("nav-open").addClass("nav-close");
+        $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
+        setTimeout(function(){
+          $("#navigation-instructions").css("display", "none");
+          $("#tileMain").removeClass("nav-close");
+        },500);
+        $scope.nav_open = false;
+      };
     };
-
-
 
     $(function() {
       //Main SWIPE FUNCTION
-      $("#tileMain").swipe( {swipeStatus: swipe2,
+      $("#tile-content").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
           var colorMain = $("#tileMain").css("background-color");
           var colorOffset = $("#tileLeft").css("background-color");
-          var windowHeight = document.documentElement.clientHeight;
+          var windowHeight = document.documentElement.clientHeight - 100;
           var windowWidth = document.documentElement.clientWidth;
 
           if(direction=="right" && distance > (windowWidth)*0.45){
@@ -376,10 +378,16 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#tileRight").css({"background-color":colorMain,"color":colorOffset});
         $("#tileUp").css({"background-color":colorMain,"color":colorOffset});
         $("#tileDown").css({"background-color":colorMain,"color":colorOffset});
+
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
+        $("#buyMain i").css("color", colorOffset);
+        // $("#buyMain i").hover(function(){this.css("color", "tomato")});
+
         $(".buyNotMain").css("background-color", colorOffset);
         $(".buyNotMain h3").css("color", colorMain);
+        $(".buyNotMain i").css("color", colorMain);
+        // $(".buyNotMain i").hover(function(){this.css("color", "tomato")});
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
@@ -392,6 +400,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
+        $("#buyMain i").css("color", colorOffset);
+        // $("#buyMain i").hover(function(){this.css("color", "tomato")});
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
@@ -400,6 +410,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $("#tileMain").removeClass("hide");
           $(".buyNotMain").css("background-color", colorOffset);
           $(".buyNotMain h3").css("color", colorMain);
+          $(".buyNotMain i").css("color", colorMain);
+          // $(".buyNotMain i").hover(function(){this.css("color", "tomato")});
           switchColors(colorMain,colorOffset);
         },400);
 
@@ -491,6 +503,31 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           }
         };
+    });
+
+    // Functions to select text when share button is clicked
+    jQuery.fn.selectText = function(){
+        var doc = document
+            , element = this[0]
+            , range, selection
+        ;
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(element);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(function() {
+        $('.buttons').click(function() {
+            $('#share-link').selectText();
+        });
     });
 
     // Create a random tile and save to database

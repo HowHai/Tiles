@@ -64,13 +64,7 @@ h1, h2, h3 {
   position: absolute;
   text-align: center;
   max-width: 680px;
-  max-height: 960px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
+  max-height: 960px; }
   #showTile img {
     width: 100%;
     height: 213px; }
@@ -111,23 +105,46 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: black; }
+      #showTile #loadedTiles #tileMain #buyMain i {
+        float: left;
+        color: white;
+        line-height: 50px;
+        margin-top: 1px;
+        padding: 0 20px;
+        font-size: 1.5em;
+        display: inline-block; }
+        #showTile #loadedTiles #tileMain #buyMain i:hover, #showTile #loadedTiles #tileMain #buyMain i:active {
+          color: tomato !important; }
+        #showTile #loadedTiles #tileMain #buyMain i.liked {
+          color: tomato; }
+      #showTile #loadedTiles #tileMain #buyMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: white;
+        display: block; }
       #showTile #loadedTiles #tileMain #buyMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: white; }
+        margin-left: -60px;
+        color: white;
+        display: inline-block; }
     #showTile #loadedTiles #tileMain.hide {
       opacity: 0; }
     #showTile #loadedTiles #tileMain.fader {
       opacity: 1; }
     #showTile #loadedTiles #tileMain.nav-open {
-      transition: 0.4s;
+      transition: 0.25s;
       opacity: 0.3;
       -webkit-filter: blur(5px);
-      filter: blur(5px); }
-      #showTile #loadedTiles #tileMain.nav-open .tile-info {
-        transition: 0.7s; }
+      -moz-filter: blur(5px);
+      -ms-filter: blur(5px);
+      -o-filter: blur(5px);
+      filter: blur(5px);
+      filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='5'); }
     #showTile #loadedTiles #tileMain.nav-close {
       transition: 0.25s;
       opacity: 1; }
@@ -148,12 +165,29 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: white; }
+      #showTile #loadedTiles #tileUp .buyNotMain i {
+        float: left;
+        color: black;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
+      #showTile #loadedTiles #tileUp .buyNotMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: black;
+        display: block; }
       #showTile #loadedTiles #tileUp .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: black; }
+        margin-left: -40px;
+        color: black;
+        display: inline-block; }
   #showTile #loadedTiles #tileDown {
     bottom: -108%;
     left: 0px;
@@ -166,12 +200,29 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: white; }
+      #showTile #loadedTiles #tileDown .buyNotMain i {
+        float: left;
+        color: black;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
+      #showTile #loadedTiles #tileDown .buyNotMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: black;
+        display: block; }
       #showTile #loadedTiles #tileDown .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: black; }
+        margin-left: -40px;
+        color: black;
+        display: inline-block; }
   #showTile #loadedTiles #tileRight {
     color: white;
     left: 108%; }
@@ -183,12 +234,29 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: white; }
+      #showTile #loadedTiles #tileRight .buyNotMain i {
+        float: left;
+        color: black;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
+      #showTile #loadedTiles #tileRight .buyNotMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: black;
+        display: block; }
       #showTile #loadedTiles #tileRight .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: black; }
+        margin-left: -40px;
+        color: black;
+        display: inline-block; }
   #showTile #loadedTiles #tileLeft {
     color: white;
     left: -108%; }
@@ -200,12 +268,29 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: white; }
+      #showTile #loadedTiles #tileLeft .buyNotMain i {
+        float: left;
+        color: black;
+        line-height: 50px;
+        margin-top: 1px;
+        margin-left: 20px;
+        font-size: 1.5em;
+        display: inline-block; }
+      #showTile #loadedTiles #tileLeft .buyNotMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: black;
+        display: block; }
       #showTile #loadedTiles #tileLeft .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
         margin: 0;
-        color: black; }
+        margin-left: -40px;
+        color: black;
+        display: inline-block; }
   #showTile #navigation-instructions {
     display: none;
     opacity: 0;
@@ -215,9 +300,10 @@ h1, h2, h3 {
     height: 90%;
     height: calc(100% - 50px);
     width: 100%;
-    color: #222222;
+    color: white;
     font-size: 3em;
     padding: 20px;
+    word-wrap: break-word;
     padding-top: 10px;
     background-color: rgba(0, 0, 0, 0.4); }
     #showTile #navigation-instructions .center-vertical {
@@ -229,6 +315,8 @@ h1, h2, h3 {
       top: 33px;
       left: 8%;
       width: 83%; }
+      #showTile #navigation-instructions #navi-content h3 {
+        font-size: 0.4em; }
       #showTile #navigation-instructions #navi-content #navi-text {
         margin-top: -54px;
         width: 100%;
@@ -236,10 +324,11 @@ h1, h2, h3 {
         display: table; }
         #showTile #navigation-instructions #navi-content #navi-text h1 {
           color: white;
-          opacity: 0.5;
+          opacity: 0.8;
           display: table-cell;
           vertical-align: middle;
           font-size: 0.6em;
+          letter-spacing: 4px;
           font-weight: 300;
           font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif; }
           #showTile #navigation-instructions #navi-content #navi-text h1 span {
@@ -247,6 +336,70 @@ h1, h2, h3 {
             font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
             font-size: 3em;
             margin-top: 5px; }
+      #showTile #navigation-instructions #navi-content #radar {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        border-radius: 160px;
+        border: 1px solid white;
+        overflow: hidden;
+        margin: 0 auto; }
+        #showTile #navigation-instructions #navi-content #radar #rad {
+          position: absolute;
+          width: 160px;
+          height: 160px;
+          background: url(http://i.stack.imgur.com/fbgUD.png);
+          background-size: 160px 160px; }
+        #showTile #navigation-instructions #navi-content #radar .centerDot {
+          background: white;
+          position: absolute;
+          border-radius: 8px;
+          width: 6px;
+          height: 6px;
+          top: 80.5px;
+          left: 80.5px;
+          margin-top: -3px;
+          margin-left: -3px;
+          box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+          opacity: 1; }
+        #showTile #navigation-instructions #navi-content #radar .obj {
+          background: white;
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          margin-top: -2px;
+          margin-left: -2px;
+          box-shadow: 0 0 10px 5px rgba(100, 255, 0, 0.5);
+          opacity: 1; }
+          #showTile #navigation-instructions #navi-content #radar .obj.multi-user {
+            background: red;
+            border-radius: 10px;
+            width: 10px;
+            height: 10px;
+            margin-top: -5px;
+            margin-left: -5px; }
+          #showTile #navigation-instructions #navi-content #radar .obj.heart {
+            background: none;
+            box-shadow: none;
+            background-image: url(../img/brand/heart.svg);
+            height: 10px;
+            width: 10px;
+            margin-top: -5px;
+            margin-left: -5px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat; }
+          #showTile #navigation-instructions #navi-content #radar .obj.prize {
+            background: none;
+            box-shadow: none;
+            background-image: url(../img/brand/moneybag.svg);
+            height: 14px;
+            width: 14px;
+            margin-top: -7px;
+            margin-left: -7px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat; }
     #showTile #navigation-instructions .kiss {
       position: fixed; }
       #showTile #navigation-instructions .kiss.buttons {
@@ -257,32 +410,37 @@ h1, h2, h3 {
           margin: 0 auto;
           border-radius: 0;
           background-color: rgba(0, 0, 0, 0);
-          outline: 1px solid #aaaaaa;
+          opacity: 0.7;
+          outline: 1px solid white;
           font-size: 0.6em; }
-          #showTile #navigation-instructions .kiss.buttons button.left {
-            color: gold; }
-          #showTile #navigation-instructions .kiss.buttons button.right {
+          #showTile #navigation-instructions .kiss.buttons button.share {
             font-weight: 300;
             text-transform: uppercase;
-            right: 10px;
             font-size: 0.5em;
-            height: 49px; }
-            #showTile #navigation-instructions .kiss.buttons button.right:active, #showTile #navigation-instructions .kiss.buttons button.right:hover {
-              color: black; }
-          #showTile #navigation-instructions .kiss.buttons button.red {
-            color: red; }
+            margin-bottom: 20px; }
+            #showTile #navigation-instructions .kiss.buttons button.share a {
+              color: white; }
+              #showTile #navigation-instructions .kiss.buttons button.share a:active, #showTile #navigation-instructions .kiss.buttons button.share a:hover {
+                color: black;
+                text-decoration: none; }
+        #showTile #navigation-instructions .kiss.buttons #share-link {
+          font-size: 0.34em; }
       #showTile #navigation-instructions .kiss.top {
         position: absolute;
+        color: tomato;
         top: 0px;
         left: 45%; }
       #showTile #navigation-instructions .kiss.left {
+        color: tomato;
         top: 45%;
         left: 10px; }
       #showTile #navigation-instructions .kiss.right {
         top: 45%;
+        color: tomato;
         right: 10px; }
       #showTile #navigation-instructions .kiss.bottom {
         position: absolute;
+        color: tomato;
         bottom: 10px;
         left: 45%; }
   #showTile .show {
@@ -290,71 +448,3 @@ h1, h2, h3 {
     z-index: 100; }
   #showTile .slow {
     transition: 0.35s; }
-
-#radar {
-  position: relative;
-  width: 160px;
-  height: 160px;
-  border-radius: 160px;
-  border: 1px solid white;
-  overflow: hidden;
-  margin: 0 auto; }
-
-#rad {
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  background: url(http://i.stack.imgur.com/fbgUD.png);
-  background-size: 160px 160px; }
-
-.centerDot {
-  background: white;
-  position: absolute;
-  border-radius: 8px;
-  width: 6px;
-  height: 6px;
-  top: 80.5px;
-  left: 80.5px;
-  margin-top: -3px;
-  margin-left: -3px;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
-  opacity: 1; }
-
-.obj {
-  background: white;
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  margin-top: -2px;
-  margin-left: -2px;
-  box-shadow: 0 0 10px 5px rgba(100, 255, 0, 0.5);
-  opacity: 1; }
-  .obj.multi-user {
-    background: red;
-    border-radius: 10px;
-    width: 10px;
-    height: 10px;
-    margin-top: -5px;
-    margin-left: -5px; }
-  .obj.heart {
-    background: none;
-    box-shadow: none;
-    background-image: url(../img/brand/heart.svg);
-    height: 10px;
-    width: 10px;
-    margin-top: -5px;
-    margin-left: -5px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat; }
-  .obj.prize {
-    background: none;
-    box-shadow: none;
-    background-image: url(../img/brand/moneybag.svg);
-    height: 14px;
-    width: 14px;
-    margin-top: -7px;
-    margin-left: -7px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat; }
