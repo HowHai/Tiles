@@ -3,6 +3,8 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
+  var socket = io.connect();
+
     $scope.loadTiles = function() {
       $scope.nav_open = false;
       $http.get('/tiles/categories', null)
@@ -48,6 +50,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
         }
       } else {
+
         console.log("You voted!");
         likesArray.push($scope.tileMain._id);
         $cookies.likes = angular.toJson(likesArray);
@@ -55,6 +58,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $http.put('/tiles', { tileId: $scope.tileMain._id })
           .success(function(data){
           });
+
+        socket.emit('sendLike', $scope.tileMain);
         alertify.success("Liked!");
       };
     }
@@ -74,7 +79,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
 
     // Socket.io testing
-    var socket = io.connect();
     socket.on('connect', function() {
       socket.on("takeTile", function(data){
         console.log(data);
@@ -119,7 +123,18 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       socket.on('currentPosition', function(data) {
         console.log(data);
       });
+
+      // Listen for likes
+      socket.on('giveBackLike', function(data){
+        $scope.$apply(function() {
+          console.log(data);
+          data.likes = data.likes + 1;
+          console.log(data);
+          $scope.tileMain = data;
+        });
+      });
     });
+    // ENDsocket
 
     $scope.changeAll = function(data){
       $scope.$apply(function() {
@@ -127,7 +142,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       });
     };
 
-    // ENDsocket
 
     // $http.get('/tiles/categories', null)
     //   .success(function(response) {

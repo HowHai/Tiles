@@ -49,6 +49,12 @@ io.sockets.on('connection', function (socket) {
 
   // Emit current user's position.
   socket.emit('currentPosition', 'this is a test, only I can see it');
+
+  // Response to sendVote
+  socket.on('sendLike', function(data) {
+    console.log(data);
+    io.sockets.emit('giveBackLike', data);
+  });
 });
 
 // ENDsocket
