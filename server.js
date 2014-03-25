@@ -32,12 +32,15 @@ var io = require('socket.io').listen(server);
 server.listen(config.port);
 
 io.sockets.on('connection', function (socket) {
+  // Send an 'I am new and I want your location on connect'
+  socket.broadcast.emit('iAmNew', {socketId: socket.id});
+
   // Send current user's location to new user.
   socket.on('sendLocationToNewUser', function(data){
     var clients = io.sockets.clients().length;
     console.log("This ran!");
     console.log(data.socketId);
-    io.sockets.socket(data.socketId).emit("newUserGetsLocation", {clientsCount: clients});
+    io.sockets.socket(data.socketId).emit("newUserGetsLocation", {clientsCount: clients, tileId: data.tileId, socketId: socket.id});
   });
 
   // Get user's current tileId
