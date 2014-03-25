@@ -25,6 +25,17 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tileMain = $scope.allTiles[3][11];
           // Send current user's tileId to server.
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
+
+          var likeCheck = JSON.parse($cookies.likes);
+          console.log($scope.tileMain._id)
+     
+          for (var i = 0; i < likeCheck.length; i++) {
+            if (likeCheck[i] == $scope.tileMain._id) {
+            $scope.votedOnTile = true;
+        }
+      }
+
+$scope.votedOnTile = true;
         });
     }
 
@@ -62,6 +73,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
         socket.emit('sendLike', $scope.tileMain);
         toastr.success("Liked!");
+        $scope.votedOnTile = true;
       };
     }
 

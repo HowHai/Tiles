@@ -31,6 +31,11 @@
           <p>{{tileMain.content}}</p>
         </div>
         <div id="buyMain">
+          <!-- ADD LIKES-->
+          <button class="btn left" style="float:left" ng-class="votedOnTile? 'btn-left' : 'btn-success'" ng-disabled="votedOnTile" ng-click="updateLikes()">
+            <i class="fa fa-heart"> {{tileMain.likes}}</i>
+          </button>
+          <!-- END -->
           <h3>BUY NOW</h3>
         </div>
       </div>
