@@ -125,9 +125,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           });
         }
-        $scope.$apply(function(){
-          showOccupied();        
-        });
+        showOccupied();        
       });
 
 
@@ -157,6 +155,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             };
           });
         };
+        showOccupied();
       });
 
       // Give all location
@@ -363,7 +362,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             if($scope.nav_open == false){
               $("#tileMain").addClass("nav-open").removeClass("nav-close");
               $("#navigation-instructions").css({"transition":"0,5s","display":"block","opacity":"1"});
-              showOccupied();
+              // showOccupied();
               $scope.nav_open = true;
             }
           }

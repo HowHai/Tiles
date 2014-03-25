@@ -321,7 +321,8 @@ h1, h2, h3 {
         margin-top: -54px;
         width: 100%;
         height: 100%;
-        display: table; }
+        display: table;
+        position: absolute; }
         #showTile #navigation-instructions #navi-content #navi-text h1 {
           color: white;
           opacity: 0.8;
