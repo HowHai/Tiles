@@ -43,16 +43,8 @@ io.sockets.on('connection', function (socket) {
     socket.broadcast.emit("takeTile", data);
   });
 
-  // Get new grid from client.
-  // TODO: This might not be necessary. Check!
-  // socket.on('newGrid', function(data){
-  //   // Send it back to client to update Grid.
-  //   socket.emit('sendNewGrid', data);
-  // });
-
   // Emit current user's position.
   socket.emit('currentPosition', 'this is a test, only I can see it');
-
 
   // Response to sendVote
   socket.on('sendLike', function(data) {
