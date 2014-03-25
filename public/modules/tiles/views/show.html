@@ -40,14 +40,16 @@
           </div>
         </div>
       </div>
+      <!-- Front end likes testing -->
       <div id="buyMain">
-        <!-- <button class="btn left" style="float:left" ng-class="votedOnTile? 'btn-left' : 'btn-success'" ng-disabled="votedOnTile" ng-click="updateLikes()"> -->
-          <!-- <i class="fa fa-heart"> {{tileMain.likes}}</i> -->
-        <!-- </button> -->
-        <i class="fa fa-heart" ng-class="{'liked': liked}" ng-click="liked = !liked"></i>
-        <span>12</span>
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
+
+        <span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+
+        <i class="fa fa-star" ng-class="{'liked': favoriteTile}" ng-click="addFavorite()"></i>
       </div>
+      <!-- End front end likes -->
     </div>
 
     <div class="tile" id="tileRight">

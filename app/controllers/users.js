@@ -24,6 +24,12 @@ exports.addFavorite = function(req, res){
 	} else {
 		res.json(req.user);
 	}
+
+	if (req.body.removeFavorite){
+		User.update({_id: currentUserId}, {$pull: {favorites: req.body.tileId}}, function(error, user){
+			res.json(user);
+		})
+	}
 }
 
 /**
