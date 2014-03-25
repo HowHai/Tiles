@@ -105,8 +105,14 @@
   <div>Likes: {{tileMain.likes}}</div>
   <!-- END VOTING -->
 
+  <!-- Favorites -->
+
+  <br>
+  <button ng-click="updateLikes()">Favorite</button>
+
+  <!-- END FAVORITES -->
   <div ng-controller="CommentsCtrl">
-    <form class="form-horizontal" data-ng-submit="create(singleTile._id)">
+    <form class="form-horizontal" data-ng-submit="create(tileMain._id)">
       <fieldset>
         <div class="form-group">
           <label class="control-label" for="content">Content</label>
@@ -120,7 +126,7 @@
       </fieldset>
     </form>
 
-    <div ng-repeat="comment in singleTile.comments">
+    <div ng-repeat="comment in tileMain.comments">
       <li>Content: {{comment.content}}</li>
       <li>User: {{comment.user.displayName}}</li>
     </div>
