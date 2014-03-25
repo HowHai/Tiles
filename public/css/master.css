@@ -84,6 +84,17 @@ h1, h2, h3 {
     position: absolute;
     background-color: black;
     overflow: hidden; }
+    #showTile #loadedTiles .tile .brand {
+      position: absolute;
+      top: 0px;
+      left: 10px;
+      height: 50px;
+      font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: left;
+      font-size: 1.5em;
+      font-weight: 300;
+      padding-top: 2px; }
   #showTile #loadedTiles .tile-info {
     padding: 15px 12px;
     overflow: hidden; }
@@ -322,7 +333,7 @@ h1, h2, h3 {
       color: rgba(255, 255, 255, 0.8);
       text-align: left;
       font-size: 0.7em;
-      font-weight: 400;
+      font-weight: 300;
       padding-top: 2px; }
       #showTile #navigation-instructions #nav-header button {
         position: fixed;
@@ -331,7 +342,11 @@ h1, h2, h3 {
         height: 30px;
         width: 40px;
         background: none;
-        border: 1px solid rgba(255, 255, 255, 0.8); }
+        border: none;
+        background-image: url(../img/brand/list.svg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat; }
     #showTile #navigation-instructions #navi-content {
       margin-top: 50px;
       position: absolute;
@@ -430,7 +445,7 @@ h1, h2, h3 {
       position: fixed; }
       #showTile #navigation-instructions .kiss.buttons {
         position: absolute;
-        bottom: 0px;
+        bottom: 15px;
         width: 100%; }
         #showTile #navigation-instructions .kiss.buttons button {
           margin: 0 auto;
@@ -443,7 +458,7 @@ h1, h2, h3 {
             font-weight: 300;
             text-transform: uppercase;
             font-size: 0.5em;
-            margin-bottom: 20px; }
+            margin-bottom: 30px; }
             #showTile #navigation-instructions .kiss.buttons button.share a {
               color: white; }
               #showTile #navigation-instructions .kiss.buttons button.share a:active, #showTile #navigation-instructions .kiss.buttons button.share a:hover {
