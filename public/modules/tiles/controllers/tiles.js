@@ -85,13 +85,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         // Find tile and remove current_user.
         for(var i = 0; i < $scope.allTiles.length; i++){
           var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-            console.log(eArr.location.indexOf(data.socketId));
             if(eArr.location.indexOf(data.socketId) != -1){
               var populatedIndex = eArr.location.indexOf(data.socketId);
 
-              console.log("Deleted!");
               $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
-              console.log($scope.allTiles);
             }
           });
         }
@@ -106,7 +103,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           });
         }
-        console.log($scope.allTiles);
         // Send new data back to server.
         socket.emit('newGrid', $scope.allTiles);
       });
