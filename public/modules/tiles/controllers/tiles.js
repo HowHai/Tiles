@@ -352,7 +352,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $(function() {
       //Main SWIPE FUNCTION
-      $("#showTile").swipe( {swipeStatus: swipe2,
+      $(".swipeable").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
           var colorMain = $("#tileMain").css("background-color");

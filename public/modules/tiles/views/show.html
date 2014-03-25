@@ -32,14 +32,16 @@
     </div>
 
     <div class="tile" id="tileMain">
-      <div id="tile-content">
-        <div class="brand">gloss</div>
-        <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Splash">
-        <div class="tile-info">
-          <h1 class="tile-title">{{tileMain.name}}</h1>
-          <div class="tile-desc">
-            <div id="white-fade"></div>
-            <p>{{tileMain.content}}</p>
+      <div class="swipeable">
+        <div id="tile-content">
+          <div class="brand">gloss</div>
+          <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Splash">
+          <div class="tile-info">
+            <h1 class="tile-title">{{tileMain.name}}</h1>
+            <div class="tile-desc">
+              <div id="white-fade"></div>
+              <p>{{tileMain.content}}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +82,7 @@
 
   </div>
 
-  <div id="navigation-instructions" ng-click="closeNav()">
+  <div id="navigation-instructions" class="swipeable" ng-click="closeNav()">
       <div id="nav-header">gloss
         <button></button>
       </div>
