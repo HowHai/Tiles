@@ -20,10 +20,51 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
 
+          $scope.tileMain = $scope.allTiles[3][11];
           // Send current user's tileId to server.
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
         });
     }
+
+    // Likes testing
+
+    $scope.updateLikes = function() {
+
+      // Save user's likes history
+      var likesArray;
+      if ($cookies.likes) {
+        likesArray = JSON.parse($cookies.likes);
+        console.log("created");
+      } else {
+        likesArray = [];
+        console.log('likesss');
+      }
+
+      if (likesArray.length > 0) {
+        for (var i = 0; i < likesArray.length; i++) {
+          if (likesArray[i] == $scope.tileMain._id){
+            alertify.error(" You've already liked this tile");
+            console.log("Already Voted");
+          }
+        }
+      } else {
+        console.log("You voted!");
+        likesArray.push($scope.tileMain._id);
+        $cookies.likes = angular.toJson(likesArray);
+
+        $http.put('/tiles', { tileId: $scope.tileMain._id })
+          .success(function(data){
+          });
+        alertify.success("Liked!");
+      };
+    }
+
+
+
+
+
+    // endLikes
+
 
     // Testing Tile categories and movement
     // $scope.allTiles;

@@ -6,6 +6,9 @@ module.exports = function(app) {
   // Get a list of all tiles
   app.get('/tiles', tiles.list);
 
+  // Update tile's likes count.
+  app.put('/tiles', tiles.update);
+
   // GET shared tile, placed in center of other random tiles
   app.get('/tile/shared/:tileId', tiles.shared);
 

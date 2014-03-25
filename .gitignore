@@ -8,3 +8,4 @@ app/tests/coverage/
 .bower-*/
 .idea/
 public/modules/tiles/img
+public/lib
