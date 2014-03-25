@@ -45,11 +45,15 @@
           </div>
         </div>
       </div>
+      <!-- Front end likes testing -->
       <div id="buyMain">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
         <span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+
+        <i class="fa fa-star" ng-class="{'liked': favoriteTile}" ng-click="addFavorite()"></i>
       </div>
+      <!-- End front end likes -->
     </div>
 
     <div class="tile" id="tileRight">

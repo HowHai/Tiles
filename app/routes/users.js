@@ -8,7 +8,7 @@ module.exports = function(app) {
 	app.get('/users/me', users.me);
 
 	// Add favorite
-	app.put('/users/favorite', users.addFavorite);
+	app.put('/users/favorite', users.requiresLogin, users.addFavorite);
 
 	// Setting up the users api
 	app.post('/auth/signup', users.signup);
