@@ -19,9 +19,7 @@ h1, h2, h3 {
   padding: 0; }
 
 .content {
-  margin-top: 50px;
-  height: 90%;
-  height: calc(100% - 50px); }
+  height: 100%; }
 
 .row {
   margin: 0;
@@ -33,6 +31,10 @@ h1, h2, h3 {
 
 .navbar-header {
   background-color: white; }
+
+.navbar-fixed-top {
+  transition: 1s;
+  display: none; }
 
 .navbar-inverse .navbar-brand {
   color: #1d7a9e;
@@ -58,8 +60,7 @@ h1, h2, h3 {
   height: 100%; }
 
 #showTile {
-  height: 90%;
-  height: calc(100% - 50px);
+  height: 100%;
   overflow: hidden;
   position: absolute;
   text-align: center;
@@ -297,8 +298,7 @@ h1, h2, h3 {
     transition: 0.9s;
     position: fixed;
     z-index: 10;
-    height: 90%;
-    height: calc(100% - 50px);
+    height: 100%;
     width: 100%;
     color: white;
     font-size: 3em;
@@ -308,7 +308,26 @@ h1, h2, h3 {
     background-color: rgba(0, 0, 0, 0.4); }
     #showTile #navigation-instructions .center-vertical {
       padding-top: 47%; }
+    #showTile #navigation-instructions #nav-header {
+      position: absolute;
+      top: 0px;
+      height: 50px;
+      font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: left;
+      font-size: 0.7em;
+      font-weight: 400;
+      padding-top: 2px; }
+      #showTile #navigation-instructions #nav-header button {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        height: 30px;
+        width: 40px;
+        background: none;
+        border: 1px solid rgba(255, 255, 255, 0.8); }
     #showTile #navigation-instructions #navi-content {
+      margin-top: 50px;
       position: absolute;
       z-index: 10;
       height: 83%;

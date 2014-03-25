@@ -6,6 +6,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     var socket = io.connect();
     // $('header').css("display","none");
 
+    // $(".navbar-fixed-top").hide();
+
     $scope.loadTiles = function() {
       $scope.nav_open = false;
       $http.get('/tiles/categories', null)
