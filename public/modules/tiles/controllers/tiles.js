@@ -245,6 +245,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $scope.closeNav = function() {
       if (!$("button").is(":focus")) {
+        $scope.share = false;
         $("#tileMain").removeClass("nav-open").addClass("nav-close");
         $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
         setTimeout(function(){
@@ -451,7 +452,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $(function() {
         $('.buttons').click(function() {
-            $(this).selectText();
+            $('#share-link').selectText();
         });
     });
 

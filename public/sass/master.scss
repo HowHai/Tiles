@@ -185,6 +185,16 @@ h1, h2, h3 {
             color: tomato;
           }
         }
+        span {
+          position: absolute;
+          // display: inline-block;
+          font-size: 0.8em;
+          bottom: 11px;
+          // left: 100;
+          margin-left: 38px;
+          color: white;
+          display: block;
+        }
         h3 {
           font-size: 1.6em;
           letter-spacing: 6px;
@@ -249,6 +259,16 @@ h1, h2, h3 {
           font-size: 1.5em;
           display: inline-block;
         }
+        span {
+          position: absolute;
+          // display: inline-block;
+          font-size: 0.8em;
+          bottom: 11px;
+          // left: 100;
+          margin-left: 38px;
+          color: black;
+          display: block;
+        }
         h3 {
           font-size: 1.6em;
           letter-spacing: 6px;
@@ -281,6 +301,16 @@ h1, h2, h3 {
           font-size: 1.5em;
           display: inline-block;
         }
+        span {
+          position: absolute;
+          // display: inline-block;
+          font-size: 0.8em;
+          bottom: 11px;
+          // left: 100;
+          margin-left: 38px;
+          color: black;
+          display: block;
+        }
         h3 {
           font-size: 1.6em;
           letter-spacing: 6px;
@@ -312,6 +342,16 @@ h1, h2, h3 {
           font-size: 1.5em;
           display: inline-block;
         }
+        span {
+          position: absolute;
+          // display: inline-block;
+          font-size: 0.8em;
+          bottom: 11px;
+          // left: 100;
+          margin-left: 38px;
+          color: black;
+          display: block;
+        }
         h3 {
           font-size: 1.6em;
           letter-spacing: 6px;
@@ -342,6 +382,16 @@ h1, h2, h3 {
           margin-left: 20px;
           font-size: 1.5em;
           display: inline-block;
+        }
+        span {
+          position: absolute;
+          // display: inline-block;
+          font-size: 0.8em;
+          bottom: 11px;
+          // left: 100;
+          margin-left: 38px;
+          color: black;
+          display: block;
         }
         h3 {
           font-size: 1.6em;
@@ -427,9 +477,6 @@ h1, h2, h3 {
               }
             }
           }
-          // &.red {
-          //   color: red;
-          // }
           margin:0 auto;
           border-radius: 0;
           background-color: rgba(0,0,0,0);
@@ -440,6 +487,9 @@ h1, h2, h3 {
             // background-color: #333;
             // color: white;
           }
+        }
+        #share-link {
+          font-size: 0.34em;
         }
       }
       &.top {

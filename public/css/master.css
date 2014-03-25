@@ -117,6 +117,13 @@ h1, h2, h3 {
           color: tomato !important; }
         #showTile #loadedTiles #tileMain #buyMain i.liked {
           color: tomato; }
+      #showTile #loadedTiles #tileMain #buyMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: white;
+        display: block; }
       #showTile #loadedTiles #tileMain #buyMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
@@ -171,6 +178,13 @@ h1, h2, h3 {
         margin-left: 20px;
         font-size: 1.5em;
         display: inline-block; }
+      #showTile #loadedTiles #tileUp .buyNotMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: black;
+        display: block; }
       #showTile #loadedTiles #tileUp .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
@@ -199,6 +213,13 @@ h1, h2, h3 {
         margin-left: 20px;
         font-size: 1.5em;
         display: inline-block; }
+      #showTile #loadedTiles #tileDown .buyNotMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: black;
+        display: block; }
       #showTile #loadedTiles #tileDown .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
@@ -226,6 +247,13 @@ h1, h2, h3 {
         margin-left: 20px;
         font-size: 1.5em;
         display: inline-block; }
+      #showTile #loadedTiles #tileRight .buyNotMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: black;
+        display: block; }
       #showTile #loadedTiles #tileRight .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
@@ -253,6 +281,13 @@ h1, h2, h3 {
         margin-left: 20px;
         font-size: 1.5em;
         display: inline-block; }
+      #showTile #loadedTiles #tileLeft .buyNotMain span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: black;
+        display: block; }
       #showTile #loadedTiles #tileLeft .buyNotMain h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
@@ -329,6 +364,8 @@ h1, h2, h3 {
               #showTile #navigation-instructions .kiss.buttons button.share a:active, #showTile #navigation-instructions .kiss.buttons button.share a:hover {
                 color: black;
                 text-decoration: none; }
+        #showTile #navigation-instructions .kiss.buttons #share-link {
+          font-size: 0.34em; }
       #showTile #navigation-instructions .kiss.top {
         position: absolute;
         color: tomato;
