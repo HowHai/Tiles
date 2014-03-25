@@ -85,16 +85,35 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     // Favorite feature
     $scope.addFavorite = function() {
-      console.log("You clicked on favorite");
-
-      $http.put('/users/favorite', { tileId: $scope.tileMain._id})
-        .success(function(data){
-          $('#addFavorite').hide();
-          console.log(data);
-        });
-    }
-
-    // END FAVORITE
+      if (user.favorites.length > 0) {
+        for (var i = 0; i < user.favorites.length; i++) {
+          if (user.favorites[i] == $scope.tileMain._id) {
+            var index = user.favorites.indexOf($scope.tileMain._id)
+            user.favorites.splice(index, 1);
+            $http.put('/users/favorite', {tileId: $scope.tileMain._id, removeFavorite: true})
+              .success(function(data) {});
+            toastr.success();
+            $scope.favoriteTile = false;
+          } else {
+              $http.put('/users/favorite', { tileId: $scope.tileMain._id})
+              .success(function(data){
+                $('#addFavorite').hide();
+                console.log("I'm newly favorited");
+                toastr.success();
+                $scope.favoriteTile = true;
+              });         
+            }
+          }
+        } else {
+          $http.put('/users/favorite', { tileId: $scope.tileMain._id})
+          .success(function(data){
+            $('#addFavorite').hide();
+            console.log("I'm newly favorited with no previous like");
+            toastr.success();
+            $scope.favoriteTile = true;
+          }); 
+        }
+      }
 
     // Socket.io testing
     socket.on('connect', function() {
