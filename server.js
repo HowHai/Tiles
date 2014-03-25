@@ -32,10 +32,13 @@ var io = require('socket.io').listen(server);
 server.listen(config.port);
 
 io.sockets.on('connection', function (socket) {
+  // Get everyone's current location when connected.
+  socket.broadcast.emit('needAllLocations', {data: socket.id});
+
   // Get user's current tileId
   socket.on('giveTile', function(data) {
     data.socketId = socket.id;
-    console.log(data);
+    console.log(socket);
     // Emits user's tileId and socketId to all users except sender.
     socket.broadcast.emit("takeTile", data);
   });

@@ -160,6 +160,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           });
         };
       });
+
+      // Give all location
+      socket.on('needAllLocations', function(data){
+        console.log(data);
+      })
     });
     // ENDsocket
 
