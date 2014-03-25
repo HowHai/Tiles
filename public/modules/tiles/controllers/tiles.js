@@ -3,7 +3,9 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
+
     var socket = io.connect();
+
 
     $scope.loadTiles = function() {
       $scope.nav_open = false;
@@ -100,6 +102,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     // Socket.io testing
     socket.on('connect', function() {
+
       socket.on("takeTile", function(data){
         console.log(data);
         // Find tile and remove current_user.
@@ -123,24 +126,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           });
         }
-        // Send new data back to server.
-        // socket.emit('newGrid', $scope.allTiles);
+        $scope.$apply(function(){
+          showOccupied();        
+        });
       });
 
-      // Might not even need this... can probably change it in 'takeTile' without setTimeout..
-      // Deleted... not sure... save this for now
-      // socket.on('sendNewGrid', function(data) {
-      //   setTimeout(function() {
-      //     console.log("Thisran");
-      //     $scope.changeAll(data);
-      //   }, 50);
-      // });
-
-      // $scope.changeAll = function(data){
-      //   $scope.$apply(function() {
-      //     $scope.allTiles = data;
-      //   });
-      // };
 
       // Get test emit to current user and display in browser's console.
       socket.on('currentPosition', function(data) {
@@ -154,7 +144,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tileMain = data;
         });
       });
-
 
       // Listen for disconnect?
       socket.on('user disconnected', function(data){
@@ -174,7 +163,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       // Give all location
       socket.on('needAllLocations', function(data){
         console.log(data);
-      })
+      });
     });
     // ENDsocket
 
@@ -335,6 +324,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     $scope.closeNav = function() {
       $("#tileMain").removeClass("nav-open").addClass("nav-close");
       $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
+
       setTimeout(function(){
         $("#navigation-instructions").css("display", "none");
         $("#tileMain").removeClass("nav-close");
@@ -371,6 +361,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             if($scope.nav_open == false){
               $("#tileMain").addClass("nav-open").removeClass("nav-close");
               $("#navigation-instructions").css({"transition":"0,5s","display":"block","opacity":"1"});
+              showOccupied();
               $scope.nav_open = true;
             }
           }
@@ -417,6 +408,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       function move(direction){
         if(direction == "Left"){
           $scope.moveLeft();
+          console.log($scope.allTiles);
         }
         else if(direction == "Right"){
           $scope.moveRight();
@@ -453,10 +445,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
             else if (direction == 'down'){
               $("#tileMain").css("margin-bottom", -distance);
-              // $("#tileUp").css("bottom", 100-((distance/document.documentElement.clientHeight)*100)+"%");
-              // $("#tileDown").css("bottom", -100-((distance/document.documentElement.clientHeight)*100)+"%");
-              // $("#tileLeft").css("bottom", -distance);
-              // $("#tileRight").css("bottom", -distance);
               $("#tileUp").css("margin-bottom", -distance);
               $("#tileDown").css("margin-bottom", -distance);
               $("#tileLeft").css("margin-bottom", -distance);
@@ -471,10 +459,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
               $("#tileDown").css("margin-bottom", distance);
               $("#tileLeft").css("margin-bottom", distance);
               $("#tileRight").css("margin-bottom", distance);
-              // $("#tileUp").css("bottom", 100+((distance/document.documentElement.clientHeight)*100)+"%");
-              // $("#tileDown").css("bottom", -100+((distance/document.documentElement.clientHeight)*100)+"%");
-              // $("#tileLeft").css("bottom", distance);
-              // $("#tileRight").css("bottom", distance);
               $("#tileDown").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
@@ -522,6 +506,75 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tile = response;
         })
     }
+
+
+    //This is for the RADAR
+
+    $scope.xcords = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+    $scope.ycords = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+    var $rad = $('#rad'),
+        $obj = $('.obj'),
+        deg = 0,
+        rad = 80.5; //   = 321/2
+
+    (function rotate() {      
+      $rad.css({transform: 'rotate('+ deg +'deg)'});
+      $('[data-atDeg='+deg+']').stop().fadeTo(0,1).fadeTo(1700,0.2);
+
+        // LOOP
+        setTimeout(function() {
+            deg = ++deg%360;
+            rotate();
+
+        }, 10);
+    })();
+
+    var showOccupied = function(){
+      // console.log("My Postion: "+ $scope.hPosition + " Cat: " + $scope.currentCategory);
+      for(var i = 0; i<$scope.allTiles.length; i++){
+        // var grid = "ROW: ";
+        // grid +=i;
+        // grid += ": ";
+        for(var j=0;j<$scope.allTiles[i].length;j++){
+          if($scope.allTiles[i][j].location.length > 0){
+            // grid+="X";
+            // var found = $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition));
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("obj");
+            if($scope.allTiles[i][j].location.length > 1){
+              $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("multi-user");
+            }
+            else{
+              $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
+            }
+          }
+          else if (i == $scope.currentCategory && j == $scope.hPosition){
+            // grid+="W";
+          }
+          else{
+            // grid+="0";
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("obj");
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
+          }
+        }
+        // console.log(grid);
+      }
+      // console.log(found);
+      showDots();
+    };
+    var showDots = function(){
+      // console.log($scope.allTiles.length);
+      $(".obj").each(function(){
+        var data = $(this).data(),
+        pos = {X:data.x, Y:data.y},
+        getAtan = Math.atan2(pos.X-rad, pos.Y-rad),
+        getDeg = ~~(-getAtan/(Math.PI/180) + 180);
+        // console.log(data);
+      $(this).css({left:pos.X, top:pos.Y}).attr('data-atDeg', getDeg);
+      });
+    }
+    //This is for the RADAR
+
+
 
     // SPRITZ test
     // $scope.spritzNow = function(content) {
