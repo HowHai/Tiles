@@ -57,13 +57,9 @@
   <h1>Cracked Tiles</h1>
 
   <div id="sharedTile">
-    <button ng-click="getOneTile('532cd94a691b8628a9a1d1ec')">Share</button>
-    <p>http://localhost:3000/#!/{{singleTile._id}}</p>
+    <button ng-click="getOneTile(tileMain._id)">Share</button>
+    <p>http://localhost:3000/#!/{{tileMain._id}}</p>
     <h2>Shared Tile</h2>
-    <button ng-click="changeCategory(1)">UP</button>
-    <button ng-click="changeCategory(-1)">DOWN</button>
-    <button ng-click="changeTile(1)">RIGHT</button>
-    <button ng-click="changeTile(-1)">LEFT</button>
 
     <div id="singleTile">
       <h2>{{sharedTile.name}}</h2>
@@ -113,34 +109,27 @@
   <!-- END FAVORITES -->
 
 
-  <div ng-controller="CommentsCtrl">
-    <form class="form-horizontal" data-ng-submit="create(tileMain._id)">
-      <fieldset>
-        <div class="form-group">
-          <label class="control-label" for="content">Content</label>
-          <div class="controls">
-              <textarea data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
-          </div>
+<!-- Comment test -->
+  <form class="form-horizontal" data-ng-submit="create(tileMain._id)">
+    <fieldset>
+      <div class="form-group">
+        <label class="control-label" for="content">Content</label>
+        <div class="controls">
+            <textarea data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
         </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-default">
-        </div>
-      </fieldset>
-    </form>
+      </div>
+      <div class="form-group">
+          <input type="submit" class="btn btn-default">
+      </div>
+    </fieldset>
+  </form>
 
-    <div ng-repeat="comment in tileMain.comments">
-      <li>Content: {{comment.content}}</li>
-      <li>User: {{comment.user.displayName}}</li>
-    </div>
-
+  <div ng-repeat="comment in tileMain.comments">
+    <li>Content: {{comment.content}}</li>
+    <li>User: {{comment.user.displayName}}</li>
   </div>
+
   <!-- END -->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 
 </section>

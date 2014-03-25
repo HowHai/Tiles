@@ -3,7 +3,7 @@
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
-  var socket = io.connect();
+    var socket = io.connect();
 
     $scope.loadTiles = function() {
       $scope.nav_open = false;
@@ -140,11 +140,25 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       // Listen for likes
       socket.on('giveBackLike', function(data){
         $scope.$apply(function() {
-          console.log(data);
           data.likes = data.likes + 1;
-          console.log(data);
           $scope.tileMain = data;
         });
+      });
+
+
+      // Listen for disconnect?
+      socket.on('user disconnected', function(data){
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr.location.indexOf(data.socketId) != -1){
+              var populatedIndex = eArr.location.indexOf(data.socketId);
+
+              $scope.$apply(function() {
+                $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
+              });
+            };
+          });
+        };
       });
     });
     // ENDsocket
@@ -275,8 +289,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             var sharedTileCatPosition = Math.round((sharedTileArray.length / 2) - 1);
             var sharedTilePosition = Math.round((sharedTileArray[0].length / 2));
 
-            categoryPosition = sharedTileCatPosition;
-            tilePosition = sharedTilePosition;
+            var categoryPosition = sharedTileCatPosition;
+            var tilePosition = sharedTilePosition;
 
             console.log(categoryPosition, tilePosition);
 

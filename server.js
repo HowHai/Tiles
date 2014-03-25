@@ -55,6 +55,10 @@ io.sockets.on('connection', function (socket) {
     console.log(data);
     io.sockets.emit('giveBackLike', data);
   });
+
+  socket.on('disconnect', function() {
+    io.sockets.emit('user disconnected', { socketId: socket.id });
+  });
 });
 
 // ENDsocket
