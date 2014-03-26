@@ -39,8 +39,7 @@ io.configure(function() {
 
 io.sockets.on('connection', function (socket) {
   // Send an 'I am new and I want your location on connect'
-  // nothing... trying to push.
-  socket.broadcast.emit('iAmNew', {socketId: socket.id});
+  // socket.broadcast.emit('iAmNew', {socketId: socket.id});
 
   // Send current user's location to new user.
   socket.on('sendLocationToNewUser', function(data){
@@ -55,10 +54,10 @@ io.sockets.on('connection', function (socket) {
     data.socketId = socket.id;
     // Emits user's tileId and socketId to all users except sender.
     socket.broadcast.emit("takeTile", data);
-  });
 
-  // Emit current user's position.
-  socket.emit('currentPosition', 'this is a test, only I can see it');
+    // Send an 'I am new and I want your location on connect'
+    socket.broadcast.emit('iAmNew', {socketId: socket.id});
+  });
 
   // Response to sendVote
   socket.on('sendLike', function(data) {

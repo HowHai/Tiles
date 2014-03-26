@@ -16,6 +16,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.hPosition = 9;
           console.log(response);
 
+
           $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
           $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
           $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
@@ -27,12 +28,14 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           // Send current user's tileId to server.
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
 
-          likeCheck = JSON.parse($cookies.likes);
-          // console.log($scope.tileMain._id)
+          if ($cookies.likes){
+            likeCheck = JSON.parse($cookies.likes);
+            // console.log($scope.tileMain._id)
 
-          for (var i = 0; i < likeCheck.length; i++) {
-            if (likeCheck[i] == $scope.tileMain._id) {
-              $scope.votedOnTile = true;
+            for (var i = 0; i < likeCheck.length; i++) {
+              if (likeCheck[i] == $scope.tileMain._id) {
+                $scope.votedOnTile = true;
+              }
             }
           }
       });
@@ -101,7 +104,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
                 console.log("I'm newly favorited");
                 toastr.success();
                 $scope.favoriteTile = true;
-              });         
+              });
             }
           }
         } else {
@@ -111,7 +114,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             console.log("I'm newly favorited with no previous like");
             toastr.success();
             $scope.favoriteTile = true;
-          }); 
+          });
         }
       }
 
@@ -143,12 +146,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         }
 
         showOccupied();
-      });
-
-
-      // Get test emit to current user and display in browser's console.
-      socket.on('currentPosition', function(data) {
-        // console.log(data);
       });
 
       // Listen for likes
@@ -183,12 +180,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
       // Send current user's location to new user.
       socket.on('iAmNew', function(data){
+        console.log("This ran");
         socket.emit('sendLocationToNewUser', { tileId: $scope.tileMain._id, socketId: data.socketId });
       });
 
       // Get everyone's location as a new user and update.
-      $scope.allUsersLocation = [];
       socket.on('newUserGetsLocation', function(data){
+        console.log($scope.allTiles);
 
         // Find tile and add other user.
         for(var i = 0; i < $scope.allTiles.length; i++){
@@ -200,13 +198,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           });
         }
-        // console.log($scope.allUsersLocation);
-        // $scope.allUsersLocation.push(data.socketId);
-        // console.log("This ran2!");
-        // console.log("My tile: " + $scope.tileMain._id);
-        // console.log(data.tileId);
-        // console.log(data.clientsCount);
-        // console.log(data.socketId);
       });
     });
     // ENDsocket
