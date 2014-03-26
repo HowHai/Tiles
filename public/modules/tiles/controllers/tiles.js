@@ -6,6 +6,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     var likeCheck;
     var socket = io.connect();
     $scope.colorOffset = true;
+    $scope.prizeTile = false;
 
     // KYLE & JUSTIN
 
