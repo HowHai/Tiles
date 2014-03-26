@@ -309,6 +309,15 @@ h1, h2, h3 {
         margin-left: -40px;
         color: black;
         display: inline-block; }
+  #showTile #heart-like {
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    top: -39px;
+    color: rgba(255, 99, 71, 0.6);
+    font-size: 13em; }
   #showTile #navigation-instructions {
     display: none;
     opacity: 0;

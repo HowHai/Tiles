@@ -67,6 +67,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
       if(count == 0){
 
+        $("#heart-like").fadeIn();
+         setTimeout(function(){
+          $("#heart-like").fadeOut();
+         },600);
         // console.log("You voted!");
         likesArray.push($scope.tileMain._id);
         $cookies.likes = angular.toJson(likesArray);
@@ -77,7 +81,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           });
 
         socket.emit('sendLike', $scope.tileMain);
-        toastr.success("Liked!");
+        // toastr.success("Liked!");
+        
         $scope.votedOnTile = true;
       };
     }
@@ -648,10 +653,15 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           else if (i == $scope.currentCategory && j == $scope.hPosition){
             // grid+="W";
           }
+          else if($scope.allTiles[i][j].likes > 5){
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("heart").addClass("obj");
+            // console.log($scope.allTiles[i][j].likes);
+          }
           else{
             // grid+="0";
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("obj");
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("heart");
           }
         }
         // console.log(grid);
