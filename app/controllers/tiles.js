@@ -177,7 +177,7 @@ exports.create = function(req, res){
   // PhantomJS testt
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open("http://uncrate.com/gear/", function(status) {
+      return page.open("http://uncrate.com/tech/", function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -241,7 +241,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: "Gear", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: "Tech", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -253,7 +253,7 @@ exports.create = function(req, res){
                 });
 
                 // Find category. Create new one if none exist.
-                var categoryName = "Gear";
+                var categoryName = "Tech";
 
                 Category.findOne({name: categoryName}, function(error, cat){
                   if (cat === null) {
