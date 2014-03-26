@@ -1,4 +1,8 @@
-<div class="row" ng-init="loadTiles()">
+<div id="loadScreen" ng-show="!loadComplete">
+  Loading GLOSS...
+</div>
+
+<div class="row" ng-init="loadTiles()" ng-show="loadComplete">
   <section id="showTile" class="col-xs-12">
   <!-- <button ng-click="createTile()">Herroo Prease</button> -->
   <div id="loadedTiles">

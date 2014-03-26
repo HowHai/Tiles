@@ -101,8 +101,13 @@ h1, h2, h3 {
   height: 100%;
 }
 
-// Show Tile View
+// Load Screen
+  height: 100%;
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
 
+// Show Tile View
 #showTile {
   height: 100%;
   // height: calc(100% - 50px);

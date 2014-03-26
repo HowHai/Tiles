@@ -28,13 +28,17 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
 
-          likeCheck = JSON.parse($cookies.likes);
+          if ($cookies.likes) {
+            likeCheck = JSON.parse($cookies.likes);
 
-          for (var i = 0; i < likeCheck.length; i++) {
-            if (likeCheck[i] == $scope.tileMain._id) {
-              $scope.votedOnTile = true;
+            for (var i = 0; i < likeCheck.length; i++) {
+              if (likeCheck[i] == $scope.tileMain._id) {
+                $scope.votedOnTile = true;
+              }
             }
           }
+
+          $scope.loadComplete = true;
       });
     };
 
@@ -52,24 +56,19 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     }
 
     $scope.moveUp = function() {
-      $scope.tileMain = $scope.tileUp;
       cookieCheck();
-
       $scope.currentCategory = categoryRotator($scope.currentCategory, "up");
       resetTiles();
     }
 
     $scope.moveDown = function() {
-      $scope.tileMain = $scope.tileDown;
       cookieCheck();
-
       $scope.currentCategory = categoryRotator($scope.currentCategory, "down");
       resetTiles();
     }
 
     $scope.moveLeft = function() {
       $scope.hPosition -= 1;
-      $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
       cookieCheck();
 
       if ($scope.hPosition < 1) {
@@ -96,7 +95,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $scope.moveRight = function() {
       $scope.hPosition += 1;
-      $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
       cookieCheck();
 
       if (($scope.allTiles[$scope.currentCategory].length - 1) - $scope.hPosition < 1) {
@@ -166,10 +164,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             animateAndMove("Right", $scope.tileRight, colorMain, colorOffset);
           }
           else if(direction=="up" && distance > (windowHeight)*0.45){
-            animateAndMove("Down", $scope.tileUp, colorMain, colorOffset);
+            animateAndMove("Down", $scope.tileDown, colorMain, colorOffset);
           }
           else if(direction=="down" && distance > (windowHeight)*0.45){
-            animateAndMove("Up", $scope.tileDown, colorMain, colorOffset);
+            animateAndMove("Up", $scope.tileUp, colorMain, colorOffset);
           }
           else if(distance == 0 && direction == null){
 
@@ -219,6 +217,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#buyMain h3").css("color", colorOffset);
         $("#buyMain i").css("color", colorOffset);
         $("#buyMain span").css("color", colorOffset);
+        console.log(tile);
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
@@ -555,14 +554,15 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // ENDsocket
 
     var cookieCheck = function() {
-      likeCheck = JSON.parse($cookies.likes);
-      // console.log($scope.tileMain._id)
-
-      for (var i = 0; i < likeCheck.length; i++) {
-        if (likeCheck[i] == $scope.tileMain._id) {
-          $scope.$apply(function() {
-            $scope.votedOnTile = true;
-          });
+      // console.log(JSON.parse($cookies.likes));
+      if ($cookies.likes) {
+        likeCheck = JSON.parse($cookies.likes);
+        for (var i = 0; i < likeCheck.length; i++) {
+          if (likeCheck[i] == $scope.tileMain._id) {
+            $scope.$apply(function() {
+              $scope.votedOnTile = true;
+            });
+          }
         }
       }
     }
