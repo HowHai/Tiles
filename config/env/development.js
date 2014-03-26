@@ -1,5 +1,5 @@
 'use strict';
-
+// mongodump -h ds033419.mongolab.com:33419 -d heroku_app23022989 -u tilesUser -p tiles123 -o mongolabBackupMar25-2
 module.exports = {
 	// db: 'mongodb://localhost/tiles-dev',
 	db: 'mongodb://tilesUser:tiles123@ds033419.mongolab.com:33419/heroku_app23022989',

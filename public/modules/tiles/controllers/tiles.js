@@ -24,7 +24,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
 
-          // $scope.tileMain = $scope.allTiles[3][11];
+          // $scope.tileMain = $scope.allTiles[0][0];
           // Send current user's tileId to server.
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
 
