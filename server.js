@@ -31,6 +31,12 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 server.listen(config.port);
 
+// Heroku deployment, polling setup.
+io.configure(function() {
+  io.set('transports', ['xhr-polling']);
+  io.set('polling duration', 10);
+});
+
 io.sockets.on('connection', function (socket) {
   // Send an 'I am new and I want your location on connect'
   // nothing... trying to push.
