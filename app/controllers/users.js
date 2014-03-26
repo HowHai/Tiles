@@ -129,13 +129,15 @@ exports.favorites = function(req, res) {
 	var currentUserId = req.user._id;
 	var favorites = req.user.favorites;
 
-  User.findById({_id: currentUserId}, {favorites: favorites} ).exec(function(err, user) {
+  // Find tiles inside user.favorites array
+  	Tile.find({_id: { $in : favorites }} ).exec(function(err, user)
+  {
     if (err) {
       res.render('error', {
         status: 500
       });
     } else {
-      res.jsonp(user.favorites);
+      res.jsonp(user);
     }
   });
 };
