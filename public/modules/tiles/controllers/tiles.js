@@ -27,13 +27,19 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           // Send current user's tileId to server.
           socket.emit('giveTile', { tileId: $scope.tileMain._id})
 
+          // Check cookie for previous likes
           likeCheck = JSON.parse($cookies.likes);
-          // console.log($scope.tileMain._id)
-
           for (var i = 0; i < likeCheck.length; i++) {
             if (likeCheck[i] == $scope.tileMain._id) {
               $scope.votedOnTile = true;
             }
+          }
+
+          // Check db for previous favorite
+          for (var i = 0; i < user.favorites.length; i++) {
+            if (user.favorites[i] == $scope.tileMain._id) {
+              $scope.favoriteTile = true;
+            } 
           }
       });
     }
@@ -83,37 +89,31 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     }
     // endLikes
 
-    // Favorite feature
+  //FAVORITES
     $scope.addFavorite = function() {
-      if (user.favorites.length > 0) {
+      var count = 0;
+      if (user && user.favorites.length > 0) {
         for (var i = 0; i < user.favorites.length; i++) {
           if (user.favorites[i] == $scope.tileMain._id) {
             var index = user.favorites.indexOf($scope.tileMain._id)
             user.favorites.splice(index, 1);
             $http.put('/users/favorite', {tileId: $scope.tileMain._id, removeFavorite: true})
-              .success(function(data) {});
-            toastr.success();
+              .success(function(data) {});   
+            console.log('removed; length: ' + user.favorites.length);
             $scope.favoriteTile = false;
-          } else {
-              $http.put('/users/favorite', { tileId: $scope.tileMain._id})
-              .success(function(data){
-                $('#addFavorite').hide();
-                console.log("I'm newly favorited");
-                toastr.success();
-                $scope.favoriteTile = true;
-              });         
-            }
-          }
-        } else {
-          $http.put('/users/favorite', { tileId: $scope.tileMain._id})
-          .success(function(data){
-            $('#addFavorite').hide();
-            console.log("I'm newly favorited with no previous like");
-            toastr.success();
-            $scope.favoriteTile = true;
-          }); 
-        }
-      }
+            count = 1;
+          };
+        };   
+      }; 
+      if (count == 0) {
+        $http.put('/users/favorite', {tileId: $scope.tileMain._id})
+          .success(function(data) {
+          $scope.favoriteTile = true;
+          console.log('added; length: ' + user.favorites.length)
+        });
+      };
+    };
+  // FAVORTIES END
 
     // Socket.io testing
     socket.on('connect', function() {
