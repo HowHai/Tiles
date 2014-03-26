@@ -6,7 +6,7 @@
   <section id="showTile" class="col-xs-12">
   <!-- <button ng-click="createTile()">Herroo Prease</button> -->
 
-    <div ng-repeat="tile in loadedTiles">
+<!--     <div ng-repeat="tile in loadedTiles">
       <div id="tile{{tile.name}}" ng-class="" class="tileTemplate">
         <div class="tile-content">
           <h2>gloss</h2>
@@ -21,10 +21,10 @@
           <h3 id="buy">BUY NOW</h3>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
-<!-- 
+
     <div id="tileMain" ng-class="" class="tileTemplate">
       <div class="tile-content">
         <h2>gloss</h2>
@@ -99,8 +99,37 @@
         <h3 id="buy">BUY NOW</h3>
       </div>
     </div>
- -->
 
+    <div id="navigation-instructions" class="swipeable" ng-click="closeNav()">
+        <div id="nav-header">gloss
+          <button></button>
+        </div>
+        <i class="fa fa-angle-up kiss top"></i>
+        <i class="fa fa-angle-left kiss left"></i>
+          <div id ="navi-content">
+            <div id="navi-text">
+              <!-- <h1>welcome to<br><br><span>gloss</span></h1> -->
+            </div>
+            <div id="radar">
+              <div id="rad"></div>
+              <div class="centerDot"></div>
+
+              <div ng-repeat="xcord in xcords">
+                <div id="{{xcord+''+ycord}}" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
+              </div>
+              <!-- <div class="obj" data-x="130" data-y="60"></div> -->
+              <!-- <div class="obj" data-x="70" data-y="35"></div> -->
+            </div>
+            <div class="kiss buttons">
+              <!-- <a href="/#!/tile/shared/{{tileMain._id}}"></a> -->
+              <h3 id="share-link" ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3>
+              <button class="btn share" ng-click="share = !share">Share</button>
+            </div>
+          </div>
+        <i class="fa fa-angle-right kiss right"></i>
+        <i class="fa fa-angle-down kiss bottom"></i>
+    </div>
+    <div id="heart-like"><i class="fa fa-heart"></i></div>
 
 
 
