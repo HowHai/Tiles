@@ -6,6 +6,25 @@
   <section id="showTile" class="col-xs-12">
   <!-- <button ng-click="createTile()">Herroo Prease</button> -->
 
+    <div ng-repeat="tile in loadedTiles">
+      <div id="tile{{tile.name}}" ng-class="" class="tileTemplate">
+        <div class="tile-content">
+          <h2>gloss</h2>
+          <img src="modules/tiles/img/tiles/{{tile.loaded.imgUrl}}" alt="Gloss">
+          <div class="tile-info">
+            <h1>{{tile.loaded.name}}</h1>
+            <div class="tile-desc"><p>{{tile.loaded.content}}</p></div>
+          </div>
+        </div>
+        <div class="tile-footer">
+          <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tile.loaded.likes}}</span>
+          <h3 id="buy">BUY NOW</h3>
+        </div>
+      </div>
+    </div>
+
+
+<!-- 
     <div id="tileMain" ng-class="" class="tileTemplate">
       <div class="tile-content">
         <h2>gloss</h2>
@@ -80,6 +99,13 @@
         <h3 id="buy">BUY NOW</h3>
       </div>
     </div>
+ -->
+
+
+
+
+
+
 
 <!--     <div id="loadedTiles">
 

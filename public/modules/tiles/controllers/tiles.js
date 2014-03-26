@@ -26,7 +26,15 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
 
-          socket.emit('giveTile', { tileId: $scope.tileMain._id})
+          $scope.loadedTiles = [
+            {name: "Main", loaded: $scope.tileMain },
+            {name: "Left", loaded: $scope.tileLeft },
+            {name: "Right", loaded: $scope.tileRight },
+            {name: "Up", loaded: $scope.tileUp },
+            {name: "Down", loaded: $scope.tileDown }
+          ];
+
+          socket.emit('giveTile', { tileId: $scope.tileMain._id});
 
           if ($cookies.likes) {
             likeCheck = JSON.parse($cookies.likes);
@@ -149,7 +157,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $(function() {
       //Main SWIPE FUNCTION
-      $(".swipeable").swipe( {swipeStatus: swipe2,
+      $(".tile-content").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
           var colorMain = $("#tileMain").css("background-color");
