@@ -12,9 +12,15 @@ angular.module('mean.tiles').config(['$stateProvider',
       url: '/haihome',
       templateUrl: 'modules/tiles/views/haihome.html',
       controller: 'TilesCtrl'
-    }).state('explodedTiles', {
+    }).
+      state('explodedTiles', {
       url: '/exploded',
       templateUrl: 'modules/tiles/views/index.html',
+      controller: 'TilesCtrl'
+    }).
+      state('favoriteTiles', {
+      url: '/favorites',
+      templateUrl: 'modules/tiles/views/favorites.html',
       controller: 'TilesCtrl'
     });
   }

@@ -130,8 +130,7 @@ exports.favorites = function(req, res) {
 	var favorites = req.user.favorites;
 
   // Find tiles inside user.favorites array
-  	Tile.find({_id: { $in : favorites }} ).exec(function(err, user)
-  {
+  	Tile.find({_id: { $in : favorites }} ).exec(function(err, user) {
     if (err) {
       res.render('error', {
         status: 500

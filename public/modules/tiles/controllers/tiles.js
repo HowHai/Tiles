@@ -630,6 +630,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     };
     // endLikes
 
+    $scope.find = function() {
+      $http.get('/users/favorites', null).success(function(data){
+        $scope.favorites = data;
+        console.log(data);
+      })
+    };
+
 
 
     // SPRITZ test
