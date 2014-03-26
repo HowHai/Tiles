@@ -80,7 +80,6 @@ h1, h2, h3 {
   #showTile .tileTemplate {
     width: 100%;
     height: 100%;
-    bottom: 0px;
     margin: 0px;
     float: left;
     position: absolute;
@@ -110,7 +109,10 @@ h1, h2, h3 {
         margin-top: 10px;
         line-height: 20px;
         max-height: 200px;
-        position: relative; }
+        position: relative;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 10; }
     #showTile .tileTemplate .tile-footer {
       position: absolute;
       bottom: 0;
@@ -151,51 +153,11 @@ h1, h2, h3 {
     left: 0;
     bottom: 0px;
     margin: 0px; }
-  #showTile #loadedTiles #tileMain {
-    background-color: white;
-    left: 0;
-    bottom: 0px;
-    margin: 0px; }
-    #showTile #loadedTiles #tileMain #buyMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: black; }
-      #showTile #loadedTiles #tileMain #buyMain i {
-        float: left;
-        color: white;
-        line-height: 50px;
-        margin-top: 1px;
-        padding: 0 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-        #showTile #loadedTiles #tileMain #buyMain i:hover, #showTile #loadedTiles #tileMain #buyMain i:active {
-          color: tomato !important; }
-        #showTile #loadedTiles #tileMain #buyMain i.liked {
-          color: tomato; }
-      #showTile #loadedTiles #tileMain #buyMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: white;
-        display: block; }
-      #showTile #loadedTiles #tileMain #buyMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -60px;
-        color: white;
-        display: inline-block; }
-    #showTile #loadedTiles #tileMain.hide {
+    #showTile #tileMain.hide {
       opacity: 0; }
-    #showTile #loadedTiles #tileMain.fader {
+    #showTile #tileMain.fader {
       opacity: 1; }
-    #showTile #loadedTiles #tileMain.nav-open {
+    #showTile #tileMain.nav-open {
       transition: 0.25s;
       opacity: 0.3;
       -webkit-filter: blur(5px);
@@ -204,118 +166,121 @@ h1, h2, h3 {
       -o-filter: blur(5px);
       filter: blur(5px);
       filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='5'); }
-    #showTile #loadedTiles #tileMain.nav-close {
+    #showTile #tileMain.nav-close {
       transition: 0.25s;
       opacity: 1; }
-      #showTile #loadedTiles #tileMain.nav-close .tile-info {
+      #showTile #tileMain.nav-close .tile-info {
         transition: 0.25s; }
-  #showTile #loadedTiles #tileLeft.center-tile, #showTile #loadedTiles #tileRight.center-tile, #showTile #loadedTiles #tileUp.center-tile, #showTile #loadedTiles #tileDown.center-tile {
+  #showTile #tileLeft.center-tile, #showTile #tileRight.center-tile, #showTile #tileUp.center-tile, #showTile #tileDown.center-tile {
     left: 0%;
     bottom: 0%; }
-  #showTile #loadedTiles #tileUp {
+  #showTile #tileUp {
     bottom: 108%;
     left: 0px;
     color: white; }
-    #showTile #loadedTiles #tileUp .buyNotMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: white; }
-      #showTile #loadedTiles #tileUp .buyNotMain i {
-        float: left;
-        color: black;
-        line-height: 50px;
-        margin-top: 1px;
-        margin-left: 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-      #showTile #loadedTiles #tileUp .buyNotMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: black;
-        display: block; }
-      #showTile #loadedTiles #tileUp .buyNotMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -40px;
-        color: black;
-        display: inline-block; }
-  #showTile #loadedTiles #tileDown {
+  #showTile #tileDown {
     bottom: -108%;
     left: 0px;
     color: white; }
-    #showTile #loadedTiles #tileDown .buyNotMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: white; }
-      #showTile #loadedTiles #tileDown .buyNotMain i {
-        float: left;
-        color: black;
-        line-height: 50px;
-        margin-top: 1px;
-        margin-left: 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-      #showTile #loadedTiles #tileDown .buyNotMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: black;
-        display: block; }
-      #showTile #loadedTiles #tileDown .buyNotMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -40px;
-        color: black;
-        display: inline-block; }
-  #showTile #loadedTiles #tileRight {
+  #showTile #tileRight {
     color: white;
     left: 108%; }
-    #showTile #loadedTiles #tileRight .buyNotMain {
+  #showTile #tileLeft {
+    color: white;
+    left: -108%; }
+  #showTile #loadedTiles #tileUp .buyNotMain {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    background-color: white; }
+    #showTile #loadedTiles #tileUp .buyNotMain i {
+      float: left;
+      color: black;
+      line-height: 50px;
+      margin-top: 1px;
+      margin-left: 20px;
+      font-size: 1.5em;
+      display: inline-block; }
+    #showTile #loadedTiles #tileUp .buyNotMain span {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: white; }
-      #showTile #loadedTiles #tileRight .buyNotMain i {
-        float: left;
-        color: black;
-        line-height: 50px;
-        margin-top: 1px;
-        margin-left: 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-      #showTile #loadedTiles #tileRight .buyNotMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: black;
-        display: block; }
-      #showTile #loadedTiles #tileRight .buyNotMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -40px;
-        color: black;
-        display: inline-block; }
+      font-size: 0.8em;
+      bottom: 11px;
+      margin-left: 38px;
+      color: black;
+      display: block; }
+    #showTile #loadedTiles #tileUp .buyNotMain h3 {
+      font-size: 1.6em;
+      letter-spacing: 6px;
+      line-height: 50px;
+      margin: 0;
+      margin-left: -40px;
+      color: black;
+      display: inline-block; }
+  #showTile #loadedTiles #tileDown .buyNotMain {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    background-color: white; }
+    #showTile #loadedTiles #tileDown .buyNotMain i {
+      float: left;
+      color: black;
+      line-height: 50px;
+      margin-top: 1px;
+      margin-left: 20px;
+      font-size: 1.5em;
+      display: inline-block; }
+    #showTile #loadedTiles #tileDown .buyNotMain span {
+      position: absolute;
+      font-size: 0.8em;
+      bottom: 11px;
+      margin-left: 38px;
+      color: black;
+      display: block; }
+    #showTile #loadedTiles #tileDown .buyNotMain h3 {
+      font-size: 1.6em;
+      letter-spacing: 6px;
+      line-height: 50px;
+      margin: 0;
+      margin-left: -40px;
+      color: black;
+      display: inline-block; }
+  #showTile #loadedTiles #tileRight .buyNotMain {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    background-color: white; }
+    #showTile #loadedTiles #tileRight .buyNotMain i {
+      float: left;
+      color: black;
+      line-height: 50px;
+      margin-top: 1px;
+      margin-left: 20px;
+      font-size: 1.5em;
+      display: inline-block; }
+    #showTile #loadedTiles #tileRight .buyNotMain span {
+      position: absolute;
+      font-size: 0.8em;
+      bottom: 11px;
+      margin-left: 38px;
+      color: black;
+      display: block; }
+    #showTile #loadedTiles #tileRight .buyNotMain h3 {
+      font-size: 1.6em;
+      letter-spacing: 6px;
+      line-height: 50px;
+      margin: 0;
+      margin-left: -40px;
+      color: black;
+      display: inline-block; }
   #showTile #loadedTiles #tileLeft {
     color: white;
     left: -108%; }

@@ -35,8 +35,8 @@ h1, h2, h3 {
 }
 
 .content {
-  // margin-top: 50px;
   height: 100%;
+  // margin-top: 50px;
   // height: calc(100% - 50px);
 }
 
@@ -122,11 +122,11 @@ h1, h2, h3 {
   .tileTemplate {
     width: 100%;
     height: 100%;
-    bottom: 0px;
     margin: 0px;
     float: left;
     position: absolute;
     overflow: hidden;
+    // bottom: 0px;
     // background-color: black;
     h2 {
       position:absolute;
@@ -158,9 +158,9 @@ h1, h2, h3 {
         line-height: 20px;
         max-height: 200px; 
         position: relative;
-        // -webkit-box-orient: vertical;
-        // -webkit-line-clamp: 10;
-        // overflow: hidden;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 10;
       }
     }
     .tile-footer {
@@ -211,6 +211,61 @@ h1, h2, h3 {
     left: 0;
     bottom: 0px;
     margin: 0px;
+    &.hide {
+      opacity: 0;
+    }
+    &.fader {
+      opacity: 1;
+    }
+    &.nav-open {
+      transition: 0.25s;
+      opacity: 0.3;
+      -webkit-filter: blur(5px); 
+      -moz-filter: blur(5px);
+      -ms-filter: blur(5px);
+      -o-filter: blur(5px);
+      filter: blur(5px);
+      filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+    }
+    &.nav-close {
+      transition: 0.25s;
+      // height: 100%;
+      // width: 100%;
+      // padding: 0px;
+      opacity: 1;
+      .tile-info{
+        transition: 0.25s;
+        // font-size: 1em;
+        // padding-top: 15px;
+      }
+    }
+  }
+
+  #tileLeft.center-tile, #tileRight.center-tile, #tileUp.center-tile, #tileDown.center-tile {
+    left: 0%;
+    bottom: 0%;
+  }
+
+  #tileUp {
+    bottom: 108%;
+    left: 0px;
+    color: white;
+  }
+
+  #tileDown {
+    bottom: -108%;
+    left: 0px;
+    color: white;
+  }
+
+  #tileRight {
+    color: white;
+    left: 108%;
+  }
+
+  #tileLeft {
+    color: white;
+    left: -108%;
   }
 
   #loadedTiles {
@@ -264,95 +319,95 @@ h1, h2, h3 {
     //   }
     // }
 
-    #tileMain {
-      background-color: white;
-      left: 0;
-      bottom: 0px;
-      margin: 0px;
-      #buyMain {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-        width: 100%;
-        height: 50px;
-        background-color: black;
-        &:hover {
-          // background-color: white;
-          h3 {
-            // color: black;
-          }
-        }
-        i {
-          float: left;
-          color: white;
-          line-height: 50px;
-          margin-top: 1px;
-          padding: 0 20px;
-          font-size: 1.5em;
-          display: inline-block;
-          &:hover, &:active {
-            color: tomato !important;
-          }
-          &.liked {
-            color: tomato;
-          }
-        }
-        span {
-          position: absolute;
-          font-size: 0.8em;
-          bottom: 11px;
-          margin-left: 38px;
-          color: white;
-          display: block;
-        }
-        h3 {
-          font-size: 1.6em;
-          letter-spacing: 6px;
-          line-height: 50px;
-          margin: 0;
-          margin-left: -60px;
-          color: white;
-          display: inline-block;
-        }
-      }
-      &.hide {
-        opacity: 0;
-      }
-      &.fader {
-        opacity: 1;
-      }
-      &.nav-open {
-        transition: 0.25s;
-        opacity: 0.3;
-        -webkit-filter: blur(5px); 
-        -moz-filter: blur(5px);
-        -ms-filter: blur(5px);
-        -o-filter: blur(5px);
-        filter: blur(5px);
-        filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
-      }
-      &.nav-close {
-        transition: 0.25s;
-        // height: 100%;
-        // width: 100%;
-        // padding: 0px;
-        opacity: 1;
-        .tile-info{
-          transition: 0.25s;
-          // font-size: 1em;
-          // padding-top: 15px;
-        }
-      }
-    }
-    #tileLeft.center-tile, #tileRight.center-tile, #tileUp.center-tile, #tileDown.center-tile {
-      left: 0%;
-      bottom: 0%;
-    }
+    // #tileMain {
+      // background-color: white;
+      // left: 0;
+      // bottom: 0px;
+      // margin: 0px;
+      // #buyMain {
+      //   position: absolute;
+      //   bottom: 0;
+      //   left: 0;
+      //   text-align: center;
+      //   width: 100%;
+      //   height: 50px;
+      //   background-color: black;
+      //   &:hover {
+      //     // background-color: white;
+      //     h3 {
+      //       // color: black;
+      //     }
+      //   }
+      //   i {
+      //     float: left;
+      //     color: white;
+      //     line-height: 50px;
+      //     margin-top: 1px;
+      //     padding: 0 20px;
+      //     font-size: 1.5em;
+      //     display: inline-block;
+      //     &:hover, &:active {
+      //       color: tomato !important;
+      //     }
+      //     &.liked {
+      //       color: tomato;
+      //     }
+      //   }
+      //   span {
+      //     position: absolute;
+      //     font-size: 0.8em;
+      //     bottom: 11px;
+      //     margin-left: 38px;
+      //     color: white;
+      //     display: block;
+      //   }
+      //   h3 {
+      //     font-size: 1.6em;
+      //     letter-spacing: 6px;
+      //     line-height: 50px;
+      //     margin: 0;
+      //     margin-left: -60px;
+      //     color: white;
+      //     display: inline-block;
+      //   }
+      // }
+      // &.hide {
+      //   opacity: 0;
+      // }
+      // &.fader {
+      //   opacity: 1;
+      // }
+      // &.nav-open {
+      //   transition: 0.25s;
+      //   opacity: 0.3;
+      //   -webkit-filter: blur(5px); 
+      //   -moz-filter: blur(5px);
+      //   -ms-filter: blur(5px);
+      //   -o-filter: blur(5px);
+      //   filter: blur(5px);
+      //   filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+      // }
+      // &.nav-close {
+      //   transition: 0.25s;
+      //   // height: 100%;
+      //   // width: 100%;
+      //   // padding: 0px;
+      //   opacity: 1;
+      //   .tile-info{
+      //     transition: 0.25s;
+      //     // font-size: 1em;
+      //     // padding-top: 15px;
+      //   }
+      // }
+    // }
+    // #tileLeft.center-tile, #tileRight.center-tile, #tileUp.center-tile, #tileDown.center-tile {
+    //   left: 0%;
+    //   bottom: 0%;
+    // }
     #tileUp {
-      bottom: 108%;
-      left: 0px;
-      color: white;
+      // bottom: 108%;
+      // left: 0px;
+      // color: white;
       .buyNotMain {
         position: absolute;
         bottom: 0;
@@ -392,9 +447,9 @@ h1, h2, h3 {
       }
     }
     #tileDown {
-      bottom: -108%;
-      left: 0px;
-      color: white;
+      // bottom: -108%;
+      // left: 0px;
+      // color: white;
       .buyNotMain {
         position: absolute;
         bottom: 0;
@@ -434,8 +489,8 @@ h1, h2, h3 {
       }
           }
     #tileRight {
-      color: white;
-      left: 108%;
+      // color: white;
+      // left: 108%;
       .buyNotMain {
         position: absolute;
         bottom: 0;
