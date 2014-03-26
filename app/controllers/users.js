@@ -124,6 +124,22 @@ exports.userByID = function(req, res, next, id) {
 	});
 };
 
+// Exports list of favorites
+exports.favorites = function(req, res) {
+	var currentUserId = req.user._id;
+	var favorites = req.user.favorites;
+
+  User.findById({_id: currentUserId}, {favorites: favorites} ).exec(function(err, user) {
+    if (err) {
+      res.render('error', {
+        status: 500
+      });
+    } else {
+      res.jsonp(user.favorites);
+    }
+  });
+};
+
 /**
  * Require login routing middleware
  */

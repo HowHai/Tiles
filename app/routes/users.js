@@ -10,6 +10,9 @@ module.exports = function(app) {
 	// Add favorite
 	app.put('/users/favorite', users.requiresLogin, users.addFavorite);
 
+	// Grab favorites
+	app.get('/users/favorites', users.requiresLogin, users.favorites);
+
 	// Setting up the users api
 	app.post('/auth/signup', users.signup);
 	app.post('/auth/signin', users.signin);
