@@ -14,7 +14,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         .success(function(response) {
 
           $scope.allTiles = response;
-          $scope.currentCategory = 4;
+          $scope.currentCategory = 1;
           $scope.hPosition = 9;
           console.log(response);
 
@@ -34,6 +34,14 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             for (var i = 0; i < likeCheck.length; i++) {
               if (likeCheck[i] == $scope.tileMain._id) {
                 $scope.votedOnTile = true;
+              }
+            }
+          }
+
+          if (user && user.favorites.length > 0) {
+            for (var i = 0; i < user.favorites.length; i++) {
+              if (user.favorites[i] == $scope.tileMain._id) {
+                $scope.favoriteTile = true;
               }
             }
           }
@@ -401,49 +409,42 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     // HAINANDO
 
-    // Favorite feature
+     //FAVORITES
     $scope.addFavorite = function() {
-      if (user.favorites.length > 0) {
+      var count = 0;
+      if (user && user.favorites.length > 0) {
         for (var i = 0; i < user.favorites.length; i++) {
-          if (user.favorites[i] == $scope.tileMain._id) {
+          if (user.favorites[i] == $scope.tileMain._id) {       
             var index = user.favorites.indexOf($scope.tileMain._id)
             user.favorites.splice(index, 1);
             $http.put('/users/favorite', {tileId: $scope.tileMain._id, removeFavorite: true})
-              .success(function(data) {});
-            toastr.success();
+              .success(function(data) {
+              });  
             $scope.favoriteTile = false;
-          } else {
-              $http.put('/users/favorite', { tileId: $scope.tileMain._id})
-              .success(function(data){
-                $('#addFavorite').hide();
-                console.log("I'm newly favorited");
-                toastr.success();
-                $scope.favoriteTile = true;
-              });         
-            }
-          }
-        } else {
-          $http.put('/users/favorite', { tileId: $scope.tileMain._id})
-          .success(function(data){
-            $('#addFavorite').hide();
-            console.log("I'm newly favorited with no previous like");
-            toastr.success();
-            $scope.favoriteTile = true;
-          }); 
-        }
-      }
+            count = 1;
+            break;
+          };
+        };  
+      };
+      if (count == 0) {
+        $http.put('/users/favorite', {tileId: $scope.tileMain._id})
+          .success(function(data) {
+          $scope.favoriteTile = true;
+          user = data;
+          count = 1;
+        });
+      };
+    };
+    // FAVORTIES END
 
     // Socket.io testing
     socket.on('connect', function() {
-
       socket.on("takeTile", function(data){
-        // console.log(data);
         // Find tile and remove current_user.
         for(var i = 0; i < $scope.allTiles.length; i++){
           var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
             if(eArr.location.indexOf(data.socketId) != -1){
               var populatedIndex = eArr.location.indexOf(data.socketId);
-
               $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
             }
           });
@@ -462,7 +463,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
         showOccupied();
       });
-
 
       // Get test emit to current user and display in browser's console.
       socket.on('currentPosition', function(data) {
@@ -546,7 +546,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       }
     }
 
-
     // Share a tile
     // Give user a url to tile when user click on share tile.
     // give url function here
@@ -584,7 +583,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     $scope.createTile = function() {
       $http.post('/tiles', null)
         .success(function(response) {
-
           // Assigns created tile object to $scope.tile
           $scope.tile = response;
         })
@@ -595,36 +593,29 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // Like feature
     //
     $scope.updateLikes = function() {
-
       // Save user's likes history
       var likesArray;
       var count = 0;
       if ($cookies.likes) {
         likesArray = JSON.parse($cookies.likes);
-        // console.log("created");
       } else {
         likesArray = [];
-        // console.log('likesss');
-      }
+      };
 
       if (likesArray.length > 0) {
         for (var i = 0; i < likesArray.length; i++) {
           if (likesArray[i] == $scope.tileMain._id){
-            // toastr.success();
-            // console.log("Already Voted");
             count = 1;
             break;
           }
         }
-      }
+      };
 
-      if(count == 0){
-
+      if(count == 0) {
         $("#heart-like").fadeIn();
-         setTimeout(function(){
+         setTimeout(function() {
           $("#heart-like").fadeOut();
          },600);
-        // console.log("You voted!");
         likesArray.push($scope.tileMain._id);
         $cookies.likes = angular.toJson(likesArray);
 
@@ -634,8 +625,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           });
 
         socket.emit('sendLike', $scope.tileMain);
-        // toastr.success("Liked!");
-        
         $scope.votedOnTile = true;
       };
     };
