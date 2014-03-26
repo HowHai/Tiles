@@ -36,10 +36,12 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
 
           // Check db for previous favorite
-          for (var i = 0; i < user.favorites.length; i++) {
-            if (user.favorites[i] == $scope.tileMain._id) {
-              $scope.favoriteTile = true;
-            } 
+          if (user && user.favorites.length > 0) {
+            for (var i = 0; i < user.favorites.length; i++) {
+              if (user.favorites[i] == $scope.tileMain._id) {
+                $scope.favoriteTile = true;
+              } 
+            }
           }
       });
     }
