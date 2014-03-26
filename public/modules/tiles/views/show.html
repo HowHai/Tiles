@@ -1,9 +1,13 @@
-<div class="row" ng-init="loadTiles()">
+<div id="loadScreen" ng-show="!loadComplete">
+  Loading GLOSS...
+</div>
+
+<div class="row" ng-init="loadTiles()" ng-show="loadComplete">
   <section id="showTile" class="col-xs-12">
   <!-- <button ng-click="createTile()">Herroo Prease</button> -->
   <div id="loadedTiles">
 
-    <div class="tile" id="tileUp">
+    <div ng-class="{'black': offset}" class="tile" id="tileUp">
       <div class="brand">gloss</div>
       <img src="modules/tiles/img/tiles/{{tileUp.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -17,7 +21,7 @@
       </div>
     </div>
 
-    <div class="tile" id="tileLeft">
+    <div ng-class="{'black': offset}" class="tile" id="tileLeft">
       <div class="brand">gloss</div>
       <img src="modules/tiles/img/tiles/{{tileLeft.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -31,7 +35,7 @@
       </div>
     </div>
 
-    <div class="tile" id="tileMain">
+    <div ng-class="{'black': !offset}" class="tile" id="tileMain">
       <div class="swipeable">
         <div id="tile-content">
           <div class="brand">gloss</div>
@@ -51,12 +55,12 @@
         <span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
 
-        <i class="fa fa-star" ng-class="{'liked': favoriteTile}" ng-click="addFavorite()"></i>
+        <!-- <i class="fa fa-star" ng-class="{'liked': favoriteTile}" ng-click="addFavorite()"></i> -->
       </div>
       <!-- End front end likes -->
     </div>
 
-    <div class="tile" id="tileRight">
+    <div ng-class="{'black': offset}" class="tile" id="tileRight">
       <div class="brand">gloss</div>
       <img src="modules/tiles/img/tiles/{{tileRight.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -70,7 +74,7 @@
       </div>
     </div>
 
-    <div class="tile" id="tileDown">
+    <div ng-class="{'black': offset}" class="tile" id="tileDown">
       <div class="brand">gloss</div>
       <img src="modules/tiles/img/tiles/{{tileDown.imgUrl}}" alt="Splash">
       <div class="tile-info">
@@ -116,6 +120,7 @@
       <i class="fa fa-angle-right kiss right"></i>
       <i class="fa fa-angle-down kiss bottom"></i>
   </div>
+  <div id="heart-like"><i class="fa fa-heart"></i></div>
 
   </section>
 </div>

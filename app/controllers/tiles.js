@@ -241,7 +241,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: "Food", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({category: "food", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -253,7 +253,7 @@ exports.create = function(req, res){
                 });
 
                 // Find category. Create new one if none exist.
-                var categoryName = "Food";
+                var categoryName = "food";
 
                 Category.findOne({name: categoryName}, function(error, cat){
                   if (cat === null) {

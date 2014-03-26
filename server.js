@@ -33,6 +33,7 @@ server.listen(config.port);
 
 io.sockets.on('connection', function (socket) {
   // Send an 'I am new and I want your location on connect'
+  // nothing... trying to push.
   socket.broadcast.emit('iAmNew', {socketId: socket.id});
 
   // Send current user's location to new user.
