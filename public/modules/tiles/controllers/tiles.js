@@ -5,6 +5,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     var likeCheck;
     var socket = io.connect();
+    $scope.colorOffset = true;
 
     // KYLE & JUSTIN
 
@@ -157,7 +158,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $(function() {
       //Main SWIPE FUNCTION
-      $(".tile-content").swipe( {swipeStatus: swipe2,
+      $(".swipeable").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
           var colorMain = $("#tileMain").css("background-color");
@@ -195,16 +196,16 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       });
 
       function switchColors(colorMain, colorOffset){
-        $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
-        $("#tileLeft").css({"background-color":colorMain,"color":colorOffset});
-        $("#tileRight").css({"background-color":colorMain,"color":colorOffset});
-        $("#tileUp").css({"background-color":colorMain,"color":colorOffset});
-        $("#tileDown").css({"background-color":colorMain,"color":colorOffset});
+        // $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
+        // $("#tileLeft").css({"background-color":colorMain,"color":colorOffset});
+        // $("#tileRight").css({"background-color":colorMain,"color":colorOffset});
+        // $("#tileUp").css({"background-color":colorMain,"color":colorOffset});
+        // $("#tileDown").css({"background-color":colorMain,"color":colorOffset});
 
-        $(".buyNotMain").css("background-color", colorOffset);
-        $(".buyNotMain h3").css("color", colorMain);
-        $(".buyNotMain i").css("color", colorMain);
-        $(".buyNotMain span").css("color", colorMain);
+        // $(".buyNotMain").css("background-color", colorOffset);
+        // $(".buyNotMain h3").css("color", colorMain);
+        // $(".buyNotMain i").css("color", colorMain);
+        // $(".buyNotMain span").css("color", colorMain);
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
@@ -214,16 +215,17 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         // Added this to match bg color to new tile, but needs some work with the animation
         // $("#showTile").css("background-color", colorMain);
 
-        $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
-        $("#buyMain").css("background-color", colorMain);
-        $("#buyMain h3").css("color", colorOffset);
+        // $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
+        // $("#buyMain").css("background-color", colorMain);
+        // $("#buyMain h3").css("color", colorOffset);
         if($scope.votedOnTile) {
           $("#buyMain i").css("color", "tomato");
         } else {
           $("#buyMain i").css("color", colorOffset);
         }
-        $("#buyMain span").css("color", colorOffset);
+        // $("#buyMain span").css("color", colorOffset);
         console.log(tile);
+        $scope.colorOffset = !$scope.colorOffset;
         $scope.$apply(function(){$scope.tileMain = tile;});
 
         setTimeout(function(){
@@ -259,28 +261,28 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       //SWIPE 2 FUNCTION FOR ANIMATION
       function swipe2(event, phase, direction, distance) {
           // console.log( phase +" you have swiped " + distance + "px in direction:" + direction );
-          $(".tile").removeClass("slow");
+          $(".tileTemplate").removeClass("slow");
           $("#tileMain").addClass("fader");
           if(phase == "move"){
             if(direction == 'right'){
-              $(".tile").css("margin-left", distance);
+              $(".tileTemplate").css("margin-left", distance);
               $("#tileLeft").css("opacity", (1.5*distance)/document.documentElement.clientWidth);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
 
             }
             else if (direction == 'left'){
-              $(".tile").css("margin-left", -distance);
+              $(".tileTemplate").css("margin-left", -distance);
               $("#tileRight").css("opacity", (1.5*distance)/document.documentElement.clientWidth);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
             else if (direction == 'down'){
-              $(".tile").css("margin-bottom", -distance);
+              $(".tileTemplate").css("margin-bottom", -distance);
               $("#tileUp").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
 
             else if (direction == 'up'){
-              $(".tile").css("margin-bottom", distance);
+              $(".tileTemplate").css("margin-bottom", distance);
               $("#tileDown").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
@@ -289,8 +291,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           else if (phase == "end"){
             //console.log(distance);
             
-              $(".tile").addClass("slow");
-              $(".tile").css("margin", "0px");
+              $(".tileTemplate").addClass("slow");
+              $(".tileTemplate").css("margin", "0px");
               $("#tileDown").css({"margin-bottom":"0px","opacity":"1"});
               $("#tileUp").css({"margin-bottom":"0px","opacity":"1"});
               $("#tileMain").css("margin-bottom", 0);
@@ -299,7 +301,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
               $("#tileMain.fader").css("opacity", 1);
 
               setTimeout(function(){
-                $(".tile").removeClass("slow");
+                $(".tileTemplate").removeClass("slow");
               },350);
           }
         };

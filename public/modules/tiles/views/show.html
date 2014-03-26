@@ -23,10 +23,8 @@
       </div>
     </div> -->
 
-
-
-    <div id="tileMain" ng-class="" class="tileTemplate">
-      <div class="tile-content">
+    <div id="tileMain" ng-class="{'colorOffset': !colorOffset}" class="tileTemplate">
+      <div class="tile-content swipeable">
         <h2>gloss</h2>
         <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Gloss">
         <div class="tile-info">
@@ -40,7 +38,7 @@
       </div>
     </div>
 
-    <div id="tileLeft" ng-class="" class="tileTemplate">
+    <div id="tileLeft" ng-class="{'colorOffset': colorOffset}" class="tileTemplate">
       <div class="tile-content">
         <h2>gloss</h2>
         <img src="modules/tiles/img/tiles/{{tileLeft.imgUrl}}" alt="Gloss">
@@ -55,7 +53,7 @@
       </div>
     </div>
 
-    <div id="tileRight" ng-class="" class="tileTemplate">
+    <div id="tileRight" ng-class="{'colorOffset': colorOffset}" class="tileTemplate">
       <div class="tile-content">
         <h2>gloss</h2>
         <img src="modules/tiles/img/tiles/{{tileRight.imgUrl}}" alt="Gloss">
@@ -70,7 +68,7 @@
       </div>
     </div>
 
-    <div id="tileUp" ng-class="" class="tileTemplate">
+    <div id="tileUp" ng-class="{'colorOffset': colorOffset}" class="tileTemplate">
       <div class="tile-content">
         <h2>gloss</h2>
         <img src="modules/tiles/img/tiles/{{tileUp.imgUrl}}" alt="Gloss">
@@ -85,7 +83,7 @@
       </div>
     </div>
 
-    <div id="tileDown" ng-class="" class="tileTemplate">
+    <div id="tileDown" ng-class="{'colorOffset': colorOffset}" class="tileTemplate">
       <div class="tile-content">
         <h2>gloss</h2>
         <img src="modules/tiles/img/tiles/{{tileDown.imgUrl}}" alt="Gloss">
@@ -129,6 +127,7 @@
         <i class="fa fa-angle-right kiss right"></i>
         <i class="fa fa-angle-down kiss bottom"></i>
     </div>
+
     <div id="heart-like"><i class="fa fa-heart"></i></div>
 
 

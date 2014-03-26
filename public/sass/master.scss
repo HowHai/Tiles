@@ -26,13 +26,6 @@ h1, h2, h3 {
   font-weight: 300;
 }
 
--webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-
 // Correcting Boostraps Bullshit
 
 .container {
@@ -125,6 +118,12 @@ user-select: none;
   text-align: center;
   max-width: 680px;
   max-height: 960px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   .tileTemplate {
     width: 100%;
@@ -213,8 +212,37 @@ user-select: none;
     }
   }
 
+  .colorOffset {
+    background-color: black;
+    .tile-info {
+      color: white;
+      h1 {
+      }
+      .tile-desc {
+      }
+    }
+    .tile-footer {
+      background-color: white;
+      i {
+        color: black;
+        display: inline-block;
+        &:hover, &:active {
+          color: tomato !important;
+        }
+        &.liked {
+          color: tomato;
+        }
+      }
+      span {
+        color: black;
+      }
+      h3 {
+        color: black;
+      }
+    }
+  }
+
   #tileMain {
-    background-color: white;
     left: 0;
     bottom: 0px;
     margin: 0px;
@@ -653,173 +681,173 @@ user-select: none;
     //   left: 0%;
     //   bottom: 0%;
     // }
-    #tileUp {
-      // bottom: 108%;
-      // left: 0px;
-      // color: white;
-      .buyNotMain {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-        width: 100%;
-        height: 50px;
-        background-color: white;
-        i {
-          float: left;
-          color: black;
-          line-height: 50px;
-          margin-top: 1px;
-          margin-left: 20px;
-          font-size: 1.5em;
-          display: inline-block;
-        }
-        span {
-          position: absolute;
-          // display: inline-block;
-          font-size: 0.8em;
-          bottom: 11px;
-          // left: 100;
-          margin-left: 38px;
-          color: black;
-          display: block;
-        }
-        h3 {
-          font-size: 1.6em;
-          letter-spacing: 6px;
-          line-height: 50px;
-          margin: 0;
-          margin-left: -40px;
-          color: black;
-          display: inline-block;
-        }
-      }
-    }
-    #tileDown {
-      // bottom: -108%;
-      // left: 0px;
-      // color: white;
-      .buyNotMain {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-        width: 100%;
-        height: 50px;
-        background-color: white;
-        i {
-          float: left;
-          color: black;
-          line-height: 50px;
-          margin-top: 1px;
-          margin-left: 20px;
-          font-size: 1.5em;
-          display: inline-block;
-        }
-        span {
-          position: absolute;
-          // display: inline-block;
-          font-size: 0.8em;
-          bottom: 11px;
-          // left: 100;
-          margin-left: 38px;
-          color: black;
-          display: block;
-        }
-        h3 {
-          font-size: 1.6em;
-          letter-spacing: 6px;
-          line-height: 50px;
-          margin: 0;
-          margin-left: -40px;
-          color: black;
-          display: inline-block;
-        }
-      }
-          }
-    #tileRight {
-      // color: white;
-      // left: 108%;
-      .buyNotMain {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-        width: 100%;
-        height: 50px;
-        background-color: white;
-        i {
-          float: left;
-          color: black;
-          line-height: 50px;
-          margin-top: 1px;
-          margin-left: 20px;
-          font-size: 1.5em;
-          display: inline-block;
-        }
-        span {
-          position: absolute;
-          // display: inline-block;
-          font-size: 0.8em;
-          bottom: 11px;
-          // left: 100;
-          margin-left: 38px;
-          color: black;
-          display: block;
-        }
-        h3 {
-          font-size: 1.6em;
-          letter-spacing: 6px;
-          line-height: 50px;
-          margin: 0;
-          margin-left: -40px;
-          color: black;
-          display: inline-block;
-        }
-      }
-    }
-    #tileLeft {
-      color: white;
-      left: -108%;
-      .buyNotMain {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-        width: 100%;
-        height: 50px;
-        background-color: white;
-        i {
-          float: left;
-          color: black;
-          line-height: 50px;
-          margin-top: 1px;
-          margin-left: 20px;
-          font-size: 1.5em;
-          display: inline-block;
-        }
-        span {
-          position: absolute;
-          // display: inline-block;
-          font-size: 0.8em;
-          bottom: 11px;
-          // left: 100;
-          margin-left: 38px;
-          color: black;
-          display: block;
-        }
-        h3 {
-          font-size: 1.6em;
-          letter-spacing: 6px;
-          line-height: 50px;
-          margin: 0;
-          margin-left: -40px;
-          color: black;
-          display: inline-block;
-        }
-      }
-    }
-  }
+    // #tileUp {
+    //   // bottom: 108%;
+    //   // left: 0px;
+    //   // color: white;
+    //   .buyNotMain {
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     text-align: center;
+    //     width: 100%;
+    //     height: 50px;
+    //     background-color: white;
+    //     i {
+    //       float: left;
+    //       color: black;
+    //       line-height: 50px;
+    //       margin-top: 1px;
+    //       margin-left: 20px;
+    //       font-size: 1.5em;
+    //       display: inline-block;
+    //     }
+    //     span {
+    //       position: absolute;
+    //       // display: inline-block;
+    //       font-size: 0.8em;
+    //       bottom: 11px;
+    //       // left: 100;
+    //       margin-left: 38px;
+    //       color: black;
+    //       display: block;
+    //     }
+    //     h3 {
+    //       font-size: 1.6em;
+    //       letter-spacing: 6px;
+    //       line-height: 50px;
+    //       margin: 0;
+    //       margin-left: -40px;
+    //       color: black;
+    //       display: inline-block;
+    //     }
+    //   }
+    // }
+    // #tileDown {
+    //   // bottom: -108%;
+    //   // left: 0px;
+    //   // color: white;
+    //   .buyNotMain {
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     text-align: center;
+    //     width: 100%;
+    //     height: 50px;
+    //     background-color: white;
+    //     i {
+    //       float: left;
+    //       color: black;
+    //       line-height: 50px;
+    //       margin-top: 1px;
+    //       margin-left: 20px;
+    //       font-size: 1.5em;
+    //       display: inline-block;
+    //     }
+    //     span {
+    //       position: absolute;
+    //       // display: inline-block;
+    //       font-size: 0.8em;
+    //       bottom: 11px;
+    //       // left: 100;
+    //       margin-left: 38px;
+    //       color: black;
+    //       display: block;
+    //     }
+    //     h3 {
+    //       font-size: 1.6em;
+    //       letter-spacing: 6px;
+    //       line-height: 50px;
+    //       margin: 0;
+    //       margin-left: -40px;
+    //       color: black;
+    //       display: inline-block;
+    //     }
+    //   }
+    //       }
+    // #tileRight {
+    //   // color: white;
+    //   // left: 108%;
+    //   .buyNotMain {
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     text-align: center;
+    //     width: 100%;
+    //     height: 50px;
+    //     background-color: white;
+    //     i {
+    //       float: left;
+    //       color: black;
+    //       line-height: 50px;
+    //       margin-top: 1px;
+    //       margin-left: 20px;
+    //       font-size: 1.5em;
+    //       display: inline-block;
+    //     }
+    //     span {
+    //       position: absolute;
+    //       // display: inline-block;
+    //       font-size: 0.8em;
+    //       bottom: 11px;
+    //       // left: 100;
+    //       margin-left: 38px;
+    //       color: black;
+    //       display: block;
+    //     }
+    //     h3 {
+    //       font-size: 1.6em;
+    //       letter-spacing: 6px;
+    //       line-height: 50px;
+    //       margin: 0;
+    //       margin-left: -40px;
+    //       color: black;
+    //       display: inline-block;
+    //     }
+    //   }
+    // }
+    // #tileLeft {
+    //   color: white;
+    //   left: -108%;
+    //   .buyNotMain {
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     text-align: center;
+    //     width: 100%;
+    //     height: 50px;
+    //     background-color: white;
+    //     i {
+    //       float: left;
+    //       color: black;
+    //       line-height: 50px;
+    //       margin-top: 1px;
+    //       margin-left: 20px;
+    //       font-size: 1.5em;
+    //       display: inline-block;
+    //     }
+    //     span {
+    //       position: absolute;
+    //       // display: inline-block;
+    //       font-size: 0.8em;
+    //       bottom: 11px;
+    //       // left: 100;
+    //       margin-left: 38px;
+    //       color: black;
+    //       display: block;
+    //     }
+    //     h3 {
+    //       font-size: 1.6em;
+    //       letter-spacing: 6px;
+    //       line-height: 50px;
+    //       margin: 0;
+    //       margin-left: -40px;
+    //       color: black;
+    //       display: inline-block;
+    //     }
+    //   }
+    // }
+  // }
   // #heart-like{
   //   display: none;
   //   position:fixed;

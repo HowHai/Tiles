@@ -148,8 +148,24 @@ h1, h2, h3 {
         margin-left: -60px;
         color: white;
         display: inline-block; }
+  #showTile .colorOffset {
+    background-color: black; }
+    #showTile .colorOffset .tile-info {
+      color: white; }
+    #showTile .colorOffset .tile-footer {
+      background-color: white; }
+      #showTile .colorOffset .tile-footer i {
+        color: black;
+        display: inline-block; }
+        #showTile .colorOffset .tile-footer i:hover, #showTile .colorOffset .tile-footer i:active {
+          color: tomato !important; }
+        #showTile .colorOffset .tile-footer i.liked {
+          color: tomato; }
+      #showTile .colorOffset .tile-footer span {
+        color: black; }
+      #showTile .colorOffset .tile-footer h3 {
+        color: black; }
   #showTile #tileMain {
-    background-color: white;
     left: 0;
     bottom: 0px;
     margin: 0px; }
@@ -188,133 +204,6 @@ h1, h2, h3 {
   #showTile #tileLeft {
     color: white;
     left: -108%; }
-  #showTile #loadedTiles #tileUp .buyNotMain {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    width: 100%;
-    height: 50px;
-    background-color: white; }
-    #showTile #loadedTiles #tileUp .buyNotMain i {
-      float: left;
-      color: black;
-      line-height: 50px;
-      margin-top: 1px;
-      margin-left: 20px;
-      font-size: 1.5em;
-      display: inline-block; }
-    #showTile #loadedTiles #tileUp .buyNotMain span {
-      position: absolute;
-      font-size: 0.8em;
-      bottom: 11px;
-      margin-left: 38px;
-      color: black;
-      display: block; }
-    #showTile #loadedTiles #tileUp .buyNotMain h3 {
-      font-size: 1.6em;
-      letter-spacing: 6px;
-      line-height: 50px;
-      margin: 0;
-      margin-left: -40px;
-      color: black;
-      display: inline-block; }
-  #showTile #loadedTiles #tileDown .buyNotMain {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    width: 100%;
-    height: 50px;
-    background-color: white; }
-    #showTile #loadedTiles #tileDown .buyNotMain i {
-      float: left;
-      color: black;
-      line-height: 50px;
-      margin-top: 1px;
-      margin-left: 20px;
-      font-size: 1.5em;
-      display: inline-block; }
-    #showTile #loadedTiles #tileDown .buyNotMain span {
-      position: absolute;
-      font-size: 0.8em;
-      bottom: 11px;
-      margin-left: 38px;
-      color: black;
-      display: block; }
-    #showTile #loadedTiles #tileDown .buyNotMain h3 {
-      font-size: 1.6em;
-      letter-spacing: 6px;
-      line-height: 50px;
-      margin: 0;
-      margin-left: -40px;
-      color: black;
-      display: inline-block; }
-  #showTile #loadedTiles #tileRight .buyNotMain {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    width: 100%;
-    height: 50px;
-    background-color: white; }
-    #showTile #loadedTiles #tileRight .buyNotMain i {
-      float: left;
-      color: black;
-      line-height: 50px;
-      margin-top: 1px;
-      margin-left: 20px;
-      font-size: 1.5em;
-      display: inline-block; }
-    #showTile #loadedTiles #tileRight .buyNotMain span {
-      position: absolute;
-      font-size: 0.8em;
-      bottom: 11px;
-      margin-left: 38px;
-      color: black;
-      display: block; }
-    #showTile #loadedTiles #tileRight .buyNotMain h3 {
-      font-size: 1.6em;
-      letter-spacing: 6px;
-      line-height: 50px;
-      margin: 0;
-      margin-left: -40px;
-      color: black;
-      display: inline-block; }
-  #showTile #loadedTiles #tileLeft {
-    color: white;
-    left: -108%; }
-    #showTile #loadedTiles #tileLeft .buyNotMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: white; }
-      #showTile #loadedTiles #tileLeft .buyNotMain i {
-        float: left;
-        color: black;
-        line-height: 50px;
-        margin-top: 1px;
-        margin-left: 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-      #showTile #loadedTiles #tileLeft .buyNotMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: black;
-        display: block; }
-      #showTile #loadedTiles #tileLeft .buyNotMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -40px;
-        color: black;
-        display: inline-block; }
   #showTile #heart-like {
     display: none;
     position: fixed;
