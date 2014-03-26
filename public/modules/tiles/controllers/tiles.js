@@ -195,19 +195,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
          threshold:0
       });
 
-      function switchColors(colorMain, colorOffset){
-        // $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
-        // $("#tileLeft").css({"background-color":colorMain,"color":colorOffset});
-        // $("#tileRight").css({"background-color":colorMain,"color":colorOffset});
-        // $("#tileUp").css({"background-color":colorMain,"color":colorOffset});
-        // $("#tileDown").css({"background-color":colorMain,"color":colorOffset});
-
-        // $(".buyNotMain").css("background-color", colorOffset);
-        // $(".buyNotMain h3").css("color", colorMain);
-        // $(".buyNotMain i").css("color", colorMain);
-        // $(".buyNotMain span").css("color", colorMain);
-      };
-
       function animateAndMove(direction, tile, colorMain, colorOffset){
         $("#tile" + direction).addClass("center-tile", "show");
         $("#tileMain").addClass("hide");
@@ -215,24 +202,20 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         // Added this to match bg color to new tile, but needs some work with the animation
         // $("#showTile").css("background-color", colorMain);
 
-        // $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
-        // $("#buyMain").css("background-color", colorMain);
-        // $("#buyMain h3").css("color", colorOffset);
-        if($scope.votedOnTile) {
-          $("#buyMain i").css("color", "tomato");
-        } else {
-          $("#buyMain i").css("color", colorOffset);
-        }
-        // $("#buyMain span").css("color", colorOffset);
-        console.log(tile);
-        $scope.colorOffset = !$scope.colorOffset;
+        // Will need to fix this based on the current offsetting
+        // if($scope.votedOnTile) {
+        //   $("#buyMain i").css("color", "tomato");
+        // } else {
+        //   $("#buyMain i").css("color", colorOffset);
+        // }
+
         $scope.$apply(function(){$scope.tileMain = tile;});
+        $scope.colorOffset = !$scope.colorOffset;
 
         setTimeout(function(){
           move(direction);
           $("#tile" + direction).removeClass("center-tile", "show");
           $("#tileMain").removeClass("hide");
-          switchColors(colorMain,colorOffset);
         },400);
 
       };

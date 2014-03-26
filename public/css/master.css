@@ -100,7 +100,8 @@ h1, h2, h3 {
       width: 100%; }
     #showTile .tileTemplate .tile-info {
       padding: 15px 12px;
-      overflow: hidden; }
+      overflow: hidden;
+      color: #333333; }
       #showTile .tileTemplate .tile-info h1 {
         margin: 0;
         margin-top: 5px;
