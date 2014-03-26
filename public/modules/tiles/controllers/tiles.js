@@ -163,10 +163,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           else if(direction=="left" && distance > (windowWidth)*0.45){
             animateAndMove("Right", $scope.tileRight, colorMain, colorOffset);
           }
-          else if(direction=="up" && distance > (windowHeight)*0.45){
+          else if(direction=="up" && distance > (windowHeight)*0.25){
             animateAndMove("Down", $scope.tileDown, colorMain, colorOffset);
           }
-          else if(direction=="down" && distance > (windowHeight)*0.45){
+          else if(direction=="down" && distance > (windowHeight)*0.25){
             animateAndMove("Up", $scope.tileUp, colorMain, colorOffset);
           }
           else if(distance == 0 && direction == null){
@@ -193,12 +193,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#tileUp").css({"background-color":colorMain,"color":colorOffset});
         $("#tileDown").css({"background-color":colorMain,"color":colorOffset});
 
-        $("#buyMain").css("background-color", colorMain);
-        $("#buyMain h3").css("color", colorOffset);
-        $("#buyMain i").css("color", colorOffset);
-        $("#buyMain span").css("color", colorOffset);
-
-
         $(".buyNotMain").css("background-color", colorOffset);
         $(".buyNotMain h3").css("color", colorMain);
         $(".buyNotMain i").css("color", colorMain);
@@ -215,7 +209,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
         $("#buyMain").css("background-color", colorMain);
         $("#buyMain h3").css("color", colorOffset);
-        $("#buyMain i").css("color", colorOffset);
+        if($scope.votedOnTile) {
+          $("#buyMain i").css("color", "tomato");
+        } else {
+          $("#buyMain i").css("color", colorOffset);
+        }
         $("#buyMain span").css("color", colorOffset);
         console.log(tile);
         $scope.$apply(function(){$scope.tileMain = tile;});
@@ -224,10 +222,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           move(direction);
           $("#tile" + direction).removeClass("center-tile", "show");
           $("#tileMain").removeClass("hide");
-          $(".buyNotMain").css("background-color", colorOffset);
-          $(".buyNotMain h3").css("color", colorMain);
-          $(".buyNotMain i").css("color", colorMain);
-          $(".buyNotMain span").css("color", colorMain);
           switchColors(colorMain,colorOffset);
         },400);
 
@@ -272,21 +266,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
             else if (direction == 'down'){
-              $("#tileMain").css("margin-bottom", -distance);
-              $("#tileUp").css("margin-bottom", -distance);
-              $("#tileDown").css("margin-bottom", -distance);
-              $("#tileLeft").css("margin-bottom", -distance);
-              $("#tileRight").css("margin-bottom", -distance);
+              $(".tile").css("margin-bottom", -distance);
               $("#tileUp").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
 
             else if (direction == 'up'){
-              $("#tileMain").css("margin-bottom", distance);
-              $("#tileUp").css("margin-bottom", distance);
-              $("#tileDown").css("margin-bottom", distance);
-              $("#tileLeft").css("margin-bottom", distance);
-              $("#tileRight").css("margin-bottom", distance);
+              $(".tile").css("margin-bottom", distance);
               $("#tileDown").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
             }
@@ -294,16 +280,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
           else if (phase == "end"){
             //console.log(distance);
-            if(distance>(document.documentElement.clientHeight)*0.45){
-             $(".tile").css("margin", "0px");
-             $("#tileDown").css({"margin-bottom":"0px","opacity":"1"});
-             $("#tileUp").css({"margin-bottom":"0px","opacity":"1"});
-             $("#tileMain").css("margin-bottom", 0);
-             $("#tileLeft").css({"margin-bottom":"0px","opacity":"1"});
-             $("#tileRight").css({"margin-bottom":"0px","opacity":"1"});
-             $("#tileMain.fader").css("opacity", 1);
-            }
-            else{
+            
               $(".tile").addClass("slow");
               $(".tile").css("margin", "0px");
               $("#tileDown").css({"margin-bottom":"0px","opacity":"1"});
@@ -315,8 +292,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
               setTimeout(function(){
                 $(".tile").removeClass("slow");
-              },100);
-            }
+              },350);
           }
         };
     });
@@ -461,7 +437,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     socket.on('connect', function() {
 
       socket.on("takeTile", function(data){
-        console.log(data);
+        // console.log(data);
         // Find tile and remove current_user.
         for(var i = 0; i < $scope.allTiles.length; i++){
           var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
@@ -555,6 +531,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     var cookieCheck = function() {
       // console.log(JSON.parse($cookies.likes));
+      $scope.$apply(function() {
+        $scope.votedOnTile = false;
+      });
       if ($cookies.likes) {
         likeCheck = JSON.parse($cookies.likes);
         for (var i = 0; i < likeCheck.length; i++) {
