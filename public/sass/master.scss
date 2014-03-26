@@ -102,49 +102,49 @@ h1, h2, h3 {
 }
 
 // Load Screen
+
+#loadScreen {
   height: 100%;
   text-align: center;
-  font-size: 3em;
-  font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+  font-size: 1.5em;
+}
 
 // Show Tile View
+
 #showTile {
   height: 100%;
-  // height: calc(100% - 50px);
   overflow: hidden;
   position: absolute;
   text-align: center;
   max-width: 680px;
   max-height: 960px;
-  img {
+
+  .tileTemplate {
     width: 100%;
-    height: 213px;
-  }
-
-  #loadedTiles {
-    .tile {
-      width: 100%;
-      height: 100%;
-      float: left;
-      bottom: 0px;
-      margin: 0px;
-      position: absolute;
-      background-color: black;
-      overflow: hidden;
-      .brand{
-          position:absolute;
-          top: 0px;
-          left: 10px;
-          height: 50px;
-          font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
-          color: rgba(255,255,255,0.8);
-          text-align: left;
-          font-size: 1.5em;
-          font-weight: 300;
-          padding-top: 2px; 
-        }
+    height: 100%;
+    bottom: 0px;
+    margin: 0px;
+    float: left;
+    position: absolute;
+    overflow: hidden;
+    // background-color: black;
+    h2 {
+      position:absolute;
+      margin: 4px 0;
+      top: 0px;
+      left: 10px;
+      height: 50px;
+      font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+      color: rgba(255,255,255,0.8);
+      text-align: left;
+      font-size: 1.5em;
+      font-weight: 300;
+      padding-top: 2px;
     }
-
+    img {
+      width: 100%;
+      // height: 213px;
+    }
     .tile-info {
       padding: 15px 12px;
       overflow: hidden; 
@@ -155,22 +155,114 @@ h1, h2, h3 {
       }
       .tile-desc {
         margin-top: 10px;
-        // font-style: italic;
         line-height: 20px;
         max-height: 200px; 
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 10;
         position: relative;
-        // #white-fade {
-        //   position: absolute;
-        //   background-image: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,0.1), rgba(255,255,255,0.6), white);
-        //   width: 100%;
-        //   height: 100%;
-        //   bottom: -20px;
-        // }
+        // -webkit-box-orient: vertical;
+        // -webkit-line-clamp: 10;
+        // overflow: hidden;
       }
     }
+    .tile-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 50px;
+      background-color: black;
+      i {
+        float: left;
+        color: white;
+        line-height: 50px;
+        margin-top: 1px;
+        padding: 0 20px;
+        font-size: 1.5em;
+        display: inline-block;
+        &:hover, &:active {
+          color: tomato !important;
+        }
+        &.liked {
+          color: tomato;
+        }
+      }
+      span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: white;
+        display: block;
+      }
+      h3 {
+        font-size: 1.6em;
+        letter-spacing: 6px;
+        line-height: 50px;
+        margin: 0;
+        margin-left: -60px;
+        color: white;
+        display: inline-block;
+      }
+    }
+  }
+
+  #tileMain {
+    background-color: white;
+    left: 0;
+    bottom: 0px;
+    margin: 0px;
+  }
+
+  #loadedTiles {
+    // .tile {
+      // width: 100%;
+      // height: 100%;
+      // float: left;
+      // bottom: 0px;
+      // margin: 0px;
+      // position: absolute;
+      // background-color: black;
+      // overflow: hidden;
+      // .brand{
+          // position:absolute;
+    //       top: 0px;
+    //       left: 10px;
+    //       height: 50px;
+    //       font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+    //       color: rgba(255,255,255,0.8);
+    //       text-align: left;
+    //       font-size: 1.5em;
+    //       font-weight: 300;
+    //       padding-top: 2px; 
+    //     }
+    // }
+
+    // .tile-info {
+    //   // padding: 15px 12px;
+    //   // overflow: hidden; 
+    //   // h1 {
+    //   //   margin: 0;
+    //   //   margin-top: 5px;
+    //   //   font-size: 1.6em;
+    //   // }
+    //   .tile-desc {
+    //     // margin-top: 10px;
+    //     // font-style: italic;
+    //     // line-height: 20px;
+    //     max-height: 200px; 
+    //     overflow: hidden;
+    //     -webkit-box-orient: vertical;
+    //     -webkit-line-clamp: 10;
+    //     position: relative;
+    //     // #white-fade {
+    //     //   position: absolute;
+    //     //   background-image: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,0.1), rgba(255,255,255,0.6), white);
+    //     //   width: 100%;
+    //     //   height: 100%;
+    //     //   bottom: -20px;
+    //     // }
+    //   }
+    // }
 
     #tileMain {
       background-color: white;
@@ -651,7 +743,6 @@ h1, h2, h3 {
       }
     }
   }
-
 
   .show {
     opacity: 1;

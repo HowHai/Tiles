@@ -59,6 +59,11 @@ h1, h2, h3 {
 #ui-view {
   height: 100%; }
 
+#loadScreen {
+  height: 100%;
+  text-align: center;
+  font-size: 1.5em; }
+
 #showTile {
   height: 100%;
   overflow: hidden;
@@ -72,20 +77,17 @@ h1, h2, h3 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-  #showTile img {
-    width: 100%;
-    height: 213px; }
-  #showTile #loadedTiles .tile {
+  #showTile .tileTemplate {
     width: 100%;
     height: 100%;
-    float: left;
     bottom: 0px;
     margin: 0px;
+    float: left;
     position: absolute;
-    background-color: black;
     overflow: hidden; }
-    #showTile #loadedTiles .tile .brand {
+    #showTile .tileTemplate h2 {
       position: absolute;
+      margin: 4px 0;
       top: 0px;
       left: 10px;
       height: 50px;
@@ -95,21 +97,60 @@ h1, h2, h3 {
       font-size: 1.5em;
       font-weight: 300;
       padding-top: 2px; }
-  #showTile #loadedTiles .tile-info {
-    padding: 15px 12px;
-    overflow: hidden; }
-    #showTile #loadedTiles .tile-info h1 {
-      margin: 0;
-      margin-top: 5px;
-      font-size: 1.6em; }
-    #showTile #loadedTiles .tile-info .tile-desc {
-      margin-top: 10px;
-      line-height: 20px;
-      max-height: 200px;
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 10;
-      position: relative; }
+    #showTile .tileTemplate img {
+      width: 100%; }
+    #showTile .tileTemplate .tile-info {
+      padding: 15px 12px;
+      overflow: hidden; }
+      #showTile .tileTemplate .tile-info h1 {
+        margin: 0;
+        margin-top: 5px;
+        font-size: 1.6em; }
+      #showTile .tileTemplate .tile-info .tile-desc {
+        margin-top: 10px;
+        line-height: 20px;
+        max-height: 200px;
+        position: relative; }
+    #showTile .tileTemplate .tile-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      height: 50px;
+      background-color: black; }
+      #showTile .tileTemplate .tile-footer i {
+        float: left;
+        color: white;
+        line-height: 50px;
+        margin-top: 1px;
+        padding: 0 20px;
+        font-size: 1.5em;
+        display: inline-block; }
+        #showTile .tileTemplate .tile-footer i:hover, #showTile .tileTemplate .tile-footer i:active {
+          color: tomato !important; }
+        #showTile .tileTemplate .tile-footer i.liked {
+          color: tomato; }
+      #showTile .tileTemplate .tile-footer span {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 11px;
+        margin-left: 38px;
+        color: white;
+        display: block; }
+      #showTile .tileTemplate .tile-footer h3 {
+        font-size: 1.6em;
+        letter-spacing: 6px;
+        line-height: 50px;
+        margin: 0;
+        margin-left: -60px;
+        color: white;
+        display: inline-block; }
+  #showTile #tileMain {
+    background-color: white;
+    left: 0;
+    bottom: 0px;
+    margin: 0px; }
   #showTile #loadedTiles #tileMain {
     background-color: white;
     left: 0;
@@ -503,4 +544,4 @@ h1, h2, h3 {
     opacity: 1;
     z-index: 100; }
   #showTile .slow {
-    transition: 0.35s; }
+    transition: 0.2s; }
