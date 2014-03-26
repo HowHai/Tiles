@@ -6,6 +6,11 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     var likeCheck;
     var socket = io.connect();
 
+    //////////////////////////////
+    ////////FRONT END TEAM/////////
+    //////////////////////////////
+
+    //On load to generate first set of tiles
     $scope.loadTiles = function() {
       $scope.nav_open = false;
       $http.get('/tiles/categories', null)
@@ -36,57 +41,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           }
       });
-    }
+    };
 
-    //
-    // Like feature
-    //
-    $scope.updateLikes = function() {
-
-      // Save user's likes history
-      var likesArray;
-      var count = 0;
-      if ($cookies.likes) {
-        likesArray = JSON.parse($cookies.likes);
-        // console.log("created");
-      } else {
-        likesArray = [];
-        // console.log('likesss');
-      }
-
-      if (likesArray.length > 0) {
-        for (var i = 0; i < likesArray.length; i++) {
-          if (likesArray[i] == $scope.tileMain._id){
-            // toastr.success();
-            // console.log("Already Voted");
-            count = 1;
-            break;
-          }
-        }
-      }
-
-      if(count == 0){
-
-        $("#heart-like").fadeIn();
-         setTimeout(function(){
-          $("#heart-like").fadeOut();
-         },600);
-        // console.log("You voted!");
-        likesArray.push($scope.tileMain._id);
-        $cookies.likes = angular.toJson(likesArray);
-
-        $http.put('/tiles/update', { tileId: $scope.tileMain._id })
-          .success(function(data){
-            $scope.tileMain = data;
-          });
-
-        socket.emit('sendLike', $scope.tileMain);
-        // toastr.success("Liked!");
-        
-        $scope.votedOnTile = true;
-      };
-    }
-    // endLikes
 
     // Favorite feature
     $scope.addFavorite = function() {
@@ -662,6 +618,59 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       });
     }
     //This is for the RADAR
+
+    //////////////////////////////
+    ////////BACK END TEAM/////////
+    //////////////////////////////
+    //
+    // Like feature
+    //
+    $scope.updateLikes = function() {
+
+      // Save user's likes history
+      var likesArray;
+      var count = 0;
+      if ($cookies.likes) {
+        likesArray = JSON.parse($cookies.likes);
+        // console.log("created");
+      } else {
+        likesArray = [];
+        // console.log('likesss');
+      }
+
+      if (likesArray.length > 0) {
+        for (var i = 0; i < likesArray.length; i++) {
+          if (likesArray[i] == $scope.tileMain._id){
+            // toastr.success();
+            // console.log("Already Voted");
+            count = 1;
+            break;
+          }
+        }
+      }
+
+      if(count == 0){
+
+        $("#heart-like").fadeIn();
+         setTimeout(function(){
+          $("#heart-like").fadeOut();
+         },600);
+        // console.log("You voted!");
+        likesArray.push($scope.tileMain._id);
+        $cookies.likes = angular.toJson(likesArray);
+
+        $http.put('/tiles/update', { tileId: $scope.tileMain._id })
+          .success(function(data){
+            $scope.tileMain = data;
+          });
+
+        socket.emit('sendLike', $scope.tileMain);
+        // toastr.success("Liked!");
+        
+        $scope.votedOnTile = true;
+      };
+    };
+    // endLikes
 
 
 
