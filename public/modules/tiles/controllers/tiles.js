@@ -35,14 +35,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           }
 
-          // Check db for previous favorite
-          if (user && user.favorites.length > 0) {
-            for (var i = 0; i < user.favorites.length; i++) {
-              if (user.favorites[i] == $scope.tileMain._id) {
-                $scope.favoriteTile = true;
-              } 
-            }
-          }
+          
       });
     }
 
@@ -91,44 +84,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     }
     // endLikes
 
-  //FAVORITES
-    $scope.addFavorite = function() {
-      var count = 0;
-      if (user && user.favorites.length > 0) {
-        console.log(user.favorites);
-        console.log($scope.tileMain._id);
-        for (var i = 0; i < user.favorites.length; i++) {
-          console.log(user.favorites.indexOf($scope.tileMain._id));
-
-          if (user.favorites[i] == $scope.tileMain._id) {
-          console.log("FOund!");          
-            var index = user.favorites.indexOf($scope.tileMain._id)
-            user.favorites.splice(index, 1);
-            $http.put('/users/favorite', {tileId: $scope.tileMain._id, removeFavorite: true})
-              .success(function(data) {
-                // Update tile for current user here.
-                console.log("SUCCESSSS")
-                console.log(data);
-              });   
-            console.log('removed; length: ' + user.favorites.length);
-            $scope.favoriteTile = false;
-            count = 1;
-            break;
-          };
-        };   
-      }; 
-      if (count == 0) {
-        $http.put('/users/favorite', {tileId: $scope.tileMain._id})
-          .success(function(data) {
-          $scope.favoriteTile = true;
-          user = data;
-          console.log(data);
-          console.log('added; length: ' + user.favorites.length);
-          count = 1;
-        });
-      };
-    };
-  // FAVORTIES END
+  
 
     // Socket.io testing
     socket.on('connect', function() {
