@@ -56,20 +56,20 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     }
 
     $scope.moveUp = function() {
-      cookieCheck();
+      
       $scope.currentCategory = categoryRotator($scope.currentCategory, "up");
       resetTiles();
     }
 
     $scope.moveDown = function() {
-      cookieCheck();
+      
       $scope.currentCategory = categoryRotator($scope.currentCategory, "down");
       resetTiles();
     }
 
     $scope.moveLeft = function() {
       $scope.hPosition -= 1;
-      cookieCheck();
+      
 
       if ($scope.hPosition < 1) {
         $http.get('/tiles/categories', null)
@@ -95,7 +95,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     $scope.moveRight = function() {
       $scope.hPosition += 1;
-      cookieCheck();
+      
 
       if (($scope.allTiles[$scope.currentCategory].length - 1) - $scope.hPosition < 1) {
         $http.get('/tiles/categories', null)
@@ -200,30 +200,38 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       };
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
-        $("#tile" + direction).addClass("center-tile", "show");
-        $("#tileMain").addClass("hide");
-        showOccupied();
-        // Added this to match bg color to new tile, but needs some work with the animation
-        // $("#showTile").css("background-color", colorMain);
+        cookieCheck();
+        // $("#tile" + direction).addClass("center-tile", "show");
+        // $("#tileMain").addClass("hide");
+        // showOccupied();
+        // // Added this to match bg color to new tile, but needs some work with the animation
+        // // $("#showTile").css("background-color", colorMain);
 
-        $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
-        $("#buyMain").css("background-color", colorMain);
-        $("#buyMain h3").css("color", colorOffset);
-        if($scope.votedOnTile) {
-          $("#buyMain i").css("color", "tomato");
-        } else {
-          $("#buyMain i").css("color", colorOffset);
-        }
-        $("#buyMain span").css("color", colorOffset);
+        // $("#tileMain").css({"background-color":colorOffset,"color":colorMain});
+        // $("#buyMain").css("background-color", colorMain);
+        // $("#buyMain h3").css("color", colorOffset);
+        // // if($scope.votedOnTile) {
+        // //   $("#buyMain i").css("color", "tomato");
+        // // } else {
+        // //   $("#buyMain i").css("color", colorOffset);
+        // // }
+        // $("#buyMain span").css("color", colorOffset);
         console.log(tile);
         $scope.$apply(function(){$scope.tileMain = tile;});
+        $("#tileMain").css("-webkit-transform","translate(0px,0px");
+
 
         setTimeout(function(){
+          $("#tileMain").show();
           move(direction);
-          $("#tile" + direction).removeClass("center-tile", "show");
-          $("#tileMain").removeClass("hide");
+          $("#tileDown").css("-webkit-transform","translate(0px,0px");
+          $("#tileUp").css("-webkit-transform","translate(0px,0px");
+          $("#tileLeft").css("-webkit-transform","translate(0px,0px");
+          $("#tileRight").css("-webkit-transform","translate(0px,0px");
+          // $("#tile" + direction).removeClass("center-tile", "show");
+          // $("#tileMain").removeClass("hide");
           switchColors(colorMain,colorOffset);
-        },400);
+        },1000);
 
       };
 
@@ -251,48 +259,116 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       //SWIPE 2 FUNCTION FOR ANIMATION
       function swipe2(event, phase, direction, distance) {
           // console.log( phase +" you have swiped " + distance + "px in direction:" + direction );
+          var windowHeight = document.documentElement.clientHeight;
+          var windowWidth = document.documentElement.clientWidth;
           $(".tile").removeClass("slow");
           $("#tileMain").addClass("fader");
           if(phase == "move"){
             if(direction == 'right'){
-              $(".tile").css("margin-left", distance);
+              // $(".tile").css("margin-left", distance);
+              $(".tile").css("-webkit-transform","translate("+distance+"px,0px)");
               $("#tileLeft").css("opacity", (1.5*distance)/document.documentElement.clientWidth);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
+              var rightpx = distance;
 
             }
             else if (direction == 'left'){
-              $(".tile").css("margin-left", -distance);
+              // $(".tile").css("margin-left", -distance);
+              $(".tile").css("-webkit-transform","translate("+(-distance)+"px,0px)");
               $("#tileRight").css("opacity", (1.5*distance)/document.documentElement.clientWidth);
               $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
+              var leftpx = distance;
             }
             else if (direction == 'down'){
-              $(".tile").css("margin-bottom", -distance);
-              $("#tileUp").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
-              $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
+              // $(".tile").css("margin-bottom", -distance);
+              $(".tile").css("-webkit-transform","translate(0px,"+distance+"px)");
+              $("#tileUp").css("opacity", (1*distance)/document.documentElement.clientHeight);
+              $("#tileMain.fader").css("opacity", 1-((1*distance)/document.documentElement.clientWidth));
+              var downpx = distance;
             }
 
             else if (direction == 'up'){
-              $(".tile").css("margin-bottom", distance);
-              $("#tileDown").css("opacity", (1.5*distance)/document.documentElement.clientHeight);
-              $("#tileMain.fader").css("opacity", 1-((1.5*distance)/document.documentElement.clientWidth));
+              // $(".tile").css("margin-bottom", distance);
+              $(".tile").css("-webkit-transform","translate(0px,"+(-distance)+"px)");
+              $("#tileDown").css("opacity", (1*distance)/document.documentElement.clientHeight);
+              $("#tileMain.fader").css("opacity", 1-((1*distance)/document.documentElement.clientWidth));
+              var uppx = distance;
             }
 
           }
           else if (phase == "end"){
             //console.log(distance);
             
+              if((direction=="right" && distance < (windowWidth)*0.45)||(direction=="left" && distance < (windowWidth)*0.45)||
+                (direction=="down" && distance < (windowHeight)*0.25)||(direction=="up" && distance < (windowHeight)*0.25)){
               $(".tile").addClass("slow");
-              $(".tile").css("margin", "0px");
-              $("#tileDown").css({"margin-bottom":"0px","opacity":"1"});
-              $("#tileUp").css({"margin-bottom":"0px","opacity":"1"});
-              $("#tileMain").css("margin-bottom", 0);
-              $("#tileLeft").css({"margin-bottom":"0px","opacity":"1"});
-              $("#tileRight").css({"margin-bottom":"0px","opacity":"1"});
+              // $(".tile").css("margin", "0px");
+              $(".tile").css("-webkit-transform","translate("+windowWidth+leftpx-rightpx+"px,"+windowHeight+ downpx-uppx+"px");
+              $("#tileDown").css("opacity","1");
+              $("#tileUp").css("opacity","1");
+              // $("#tileMain").css("margin-bottom", 0);
+              $("#tileLeft").css("opacity","1");
+              $("#tileRight").css("opacity","1");
               $("#tileMain.fader").css("opacity", 1);
 
               setTimeout(function(){
                 $(".tile").removeClass("slow");
               },350);
+            }
+            else{
+              if(direction=="right"){
+                console.log(windowWidth);
+                $("#tileLeft").css("opacity", 1);
+                $("#tileLeft").css("-webkit-transform","translate("+(windowWidth+26)+"px,0px");
+
+                $("#tileMain").hide();
+
+                $("#tileDown").css("-webkit-transform","translate(0px,0px");
+                $("#tileUp").css("-webkit-transform","translate(0px,0px");
+                $("#tileRight").css("-webkit-transform","translate(0px,0px");
+
+                $("#tileMain").css("opacity", 1);
+              }
+              else if(direction=="left"){
+                console.log(windowWidth);
+                $("#tileRight").css("-webkit-transform","translate(-"+(windowWidth+26)+"px,0px");
+                $("#tileRight").css("opacity", 1);
+
+                $("#tileMain").hide();
+
+                $("#tileDown").css("-webkit-transform","translate(0px,0px");
+                $("#tileUp").css("-webkit-transform","translate(0px,0px");
+                $("#tileLeft").css("-webkit-transform","translate(0px,0px");
+                
+                $("#tileMain").css("opacity", 1);
+              }
+              else if(direction=="up"){
+                console.log(windowWidth);
+                $("#tileDown").css("-webkit-transform","translate("+(windowHeight+26)+"px,0px");
+                $("#tileDown").css("opacity", 1);
+
+                $("#tileMain").hide();
+
+                $("#tileLeft").css("-webkit-transform","translate(0px,0px");
+                $("#tileUp").css("-webkit-transform","translate(0px,0px");
+                $("#tileRight").css("-webkit-transform","translate(0px,0px");
+                
+                $("#tileMain").css("opacity", 1);
+              }
+              else if(direction=="down"){
+                console.log(windowWidth);
+                $("#tileUp").css("-webkit-transform","translate(-"+(windowHeight+26)+"px,0px");
+                $("#tileUp").css("opacity", 1);
+
+                $("#tileMain").hide();
+
+                $("#tileDown").css("-webkit-transform","translate(0px,0px");
+                $("#tileRight").css("-webkit-transform","translate(0px,0px");
+                $("#tileLeft").css("-webkit-transform","translate(0px,0px");
+                
+                $("#tileMain").css("opacity", 1);
+              }
+            }
           }
         };
     });
@@ -534,6 +610,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       $scope.$apply(function() {
         $scope.votedOnTile = false;
       });
+      console.log($scope.votedOnTile);
       if ($cookies.likes) {
         likeCheck = JSON.parse($cookies.likes);
         for (var i = 0; i < likeCheck.length; i++) {
@@ -544,6 +621,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
         }
       }
+      console.log($scope.votedOnTile);
     }
 
 

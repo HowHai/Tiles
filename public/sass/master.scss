@@ -199,9 +199,6 @@ h1, h2, h3 {
           padding: 0 20px;
           font-size: 1.5em;
           display: inline-block;
-          &:hover, &:active {
-            color: tomato !important;
-          }
           &.liked {
             color: tomato;
           }
@@ -254,8 +251,7 @@ h1, h2, h3 {
       }
     }
     #tileLeft.center-tile, #tileRight.center-tile, #tileUp.center-tile, #tileDown.center-tile {
-      left: 0%;
-      bottom: 0%;
+      -webkit-transform: translate(100%,0px);
     }
     #tileUp {
       bottom: 108%;
