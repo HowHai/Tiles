@@ -1,0 +1,11 @@
+<section data-ng-init="find()">
+  <div class="page-header">
+    <h1>Favorites</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="favorite in favorites" data-ng-href="#!/favorites/{{favorite._id}}" class="list-group-item">
+      <p class="list-group-item-heading">{{favorite.name}}</p>
+      <p class="list-group-item-text">Category: {{favorite.category}}</p>
+    </a>
+  </div>
+</section>

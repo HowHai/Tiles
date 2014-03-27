@@ -5,24 +5,24 @@
  */
 var mongoose = require('mongoose'),
 	passport = require('passport'),
-	User = mongoose.model('User');
+	User = mongoose.model('User'),
+	Tile = mongoose.model('Tile');
 
 // Add favorite tile.
 exports.addFavorite = function(req, res){
 // Find user and add tile to their favorite list.
 	var currentUserId = req.user._id;
 
-	if (req.user.favorites.indexOf(req.body.tileId)) {
+	if (req.user.favorites.indexOf(req.body.tileId) == -1) {
 		User.update({_id: currentUserId}, {$push: { favorites: req.body.tileId }}, function(error, user){
 			if (error) {
 				console.log(error);
 			} else {
-				console.log(user);
-				res.json(user);
+				User.findById(req.user._id, {}, function(error, user){
+					res.json(user);
+				})
 			}
 		});
-	} else {
-		res.json(req.user);
 	}
 
 	if (req.body.removeFavorite){
@@ -122,6 +122,23 @@ exports.userByID = function(req, res, next, id) {
 		req.profile = user;
 		next();
 	});
+};
+
+// Exports list of favorites
+exports.favorites = function(req, res) {
+	var currentUserId = req.user._id;
+	var favorites = req.user.favorites;
+
+  // Find tiles inside user.favorites array
+  	Tile.find({_id: { $in : favorites }} ).exec(function(err, user) {
+    if (err) {
+      res.render('error', {
+        status: 500
+      });
+    } else {
+      res.jsonp(user);
+    }
+  });
 };
 
 /**
