@@ -394,7 +394,7 @@ h1, h2, h3 {
       font-size: 0.7em;
       font-weight: 300;
       padding-top: 2px;
-      button{
+      .list-button{
         position: fixed;
         top: 10px;
         right: 10px;
@@ -643,6 +643,84 @@ h1, h2, h3 {
     color: white;
     // margin-top: 12px;
     // margin-bottom: 4px;
+  }
+}
+
+///styles for favorite list page
+
+#favorites{
+
+  .page-header{
+    font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+    margin: 0px;
+    position: fixed;
+    z-index: 10;
+    background-color: white;
+    height: 94px;
+    width: 100% !important;
+    .control{
+      background-color: black;
+      height: 30px;
+      .brand{
+        font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+        padding-left: 10px;
+        color: rgba(255,255,255,0.8);
+        font-size: 1.5em;
+      }
+      a{
+      font-size: 1.4em;
+      padding-right: 10px;
+      color: white;
+      text-align: right;
+    }
+    }
+    h1{
+      margin-top: 10px;
+      padding-left: 5px;
+      text-align: center;
+    }
+    
+  }
+
+  .list-group{
+    padding-top: 94px;
+    .list-group-item{
+      border-radius: 0px;
+      border: none;
+      color: black;
+      .thumb-image{
+        height: 62px;
+        width: 44px;
+        margin-right: 10px;
+        margin-left: 10px;
+        float: left;
+        background-size: auto 44px;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .list-group-item-heading{
+        padding-top: 5px;
+      }
+      .list-group-item-text{
+        padding-bottom: 5px;
+      }
+      .likes{
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 2px;
+        margin-left: 16px;
+        display: block;
+      }
+      
+      &.dark{
+          background-color: black;
+          color: white;
+          p{
+            color: white;
+          }
+        }
+      
+    }
   }
 }
 

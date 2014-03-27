@@ -272,7 +272,7 @@ h1, h2, h3 {
       font-size: 0.7em;
       font-weight: 300;
       padding-top: 2px; }
-      #showTile #navigation-instructions #nav-header button {
+      #showTile #navigation-instructions #nav-header .list-button {
         position: fixed;
         top: 10px;
         right: 10px;
@@ -464,3 +464,59 @@ h1, h2, h3 {
     color: white; }
   .signin h3 {
     color: white; }
+
+#favorites .page-header {
+  font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+  margin: 0px;
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+  height: 94px;
+  width: 100% !important; }
+  #favorites .page-header .control {
+    background-color: black;
+    height: 30px; }
+    #favorites .page-header .control .brand {
+      font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+      padding-left: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.5em; }
+    #favorites .page-header .control a {
+      font-size: 1.4em;
+      padding-right: 10px;
+      color: white;
+      text-align: right; }
+  #favorites .page-header h1 {
+    margin-top: 10px;
+    padding-left: 5px;
+    text-align: center; }
+#favorites .list-group {
+  padding-top: 94px; }
+  #favorites .list-group .list-group-item {
+    border-radius: 0px;
+    border: none;
+    color: black; }
+    #favorites .list-group .list-group-item .thumb-image {
+      height: 62px;
+      width: 44px;
+      margin-right: 10px;
+      margin-left: 10px;
+      float: left;
+      background-size: auto 44px;
+      background-position: center;
+      background-repeat: no-repeat; }
+    #favorites .list-group .list-group-item .list-group-item-heading {
+      padding-top: 5px; }
+    #favorites .list-group .list-group-item .list-group-item-text {
+      padding-bottom: 5px; }
+    #favorites .list-group .list-group-item .likes {
+      position: absolute;
+      font-size: 0.8em;
+      bottom: 2px;
+      margin-left: 16px;
+      display: block; }
+    #favorites .list-group .list-group-item.dark {
+      background-color: black;
+      color: white; }
+      #favorites .list-group .list-group-item.dark p {
+        color: white; }

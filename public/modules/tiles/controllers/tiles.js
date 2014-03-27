@@ -1,5 +1,17 @@
 'use strict';
 
+angular.module('mean.tiles').filter('capitalize', function() {
+ return function(input, scope) {
+ if (input!=null)
+  var words = input.split(' ')
+  var array = []
+  for (var i=0; i<words.length; ++i) {
+    array.push(words[i].charAt(0).toUpperCase() + words[i].toLowerCase().slice(1))
+  }
+  return array.join(' ')
+ }
+});
+
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
