@@ -140,7 +140,8 @@ h1, h2, h3 {
       text-align: center;
       width: 100%;
       height: 50px;
-      background-color: black; }
+      background-color: black;
+      box-shadow: 0 8px 43px 46px white; }
       #showTile .tileTemplate .tile-footer i {
         float: left;
         color: white;
@@ -173,7 +174,8 @@ h1, h2, h3 {
     #showTile .colorOffset .tile-info {
       color: white; }
     #showTile .colorOffset .tile-footer {
-      background-color: white; }
+      background-color: white;
+      box-shadow: 0 8px 43px 46px black; }
       #showTile .colorOffset .tile-footer i {
         color: black; }
         #showTile .colorOffset .tile-footer i:hover, #showTile .colorOffset .tile-footer i:active {
