@@ -1,5 +1,17 @@
 'use strict';
 
+angular.module('mean.tiles').filter('capitalize', function() {
+ return function(input, scope) {
+ if (input!=null)
+  var words = input.split(' ')
+  var array = []
+  for (var i=0; i<words.length; ++i) {
+    array.push(words[i].charAt(0).toUpperCase() + words[i].toLowerCase().slice(1))
+  }
+  return array.join(' ')
+ }
+});
+
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
@@ -60,14 +72,15 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           }
 
-          // setTimeout(function(){
+          setTimeout(function(){
+          // $("#loadScreen .load-text").css("-webkit-transform", "translate(0px,156%)");
             $scope.$apply(function(){
               $scope.loadComplete = true;
             });
-            // setTimeout(function(){
+            setTimeout(function(){
               $("#loadScreen").hide();
-            // },1500);
-          // },1000);
+            },1500);
+          },10);
 
 
           // // for ng-repeat
@@ -250,7 +263,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $scope.$apply(function(){$scope.tileMain = tile;});
         $scope.colorOffset = !$scope.colorOffset;
 
-        if ($scope.tileMain.prize = "true") {
+        if ($scope.tileMain.prize == "true") {
           $scope.prizeTile = true;
         } else {
           $scope.prizeTile = false;

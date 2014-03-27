@@ -1,11 +1,21 @@
-<section data-ng-init="find()">
-  <div class="page-header">
-    <h1>Favorites</h1>
+<section id="favorites" data-ng-init="find()">
+  <div class="page-header col-xs-12">
+    <div class="control col-xs-12">
+    <div class="brand pull-left">gloss</div>
+    <a class="col-xs-4 pull-right"><i class="fa fa-angle-left"></i>&nbsp;BACK</a>
+  </div>
+    <h1 class="col-xs-12">Favorites</h1>
   </div>
   <div class="list-group">
-    <a data-ng-repeat="favorite in favorites" data-ng-href="#!/favorites/{{favorite._id}}" class="list-group-item">
-      <p class="list-group-item-heading">{{favorite.name}}</p>
-      <p class="list-group-item-text">Category: {{favorite.category}}</p>
+    <a ng-class-odd="'dark'" data-ng-repeat="favorite in favorites" data-ng-href="#!/favorites/{{favorite._id}}" class="list-group-item col-xs-12">
+      <div class="thumb-image col-xs-3" style="background-image: url(http://storage.googleapis.com/gloss/tiles/{{favorite.imgUrl}})"></div>
+      <div class="col-xs-9">
+      <p class="list-group-item-heading">{{favorite.name | capitalize}}</p>
+      <p class="list-group-item-text">
+        {{favorite.category}}
+        <span class="pull-right"><i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ></i><span class="likes">{{favorite.likes}}</span></span>
+      </p>
+      </div>
     </a>
   </div>
 </section>
