@@ -114,6 +114,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       $scope.hPosition -= 1;
       cookieCheck();
 
+      console.log($scope.allTiles);
       if ($scope.hPosition < 2) {
 
         $scope.loadMoreTiles('left');
@@ -145,6 +146,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     $scope.moveRight = function() {
       $scope.hPosition += 1;
       cookieCheck();
+      console.log($scope.allTiles);
 
       if (($scope.allTiles[$scope.currentCategory].length - 1) - $scope.hPosition < 2) {
 
