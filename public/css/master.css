@@ -66,7 +66,7 @@ h1, h2, h3 {
   z-index: 100;
   text-align: center;
   font-size: 1.5em;
-  background-color: #58c9f3;
+  background-color: tomato;
   color: rgba(255, 255, 255, 0.6);
   font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
   font-weight: 300;
@@ -284,15 +284,28 @@ h1, h2, h3 {
         background-position: center;
         background-repeat: no-repeat; }
     #showTile #navigation-instructions #navi-content {
-      margin-top: 50px;
+      margin-top: 30px;
       position: absolute;
       z-index: 10;
       height: 83%;
       top: 33px;
       left: 8%;
       width: 83%; }
+      #showTile #navigation-instructions #navi-content #welcome-screen img {
+        width: 50px;
+        -webkit-filter: invert(100%);
+        filter: invert(100%); }
       #showTile #navigation-instructions #navi-content #welcome-screen h2 {
-        font-size: 1em; }
+        font-size: 0.4em;
+        margin-top: 0;
+        margin-bottom: 15%; }
+      #showTile #navigation-instructions #navi-content #welcome-screen h1 {
+        opacity: 0.5;
+        font-size: 0.8em;
+        font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+        font-weight: 300; }
+        #showTile #navigation-instructions #navi-content #welcome-screen h1 span {
+          font-size: 1.2em; }
       #showTile #navigation-instructions #navi-content #navi-text {
         margin-top: 7%;
         width: 100%;
@@ -395,7 +408,7 @@ h1, h2, h3 {
             font-weight: 300;
             text-transform: uppercase;
             font-size: 0.5em;
-            margin-bottom: 30px; }
+            margin-bottom: 20px; }
             #showTile #navigation-instructions .kiss.buttons button.share a {
               color: white; }
               #showTile #navigation-instructions .kiss.buttons button.share a:active, #showTile #navigation-instructions .kiss.buttons button.share a:hover {

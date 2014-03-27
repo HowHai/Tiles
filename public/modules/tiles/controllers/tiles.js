@@ -61,11 +61,14 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
 
           setTimeout(function(){
-            $scope.loadComplete = true;
+            $scope.$apply(function(){
+              $scope.loadComplete = true;
+            });
             setTimeout(function(){
               $("#loadScreen").hide();
             },1500);
           },1000);
+
 
           // // for ng-repeat
           // $scope.loadedTiles = [
