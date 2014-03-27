@@ -102,6 +102,8 @@ exports.loadmore = function(req, res){
   console.log(allTiles[0].length);
   var startingPoint = allTiles.length + 1;
   var endingPoint = allTiles.length + allTiles.length + 1;
+  console.log("start:" + startingPoint);
+  console.log("End:" + endingPoint);
 
   Category.find({}, {}, function(error, categories){
     Category.populate(categories, {
@@ -166,8 +168,8 @@ exports.categories = function(req, res){
   // TODO: Errors handling
 
   // TODO: Uncomment this after done with testing.
-  if(req.cookies.savedTiles){
-  // if(false){
+  // if(req.cookies.savedTiles){
+  if(false){
     var tilesArray = JSON.parse(req.cookies.savedTiles)
     var savedTilesArray = [];
 
@@ -194,8 +196,7 @@ exports.categories = function(req, res){
     Category.find({}, {}, function(error, categories){
       Category.populate(categories, {
         path: "tiles",
-        model: Tile,
-        options: { _id: { $in: ["53323f3ae212f9686cede7b8", "53323f3ae212f9686cede7c0"] }}
+        model: Tile
       }, function(error, categories){
         // Populate comments data within each tile.
         Tile.populate(categories, {
@@ -217,6 +218,7 @@ exports.categories = function(req, res){
           // var categoriesArray = categories.map(function(cat) { return cat.tiles });
 
           // Get all tiles'ID and push to new array.
+          // Cookies
           var allTilesId = [];
           for(var i = 0; i < categoriesArray.length; i++) {
             var getTilesId = categoriesArray[i].map(function(tilee) {
@@ -227,10 +229,9 @@ exports.categories = function(req, res){
           // Store user's grid to cookie.
           res.cookie("savedTiles", JSON.stringify(allTilesId));
 
-         
+
 
           // Randomize category
-          categoriesArray = (categoriesArray);
           // categoriesArray = (categoriesArray);
           res.json(categoriesArray);
         });
