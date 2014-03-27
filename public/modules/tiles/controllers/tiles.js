@@ -249,11 +249,18 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
         $scope.$apply(function(){$scope.tileMain = tile;});
         $scope.colorOffset = !$scope.colorOffset;
-        if ($scope.currentCategory == 2 && $scope.hPosition == 8) {
+
+        if ($scope.tileMain.prize = "true") {
           $scope.prizeTile = true;
         } else {
           $scope.prizeTile = false;
         };
+
+        // if ($scope.currentCategory == 2 && $scope.hPosition == 8) {
+        //   $scope.prizeTile = true;
+        // } else {
+        //   $scope.prizeTile = false;
+        // };
 
         setTimeout(function(){
           move(direction);
