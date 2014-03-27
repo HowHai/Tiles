@@ -38,14 +38,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           }
 
-          if (user && user.favorites.length > 0) {
-            for (var i = 0; i < user.favorites.length; i++) {
-              if (user.favorites[i] == $scope.tileMain._id) {
-                $scope.favoriteTile = true;
-              }
-            }
-          }
-
           $scope.loadComplete = true;
       });
     };
@@ -419,6 +411,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             user.favorites.splice(index, 1);
             $http.put('/users/favorite', {tileId: $scope.tileMain._id, removeFavorite: true})
               .success(function(data) {
+                console.log('removed!')
               });  
             $scope.favoriteTile = false;
             count = 1;
@@ -431,6 +424,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           .success(function(data) {
           $scope.favoriteTile = true;
           user = data;
+          console.log('added!')
           count = 1;
         });
       };
@@ -530,7 +524,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // ENDsocket
 
     var cookieCheck = function() {
-      // console.log(JSON.parse($cookies.likes));
       $scope.$apply(function() {
         $scope.votedOnTile = false;
       });
@@ -630,6 +623,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     };
     // endLikes
 
+    // Grab list of current user's favorite tiles
     $scope.find = function() {
       $http.get('/users/favorites', null).success(function(data){
         $scope.favorites = data;
@@ -637,6 +631,19 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       })
     };
 
+    // Search DB for previous likes
+    var favoriteCheck = function () {
+      $scope.$apply(function() {
+        $scope.favoriteTile = false;
+      });
+      if (user && user.favorites.length > 0) {
+        for (var i = 0; i < user.favorites.length; i++) {
+          if (user.favorites[i] == $scope.tileMain._id) {
+            $scope.favoriteTile = true;
+          }
+        }
+      }
+    }
 
 
     // SPRITZ test
