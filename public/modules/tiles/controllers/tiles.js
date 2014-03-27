@@ -15,7 +15,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         .success(function(response) {
 
           $scope.allTiles = response;
-          $scope.currentCategory = 4;
+          $scope.currentCategory = 1;
           $scope.hPosition = 5;
           console.log(response);
           console.log($scope.hPosition);
@@ -62,6 +62,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
               }
             }
           }
+
+          $("#loadScreen .load-text").css("-webkit-transform", "translate(0px,156%)");
 
           setTimeout(function(){
             $scope.$apply(function(){

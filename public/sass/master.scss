@@ -127,6 +127,7 @@ h1, h2, h3 {
     // position: absolute;
     font-size: 1.5em;
     .load-text{
+      transition: 1s;
       padding-top: 60%;
       text-align: center;
       font-size: 0.5em;
@@ -598,6 +599,51 @@ h1, h2, h3 {
     // transition-timing-function: ease-in-out;
   }
 
+}
+
+// Styles for sign in screen
+
+.signin{
+  background-color: #58c9f3;
+  height: auto;
+  a{
+    color: white;
+    
+  }
+  .social-links{
+    background-color:white;
+  }
+  img{
+    height: 80px;
+    width: 80px;
+
+  }
+  input{
+    border-radius: 0px;
+    box-shadow: none;
+    border: none;
+  }
+  button{
+    background-color: white;
+    color: #58c9f3;
+    border-radius: 0px;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+    text-shadow: none;
+  }
+  .brand{
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+    font-size: 3em;
+    color: white;
+  }
+  h3{
+    color: white;
+    // margin-top: 12px;
+    // margin-bottom: 4px;
+  }
 }
 
 
