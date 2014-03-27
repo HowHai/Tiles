@@ -35,22 +35,22 @@ describe ('<Unit Test>', function () {
       });
      });
 
-    describe('Method Save', function() {
-      it('should be able to save comments without problmem', function(done) {
-        return comment.save(function(err) {
-          should.not.exist(err);
-          done();
-        });
-      });
+    // describe('Method Save', function() {
+    //   it('should be able to save comments without problmem', function(done) {
+    //     return comment.save(function(err) {
+    //       should.not.exist(err);
+    //       done();
+    //     });
+    //   });
 
-      it('should show an error when content is empty', function(done) {
-        comment.content = '';
-        return comment.save(function(err) {
-          should.exist(err);
-          done();
-        });
-      });
-    });
+    //   it('should show an error when content is empty', function(done) {
+    //     comment.content = '';
+    //     return comment.save(function(err) {
+    //       should.exist(err);
+    //       done();
+    //     });
+    //   });
+    // });
 
     // Remove items or else they stay in database
     afterEach(function(done) {
