@@ -59,6 +59,29 @@ h1, h2, h3 {
 #ui-view {
   height: 100%; }
 
+#loadScreen {
+  position: absolute;
+  transition: 1.5s;
+  opacity: 0;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  font-size: 1.5em;
+  background-color: black;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+  font-weight: 300;
+  padding: 15px; }
+  #loadScreen.load-fade {
+    opacity: 1; }
+  #loadScreen .brand {
+    font-size: 1.5em; }
+    #loadScreen .brand .load-text {
+      padding-top: 60%;
+      text-align: center;
+      font-size: 0.5em;
+      color: tomato; }
+
 #showTile {
   height: 100%;
   overflow: hidden;
@@ -72,20 +95,16 @@ h1, h2, h3 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-  #showTile img {
-    width: 100%;
-    height: 213px; }
-  #showTile #loadedTiles .tile {
+  #showTile .tileTemplate {
     width: 100%;
     height: 100%;
-    float: left;
-    bottom: 0px;
     margin: 0px;
+    float: left;
     position: absolute;
-    background-color: black;
     overflow: hidden; }
-    #showTile #loadedTiles .tile .brand {
+    #showTile .tileTemplate h2 {
       position: absolute;
+      margin: 4px 0;
       top: 0px;
       left: 10px;
       height: 50px;
@@ -95,27 +114,26 @@ h1, h2, h3 {
       font-size: 1.5em;
       font-weight: 300;
       padding-top: 2px; }
-  #showTile #loadedTiles .tile-info {
-    padding: 15px 12px;
-    overflow: hidden; }
-    #showTile #loadedTiles .tile-info h1 {
-      margin: 0;
-      margin-top: 5px;
-      font-size: 1.6em; }
-    #showTile #loadedTiles .tile-info .tile-desc {
-      margin-top: 10px;
-      line-height: 20px;
-      max-height: 140px;
+    #showTile .tileTemplate img {
+      width: 100%; }
+    #showTile .tileTemplate .tile-info {
+      padding: 15px 12px;
       overflow: hidden;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 7;
-      position: relative; }
-  #showTile #loadedTiles #tileMain {
-    background-color: white;
-    left: 0;
-    bottom: 0px;
-    margin: 0px; }
-    #showTile #loadedTiles #tileMain #buyMain {
+      color: #333333; }
+      #showTile .tileTemplate .tile-info h1 {
+        margin: 0;
+        margin-top: 5px;
+        font-size: 1.6em; }
+      #showTile .tileTemplate .tile-info .tile-desc {
+        margin-top: 10px;
+        padding-bottom: 10px;
+        line-height: 20px;
+        max-height: 200px;
+        position: relative;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 10; }
+    #showTile .tileTemplate .tile-footer {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -123,7 +141,7 @@ h1, h2, h3 {
       width: 100%;
       height: 50px;
       background-color: black; }
-      #showTile #loadedTiles #tileMain #buyMain i {
+      #showTile .tileTemplate .tile-footer i {
         float: left;
         color: white;
         line-height: 50px;
@@ -131,18 +149,18 @@ h1, h2, h3 {
         padding: 0 20px;
         font-size: 1.5em;
         display: inline-block; }
-        #showTile #loadedTiles #tileMain #buyMain i:hover, #showTile #loadedTiles #tileMain #buyMain i:active {
+        #showTile .tileTemplate .tile-footer i:hover, #showTile .tileTemplate .tile-footer i:active {
           color: tomato !important; }
-        #showTile #loadedTiles #tileMain #buyMain i.liked {
+        #showTile .tileTemplate .tile-footer i.liked {
           color: tomato; }
-      #showTile #loadedTiles #tileMain #buyMain span {
+      #showTile .tileTemplate .tile-footer span {
         position: absolute;
         font-size: 0.8em;
         bottom: 11px;
         margin-left: 38px;
         color: white;
         display: block; }
-      #showTile #loadedTiles #tileMain #buyMain h3 {
+      #showTile .tileTemplate .tile-footer h3 {
         font-size: 1.6em;
         letter-spacing: 6px;
         line-height: 50px;
@@ -150,12 +168,40 @@ h1, h2, h3 {
         margin-left: -60px;
         color: white;
         display: inline-block; }
-    #showTile #loadedTiles #tileMain.hide {
+  #showTile .colorOffset {
+    background-color: black; }
+    #showTile .colorOffset .tile-info {
+      color: white; }
+    #showTile .colorOffset .tile-footer {
+      background-color: white; }
+      #showTile .colorOffset .tile-footer i {
+        color: black; }
+        #showTile .colorOffset .tile-footer i:hover, #showTile .colorOffset .tile-footer i:active {
+          color: tomato !important; }
+        #showTile .colorOffset .tile-footer i.liked {
+          color: tomato; }
+      #showTile .colorOffset .tile-footer span {
+        color: black; }
+      #showTile .colorOffset .tile-footer h3 {
+        color: black; }
+  #showTile .prizeTile .tile-footer {
+    background: -webkit-linear-gradient(top, #d5ad6d 0%, #d5ad6d 26%, #e2ba78 35%, #a37e43 45%, #91703b 61%, #d5ad6d 100%); }
+    #showTile .prizeTile .tile-footer h3 {
+      visibility: hidden; }
+    #showTile .prizeTile .tile-footer h3:after {
+      visibility: visible;
+      content: "YOU WIN!!";
+      margin-left: -130px;
+      color: white; }
+  #showTile #tileMain {
+    left: 0;
+    bottom: 0px;
+    margin: 0px; }
+    #showTile #tileMain.hide {
       opacity: 0; }
-    #showTile #loadedTiles #tileMain.fader {
+    #showTile #tileMain.fader {
       opacity: 1; }
-    #showTile #loadedTiles #tileMain.nav-open {
-      transition: 0.25s;
+    #showTile #tileMain.nav-open {
       opacity: 0.3;
       -webkit-filter: blur(5px);
       -moz-filter: blur(5px);
@@ -163,152 +209,36 @@ h1, h2, h3 {
       -o-filter: blur(5px);
       filter: blur(5px);
       filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='5'); }
-    #showTile #loadedTiles #tileMain.nav-close {
-      transition: 0.25s;
+    #showTile #tileMain.nav-close {
       opacity: 1; }
-      #showTile #loadedTiles #tileMain.nav-close .tile-info {
+      #showTile #tileMain.nav-close .tile-info {
         transition: 0.25s; }
-  #showTile #loadedTiles #tileLeft.center-tile, #showTile #loadedTiles #tileRight.center-tile, #showTile #loadedTiles #tileUp.center-tile, #showTile #loadedTiles #tileDown.center-tile {
+  #showTile #tileLeft.center-tile, #showTile #tileRight.center-tile, #showTile #tileUp.center-tile, #showTile #tileDown.center-tile {
     left: 0%;
     bottom: 0%; }
-  #showTile #loadedTiles #tileUp {
+  #showTile #tileUp {
     bottom: 108%;
     left: 0px;
     color: white; }
-    #showTile #loadedTiles #tileUp .buyNotMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: white; }
-      #showTile #loadedTiles #tileUp .buyNotMain i {
-        float: left;
-        color: black;
-        line-height: 50px;
-        margin-top: 1px;
-        margin-left: 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-      #showTile #loadedTiles #tileUp .buyNotMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: black;
-        display: block; }
-      #showTile #loadedTiles #tileUp .buyNotMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -40px;
-        color: black;
-        display: inline-block; }
-  #showTile #loadedTiles #tileDown {
+  #showTile #tileDown {
     bottom: -108%;
     left: 0px;
     color: white; }
-    #showTile #loadedTiles #tileDown .buyNotMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: white; }
-      #showTile #loadedTiles #tileDown .buyNotMain i {
-        float: left;
-        color: black;
-        line-height: 50px;
-        margin-top: 1px;
-        margin-left: 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-      #showTile #loadedTiles #tileDown .buyNotMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: black;
-        display: block; }
-      #showTile #loadedTiles #tileDown .buyNotMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -40px;
-        color: black;
-        display: inline-block; }
-  #showTile #loadedTiles #tileRight {
+  #showTile #tileRight {
     color: white;
     left: 108%; }
-    #showTile #loadedTiles #tileRight .buyNotMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: white; }
-      #showTile #loadedTiles #tileRight .buyNotMain i {
-        float: left;
-        color: black;
-        line-height: 50px;
-        margin-top: 1px;
-        margin-left: 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-      #showTile #loadedTiles #tileRight .buyNotMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: black;
-        display: block; }
-      #showTile #loadedTiles #tileRight .buyNotMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -40px;
-        color: black;
-        display: inline-block; }
-  #showTile #loadedTiles #tileLeft {
+  #showTile #tileLeft {
     color: white;
     left: -108%; }
-    #showTile #loadedTiles #tileLeft .buyNotMain {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-      height: 50px;
-      background-color: white; }
-      #showTile #loadedTiles #tileLeft .buyNotMain i {
-        float: left;
-        color: black;
-        line-height: 50px;
-        margin-top: 1px;
-        margin-left: 20px;
-        font-size: 1.5em;
-        display: inline-block; }
-      #showTile #loadedTiles #tileLeft .buyNotMain span {
-        position: absolute;
-        font-size: 0.8em;
-        bottom: 11px;
-        margin-left: 38px;
-        color: black;
-        display: block; }
-      #showTile #loadedTiles #tileLeft .buyNotMain h3 {
-        font-size: 1.6em;
-        letter-spacing: 6px;
-        line-height: 50px;
-        margin: 0;
-        margin-left: -40px;
-        color: black;
-        display: inline-block; }
+  #showTile #heart-like {
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    top: -39px;
+    color: rgba(255, 99, 71, 0.6);
+    font-size: 13em; }
   #showTile #navigation-instructions {
     display: none;
     opacity: 0;
@@ -322,7 +252,11 @@ h1, h2, h3 {
     padding: 20px;
     word-wrap: break-word;
     padding-top: 10px;
-    background-color: rgba(0, 0, 0, 0.4); }
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: 0.5s; }
+    #showTile #navigation-instructions.open {
+      display: block;
+      opacity: 1; }
     #showTile #navigation-instructions .center-vertical {
       padding-top: 47%; }
     #showTile #navigation-instructions #nav-header {
@@ -358,16 +292,14 @@ h1, h2, h3 {
       #showTile #navigation-instructions #navi-content h3 {
         font-size: 0.4em; }
       #showTile #navigation-instructions #navi-content #navi-text {
-        margin-top: -54px;
+        margin-top: 7%;
         width: 100%;
         height: 100%;
-        display: table;
         position: absolute; }
         #showTile #navigation-instructions #navi-content #navi-text h1 {
           color: white;
           opacity: 0.8;
           display: table-cell;
-          vertical-align: middle;
           font-size: 0.6em;
           letter-spacing: 4px;
           font-weight: 300;
@@ -375,8 +307,11 @@ h1, h2, h3 {
           #showTile #navigation-instructions #navi-content #navi-text h1 span {
             margin-top: 100px;
             font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
-            font-size: 3em;
+            font-size: 1.2em;
             margin-top: 5px; }
+        #showTile #navigation-instructions #navi-content #navi-text p {
+          font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+          font-size: 0.5em; }
       #showTile #navigation-instructions #navi-content #radar {
         position: relative;
         width: 160px;
@@ -494,4 +429,4 @@ h1, h2, h3 {
     opacity: 1;
     z-index: 100; }
   #showTile .slow {
-    transition: 0.35s; }
+    transition: 0.2s; }

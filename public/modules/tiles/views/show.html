@@ -1,121 +1,136 @@
-<div class="row" ng-init="loadTiles()">
+<div id="loadScreen" ng-class="{'load-fade': !loadComplete}">
+  <div class="brand">gloss<br><div class="load-text">Loading...</div></div>
+</div>
+
+<div class="row" ng-init="loadTiles()" >
   <section id="showTile" class="col-xs-12">
   <!-- <button ng-click="createTile()">Herroo Prease</button> -->
-  <div id="loadedTiles">
 
-    <div class="tile" id="tileUp">
-      <div class="brand">gloss</div>
-      <img src="http://storage.googleapis.com/gloss/tiles/{{tileUp.imgUrl}}" alt="Splash">
-      <div class="tile-info">
-        <h1 class="tile-title">{{tileUp.name}}</h1>
-        <p class="tile-desc">{{tileUp.content}}</p>
-      </div>
-      <div class="buyNotMain">
-        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
-        <span>{{tileUp.likes}}</span>
-        <h3>BUY NOW</h3>
-      </div>
-    </div>
-
-    <div class="tile" id="tileLeft">
-      <div class="brand">gloss</div>
-      <img src="http://storage.googleapis.com/gloss/tiles/{{tileLeft.imgUrl}}" alt="Splash">
-      <div class="tile-info">
-        <h1 class="tile-title">{{tileLeft.name}}</h1>
-        <p class="tile-desc">{{tileLeft.content}}</p>
-      </div>
-      <div class="buyNotMain">
-        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
-        <span>{{tileLeft.likes}}</span>
-        <h3>BUY NOW</h3>
-      </div>
-    </div>
-
-    <div class="tile" id="tileMain">
-      <div class="swipeable">
-        <div id="tile-content">
-          <div class="brand">gloss</div>
-          <img src="http://storage.googleapis.com/gloss/tiles/{{tileMain.imgUrl}}" alt="Splash">
-          <div class="tile-info">
-            <h1 class="tile-title">{{tileMain.name}}</h1>
-            <div class="tile-desc">
-              <div id="white-fade"></div>
-              <p>{{tileMain.content}}</p>
-            </div>
-          </div>
+    <div id="tileMain" ng-class="{'colorOffset': !colorOffset, 'prizeTile': prizeTile}" class="tileTemplate">
+      <div class="tile-content swipeable">
+        <h2>gloss</h2>
+        <img src="modules/tiles/img/tiles/{{tileMain.imgUrl}}" alt="Gloss">
+        <div class="tile-info">
+          <h1>{{tileMain.name}}</h1>
+          <div class="tile-desc"><p>{{tileMain.content}}</p></div>
         </div>
       </div>
-      <!-- Front end likes testing -->
-      <div id="buyMain">
-        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
-        <span>{{tileMain.likes}}</span>
+      <div class="tile-footer">
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
-
-        <i class="fa fa-star" ng-class="{'liked': favoriteTile}" ng-click="addFavorite()"></i>
-      </div>
-      <!-- End front end likes -->
-    </div>
-
-    <div class="tile" id="tileRight">
-      <div class="brand">gloss</div>
-      <img src="http://storage.googleapis.com/gloss/tiles/{{tileRight.imgUrl}}" alt="Splash">
-      <div class="tile-info">
-        <h1 class="tile-title">{{tileRight.name}}</h1>
-        <p class="tile-desc">{{tileRight.content}}</p>
-      </div>
-      <div class="buyNotMain">
-        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
-        <span>{{tileRight.likes}}</span>
-        <h3>BUY NOW</h3>
       </div>
     </div>
 
-    <div class="tile" id="tileDown">
-      <div class="brand">gloss</div>
-      <img src="http://storage.googleapis.com/gloss/tiles/{{tileDown.imgUrl}}" alt="Splash">
-      <div class="tile-info">
-        <h1 class="tile-title">{{tileDown.name}}</h1>
-        <p class="tile-desc">{{tileDown.content}}</p>
-      </div>
-      <div class="buyNotMain">
-        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i>
-        <span>{{tileDown.likes}}</span>
-        <h3>BUY NOW</h3>
-      </div>
-    </div>
-
-  </div>
-
-  <div id="navigation-instructions" class="swipeable" ng-click="closeNav()">
-      <div id="nav-header">gloss
-        <button></button>
-      </div>
-      <i class="fa fa-angle-up kiss top"></i>
-      <i class="fa fa-angle-left kiss left"></i>
-        <div id ="navi-content">
-          <div id="navi-text">
-            <!-- <h1>welcome to<br><br><span>gloss</span></h1> -->
-          </div>
-          <div id="radar">
-            <div id="rad"></div>
-            <div class="centerDot"></div>
-
-            <div ng-repeat="xcord in xcords">
-              <div id="{{xcord+''+ycord}}" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
-            </div>
-            <!-- <div class="obj" data-x="130" data-y="60"></div> -->
-
-            <!-- <div class="obj" data-x="70" data-y="35"></div> -->
-          </div>
-          <div class="kiss buttons">
-            <!-- <a href="/#!/tile/shared/{{tileMain._id}}"></a> -->
-            <h3 id="share-link" ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3>
-            <button class="btn share" ng-click="share = !share">Share</button>
-          </div>
+    <div id="tileLeft" ng-class="{'colorOffset': colorOffset}" class="tileTemplate">
+      <div class="tile-content">
+        <h2>gloss</h2>
+        <img src="modules/tiles/img/tiles/{{tileLeft.imgUrl}}" alt="Gloss">
+        <div class="tile-info">
+          <h1>{{tileLeft.name}}</h1>
+          <div class="tile-desc"><p>{{tileLeft.content}}</p></div>
         </div>
-      <i class="fa fa-angle-right kiss right"></i>
-      <i class="fa fa-angle-down kiss bottom"></i>
-  </div>
+      </div>
+      <div class="tile-footer">
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileLeft.likes}}</span>
+        <h3 id="buy">BUY NOW</h3>
+      </div>
+    </div>
+
+    <div id="tileRight" ng-class="{'colorOffset': colorOffset}" class="tileTemplate">
+      <div class="tile-content">
+        <h2>gloss</h2>
+        <img src="modules/tiles/img/tiles/{{tileRight.imgUrl}}" alt="Gloss">
+        <div class="tile-info">
+          <h1>{{tileRight.name}}</h1>
+          <div class="tile-desc"><p>{{tileRight.content}}</p></div>
+        </div>
+      </div>
+      <div class="tile-footer">
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileRight.likes}}</span>
+        <h3 id="buy">BUY NOW</h3>
+      </div>
+    </div>
+
+    <div id="tileUp" ng-class="{'colorOffset': colorOffset}" class="tileTemplate">
+      <div class="tile-content">
+        <h2>gloss</h2>
+        <img src="modules/tiles/img/tiles/{{tileUp.imgUrl}}" alt="Gloss">
+        <div class="tile-info">
+          <h1>{{tileUp.name}}</h1>
+          <div class="tile-desc"><p>{{tileUp.content}}</p></div>
+        </div>
+      </div>
+      <div class="tile-footer">
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileUp.likes}}</span>
+        <h3 id="buy">BUY NOW</h3>
+      </div>
+    </div>
+
+    <div id="tileDown" ng-class="{'colorOffset': colorOffset}" class="tileTemplate">
+      <div class="tile-content">
+        <h2>gloss</h2>
+        <img src="modules/tiles/img/tiles/{{tileDown.imgUrl}}" alt="Gloss">
+        <div class="tile-info">
+          <h1>{{tileDown.name}}</h1>
+          <div class="tile-desc"><p>{{tileDown.content}}</p></div>
+        </div>
+      </div>
+      <div class="tile-footer">
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileDown.likes}}</span>
+        <h3 id="buy">BUY NOW</h3>
+      </div>
+    </div>
+
+    <div id="navigation-instructions" class="swipeable" ng-class="{'open': nav_open}" ng-click="closeNav()">
+        <div id="nav-header">gloss
+          <button></button>
+        </div>
+        <i class="fa fa-angle-up kiss top"></i>
+        <i class="fa fa-angle-left kiss left"></i>
+          <div id ="navi-content">
+            <div id="radar">
+              <div id="rad"></div>
+              <div class="centerDot"></div>
+
+              <div ng-repeat="xcord in xcords">
+                <div id="{{xcord+''+ycord}}" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
+              </div>
+              <!-- <div class="obj" data-x="130" data-y="60"></div> -->
+              <!-- <div class="obj" data-x="70" data-y="35"></div> -->
+            </div>
+            <div id="navi-text">
+            </div>
+            <div class="kiss buttons">
+              <!-- <a href="/#!/tile/shared/{{tileMain._id}}"></a> -->
+              <h3 id="share-link" ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3>
+              <button class="btn share" ng-click="share = !share">Share</button>
+            </div>
+          </div>
+        <i class="fa fa-angle-right kiss right"></i>
+        <i class="fa fa-angle-down kiss bottom"></i>
+    </div>
+
+    <div id="heart-like"><i class="fa fa-heart"></i></div>
+
+
+<!-- TRYING TO GET NG REPEAT TO WORK -->
+  <!--     <div ng-repeat="tile in loadedTiles" id="tile{{tile.name}}" ng-class="{'colorOffset': !colorOffset}" class="tileTemplate">
+      <div class="tile-content swipeable">
+        <h2>gloss</h2>
+        <img src="modules/tiles/img/tiles/{{tile.loaded.imgUrl}}" alt="Gloss">
+        <div class="tile-info">
+          <h1>{{tile.loaded.name}}</h1>
+          <div class="tile-desc"><p>{{tile.loaded.content}}</p></div>
+        </div>
+      </div>
+      <div class="tile-footer">
+        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tile.loaded.likes}}</span>
+        <h3 id="buy">BUY NOW</h3>
+      </div>
+    </div> -->
+
+<!-- FERNS FAV STUFF -->
+    <!-- <i class="fa fa-star" ng-class="{'liked': favoriteTile}" ng-click="addFavorite()"></i> -->
 
   </section>
 </div>
