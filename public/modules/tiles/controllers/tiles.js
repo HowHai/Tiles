@@ -565,7 +565,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
             if(eArr._id === data.tileId){
               $scope.$apply(function() {
-                $scope.allTiles[i][indexArr].location.push(data.socketId);
+                if($scope.allTiles[i][indexArr].location.indexOf(data.socketId) == -1) {
+                  $scope.allTiles[i][indexArr].location.push(data.socketId);
+                }
               });
             }
           });
