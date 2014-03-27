@@ -126,6 +126,8 @@ h1, h2, h3 {
         margin: 0;
         margin-top: 5px;
         font-size: 1.6em; }
+      #showTile .tileTemplate .tile-info h5 {
+        font-size: 1em; }
       #showTile .tileTemplate .tile-info .tile-desc {
         margin-top: 10px;
         padding-bottom: 10px;
@@ -170,6 +172,14 @@ h1, h2, h3 {
         margin-left: -60px;
         color: white;
         display: inline-block; }
+      #showTile .tileTemplate .tile-footer h4 {
+        position: absolute;
+        color: white;
+        right: 17px;
+        bottom: 3px;
+        font-size: 1.6em;
+        display: block;
+        font-weight: 300; }
   #showTile .colorOffset {
     background-color: black; }
     #showTile .colorOffset .tile-info {
@@ -185,6 +195,8 @@ h1, h2, h3 {
       #showTile .colorOffset .tile-footer span {
         color: black; }
       #showTile .colorOffset .tile-footer h3 {
+        color: black; }
+      #showTile .colorOffset .tile-footer h4 {
         color: black; }
   #showTile .prizeTile .tile-footer {
     background: -webkit-linear-gradient(top, #d5ad6d 0%, #d5ad6d 26%, #e2ba78 35%, #a37e43 45%, #91703b 61%, #d5ad6d 100%); }

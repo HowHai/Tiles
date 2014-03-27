@@ -184,6 +184,9 @@ h1, h2, h3 {
         margin-top: 5px;
         font-size: 1.6em;
       }
+      h5 {
+        font-size: 1em;
+      }
       .tile-desc {
         margin-top: 10px;
         padding-bottom: 10px;
@@ -235,6 +238,17 @@ h1, h2, h3 {
         color: white;
         display: inline-block;
       }
+      h4 {
+        position: absolute;
+        color: white;
+        right: 17px;
+        // right: 10px;
+        bottom: 3px;
+        // bottom: 320px;
+        font-size: 1.6em;
+        display: block;
+        font-weight: 300;
+      }
     }
   }
 
@@ -258,6 +272,9 @@ h1, h2, h3 {
         color: black;
       }
       h3 {
+        color: black;
+      }
+      h4 {
         color: black;
       }
     }
@@ -412,25 +429,32 @@ h1, h2, h3 {
       left: 8%;
       width: 83%;
       #welcome-screen {
-        img {
-          width: 50px;
-          -webkit-filter:  #{'invert(100%)'};
-          filter: #{'invert(100%)'};
-        }
-        h2 {
-          font-size: 0.4em;
-          margin-top: 0;
-          margin-bottom: 15%;
-        }
-        h1 {
-          opacity: 0.5;
-          font-size: 0.8em;
-          font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
-          font-weight: 300;
-          span {
-            font-size: 1.2em;
+        // position: relative;
+        // display: table;
+        // div {
+          // position: relative;
+          // display: table-cell;
+          // vertical-align: middle;
+          img {
+            width: 50px;
+            -webkit-filter:  #{'invert(100%)'};
+            filter: #{'invert(100%)'};
           }
-        }
+          h2 {
+            font-size: 0.4em;
+            margin-top: 0;
+            margin-bottom: 15%;
+          }
+          h1 {
+            opacity: 0.5;
+            font-size: 0.8em;
+            font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+            font-weight: 300;
+            span {
+              font-size: 1.2em;
+            }
+          }
+        // }
       }
       // h3 {
       //   font-size: 0.4em;

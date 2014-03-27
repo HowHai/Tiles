@@ -12,12 +12,14 @@
         <img src="http://storage.googleapis.com/gloss/tiles/{{tileMain.imgUrl}}" alt="...apologies, Towelie must've broken something!">
         <div class="tile-info">
           <h1>{{tileMain.name}}</h1>
+          <h5>${{tileMain.price}}</h5>
           <div class="tile-desc"><p>{{tileMain.content}}</p></div>
         </div>
       </div>
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileMain.price}}</h4>
       </div>
     </div>
 
@@ -33,6 +35,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileLeft.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileLeft.price}}</h4>
       </div>
     </div>
 
@@ -48,6 +51,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileRight.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileRight.price}}</h4>
       </div>
     </div>
 
@@ -63,6 +67,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileUp.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileUp.price}}</h4>
       </div>
     </div>
 
@@ -78,6 +83,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileDown.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileDown.price}}</h4>
       </div>
     </div>
 
@@ -89,10 +95,12 @@
         <i class="fa fa-angle-left kiss left"></i>
           <div id ="navi-content">
             <div id="welcome-screen" ng-show="firstTime">
+            <!-- <div> -->
               <img src="img/icons/swipe-up.svg"><h2>Swipe up and down for a new category</h2>
               <img src="img/icons/swipe-left.svg"><h2>Left and right for more</h2>
               <img src="img/icons/finger-tap.svg"><h2>And tap to access your radar and favs</h2>
               <h1><!-- welcome to<br> --><span>gloss</span></h1>
+            <!-- </div> -->
             </div>
             <div id="radar" ng-show="!firstTime">
               <div id="rad"></div>
