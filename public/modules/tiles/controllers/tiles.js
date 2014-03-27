@@ -29,10 +29,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
           else{
             console.log("OLD USER");
-            // I don't think you need this!!!  - HAI
-            // $scope.$apply(function(){
+            $scope.$apply(function(){
               $scope.nav_open = false;
-            // });
+            });
           }
 
           $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
