@@ -1,5 +1,5 @@
 <style>
-  #userGrid, #mainTile, #singleTile {
+  #mainTile, #singleTile {
     width: 450px;
     height: 650px;
     border: 1px solid black;
@@ -29,20 +29,26 @@
 </style>
 
 <section ng-init="loadTiles()">
-  <h2>Radar</h2>
 
-  <button ng-click="runMe()">click me</button>
-  <div id="testMe">{{tileMain._id}}</div>
+  <section ng-hide="false">
+    <h2>Add more tiles on edge</h2>
+    <button id="moreTiles" ng-click="loadMoreTiles('right')">Make more tiles!</button>
 
-  <div id="userGrid">
-    <ul ng-repeat="alltile in allTiles">
-      <ul ng-repeat="myTiles in alltile">
-        <li class="location-populated" ng-show="myTiles.location.length > 0">{{myTiles._id}}</li>
-        <li ng-show="myTiles.location.length === 0"></li>
+
+    <h2>Radar</h2>
+
+    <button ng-click="runMe()">click me</button>
+    <div id="testMe">{{tileMain._id}}</div>
+
+    <div id="userGrid">
+      <ul ng-repeat="alltile in allTiles" class="col-md-1 col-lg-1">
+        <ul ng-repeat="myTiles in alltile">
+          <li class="location-populated" ng-show="myTiles.location.length > 0">{{myTiles._id}}</li>
+          <li ng-show="myTiles.location.length === 0"></li>
+        </ul>
       </ul>
-    </ul>
-  </div>
-
+    </div>
+  </section>
 
 <br><br><br><br>
 <br><br><br><br>
@@ -51,33 +57,49 @@
 
   </div>
 <section ng-hide="false">
+  <section ng-hide="true">
   <button ng-click="createTile()">Make Tile</button>
   <!-- <button onload="loadTiles()">Make Tile</button> -->
 
   <h1>Cracked Tiles</h1>
 
-  <div id="sharedTile">
-    <button ng-click="getOneTile(tileMain._id)">Share</button>
-    <p>http://localhost:3000/#!/{{tileMain._id}}</p>
-    <h2>Shared Tile</h2>
+    <div id="sharedTile">
+      <button ng-click="getOneTile(tileMain._id)">Share</button>
+      <p>http://localhost:3000/#!/{{tileMain._id}}</p>
+      <h2>Shared Tile</h2>
 
-    <div id="singleTile">
-      <h2>{{sharedTile.name}}</h2>
-      <img src="modules/tiles/img/tiles/{{sharedTile.imgUrl}}" alt="Splash">
-      <p>{{sharedTile.content}}</p>
+      <div id="singleTile">
+        <h2>{{sharedTile.name}}</h2>
+        <img src="modules/tiles/img/tiles/{{sharedTile.imgUrl}}" alt="Splash">
+        <p>{{sharedTile.content}}</p>
+      </div>
     </div>
-  </div>
 
-  <!-- <button ng-click="createTile()">Make Tile</button> -->
+    <!-- <button ng-click="createTile()">Make Tile</button> -->
 
 
-  <!-- Spritz test -->
+    <!-- Spritz test -->
 
-  <div id="spritzBox" ng-hide="true">
-    <button ng-click="spritzNow(singleTile.content)">Spritz!</button>
-    <p id="spritz"></p>
-  </div>
+    <div id="spritzBox" ng-hide="true">
+      <button ng-click="spritzNow(singleTile.content)">Spritz!</button>
+      <p id="spritz"></p>
+    </div>
+  </section>
 
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <!-- END -->
 
 

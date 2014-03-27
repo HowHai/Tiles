@@ -3,6 +3,10 @@
 module.exports = function(app) {
   var tiles = require('../../app/controllers/tiles');
 
+  // This might cause issues with other routes that takes paramater.
+  // Get more categories/tiles
+  app.post('/tiles/more/:side', tiles.loadmore);
+
   // Get a list of all tiles
   app.get('/tiles', tiles.list);
 

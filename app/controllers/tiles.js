@@ -12,6 +12,8 @@ var mongoose = require('mongoose'),
   _ = require('lodash'),
   phantom = require('phantom');
 
+
+
 // Get a tile
 exports.show = function(req, res){
   var tileId = req.params.tileId;
@@ -93,6 +95,72 @@ exports.list = function(req, res){
   });
 };
 
+// GET more categories/tiles and append or prepend (depends on side passed).
+exports.loadmore = function(req, res){
+  var allTiles = req.body.alltiles;
+
+  console.log(allTiles[0].length);
+  var startingPoint = allTiles.length + 1;
+  var endingPoint = allTiles.length + allTiles.length + 1;
+
+  Category.find({}, {}, function(error, categories){
+    Category.populate(categories, {
+      path: "tiles",
+      model: Tile
+    }, function(error, categories){
+      // Populate comments data within each tile.
+      Tile.populate(categories, {
+      path: 'tiles.comments',
+      model: Comment
+    }, function(error, categories) {
+      // Populate user data within each comment.
+      Comment.populate(categories, {
+        path: 'tiles.comments.user',
+        select: 'displayName',
+        model: User
+      }, function(error, categories) {
+
+        var newTilesArray = [];
+
+        // Return each category with tiles inside as an array. [[cat1], [cat2]]
+        var categoriesArray = categories.map(function(cat) {
+          // Return first 16 tiles from each category.
+          return (cat.tiles.splice(startingPoint, endingPoint));
+        });
+
+        // Join current allTiles and new tiles.
+
+        if (req.params.side === 'right') {
+          console.log(req.params.side);
+          for(var i = 0; i < allTiles.length; i++){
+            for(var j = 0; j < categoriesArray.length; j++){
+              if (allTiles[i][0].category == categoriesArray[j][0].category) {
+                var newCat = allTiles[i].concat(categoriesArray[j]);
+                console.log(newCat.length);
+                newTilesArray.push(newCat);
+              };
+            }
+          }
+        } else {
+          for(var i = 0; i < categoriesArray.length; i++){
+            for(var j = 0; j < allTiles.length; j++){
+              if (allTiles[i][0].category == categoriesArray[j][0].category) {
+                var newCat = categoriesArray[i].concat(allTiles[j]);
+                console.log(newCat.length);
+                newTilesArray.push(newCat);
+              };
+            }
+          }
+        }
+        // Randomize category
+        // categoriesArray = (categoriesArray);
+        res.json(newTilesArray);
+      });
+      });
+    });
+  });
+}
+
 // GET all tiles in all categories and return as an array
 exports.categories = function(req, res){
   // TODO: Errors handling
@@ -120,13 +188,19 @@ exports.categories = function(req, res){
         });
       });
     }
-  } else {
+  }
+  else {
     // Find all categories and populate tiles data within category.
-    Category.find({}, { tiles: 1, _id: 0 }).populate('tiles').exec(function(error, categories) {
-      // Populate comments data within each tile.
-      Tile.populate(categories, {
+    Category.find({}, {}, function(error, categories){
+      Category.populate(categories, {
+        path: "tiles",
+        model: Tile,
+        options: { _id: { $in: ["53323f3ae212f9686cede7b8", "53323f3ae212f9686cede7c0"] }}
+      }, function(error, categories){
+        // Populate comments data within each tile.
+        Tile.populate(categories, {
         path: 'tiles.comments',
-        model: Comment,
+        model: Comment
       }, function(error, categories) {
         // Populate user data within each comment.
         Comment.populate(categories, {
@@ -136,7 +210,10 @@ exports.categories = function(req, res){
         }, function(error, categories) {
 
           // Return each category with tiles inside as an array. [[cat1], [cat2]]
-          var categoriesArray = categories.map(function(cat) { return shuffle(cat.tiles) });
+          var categoriesArray = categories.map(function(cat) {
+            // Return first 16 tiles from each category.
+            return (cat.tiles.splice(0, 10));
+          });
           // var categoriesArray = categories.map(function(cat) { return cat.tiles });
 
           // Get all tiles'ID and push to new array.
@@ -151,9 +228,10 @@ exports.categories = function(req, res){
           res.cookie("savedTiles", JSON.stringify(allTilesId));
 
           // Randomize category
-          categoriesArray = shuffle(categoriesArray);
+          categoriesArray = (categoriesArray);
           // categoriesArray = (categoriesArray);
           res.json(categoriesArray);
+        });
         });
       });
     });

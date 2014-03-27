@@ -663,6 +663,22 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     }
     //This is for the RADAR
 
+    // Add more categories/tiles when user reaches edge of grid
+
+    $scope.loadMoreTiles = function(side) {
+      console.log(side);
+      // Converts $scope.allTiles array to JSON before sending to database.
+      // var allTiles = angular.toJson($scope.allTiles);
+      // console.log($scope.allTiles);
+
+      $http.post('/tiles/more/' + side, {alltiles: $scope.allTiles})
+        .success(function(response){
+          $scope.allTiles = response;
+          console.log(response);
+        });
+    };
+
+    // END ADD MORE CATEGORIES
 
 
     // SPRITZ test
