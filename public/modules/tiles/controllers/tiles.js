@@ -6,6 +6,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     var likeCheck;
     var socket = io.connect();
     $scope.colorOffset = true;
+    $scope.prizeTile = false;
 
     // KYLE & JUSTIN
 
@@ -82,7 +83,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
         $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1]
         $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1]
-
       });
     }
 
@@ -172,7 +172,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $scope.$apply(function(){
           $scope.nav_open = false;
         });
-      };
+      }
+      else{
+        $scope.$apply(function(){
+          $scope.share = true;
+        });
+        
+      }
     };
 
     $(function() {
@@ -221,15 +227,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         // Added this to match bg color to new tile, but needs some work with the animation
         // $("#showTile").css("background-color", colorMain);
 
-        // Will need to fix this based on the current offsetting
-        // if($scope.votedOnTile) {
-        //   $("#buyMain i").css("color", "tomato");
-        // } else {
-        //   $("#buyMain i").css("color", colorOffset);
-        // }
-
         $scope.$apply(function(){$scope.tileMain = tile;});
         $scope.colorOffset = !$scope.colorOffset;
+        if ($scope.currentCategory == 2 && $scope.hPosition == 8) {
+          $scope.prizeTile = true;
+        } else {
+          $scope.prizeTile = false;
+        };
 
         setTimeout(function(){
           move(direction);

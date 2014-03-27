@@ -151,6 +151,7 @@ h1, h2, h3 {
   -ms-user-select: none;
   user-select: none;
 
+  // Styles for all tiles
   .tileTemplate {
     width: 100%;
     height: 100%;
@@ -188,6 +189,7 @@ h1, h2, h3 {
       }
       .tile-desc {
         margin-top: 10px;
+        padding-bottom: 10px;
         line-height: 20px;
         max-height: 200px; 
         position: relative;
@@ -243,16 +245,11 @@ h1, h2, h3 {
     background-color: black;
     .tile-info {
       color: white;
-      h1 {
-      }
-      .tile-desc {
-      }
     }
     .tile-footer {
       background-color: white;
       i {
         color: black;
-        display: inline-block;
         &:hover, &:active {
           color: tomato !important;
         }
@@ -269,6 +266,26 @@ h1, h2, h3 {
     }
   }
 
+  .prizeTile {
+    // border: 10px solid skyblue;
+    .tile-footer {
+      background: -webkit-linear-gradient(top, 
+                rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, 
+                rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, 
+                rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+      h3 {
+        visibility: hidden;
+      }
+      h3:after {
+        visibility: visible;
+        content: "YOU WIN!!";
+        margin-left: -130px;
+        color: white;
+      }
+    }
+  }
+
+  // Styles for individual tiles
   #tileMain {
     left: 0;
     bottom: 0px;
@@ -290,11 +307,11 @@ h1, h2, h3 {
       filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
     }
     &.nav-close {
-      transition: 0.25s;
+      // transition: 0.25s;
+      opacity: 1;
       // height: 100%;
       // width: 100%;
       // padding: 0px;
-      opacity: 1;
       .tile-info{
         transition: 0.25s;
         // font-size: 1em;
