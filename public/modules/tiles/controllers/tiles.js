@@ -598,13 +598,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           });
         }
-        // console.log($scope.allUsersLocation);
-        // $scope.allUsersLocation.push(data.socketId);
-        // console.log("This ran2!");
-        // console.log("My tile: " + $scope.tileMain._id);
-        // console.log(data.tileId);
-        // console.log(data.clientsCount);
-        // console.log(data.socketId);
       });
     });
     // ENDsocket
@@ -661,25 +654,5 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.tile = response;
         })
     }
-
-    // SPRITZ test
-    // $scope.spritzNow = function(content) {
-    //   var contentArr = content.split(/\W/).filter(function(n) { return n != "" });
-    //   var counter = 0;
-
-    //   var startSpritz = setInterval(function() {
-    //     if (counter >= contentArr.length - 1)
-    //       window.clearInterval(startSpritz);
-
-    //     var avgNumber = Math.round(contentArr[counter].length * 0.29);
-    //     var wordArr = contentArr[counter].split('');
-    //     wordArr.splice(avgNumber, 1, "<span class='red'>" + contentArr[counter][avgNumber] + "</span>")
-    //     wordArr = wordArr.join('');
-
-    //     $('#spritz').html(wordArr);
-    //     counter++;
-    //   }, 250);
-    // };
-    // END
   }
 ]);

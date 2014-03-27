@@ -12,8 +12,6 @@ var mongoose = require('mongoose'),
   _ = require('lodash'),
   phantom = require('phantom');
 
-
-
 // Get a tile
 exports.show = function(req, res){
   var tileId = req.params.tileId;

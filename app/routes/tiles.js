@@ -19,7 +19,6 @@ module.exports = function(app) {
   // GET one tile
   app.get('/tile/:tileId', tiles.show);
 
-
   // Create tiles
   app.post('/tiles', tiles.create);
 
