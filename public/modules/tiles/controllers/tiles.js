@@ -18,6 +18,16 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.currentCategory = 1;
           $scope.hPosition = 5;
           console.log(response);
+          console.log("yoo");
+
+          // Checking for location bug
+          for(var i = 0; i < $scope.allTiles.length; i++){
+            for(var j = 0; j < $scope.allTiles.length; j++){
+              console.log($scope.allTiles[i][j].location);
+            }
+          }
+          // ENDBUG
+
           console.log($scope.hPosition);
 
           if(!$cookies.firstTimeUser){
@@ -706,7 +716,18 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
           $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
           $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
+
+
         });
+
+        // Checking for location bug
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          for(var j = 0; j < $scope.allTiles.length; j++){
+            console.log($scope.allTiles[i][j].location);
+          }
+        }
+        // ENDBUG
+
     };
 
     // END ADD MORE CATEGORIES
