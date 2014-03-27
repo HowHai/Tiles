@@ -15,8 +15,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         .success(function(response) {
 
           $scope.allTiles = response;
-          $scope.currentCategory = 1;
-          $scope.hPosition = 9;
+          $scope.currentCategory = 4;
+          $scope.hPosition = 5;
           console.log(response);
 
           if(!$cookies.firstTimeUser){
@@ -138,6 +138,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
               };
             };
             // console.log($scope.allTiles);
+            console.log($scope.allTiles);
             resetTiles();
 
             // Send current user's tileId to server.
