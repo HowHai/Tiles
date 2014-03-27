@@ -414,206 +414,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     //This is for the RADAR
 
 
+  // HAINANDO
 
-
-
-
-
-    // HAINANDO
-
- //FAVORITES
-    $scope.addFavorite = function() {
-      var count = 0;
-      if (user && user.favorites.length > 0) {
-        console.log(user.favorites);
-        console.log($scope.tileMain._id);
-        for (var i = 0; i < user.favorites.length; i++) {
-          console.log(user.favorites.indexOf($scope.tileMain._id));
-
-          if (user.favorites[i] == $scope.tileMain._id) {
-          console.log("FOund!");
-            var index = user.favorites.indexOf($scope.tileMain._id)
-            user.favorites.splice(index, 1);
-            $http.put('/users/favorite', {tileId: $scope.tileMain._id, removeFavorite: true})
-              .success(function(data) {
-                // Update tile for current user here.
-                console.log("SUCCESSSS")
-                console.log(data);
-              });
-            console.log('removed; length: ' + user.favorites.length);
-            $scope.favoriteTile = false;
-            count = 1;
-            break;
-          };
-        };
-      };
-      if (count == 0) {
-        $http.put('/users/favorite', {tileId: $scope.tileMain._id})
-          .success(function(data) {
-          $scope.favoriteTile = true;
-          user = data;
-          console.log(data);
-          console.log('added; length: ' + user.favorites.length);
-          count = 1;
-        });
-      };
-    };
-  // FAVORTIES END
-
-    // Socket.io testing
-    socket.on('connect', function() {
-      socket.on("takeTile", function(data){
-        // Find tile and remove current_user.
-        for(var i = 0; i < $scope.allTiles.length; i++){
-          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-            if(eArr.location.indexOf(data.socketId) != -1){
-              var populatedIndex = eArr.location.indexOf(data.socketId);
-              $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
-            }
-          });
-        }
-
-        // Find tile and add current_user.
-        for(var i = 0; i < $scope.allTiles.length; i++){
-          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-            if(eArr._id === data.tileId){
-              $scope.$apply(function() {
-                $scope.allTiles[i][indexArr].location.push(data.socketId);
-              });
-            }
-          });
-        }
-
-        showOccupied();
-      });
-
-      // Get test emit to current user and display in browser's console.
-      socket.on('currentPosition', function(data) {
-        // console.log(data);
-      });
-
-      // Listen for likes
-      socket.on('giveBackLike', function(data){
-       for(var i = 0; i < $scope.allTiles.length; i++){
-          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-            if(eArr._id === data._id){
-              $scope.$apply(function() {
-                data.likes = data.likes + 1;
-                $scope.allTiles[i][indexArr] = data;
-              });
-            }
-          });
-        }
-      });
-
-      // Listen for disconnect?
-      socket.on('user disconnected', function(data){
-        for(var i = 0; i < $scope.allTiles.length; i++){
-          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-            if(eArr.location.indexOf(data.socketId) != -1){
-              var populatedIndex = eArr.location.indexOf(data.socketId);
-
-              $scope.$apply(function() {
-                $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
-              });
-            };
-          });
-        };
-        showOccupied();
-      });
-
-      // Send current user's location to new user.
-      socket.on('iAmNew', function(data){
-        socket.emit('sendLocationToNewUser', { tileId: $scope.tileMain._id, socketId: data.socketId });
-      });
-
-      // Get everyone's location as a new user and update.
-      $scope.allUsersLocation = [];
-      socket.on('newUserGetsLocation', function(data){
-
-        // Find tile and add other user.
-        for(var i = 0; i < $scope.allTiles.length; i++){
-          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-            if(eArr._id === data.tileId){
-              $scope.$apply(function() {
-                $scope.allTiles[i][indexArr].location.push(data.socketId);
-              });
-            }
-          });
-        }
-        // console.log($scope.allUsersLocation);
-        // $scope.allUsersLocation.push(data.socketId);
-        // console.log("This ran2!");
-        // console.log("My tile: " + $scope.tileMain._id);
-        // console.log(data.tileId);
-        // console.log(data.clientsCount);
-        // console.log(data.socketId);
-      });
-    });
-    // ENDsocket
-
-    var cookieCheck = function() {
-      $scope.$apply(function() {
-        $scope.votedOnTile = false;
-      });
-      if ($cookies.likes) {
-        likeCheck = JSON.parse($cookies.likes);
-        for (var i = 0; i < likeCheck.length; i++) {
-          if (likeCheck[i] == $scope.tileMain._id) {
-            $scope.$apply(function() {
-              $scope.votedOnTile = true;
-            });
-          }
-        }
-      }
-    }
-
-    // Share a tile
-    // Give user a url to tile when user click on share tile.
-    // give url function here
-
-      // Return shared tile and random tiles around it (shared tile in center of return array)
-      $scope.sharedTile;
-      $scope.sharedTileArray;
-
-      $scope.getOneTile = function(currentTileId) {
-        $http.get('/tile/shared/' + currentTileId, null)
-          .success(function(sharedTileArray) {
-            // Get position of shared tile.
-            $scope.sharedTileArray = sharedTileArray;
-            var sharedTileCatPosition = Math.round((sharedTileArray.length / 2) - 1);
-            var sharedTilePosition = Math.round((sharedTileArray[0].length / 2));
-
-            var categoryPosition = sharedTileCatPosition;
-            var tilePosition = sharedTilePosition;
-
-            console.log(categoryPosition, tilePosition);
-
-            $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
-          });
-      };
-
-    // ShareEND
-
-
-
-    // Create a random tile and save to database
-    // Leave this alone!!!!!!!!!!!!!
-
-    // CANT TOUCH THISSSSSS, HAI *fsssttt*
-
-    $scope.createTile = function() {
-      $http.post('/tiles', null)
-        .success(function(response) {
-          // Assigns created tile object to $scope.tile
-          $scope.tile = response;
-        })
-    }
-
-
-    //
-    // Like feature
-    //
+   // Like current tile
     $scope.updateLikes = function() {
       // Save user's likes history
       var likesArray;
@@ -637,20 +440,34 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#heart-like").fadeIn();
          setTimeout(function() {
           $("#heart-like").fadeOut();
-         },600);
+         }, 600);
         likesArray.push($scope.tileMain._id);
         $cookies.likes = angular.toJson(likesArray);
-
         $http.put('/tiles/update', { tileId: $scope.tileMain._id })
           .success(function(data){
             $scope.tileMain = data;
           });
-
         socket.emit('sendLike', $scope.tileMain);
         $scope.votedOnTile = true;
       };
     };
-    // endLikes
+
+    // Check cookie for previous likes
+    var cookieCheck = function() {
+      $scope.$apply(function() {
+        $scope.votedOnTile = false;
+      });
+      if ($cookies.likes) {
+        likeCheck = JSON.parse($cookies.likes);
+        for (var i = 0; i < likeCheck.length; i++) {
+          if (likeCheck[i] == $scope.tileMain._id) {
+            $scope.$apply(function() {
+              $scope.votedOnTile = true;
+            });
+          }
+        }
+      }
+    };
 
     // Grab list of current user's favorite tiles
     $scope.find = function() {
@@ -660,7 +477,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       })
     };
 
-    // Search DB for previous likes
+    // Search DB for previous favorited tiles
     var favoriteCheck = function () {
       $scope.$apply(function() {
         $scope.favoriteTile = false;
@@ -674,9 +491,150 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       }
     }
 
+    // Add favorite tiles to current user
+    $scope.addFavorite = function() {
+      var count = 0;
+      if (user && user.favorites.length > 0) {
+        for (var i = 0; i < user.favorites.length; i++) {
+          if (user.favorites[i] == $scope.tileMain._id) {
+            var index = user.favorites.indexOf($scope.tileMain._id)
+            user.favorites.splice(index, 1);
+            $http.put('/users/favorite', {tileId: $scope.tileMain._id, removeFavorite: true})
+              .success(function(data) {
+                console.log(data);
+              });
+            $scope.favoriteTile = false;
+            count = 1;
+            break;
+          };
+        };
+      };
+      if (count == 0) {
+        $http.put('/users/favorite', {tileId: $scope.tileMain._id})
+          .success(function(data) {
+          $scope.favoriteTile = true;
+          user = data;
+          count = 1;
+        });
+      };
+    };
+
+    // Socket.io testing
+    socket.on('connect', function() {
+      socket.on("takeTile", function(data) {
+        // Find tile and remove current_user.
+        for(var i = 0; i < $scope.allTiles.length; i++) {
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr.location.indexOf(data.socketId) != -1){
+              var populatedIndex = eArr.location.indexOf(data.socketId);
+              $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
+            }
+          });
+        }
+
+        // Find tile and add current_user.
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr._id === data.tileId){
+              $scope.$apply(function() {
+                $scope.allTiles[i][indexArr].location.push(data.socketId);
+              });
+            }
+          });
+        }
+        showOccupied();
+      });
+
+      // Get test emit to current user and display in browser's console.
+      socket.on('currentPosition', function(data) {
+        // console.log(data);
+      });
+
+      // Listen for likes
+      socket.on('giveBackLike', function(data) {
+       for(var i = 0; i < $scope.allTiles.length; i++) {
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr._id === data._id) {
+              $scope.$apply(function() {
+                data.likes = data.likes + 1;
+                $scope.allTiles[i][indexArr] = data;
+              });
+            }
+          });
+        }
+      });
+
+      // Listen for disconnect?
+      socket.on('user disconnected', function(data){
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr.location.indexOf(data.socketId) != -1){
+              var populatedIndex = eArr.location.indexOf(data.socketId);
+              $scope.$apply(function() {
+                $scope.allTiles[i][indexArr].location.splice(populatedIndex, 1);
+              });
+            };
+          });
+        };
+        showOccupied();
+      });
+
+      // Send current user's location to new user.
+      socket.on('iAmNew', function(data) {
+        socket.emit('sendLocationToNewUser', { tileId: $scope.tileMain._id, socketId: data.socketId });
+      });
+
+      // Get everyone's location as a new user and update.
+      $scope.allUsersLocation = [];
+      socket.on('newUserGetsLocation', function(data) {
+
+        // Find tile and add other user.
+        for(var i = 0; i < $scope.allTiles.length; i++){
+          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+            if(eArr._id === data.tileId){
+              $scope.$apply(function() {
+                $scope.allTiles[i][indexArr].location.push(data.socketId);
+              });
+            }
+          });
+        }
+        // console.log($scope.allUsersLocation);
+        // $scope.allUsersLocation.push(data.socketId);
+        // console.log("This ran2!");
+        // console.log("My tile: " + $scope.tileMain._id);
+        // console.log(data.tileId);
+        // console.log(data.clientsCount);
+        // console.log(data.socketId);
+      });
+    });
+    // ENDsocket
+
+    // Share a tile
+    // Give user a url to tile when user click on share tile.
+    // give url function here
+
+    // Return shared tile and random tiles around it (shared tile in center of return array)
+    $scope.sharedTile;
+    $scope.sharedTileArray;
+
+    $scope.getOneTile = function(currentTileId) {
+      $http.get('/tile/shared/' + currentTileId, null)
+        .success(function(sharedTileArray) {
+          // Get position of shared tile.
+          $scope.sharedTileArray = sharedTileArray;
+          var sharedTileCatPosition = Math.round((sharedTileArray.length / 2) - 1);
+          var sharedTilePosition = Math.round((sharedTileArray[0].length / 2));
+
+          var categoryPosition = sharedTileCatPosition;
+          var tilePosition = sharedTilePosition;
+
+          console.log(categoryPosition, tilePosition);
+
+          $scope.sharedTile = $scope.sharedTileArray[categoryPosition][tilePosition];
+        });
+      };
 
     // Add more categories/tiles when user reaches edge of grid
-
     $scope.loadMoreTiles = function(side) {
       $http.post('/tiles/more/' + side, {alltiles: $scope.allTiles})
         .success(function(response){
@@ -691,7 +649,18 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         });
     };
 
-    // END ADD MORE CATEGORIES
+    // Create a random tile and save to database
+    // Leave this alone!!!!!!!!!!!!!
+
+    // CANT TOUCH THISSSSSS, HAI *fsssttt*
+
+    $scope.createTile = function() {
+      $http.post('/tiles', null)
+        .success(function(response) {
+          // Assigns created tile object to $scope.tile
+          $scope.tile = response;
+        })
+    }
 
     // SPRITZ test
     // $scope.spritzNow = function(content) {
