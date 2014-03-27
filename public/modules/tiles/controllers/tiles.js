@@ -10,29 +10,34 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     // KYLE & JUSTIN
 
+    var welcomeScreen = function() {
+      if(!$cookies.firstTimeUser){
+        $scope.firstTime = true;
+        $("#tileMain").addClass("nav-open").removeClass("nav-close");
+        $scope.nav_open = true;
+        $cookies.firstTimeUser = "Welcome to Gloss!";
+        console.log("NEW USER");
+      }
+      else{
+        $("#welcome-screen").hide();
+        console.log("OLD USER");
+        $scope.$apply(function(){
+          $scope.nav_open = false;
+        });
+      }
+    }
+
     $scope.loadTiles = function() {
       $http.get('/tiles/categories', null)
         .success(function(response) {
 
+          welcomeScreen();
+
           $scope.allTiles = response;
-          $scope.currentCategory = 1;
-          $scope.hPosition = 5;
+          $scope.currentCategory = 4;
+          $scope.hPosition = 9;
           console.log(response);
           console.log($scope.hPosition);
-
-          if(!$cookies.firstTimeUser){
-            $("#tileMain").addClass("nav-open").removeClass("nav-close");
-            $("#navi-text").html("<h1>Welcome to <span>gloss</span>!</h1><p>Swipe Left & Right for more,<br> Up & Down for new categories,<br> tap to begin.</p>");
-            $scope.nav_open = true;
-            $cookies.firstTimeUser = "Welcome to Gloss!";
-            console.log("NEW USER");
-          }
-          else{
-            console.log("OLD USER");
-            $scope.$apply(function(){
-              $scope.nav_open = false;
-            });
-          }
 
           $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
 
@@ -41,14 +46,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
           $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
-
-          $scope.loadedTiles = [
-            {name: "Main", loaded: $scope.tileMain },
-            {name: "Left", loaded: $scope.tileLeft },
-            {name: "Right", loaded: $scope.tileRight },
-            {name: "Up", loaded: $scope.tileUp },
-            {name: "Down", loaded: $scope.tileDown }
-          ];
 
           socket.emit('giveTile', { tileId: $scope.tileMain._id});
           console.log($scope.tileMain._id);
@@ -64,14 +61,20 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
 
           setTimeout(function(){
-            $scope.$apply(function(){
-              $scope.loadComplete = true;
-            });
+            $scope.loadComplete = true;
             setTimeout(function(){
               $("#loadScreen").hide();
             },1500);
           },1000);
 
+          // // for ng-repeat
+          // $scope.loadedTiles = [
+          //   {name: "Main", loaded: $scope.tileMain },
+          //   {name: "Left", loaded: $scope.tileLeft },
+          //   {name: "Right", loaded: $scope.tileRight },
+          //   {name: "Up", loaded: $scope.tileUp },
+          //   {name: "Down", loaded: $scope.tileDown }
+          // ];
 
       });
     };
@@ -191,8 +194,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $scope.$apply(function(){
           $scope.share = true;
         });
-
       }
+      $scope.firstTime = false;
     };
 
     $(function() {
