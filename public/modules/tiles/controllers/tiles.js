@@ -666,18 +666,20 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // Add more categories/tiles when user reaches edge of grid
 
     $scope.loadMoreTiles = function(side) {
-      console.log(side);
-      // Converts $scope.allTiles array to JSON before sending to database.
-      // var allTiles = angular.toJson($scope.allTiles);
-      // console.log($scope.allTiles);
-
       $http.post('/tiles/more/' + side, {alltiles: $scope.allTiles})
         .success(function(response){
           $scope.allTiles = response;
+
+          // Find user's current position in new grid.
+          if (side == 'left') {
+            var newTilePosition = $scope.hPosition + 10;
+            $scope.tileMain = $scope.allTiles[$scope.currentCategory][newTilePosition];
+          }
           console.log(response);
         });
     };
 
+// $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
     // END ADD MORE CATEGORIES
 
 
