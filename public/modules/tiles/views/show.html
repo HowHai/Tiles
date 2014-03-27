@@ -1,8 +1,9 @@
-<div id="loadScreen" ng-show="!loadComplete">
-  Loading...
+<div id="loadScreen" ng-class="{'load-fade': !loadComplete}">
+  
+  <div class="brand">gloss<br><div class="load-text">Loading...</div></div>
 </div>
 
-<div class="row" ng-init="loadTiles()" ng-show="loadComplete">
+<div class="row" ng-init="loadTiles()" >
   <section id="showTile" class="col-xs-12">
   <!-- <button ng-click="createTile()">Herroo Prease</button> -->
 
@@ -98,16 +99,13 @@
       </div>
     </div>
 
-    <div id="navigation-instructions" class="swipeable" ng-click="closeNav()">
+    <div id="navigation-instructions" class="swipeable" ng-class="{'open': nav_open}" ng-click="closeNav()">
         <div id="nav-header">gloss
           <button></button>
         </div>
         <i class="fa fa-angle-up kiss top"></i>
         <i class="fa fa-angle-left kiss left"></i>
           <div id ="navi-content">
-            <div id="navi-text">
-              <!-- <h1>welcome to<br><br><span>gloss</span></h1> -->
-            </div>
             <div id="radar">
               <div id="rad"></div>
               <div class="centerDot"></div>
@@ -117,6 +115,8 @@
               </div>
               <!-- <div class="obj" data-x="130" data-y="60"></div> -->
               <!-- <div class="obj" data-x="70" data-y="35"></div> -->
+            </div>
+            <div id="navi-text">
             </div>
             <div class="kiss buttons">
               <!-- <a href="/#!/tile/shared/{{tileMain._id}}"></a> -->

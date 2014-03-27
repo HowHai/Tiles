@@ -104,9 +104,35 @@ h1, h2, h3 {
 // Load Screen
 
 #loadScreen {
+  position:absolute;
+  transition: 1.5s;
+  opacity: 0;
+  z-index: 100;
+  // display: none;
   height: 100%;
-  text-align: center;
+  width: 100%;
+  // text-align: center;
   font-size: 1.5em;
+  background-color: black;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+  font-weight: 300;
+  padding: 15px;
+  &.load-fade{
+    opacity: 1;
+    // display: block;
+  }
+  // padding-top:47%;
+  .brand{
+    // position: absolute;
+    font-size: 1.5em;
+    .load-text{
+      padding-top: 60%;
+      text-align: center;
+      font-size: 0.5em;
+      color: tomato;
+    }
+  }
 }
 
 // Show Tile View
@@ -254,7 +280,7 @@ h1, h2, h3 {
       opacity: 1;
     }
     &.nav-open {
-      transition: 0.25s;
+      // transition: 0.25s;
       opacity: 0.3;
       -webkit-filter: blur(5px); 
       -moz-filter: blur(5px);
@@ -330,6 +356,11 @@ h1, h2, h3 {
     word-wrap: break-word;
     padding-top: 10px;
     background-color: rgba(0,0,0,0.4);
+    transition: 0.5s;
+    &.open{
+      display: block;
+      opacity: 1;
+    }
     .center-vertical {
       padding-top: 47%;
     }
@@ -370,16 +401,16 @@ h1, h2, h3 {
         font-size: 0.4em;
       }
       #navi-text {
-        margin-top: -54px;
+        margin-top: 7%;
         width: 100%;
         height: 100%;
-        display: table;
+        // display: table;
         position: absolute;
         h1 {
           color: white;
           opacity: 0.8;
           display: table-cell;
-          vertical-align: middle;
+          // vertical-align: middle;
           font-size: 0.6em;
           letter-spacing: 4px;
           font-weight: 300;
@@ -387,9 +418,13 @@ h1, h2, h3 {
           span {
             margin-top: 100px;
             font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
-            font-size: 3em;
+            font-size: 1.2em;
             margin-top: 5px;
           }
+        }
+        p{
+          font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+          font-size: 0.5em;
         }
       }
       #radar{
@@ -545,6 +580,7 @@ h1, h2, h3 {
   }
 
 }
+
 
   // #loadedTiles {
     // .tile {

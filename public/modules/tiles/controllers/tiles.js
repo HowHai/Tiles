@@ -10,7 +10,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // KYLE & JUSTIN
 
     $scope.loadTiles = function() {
-      $scope.nav_open = false;
       $http.get('/tiles/categories', null)
         .success(function(response) {
 
@@ -18,6 +17,20 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           $scope.currentCategory = 4;
           $scope.hPosition = 9;
           console.log(response);
+
+          if(!$cookies.firstTimeUser){
+            $("#tileMain").addClass("nav-open").removeClass("nav-close");
+            $("#navi-text").html("<h1>Welcome to <span>gloss</span>!</h1><p>Swipe Left & Right for more,<br> Up & Down for new categories,<br> tap to begin.</p>");
+            $scope.nav_open = true;
+            $cookies.firstTimeUser = "Welcome to Gloss!";
+            console.log("NEW USER");
+          } 
+          else{
+            console.log("OLD USER");
+            $scope.$apply(function(){
+              $scope.nav_open = false;
+            });
+          }
 
           $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
 
@@ -47,7 +60,16 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           }
 
-          $scope.loadComplete = true;
+          setTimeout(function(){
+            $scope.$apply(function(){
+              $scope.loadComplete = true;
+            });
+            setTimeout(function(){
+              $("#loadScreen").hide();
+            },1500);
+          },1000);
+          
+          
       });
     };
 
@@ -147,12 +169,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       if (!$("button").is(":focus")) {
         $scope.share = false;
         $("#tileMain").removeClass("nav-open").addClass("nav-close");
-        $("#navigation-instructions").css({"transition":"0.5s","opacity":"0"});
-        setTimeout(function(){
-          $("#navigation-instructions").css("display", "none");
-          $("#tileMain").removeClass("nav-close");
-        },500);
-        $scope.nav_open = false;
+        $scope.$apply(function(){
+          $scope.nav_open = false;
+        });
       };
     };
 
@@ -182,9 +201,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
             if($scope.nav_open == false){
               $("#tileMain").addClass("nav-open").removeClass("nav-close");
-              $("#navigation-instructions").css({"transition":"0,5s","display":"block","opacity":"1"});
               showOccupied();
-              $scope.nav_open = true;
+              $scope.$apply(function(){
+                $scope.nav_open = true;
+              });
             }
             else{
               $scope.closeNav();
@@ -198,7 +218,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       function animateAndMove(direction, tile, colorMain, colorOffset){
         $("#tile" + direction).addClass("center-tile", "show");
         $("#tileMain").addClass("hide");
-        showOccupied();
         // Added this to match bg color to new tile, but needs some work with the animation
         // $("#showTile").css("background-color", colorMain);
 
@@ -214,6 +233,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
         setTimeout(function(){
           move(direction);
+          showOccupied();
           $("#tile" + direction).removeClass("center-tile", "show");
           $("#tileMain").removeClass("hide");
         },400);
@@ -337,15 +357,15 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     })();
 
     var showOccupied = function(){
-      // console.log("My Postion: "+ $scope.hPosition + " Cat: " + $scope.currentCategory);
+      console.log("My Postion: "+ $scope.hPosition + " Cat: " + $scope.currentCategory);
       for(var i = 0; i<$scope.allTiles.length; i++){
-        // var grid = "ROW: ";
-        // grid +=i;
-        // grid += ": ";
+        var grid = "ROW: ";
+        grid +=i;
+        grid += ": ";
         for(var j=0;j<$scope.allTiles[i].length;j++){
           if($scope.allTiles[i][j].location.length > 0){
-            // grid+="X";
-            // var found = $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition));
+            grid+="X";
+            var found = $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition));
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("obj");
             if($scope.allTiles[i][j].location.length > 1){
               $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("multi-user");
@@ -355,22 +375,25 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             }
           }
           else if (i == $scope.currentCategory && j == $scope.hPosition){
-            // grid+="W";
+            grid+="W";
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("obj");
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("heart");
           }
           else if($scope.allTiles[i][j].likes > 5){
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("heart").addClass("obj");
             // console.log($scope.allTiles[i][j].likes);
           }
           else{
-            // grid+="0";
+            grid+="0";
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("obj");
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("heart");
           }
         }
-        // console.log(grid);
+        console.log(grid);
       }
-      // console.log(found);
+      console.log(found);
       showDots();
     };
     var showDots = function(){

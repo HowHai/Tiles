@@ -98,8 +98,8 @@ exports.categories = function(req, res){
   // TODO: Errors handling
 
   // TODO: Uncomment this after done with testing.
-  // if(req.cookies.savedTiles){
-  if(false){
+  if(req.cookies.savedTiles){
+  // if(false){
     var tilesArray = JSON.parse(req.cookies.savedTiles)
     var savedTilesArray = [];
 
@@ -149,6 +149,8 @@ exports.categories = function(req, res){
           }
           // Store user's grid to cookie.
           res.cookie("savedTiles", JSON.stringify(allTilesId));
+
+         
 
           // Randomize category
           categoriesArray = shuffle(categoriesArray);

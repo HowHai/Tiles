@@ -60,9 +60,27 @@ h1, h2, h3 {
   height: 100%; }
 
 #loadScreen {
+  position: absolute;
+  transition: 1.5s;
+  opacity: 0;
+  z-index: 100;
   height: 100%;
-  text-align: center;
-  font-size: 1.5em; }
+  width: 100%;
+  font-size: 1.5em;
+  background-color: black;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+  font-weight: 300;
+  padding: 15px; }
+  #loadScreen.load-fade {
+    opacity: 1; }
+  #loadScreen .brand {
+    font-size: 1.5em; }
+    #loadScreen .brand .load-text {
+      padding-top: 60%;
+      text-align: center;
+      font-size: 0.5em;
+      color: tomato; }
 
 #showTile {
   height: 100%;
@@ -175,7 +193,6 @@ h1, h2, h3 {
     #showTile #tileMain.fader {
       opacity: 1; }
     #showTile #tileMain.nav-open {
-      transition: 0.25s;
       opacity: 0.3;
       -webkit-filter: blur(5px);
       -moz-filter: blur(5px);
@@ -227,7 +244,11 @@ h1, h2, h3 {
     padding: 20px;
     word-wrap: break-word;
     padding-top: 10px;
-    background-color: rgba(0, 0, 0, 0.4); }
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: 0.5s; }
+    #showTile #navigation-instructions.open {
+      display: block;
+      opacity: 1; }
     #showTile #navigation-instructions .center-vertical {
       padding-top: 47%; }
     #showTile #navigation-instructions #nav-header {
@@ -263,16 +284,14 @@ h1, h2, h3 {
       #showTile #navigation-instructions #navi-content h3 {
         font-size: 0.4em; }
       #showTile #navigation-instructions #navi-content #navi-text {
-        margin-top: -54px;
+        margin-top: 7%;
         width: 100%;
         height: 100%;
-        display: table;
         position: absolute; }
         #showTile #navigation-instructions #navi-content #navi-text h1 {
           color: white;
           opacity: 0.8;
           display: table-cell;
-          vertical-align: middle;
           font-size: 0.6em;
           letter-spacing: 4px;
           font-weight: 300;
@@ -280,8 +299,11 @@ h1, h2, h3 {
           #showTile #navigation-instructions #navi-content #navi-text h1 span {
             margin-top: 100px;
             font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
-            font-size: 3em;
+            font-size: 1.2em;
             margin-top: 5px; }
+        #showTile #navigation-instructions #navi-content #navi-text p {
+          font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+          font-size: 0.5em; }
       #showTile #navigation-instructions #navi-content #radar {
         position: relative;
         width: 160px;
