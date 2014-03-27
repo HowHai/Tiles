@@ -431,7 +431,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           console.log(user.favorites.indexOf($scope.tileMain._id));
 
           if (user.favorites[i] == $scope.tileMain._id) {
-          console.log("FOund!");         
+          console.log("FOund!");
             var index = user.favorites.indexOf($scope.tileMain._id)
             user.favorites.splice(index, 1);
             $http.put('/users/favorite', {tileId: $scope.tileMain._id, removeFavorite: true})
@@ -439,13 +439,13 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
                 // Update tile for current user here.
                 console.log("SUCCESSSS")
                 console.log(data);
-              });  
+              });
             console.log('removed; length: ' + user.favorites.length);
             $scope.favoriteTile = false;
             count = 1;
             break;
           };
-        };  
+        };
       };
       if (count == 0) {
         $http.put('/users/favorite', {tileId: $scope.tileMain._id})
@@ -674,6 +674,24 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       }
     }
 
+
+    // Add more categories/tiles when user reaches edge of grid
+
+    $scope.loadMoreTiles = function(side) {
+      $http.post('/tiles/more/' + side, {alltiles: $scope.allTiles})
+        .success(function(response){
+          $scope.allTiles = response;
+
+          // Find user's current position in new grid.
+          if (side == 'left') {
+            var newTilePosition = $scope.hPosition + 10;
+            $scope.tileMain = $scope.allTiles[$scope.currentCategory][newTilePosition];
+          }
+          console.log(response);
+        });
+    };
+
+    // END ADD MORE CATEGORIES
 
     // SPRITZ test
     // $scope.spritzNow = function(content) {
