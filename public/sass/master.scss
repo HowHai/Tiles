@@ -105,8 +105,28 @@ h1, h2, h3 {
 
 #loadScreen {
   height: 100%;
+  width: 100%;
+  display: table;
   text-align: center;
-  font-size: 1.5em;
+  background-color: #58c9f3;
+  #inner {
+    display: table-cell;
+    vertical-align: middle;
+    h1 {
+      margin-top: -70px;
+      color: white;
+      opacity: 0.6;
+      font-size: 1.5em;
+      // letter-spacing: 6px;
+      font-weight: 300;
+      font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+      span {
+        font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+        font-size: 4em;
+        margin-top: 50px;
+      }
+    }    
+  }
 }
 
 // Show Tile View
@@ -241,7 +261,7 @@ h1, h2, h3 {
   }
 
   .prizeTile {
-    border: 10px solid skyblue;
+    // border: 10px solid skyblue;
     .tile-footer {
       background: -webkit-linear-gradient(top, 
                 rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, 

@@ -61,8 +61,24 @@ h1, h2, h3 {
 
 #loadScreen {
   height: 100%;
+  width: 100%;
+  display: table;
   text-align: center;
-  font-size: 1.5em; }
+  background-color: #58c9f3; }
+  #loadScreen #inner {
+    display: table-cell;
+    vertical-align: middle; }
+    #loadScreen #inner h1 {
+      margin-top: -70px;
+      color: white;
+      opacity: 0.6;
+      font-size: 1.5em;
+      font-weight: 300;
+      font-family: 'Open Sans', 'Helvetica', Helvetica, sans-serif; }
+      #loadScreen #inner h1 span {
+        font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
+        font-size: 4em;
+        margin-top: 50px; }
 
 #showTile {
   height: 100%;
@@ -166,17 +182,15 @@ h1, h2, h3 {
         color: black; }
       #showTile .colorOffset .tile-footer h3 {
         color: black; }
-  #showTile .prizeTile {
-    border: 10px solid skyblue; }
-    #showTile .prizeTile .tile-footer {
-      background: -webkit-linear-gradient(top, #d5ad6d 0%, #d5ad6d 26%, #e2ba78 35%, #a37e43 45%, #91703b 61%, #d5ad6d 100%); }
-      #showTile .prizeTile .tile-footer h3 {
-        visibility: hidden; }
-      #showTile .prizeTile .tile-footer h3:after {
-        visibility: visible;
-        content: "YOU WIN!!";
-        margin-left: -130px;
-        color: white; }
+  #showTile .prizeTile .tile-footer {
+    background: -webkit-linear-gradient(top, #d5ad6d 0%, #d5ad6d 26%, #e2ba78 35%, #a37e43 45%, #91703b 61%, #d5ad6d 100%); }
+    #showTile .prizeTile .tile-footer h3 {
+      visibility: hidden; }
+    #showTile .prizeTile .tile-footer h3:after {
+      visibility: visible;
+      content: "YOU WIN!!";
+      margin-left: -130px;
+      color: white; }
   #showTile #tileMain {
     left: 0;
     bottom: 0px;
