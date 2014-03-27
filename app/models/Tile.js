@@ -14,6 +14,9 @@ var TileSchema = new Schema({
   category: {type: String},
   likes: {type: Number, default: 0},
   location: [],
+  itemUrl: {type: String},
+  price: {type: String},
+  prize: {type: String},
   comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
 });
 

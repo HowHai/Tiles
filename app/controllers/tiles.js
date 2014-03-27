@@ -295,6 +295,8 @@ exports.create = function(req, res){
 
               var titleArr = [];
               var contentArr = [];
+              var itemArr = [];
+              var priceArr = [];
 
               // thisiswhyiambroke.com content
               // Get titles
@@ -317,12 +319,22 @@ exports.create = function(req, res){
               // Get titles
               $('.article-list.grid li .content-wrapper .copy-wrapper h1 a').each(function() { titleArr.push($(this)[0].text); });
 
+              // Get item URLs
+              $('.article-list.grid li .ui-wrapper .buy a').each(function(){
+                itemArr.push($(this)[0].href);
+              });
+
+              // Get item price
+              $('.article-list.grid li .ui-wrapper .buy .cost').each(function() {
+                priceArr.push($(this)[0].innerText);
+              });
+
               // Create an array of objects containing titles and contents
               var tilesArr = []
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({category: "food", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
+                tilesArr.push({itemUrl: itemArr[i], price: priceArr[i], category: "food", name: titleArr[i], content: contentArr[i], imgUrl: 'photo' + randomPhotoNumber + '.jpg'});
               }
 
               return [tilesArr, images];
