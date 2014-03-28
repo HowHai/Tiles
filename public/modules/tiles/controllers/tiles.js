@@ -508,6 +508,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
  //FAVORITES
     $scope.addFavorite = function() {
+      console.log(event);
+      event.cancelBubble = true;
+      $scope.favoriteTile = !$scope.favoriteTile;
       var count = 0;
       if (user && user.favorites.length > 0) {
         console.log(user.favorites);

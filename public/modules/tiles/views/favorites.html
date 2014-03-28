@@ -7,7 +7,7 @@
     <h1 class="col-xs-12">FAVORITES</h1>
   </div>
   <div class="list-group">
-    <a ng-class-odd="'dark'" data-ng-repeat="favorite in favorites" data-ng-href="#!/favorites/{{favorite._id}}" class="list-group-item col-xs-12">
+    <a ng-class-odd="'dark'" data-ng-repeat="favorite in favorites" data-ng-href="{{favorite.itemUrl}}" class="list-group-item col-xs-12">
       <div class="thumb-image col-xs-3" style="background-image: url(http://storage.googleapis.com/gloss/tiles/{{favorite.imgUrl}})"></div>
       <div class="col-xs-9">
       <p class="list-group-item-heading">{{favorite.name | capitalize}}</p>
