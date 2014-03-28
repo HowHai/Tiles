@@ -221,8 +221,8 @@ h1, h2, h3 {
         padding: 0 20px;
         font-size: 1.5em;
         display: inline-block;
-        &:hover, &:active {
-          color: tomato !important;
+        &:hover {
+          color: tomato;
         }
         &.liked {
           color: tomato;
@@ -292,8 +292,8 @@ h1, h2, h3 {
     // border: 10px solid skyblue;
     .tile-footer {
       background: -webkit-linear-gradient(top, 
-                rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, 
-                rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, 
+                rgba(213,173,109,1) 0%, rgba(213,173,109,1) 16%, 
+                rgba(226,186,120,1) 25%, rgba(163,126,67,1) 45%, 
                 rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
       h3 {
         visibility: hidden;
@@ -437,7 +437,7 @@ h1, h2, h3 {
         background: none;
         // border: 1px solid rgba(255,255,255,0.8);
         border: none;
-        background-image: url(../img/brand/list.svg);
+        background-image: url(../img/brand/list2.svg);
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
@@ -521,7 +521,7 @@ h1, h2, h3 {
         #rad{
           position:absolute;
           width:160px;
-          height:160px; background:url(http://i.stack.imgur.com/fbgUD.png);
+          height:160px; background:url(../img/brand/fbgUD.png);
           background-size: 160px 160px;
         }
         .centerDot{
@@ -540,19 +540,28 @@ h1, h2, h3 {
         .obj{
           background: white;
           position:absolute;
-          width:4px;
-          height:4px;
-          margin-top:-2px;
-          margin-left:-2px;
+          width:2px;
+          height:2px;
+          margin-top:-1px;
+          margin-left:-1px;
           box-shadow:0 0 10px 5px rgba(100,255,0,0.5);
           opacity:1;
+          &.two-user{
+            background: white;
+            // border-radius: 10px;
+            width:4px;
+            height:4px;
+            margin-top:-2px;
+            margin-left:-2px;
+
+          }
           &.multi-user{
-            background: red;
-            border-radius: 10px;
-            width:10px;
-            height:10px;
-            margin-top:-5px;
-            margin-left:-5px;
+            background: white;
+            // border-radius: 10px;
+            width:6px;
+            height:6px;
+            margin-top:-3px;
+            margin-left:-3px;
 
           }
           &.heart{
@@ -561,8 +570,20 @@ h1, h2, h3 {
             background-image: url(../img/brand/heart.svg);
             height: 10px;
             width: 10px;
-            margin-top:-5px;
-            margin-left:-5px;
+            margin-top:-4px;
+            margin-left:-4px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+          &.towel{
+            background: none;
+            box-shadow:none;
+            background-image: url(../img/brand/towelie.png);
+            height: 20px;
+            width: 20px;
+            margin-top:-4px;
+            margin-left:-4px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -573,8 +594,8 @@ h1, h2, h3 {
             background-image: url(../img/brand/moneybag.svg);
             height: 14px;
             width: 14px;
-            margin-top:-7px;
-            margin-left:-7px;
+            margin-top:-8px;
+            margin-left:-6px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -601,6 +622,9 @@ h1, h2, h3 {
                 text-decoration: none;
               }
             }
+            &.gold{
+              background-color: rgba(88,201,243,0.7);
+            }
           }
           margin:0 auto;
           border-radius: 0;
@@ -625,23 +649,23 @@ h1, h2, h3 {
       }
       &.top {
         position: absolute;
-        color: tomato;
+        color: #58c9f3;
         top: 0px;
         left: 45%;
       }
       &.left {
-        color: tomato;
+        color: #58c9f3;
         top: 45%;
         left: 10px;
       }
       &.right {
         top: 45%;
-        color: tomato;
+        color: #58c9f3;
         right: 10px;
       }
       &.bottom {
         position: absolute;
-        color: tomato;
+        color: #58c9f3;
         bottom: 10px;
         left: 45%;
       }
@@ -718,34 +742,43 @@ h1, h2, h3 {
     position: fixed;
     z-index: 10;
     background-color: white;
-    height: 94px;
+    height: 50px;
     width: 100% !important;
     .control{
-      background-color: black;
-      height: 30px;
+      background-color: white;
+      height: 25px;
       .brand{
         font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
         padding-left: 10px;
-        color: rgba(255,255,255,0.8);
+        color: #58c9f3;
         font-size: 1.5em;
       }
-      a{
+      .back{
+      z-index: 10;
       font-size: 1.4em;
       padding-right: 10px;
-      color: white;
+      padding-bottom: 17px;
+      margin-top: -3px;
+      margin-right: -6px;
+      color: black;
       text-align: right;
+        img{
+          height: 31px;
+        }
+      }
     }
-    }
+  
     h1{
-      margin-top: 10px;
+      margin-top: -7px;
       padding-left: 5px;
       text-align: center;
+      font-size: 1.5em;
     }
     
   }
 
   .list-group{
-    padding-top: 94px;
+    padding-top: 50px;
     .list-group-item{
       border-radius: 0px;
       border: none;

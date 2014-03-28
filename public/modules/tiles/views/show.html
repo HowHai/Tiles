@@ -13,14 +13,14 @@
         <img src="http://storage.googleapis.com/gloss/tiles/{{tileMain.imgUrl}}" alt="...apologies, Hai must've broken something!">
         <div class="tile-info">
           <h1>{{tileMain.name}}</h1>
-          <!-- <h5>${{tileMain.price}}</h5> -->
+          <!-- <h5>${{tileMain.price | fixprice}}</h5> -->
           <div class="tile-desc"><p>{{tileMain.content}}</p></div>
         </div>
       </div>
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
-        <h4>${{tileMain.price}}</h4>
+        <h4>${{tileMain.price | fixprice}}</h4>
       </div>
     </div>
 
@@ -36,7 +36,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileLeft.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
-        <h4>${{tileLeft.price}}</h4>
+        <h4>${{tileLeft.price | fixprice}}</h4>
       </div>
     </div>
 
@@ -52,7 +52,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileRight.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
-        <h4>${{tileRight.price}}</h4>
+        <h4>${{tileRight.price | fixprice}}</h4>
       </div>
     </div>
 
@@ -68,7 +68,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileUp.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
-        <h4>${{tileUp.price}}</h4>
+        <h4>${{tileUp.price | fixprice}}</h4>
       </div>
     </div>
 
@@ -84,7 +84,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileDown.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
-        <h4>${{tileDown.price}}</h4>
+        <h4>${{tileDown.price | fixprice}}</h4>
       </div>
     </div>
 
@@ -107,12 +107,12 @@
               <div id="rad"></div>
               <div class="centerDot"></div>
               <div ng-repeat="xcord in xcords">
-                <div id="{{xcord+''+ycord}}" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
+                <div id="{{xcord+''+ycord}}" class="radar-points" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
               </div>
             </div>
             <div class="kiss buttons" ng-show="!firstTime">
               <!-- <h3 id="share-link" ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3> -->
-              <button class="btn share" ng-click="addFavorite()">FAVORITE</button>
+              <button class="btn share" ng-click="addFavorite()" ng-class="{'gold': favoriteTile}">FAVORITE</button>
             </div>
           </div>
         <i class="fa fa-angle-right kiss right"></i>
