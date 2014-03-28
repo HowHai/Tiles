@@ -95,6 +95,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           // $("#loadScreen .load-text").css("-webkit-transform", "translate(0px,156%)");
             $scope.$apply(function(){
               $scope.loadComplete = true;
+              $scope.loadingTiles = false;
             });
             setTimeout(function(){
               $("#loadScreen").hide();
@@ -244,17 +245,17 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           var colorOffset = $("#tileLeft").css("background-color");
           var windowHeight = document.documentElement.clientHeight - 100;
           var windowWidth = document.documentElement.clientWidth;
-
-          if(direction=="right" && distance > (windowWidth)*0.45){
+          console.log("Loading: " + $scope.loadingTiles);
+          if(direction=="right" && distance > (windowWidth)*0.45 && $scope.loadingTiles == false){
             animateAndMove("Left", $scope.tileLeft, colorMain, colorOffset);
           }
-          else if(direction=="left" && distance > (windowWidth)*0.45){
+          else if(direction=="left" && distance > (windowWidth)*0.45 && $scope.loadingTiles == false){
             animateAndMove("Right", $scope.tileRight, colorMain, colorOffset);
           }
-          else if(direction=="up" && distance > (windowHeight)*0.25){
+          else if(direction=="up" && distance > (windowHeight)*0.25 && $scope.loadingTiles == false){
             animateAndMove("Down", $scope.tileDown, colorMain, colorOffset);
           }
-          else if(direction=="down" && distance > (windowHeight)*0.25){
+          else if(direction=="down" && distance > (windowHeight)*0.25 && $scope.loadingTiles == false){
             animateAndMove("Up", $scope.tileUp, colorMain, colorOffset);
           }
           else if(distance == 0 && direction == null){
@@ -782,6 +783,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // Add more categories/tiles when user reaches edge of grid
 
     $scope.loadMoreTiles = function(side) {
+      $scope.loadingTiles = true;
       $http.post('/tiles/more/' + side, {alltiles: $scope.allTiles})
         .success(function(response){
           $scope.allTiles = response;
@@ -794,7 +796,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
           $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
           $scope.tileRight = $scope.allTiles[$scope.currentCategory][$scope.hPosition + 1];
-
+          $scope.loadingTiles = false;
         });
     };
 

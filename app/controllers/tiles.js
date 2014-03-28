@@ -221,7 +221,7 @@ exports.categories = function(req, res){
           var categoriesArray = categories.map(function(cat) {
             // Return first 16 tiles from each category.
 
-            return shuffle(cat.tiles.splice(0, 30));
+            return shuffle(cat.tiles.splice(0, 10));
           });
           // var categoriesArray = categories.map(function(cat) { return cat.tiles });
 
