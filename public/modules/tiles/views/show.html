@@ -107,7 +107,7 @@
               <div id="rad"></div>
               <div class="centerDot"></div>
               <div ng-repeat="xcord in xcords">
-                <div id="{{xcord+''+ycord}}" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
+                <div id="{{xcord+''+ycord}}" class="radar-points" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
               </div>
             </div>
             <div class="kiss buttons" ng-show="!firstTime">

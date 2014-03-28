@@ -417,43 +417,48 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     })();
 
     var showOccupied = function(){
+      $(".radar-points").removeClass("obj").removeClass("prize").removeClass("two-user").removeClass("multi-user").removeClass("heart");
       console.log("My Postion: "+ $scope.hPosition + " Cat: " + $scope.currentCategory);
       for(var i = 0; i<$scope.allTiles.length; i++){
         var grid = "ROW: ";
         grid +=i;
         grid += ": ";
         for(var j=0;j<$scope.allTiles[i].length;j++){
+          var none = true;
           if($scope.allTiles[i][j].location.length > 0){
             grid+="X";
-            var found = $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition));
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("obj");
-            if($scope.allTiles[i][j].location.length > 1){
-              $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("multi-user");
-            }
-            else{
+            if($scope.allTiles[i][j].location.length == 2){
+              $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("two-user");
               $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
             }
+            else if($scope.allTiles[i][j].location.length > 2){
+              $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("multi-user");
+            }
+            none = false;
           }
-          else if (i == $scope.currentCategory && j == $scope.hPosition){
+          if (i == $scope.currentCategory && j == $scope.hPosition){
             grid+="W";
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("obj");
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("heart");
+            none = false;
           }
-          else if($scope.allTiles[i][j].likes > 5){
+          if($scope.allTiles[i][j].likes > 5){
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("heart").addClass("obj");
+            var found = $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition));
             // console.log($scope.allTiles[i][j].likes);
+            grid+="H";
+            none = false;
           }
-          else if($scope.allTiles[i][j].prize == "true"){
+          if($scope.allTiles[i][j].prize == "true"){
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("prize").addClass("obj");
             // console.log($scope.allTiles[i][j].likes);
+            grid+="P";
+            none = false;
           }
-          else{
+          if(none == true){
             grid+="0";
-            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("obj");
-            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("prize");
-            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
-            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("heart");
           }
         }
         console.log(grid);
