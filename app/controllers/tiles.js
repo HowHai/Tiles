@@ -105,22 +105,24 @@ exports.loadmore = function(req, res){
   // console.log("start:" + startingPoint);
   // console.log("End:" + endingPoint);
 
-  Category.find({}, {}, function(error, categories){
-    Category.populate(categories, {
-      path: "tiles",
-      model: Tile
-    }, function(error, categories){
-      // Populate comments data within each tile.
-      Tile.populate(categories, {
-      path: 'tiles.comments',
-      model: Comment
-    }, function(error, categories) {
-      // Populate user data within each comment.
-      Comment.populate(categories, {
-        path: 'tiles.comments.user',
-        select: 'displayName',
-        model: User
-      }, function(error, categories) {
+  Category.find({}, {}).populate('tiles').exec(function(error, categories) {
+
+  // Category.find({}, {}, function(error, categories){
+    // Category.populate(categories, {
+    //   path: "tiles",
+    //   model: Tile
+    // }, function(error, categories){
+    //   // Populate comments data within each tile.
+    //   Tile.populate(categories, {
+    //   path: 'tiles.comments',
+    //   model: Comment
+    // }, function(error, categories) {
+    //   // Populate user data within each comment.
+    //   Comment.populate(categories, {
+    //     path: 'tiles.comments.user',
+    //     select: 'displayName',
+    //     model: User
+      // }, function(error, categories) {
 
         var newTilesArray = [];
 
@@ -162,9 +164,9 @@ exports.loadmore = function(req, res){
         };
 
         res.json(newTilesArray);
-      });
-      });
-    });
+    //   });
+    //   });
+    // });
   });
 }
 
@@ -198,22 +200,22 @@ exports.categories = function(req, res){
   }
   else {
     // Find all categories and populate tiles data within category.
-    Category.find({}, {}, function(error, categories){
-      Category.populate(categories, {
-        path: "tiles",
-        model: Tile
-      }, function(error, categories){
-        // Populate comments data within each tile.
-        Tile.populate(categories, {
-        path: 'tiles.comments',
-        model: Comment
-      }, function(error, categories) {
-        // Populate user data within each comment.
-        Comment.populate(categories, {
-          path: 'tiles.comments.user',
-          select: 'displayName',
-          model: User
-        }, function(error, categories) {
+    Category.find({}, {}).populate('tiles').exec(function(error, categories){
+      // Category.populate(categories, {
+      //   path: "tiles",
+      //   model: Tile
+      // }, function(error, categories){
+      //   // Populate comments data within each tile.
+      //   Tile.populate(categories, {
+      //   path: 'tiles.comments',
+      //   model: Comment
+      // }, function(error, categories) {
+      //   // Populate user data within each comment.
+      //   Comment.populate(categories, {
+      //     path: 'tiles.comments.user',
+      //     select: 'displayName',
+      //     model: User
+      //   }, function(error, categories) {
 
           // Return each category with tiles inside as an array. [[cat1], [cat2]]
           var categoriesArray = categories.map(function(cat) {
@@ -239,9 +241,9 @@ exports.categories = function(req, res){
           // Randomize category
           // categoriesArray = (categoriesArray);
           res.json(categoriesArray);
-        });
-        });
-      });
+      //   });
+      //   });
+      // });
     });
   }
 }
