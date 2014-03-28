@@ -644,6 +644,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       $scope.sharedTileArray;
 
       $scope.getOneTile = function(currentTileId) {
+        console.log(currentTileId);
         $http.get('/tile/shared/' + currentTileId, null)
           .success(function(sharedTileArray) {
             // Get position of shared tile.

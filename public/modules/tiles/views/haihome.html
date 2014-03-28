@@ -64,13 +64,13 @@
   <h1>Cracked Tiles</h1>
 
     <div id="sharedTile">
-      <button ng-click="getOneTile(tileMain._id)">Share</button>
-      <p>http://localhost:3000/#!/{{tileMain._id}}</p>
+      <button ng-click="getOneTile('5417c65445c74b38c25af5a3')">Share</button>
+      <p>http://localhost:3000/#!/</p>
       <h2>Shared Tile</h2>
 
       <div id="singleTile">
         <h2>{{sharedTile.name}}</h2>
-        <img src="modules/tiles/img/tiles/{{sharedTile.imgUrl}}" alt="Splash">
+        <img src="http://storage.googleapis.com/gloss/tiles/{{sharedTile.imgUrl}}" alt="Splash">
         <p>{{sharedTile.content}}</p>
       </div>
     </div>
