@@ -156,7 +156,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     $scope.moveLeft = function() {
       console.log("1: " + $scope.hPosition);
       if ($scope.hPosition < 1) {
-        $scope.hPosition = $scope.allTiles[$scope.currentCategory].length;
+        $scope.hPosition = $scope.allTiles[$scope.currentCategory].length - 1;
       } else {
         $scope.hPosition -= 1;
       };
