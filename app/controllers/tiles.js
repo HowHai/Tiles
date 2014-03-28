@@ -266,7 +266,7 @@ exports.create = function(req, res){
   // PhantomJS testt
     phantom.create(function(ph) {
     return ph.createPage(function(page) {
-      return page.open("http://uncrate.com/home/", function(status) {
+      return page.open("http://uncrate.com/food/4/", function(status) {
         console.log('opened site?', status);
 
         page.injectJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function() {
@@ -342,7 +342,7 @@ exports.create = function(req, res){
               for(var i = 0; i < titleArr.length; i++) {
                 var randomPhotoNumber = Math.floor((Math.random()*100000)+1);
 
-                tilesArr.push({itemUrl: itemArr[i], price: priceArr[i], category: "Home", name: titleArr[i], content: contentArr[i], imgUrl: "Home" + i + '.jpg'});
+                tilesArr.push({itemUrl: itemArr[i], price: priceArr[i], category: "Food", name: titleArr[i], content: contentArr[i], imgUrl: "Food" + "-c" + i + '.jpg'});
               }
 
               return [tilesArr, images];
@@ -354,7 +354,7 @@ exports.create = function(req, res){
                 });
 
                 // Find category. Create new one if none exist.
-                var categoryName = "Home";
+                var categoryName = "Food";
 
                 Category.findOne({name: categoryName}, function(error, cat){
                   if (cat === null) {
