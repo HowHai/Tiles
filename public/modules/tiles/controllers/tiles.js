@@ -40,6 +40,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     // KYLE & JUSTIN
 
+    $scope.clientHeight = document.documentElement.clientHeight;    
+
     var welcomeScreen = function() {
       if(!$cookies.firstTimeUser){
         $scope.firstTime = true;
