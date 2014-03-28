@@ -303,7 +303,7 @@ h1, h2, h3 {
         width: 40px;
         background: none;
         border: none;
-        background-image: url(../img/brand/list.svg);
+        background-image: url(../img/brand/list2.svg);
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat; }
@@ -363,7 +363,7 @@ h1, h2, h3 {
           position: absolute;
           width: 160px;
           height: 160px;
-          background: url(http://i.stack.imgur.com/fbgUD.png);
+          background: url(../img/brand/fbgUD.png);
           background-size: 160px 160px; }
         #showTile #navigation-instructions #navi-content #radar .centerDot {
           background: white;
