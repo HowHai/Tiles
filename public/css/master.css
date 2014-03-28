@@ -66,20 +66,22 @@ h1, h2, h3 {
   z-index: 100;
   text-align: center;
   font-size: 1.5em;
-  background-color: white;
+  background-color: #58c9f3;
   color: rgba(255, 255, 255, 0.6);
   font-family: 'Great Vibes', 'Open Sans', 'Helvetica', Helvetica, sans-serif;
   font-weight: 300;
   padding: 15px;
-  display: table;
   height: 100%;
   width: 100%; }
   #loadScreen .load-text {
-    display: table-cell;
-    vertical-align: middle;
     text-align: center;
     font-size: 3.5em;
-    color: tomato; }
+    color: white;
+    padding-top: 55%; }
+  #loadScreen .load-spinner i {
+    font-size: 1.5em;
+    margin: 0;
+    color: white; }
   #loadScreen.load-fade {
     opacity: 1; }
 
@@ -253,6 +255,15 @@ h1, h2, h3 {
     padding: 20px;
     top: -39px;
     color: rgba(255, 99, 71, 0.6);
+    font-size: 13em; }
+  #showTile #prize-win {
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    top: -39px;
+    color: #58c9f3;
     font-size: 13em; }
   #showTile #navigation-instructions {
     display: none;

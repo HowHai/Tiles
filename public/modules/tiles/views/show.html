@@ -1,5 +1,6 @@
 <div id="loadScreen" ng-class="{'load-fade': !loadComplete}">
   <div class="load-text">gloss</div>
+  <div class="load-spinner"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
 
 <div class="row" ng-init="loadTiles()" >
@@ -9,7 +10,7 @@
     <div id="tileMain" ng-class="{'colorOffset': !colorOffset, 'prizeTile': prizeTile}" class="tileTemplate">
       <div class="tile-content swipeable">
         <h2>gloss</h2>
-        <img src="http://storage.googleapis.com/gloss/tiles/{{tileMain.imgUrl}}" alt="...apologies, Towelie must've broken something!">
+        <img src="http://storage.googleapis.com/gloss/tiles/{{tileMain.imgUrl}}" alt="...apologies, Hai must've broken something!">
         <div class="tile-info">
           <h1>{{tileMain.name}}</h1>
           <!-- <h5>${{tileMain.price}}</h5> -->
@@ -110,8 +111,8 @@
               </div>
             </div>
             <div class="kiss buttons" ng-show="!firstTime">
-              <h3 id="share-link" ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3>
-              <button class="btn share" ng-click="addFavorite()">FAV</button>
+              <!-- <h3 id="share-link" ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3> -->
+              <button class="btn share" ng-click="addFavorite()">FAVORITE</button>
             </div>
           </div>
         <i class="fa fa-angle-right kiss right"></i>
@@ -119,6 +120,7 @@
     </div>
 
     <div id="heart-like"><i class="fa fa-heart"></i></div>
+    <div id="prize-win"><i class="fa fa-gift"></i></div>
 
 
 <!-- TRYING TO GET NG REPEAT TO WORK -->
