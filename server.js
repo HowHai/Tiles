@@ -61,6 +61,7 @@ io.sockets.on('connection', function (socket) {
 
   // Response to sendVote
   socket.on('sendLike', function(data) {
+    console.log("Broadcasting: ");
     io.sockets.emit('giveBackLike', data);
   });
 

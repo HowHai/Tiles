@@ -99,11 +99,11 @@ exports.list = function(req, res){
 exports.loadmore = function(req, res){
   var allTiles = req.body.alltiles;
 
-  console.log(allTiles[0].length);
-  var startingPoint = allTiles.length + 1;
-  var endingPoint = allTiles.length + allTiles.length + 1;
-  console.log("start:" + startingPoint);
-  console.log("End:" + endingPoint);
+  var startingPoint = allTiles[0].length + 1;
+  // console.log("startingPoint" + startingPoint);
+  // var endingPoint = startingPoint * 2;
+  // console.log("start:" + startingPoint);
+  // console.log("End:" + endingPoint);
 
   Category.find({}, {}, function(error, categories){
     Category.populate(categories, {
@@ -127,23 +127,29 @@ exports.loadmore = function(req, res){
         // Return each category with tiles inside as an array. [[cat1], [cat2]]
         var categoriesArray = categories.map(function(cat) {
           // Return first 16 tiles from each category.
-          return (cat.tiles.splice(startingPoint, endingPoint));
+          return (cat.tiles.splice(startingPoint, startingPoint));
         });
+        console.log("CategoriesArray");
+        console.log(categoriesArray[0].length);
+        console.log(allTiles[0].length);
 
         // Join current allTiles and new tiles.
 
         if (req.params.side === 'right') {
-          console.log(req.params.side);
           for(var i = 0; i < allTiles.length; i++){
+            var found = false;
             for(var j = 0; j < categoriesArray.length; j++){
-              if (allTiles[i][0].category == categoriesArray[j][0].category) {
+              if (allTiles[i][0].category == categoriesArray[j][0].category && !found) {
+                console.log("categoriesArr Length" + categoriesArray[j].length);
                 var newCat = allTiles[i].concat(categoriesArray[j]);
-                console.log(newCat.length);
                 newTilesArray.push(newCat);
+                found = true;
               };
-            }
-          }
-        } else {
+            };
+          };
+        };
+
+        if (req.params.side === 'left') {
           for(var i = 0; i < categoriesArray.length; i++){
             for(var j = 0; j < allTiles.length; j++){
               if (allTiles[i][0].category == categoriesArray[j][0].category) {
@@ -151,11 +157,10 @@ exports.loadmore = function(req, res){
                 console.log(newCat.length);
                 newTilesArray.push(newCat);
               };
-            }
-          }
-        }
-        // Randomize category
-        // categoriesArray = (categoriesArray);
+            };
+          };
+        };
+
         res.json(newTilesArray);
       });
       });

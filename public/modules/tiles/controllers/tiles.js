@@ -44,18 +44,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           welcomeScreen();
 
           $scope.allTiles = response;
-          $scope.currentCategory = 4;
-          $scope.hPosition = 4;
+          $scope.currentCategory = 1;
+          $scope.hPosition = 5;
           console.log(response);
-          console.log("yoo");
-
-          // Checking for location bug
-          for(var i = 0; i < $scope.allTiles.length; i++){
-            for(var j = 0; j < $scope.allTiles.length; j++){
-              console.log($scope.allTiles[i][j].location);
-            }
-          }
-          // ENDBUG
 
           console.log($scope.hPosition);
 
@@ -558,16 +549,26 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
       // Listen for likes
       socket.on('giveBackLike', function(data){
-       for(var i = 0; i < $scope.allTiles.length; i++){
-          var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
-            if(eArr._id === data._id){
-              $scope.$apply(function() {
-                data.likes = data.likes + 1;
-                $scope.allTiles[i][indexArr] = data;
-              });
-            }
+        if ($scope.tileMain._id == data._id) {
+          $scope.$apply(function() {
+            $scope.tileMain = data;
           });
-        }
+        };
+       // for(var i = 0; i < $scope.allTiles.length; i++){
+       //    var result = $.grep($scope.allTiles[i], function(eArr, indexArr) {
+       //      if(eArr._id === data._id){
+       //        $scope.$apply(function() {
+       //          // console.log(data);
+       //          // data.likes = data.likes + 1;
+       //          // console.log(data);
+       //          console.log($scope.allTiles[i][indexArr]);
+       //          $scope.allTiles[i][indexArr].likes + 1;
+       //          console.log($scope.allTiles[i][indexArr]);
+       //          // console.log($scope.allTiles[i][indexArr]);
+       //        });
+       //      }
+       //    });
+       //  }
       });
 
       // Listen for disconnect?
@@ -710,9 +711,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $http.put('/tiles/update', { tileId: $scope.tileMain._id })
           .success(function(data){
             $scope.tileMain = data;
+            socket.emit('sendLike', $scope.tileMain);
           });
 
-        socket.emit('sendLike', $scope.tileMain);
         $scope.votedOnTile = true;
       };
     };
@@ -744,15 +745,18 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // Add more categories/tiles when user reaches edge of grid
 
     $scope.loadMoreTiles = function(side) {
+      console.log("HIIII");
+      console.log($scope.allTiles);
       $http.post('/tiles/more/' + side, {alltiles: $scope.allTiles})
         .success(function(response){
           $scope.allTiles = response;
 
+          console.log("I ran once!");
           console.log(response);
 
           // Find user's current position in new grid.
           if (side == 'left') {
-            $scope.hPosition = $scope.hPosition + 10;
+            $scope.hPosition = $scope.hPosition + 11;
             $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
           }
 
@@ -761,14 +765,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
 
         });
-
-        // Checking for location bug
-        for(var i = 0; i < $scope.allTiles.length; i++){
-          for(var j = 0; j < $scope.allTiles.length; j++){
-            console.log($scope.allTiles[i][j].location);
-          }
-        }
-        // ENDBUG
 
     };
 
