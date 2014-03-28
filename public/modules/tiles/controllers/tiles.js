@@ -1,5 +1,17 @@
 'use strict';
 
+angular.module('mean.tiles').filter('capitalize', function() {
+ return function(input, scope) {
+ if (input!=null)
+  var words = input.split(' ')
+  var array = []
+  for (var i=0; i<words.length; ++i) {
+    array.push(words[i].charAt(0).toUpperCase() + words[i].toLowerCase().slice(1))
+  }
+  return array.join(' ')
+ }
+});
+
 angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cookies',
   function($scope, $http, $cookies) {
 
@@ -10,13 +22,30 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
     // KYLE & JUSTIN
 
+    var welcomeScreen = function() {
+      if(!$cookies.firstTimeUser){
+        $scope.firstTime = true;
+        $("#tileMain").addClass("nav-open").removeClass("nav-close");
+        $scope.nav_open = true;
+        $cookies.firstTimeUser = "Welcome to Gloss!";
+        console.log("NEW USER");
+      }
+      else{
+        $("#welcome-screen").hide();
+        console.log("OLD USER");
+        $scope.nav_open = false;
+      }
+    }
+
     $scope.loadTiles = function() {
       $http.get('/tiles/categories', null)
         .success(function(response) {
 
+          welcomeScreen();
+
           $scope.allTiles = response;
-          $scope.currentCategory = 1;
-          $scope.hPosition = 5;
+          $scope.currentCategory = 4;
+          $scope.hPosition = 4;
           console.log(response);
           console.log("yoo");
 
@@ -30,20 +59,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
           console.log($scope.hPosition);
 
-          if(!$cookies.firstTimeUser){
-            $("#tileMain").addClass("nav-open").removeClass("nav-close");
-            $("#navi-text").html("<h1>Welcome to <span>gloss</span>!</h1><p>Swipe Left & Right for more,<br> Up & Down for new categories,<br> tap to begin.</p>");
-            $scope.nav_open = true;
-            $cookies.firstTimeUser = "Welcome to Gloss!";
-            console.log("NEW USER");
-          }
-          else{
-            console.log("OLD USER");
-            $scope.$apply(function(){
-              $scope.nav_open = false;
-            });
-          }
-
           $scope.tileMain = $scope.allTiles[$scope.currentCategory][$scope.hPosition];
 
           $scope.tileLeft = $scope.allTiles[$scope.currentCategory][$scope.hPosition - 1];
@@ -51,14 +66,6 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
           $scope.tileUp = $scope.allTiles[categoryRotator($scope.currentCategory, "up")][$scope.hPosition];
           $scope.tileDown = $scope.allTiles[categoryRotator($scope.currentCategory, "down")][$scope.hPosition];
-
-          $scope.loadedTiles = [
-            {name: "Main", loaded: $scope.tileMain },
-            {name: "Left", loaded: $scope.tileLeft },
-            {name: "Right", loaded: $scope.tileRight },
-            {name: "Up", loaded: $scope.tileUp },
-            {name: "Down", loaded: $scope.tileDown }
-          ];
 
           socket.emit('giveTile', { tileId: $scope.tileMain._id});
           console.log($scope.tileMain._id);
@@ -74,14 +81,24 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
           }
 
           setTimeout(function(){
+          // $("#loadScreen .load-text").css("-webkit-transform", "translate(0px,156%)");
             $scope.$apply(function(){
               $scope.loadComplete = true;
             });
             setTimeout(function(){
               $("#loadScreen").hide();
             },1500);
-          },1000);
+          },10);
 
+
+          // // for ng-repeat
+          // $scope.loadedTiles = [
+          //   {name: "Main", loaded: $scope.tileMain },
+          //   {name: "Left", loaded: $scope.tileLeft },
+          //   {name: "Right", loaded: $scope.tileRight },
+          //   {name: "Up", loaded: $scope.tileUp },
+          //   {name: "Down", loaded: $scope.tileDown }
+          // ];
 
       });
     };
@@ -192,19 +209,19 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     };
 
     $scope.closeNav = function() {
-      if (!$("button").is(":focus")) {
-        $scope.share = false;
-        $("#tileMain").removeClass("nav-open").addClass("nav-close");
+      // if (!$("button").is(":active")) {
+        // $scope.share = false;
         $scope.$apply(function(){
           $scope.nav_open = false;
         });
-      }
-      else{
-        $scope.$apply(function(){
-          $scope.share = true;
-        });
-
-      }
+        $("#tileMain").removeClass("nav-open").addClass("nav-close");
+      // }
+      // else{
+        // $scope.$apply(function(){
+          // $scope.share = true;
+        // });
+      // }
+      $scope.firstTime = false;
     };
 
     $(function() {
@@ -255,11 +272,24 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
 
         $scope.$apply(function(){$scope.tileMain = tile;});
         $scope.colorOffset = !$scope.colorOffset;
-        if ($scope.currentCategory == 2 && $scope.hPosition == 8) {
+
+        if ($scope.tileMain.prize == "true") {
           $scope.prizeTile = true;
+          setTimeout(function() {
+            $("#prize-win").fadeIn();
+             setTimeout(function() {
+              $("#prize-win").fadeOut();
+             },1500);
+          }, 500);
         } else {
           $scope.prizeTile = false;
         };
+
+        // if ($scope.currentCategory == 2 && $scope.hPosition == 8) {
+        //   $scope.prizeTile = true;
+        // } else {
+        //   $scope.prizeTile = false;
+        // };
 
         setTimeout(function(){
           move(direction);
@@ -414,9 +444,14 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("heart").addClass("obj");
             // console.log($scope.allTiles[i][j].likes);
           }
+          else if($scope.allTiles[i][j].prize == "true"){
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("prize").addClass("obj");
+            // console.log($scope.allTiles[i][j].likes);
+          }
           else{
             grid+="0";
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("obj");
+            $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("prize");
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("multi-user");
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("heart");
           }
@@ -668,7 +703,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         $("#heart-like").fadeIn();
          setTimeout(function() {
           $("#heart-like").fadeOut();
-         },600);
+         },1000);
         likesArray.push($scope.tileMain._id);
         $cookies.likes = angular.toJson(likesArray);
 

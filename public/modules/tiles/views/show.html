@@ -1,5 +1,6 @@
 <div id="loadScreen" ng-class="{'load-fade': !loadComplete}">
-  <div class="brand">gloss<br><div class="load-text">Loading...</div></div>
+  <div class="load-text">gloss</div>
+  <div class="load-spinner"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
 
 <div class="row" ng-init="loadTiles()" >
@@ -9,15 +10,17 @@
     <div id="tileMain" ng-class="{'colorOffset': !colorOffset, 'prizeTile': prizeTile}" class="tileTemplate">
       <div class="tile-content swipeable">
         <h2>gloss</h2>
-        <img src="http://storage.googleapis.com/gloss/tiles/{{tileMain.imgUrl}}" alt="Gloss">
+        <img src="http://storage.googleapis.com/gloss/tiles/{{tileMain.imgUrl}}" alt="...apologies, Hai must've broken something!">
         <div class="tile-info">
           <h1>{{tileMain.name}}</h1>
+          <!-- <h5>${{tileMain.price}}</h5> -->
           <div class="tile-desc"><p>{{tileMain.content}}</p></div>
         </div>
       </div>
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileMain.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileMain.price}}</h4>
       </div>
     </div>
 
@@ -33,6 +36,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileLeft.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileLeft.price}}</h4>
       </div>
     </div>
 
@@ -48,6 +52,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileRight.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileRight.price}}</h4>
       </div>
     </div>
 
@@ -63,6 +68,7 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileUp.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileUp.price}}</h4>
       </div>
     </div>
 
@@ -78,32 +84,35 @@
       <div class="tile-footer">
         <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tileDown.likes}}</span>
         <h3 id="buy">BUY NOW</h3>
+        <h4>${{tileDown.price}}</h4>
       </div>
     </div>
 
     <div id="navigation-instructions" class="swipeable" ng-class="{'open': nav_open}" ng-click="closeNav()">
         <div id="nav-header">gloss
-          <button></button>
+          <a class="list-button" href="#!/favorites"></a>
         </div>
         <i class="fa fa-angle-up kiss top"></i>
         <i class="fa fa-angle-left kiss left"></i>
           <div id ="navi-content">
-            <div id="radar">
+            <div id="welcome-screen" ng-show="firstTime">
+            <!-- <div> -->
+              <img src="img/icons/swipe-up.svg"><h2>Swipe up and down for a new category</h2>
+              <img src="img/icons/swipe-left.svg"><h2>Left and right for more</h2>
+              <img src="img/icons/finger-tap.svg"><h2>And tap to access your radar and favs</h2>
+              <h1><!-- welcome to<br> --><span>gloss</span></h1>
+            <!-- </div> -->
+            </div>
+            <div id="radar" ng-show="!firstTime">
               <div id="rad"></div>
               <div class="centerDot"></div>
-
               <div ng-repeat="xcord in xcords">
                 <div id="{{xcord+''+ycord}}" ng-repeat="ycord in ycords" data-x="{{ycord*10}}" data-y="{{xcord*10}}"></div>
               </div>
-              <!-- <div class="obj" data-x="130" data-y="60"></div> -->
-              <!-- <div class="obj" data-x="70" data-y="35"></div> -->
             </div>
-            <div id="navi-text">
-            </div>
-            <div class="kiss buttons">
-              <!-- <a href="/#!/tile/shared/{{tileMain._id}}"></a> -->
-              <h3 id="share-link" ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3>
-              <button class="btn share" ng-click="share = !share">Share</button>
+            <div class="kiss buttons" ng-show="!firstTime">
+              <!-- <h3 id="share-link" ng-show="share">http://localhost:3000/#!/tile/shared/{{tileMain._id}}</h3> -->
+              <button class="btn share" ng-click="addFavorite()">FAVORITE</button>
             </div>
           </div>
         <i class="fa fa-angle-right kiss right"></i>
@@ -111,6 +120,7 @@
     </div>
 
     <div id="heart-like"><i class="fa fa-heart"></i></div>
+    <div id="prize-win"><i class="fa fa-gift"></i></div>
 
 
 <!-- TRYING TO GET NG REPEAT TO WORK -->
