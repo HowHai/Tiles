@@ -155,8 +155,8 @@ h1, h2, h3 {
         padding: 0 20px;
         font-size: 1.5em;
         display: inline-block; }
-        #showTile .tileTemplate .tile-footer i:hover, #showTile .tileTemplate .tile-footer i:active {
-          color: tomato !important; }
+        #showTile .tileTemplate .tile-footer i:hover {
+          color: tomato; }
         #showTile .tileTemplate .tile-footer i.liked {
           color: tomato; }
       #showTile .tileTemplate .tile-footer span {
@@ -202,7 +202,7 @@ h1, h2, h3 {
       #showTile .colorOffset .tile-footer h4 {
         color: black; }
   #showTile .prizeTile .tile-footer {
-    background: -webkit-linear-gradient(top, #d5ad6d 0%, #d5ad6d 26%, #e2ba78 35%, #a37e43 45%, #91703b 61%, #d5ad6d 100%); }
+    background: -webkit-linear-gradient(top, #d5ad6d 0%, #d5ad6d 16%, #e2ba78 25%, #a37e43 45%, #91703b 61%, #d5ad6d 100%); }
     #showTile .prizeTile .tile-footer h3 {
       visibility: hidden; }
     #showTile .prizeTile .tile-footer h3:after {
