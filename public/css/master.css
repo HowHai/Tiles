@@ -634,5 +634,13 @@ h1, h2, h3 {
         left: -661px; }
     #showTile #buy {
       letter-spacing: 1px !important; }
+    #showTile #heart-like {
+      top: 47px;
+      width: 288px;
+      height: 470px; }
+    #showTile #prize-win {
+      top: 47px;
+      width: 288px;
+      height: 470px; }
   #cellphone-wrapper {
     display: block; } }
