@@ -860,7 +860,19 @@ h1, h2, h3 {
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 500px) {
+  #loadScreen {
+    position: absolute;
+    width: 288px;
+    height: 470px;
+    left: 43px;
+    top: 96px;
+  }
+  #welcome-screen {
+    h1 {
+      display: none;
+    }
+  }
   #showTile {
     position: absolute;
     width: 288px;
@@ -873,6 +885,14 @@ h1, h2, h3 {
       height: 470px;
       #navi-content {
         width: 239.04px;
+      }
+      .kiss {
+        &.left {
+          left: 53px;
+        }
+        &.right {
+          left: -661px;
+        }
       }
     }
     #buy {

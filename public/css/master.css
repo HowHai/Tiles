@@ -607,7 +607,15 @@ h1, h2, h3 {
       #showTile #navigation-instructions #navi-content #welcome-screen h1 span {
         font-size: 1em; } }
 
-@media (min-width: 800px) {
+@media (min-width: 500px) {
+  #loadScreen {
+    position: absolute;
+    width: 288px;
+    height: 470px;
+    left: 43px;
+    top: 96px; }
+  #welcome-screen h1 {
+    display: none; }
   #showTile {
     position: absolute;
     width: 288px;
@@ -620,6 +628,10 @@ h1, h2, h3 {
       height: 470px; }
       #showTile #navigation-instructions #navi-content {
         width: 239.04px; }
+      #showTile #navigation-instructions .kiss.left {
+        left: 53px; }
+      #showTile #navigation-instructions .kiss.right {
+        left: -661px; }
     #showTile #buy {
       letter-spacing: 1px !important; }
   #cellphone-wrapper {
