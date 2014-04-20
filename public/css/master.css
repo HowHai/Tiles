@@ -16,7 +16,8 @@ h1, h2, h3 {
 .container {
   height: 100%;
   height: 100vh;
-  padding: 0; }
+  padding: 0;
+  margin: 0; }
 
 .content {
   height: 100%; }
@@ -488,6 +489,9 @@ h1, h2, h3 {
   #showTile .slow {
     transition: 0.2s; }
 
+#cellphone-wrapper {
+  display: none; }
+
 .signin {
   background-color: #58c9f3;
   height: auto; }
@@ -602,3 +606,21 @@ h1, h2, h3 {
       font-weight: 300; }
       #showTile #navigation-instructions #navi-content #welcome-screen h1 span {
         font-size: 1em; } }
+
+@media (min-width: 800px) {
+  #showTile {
+    position: absolute;
+    width: 288px;
+    height: 470px;
+    left: 43px;
+    top: 96px;
+    background-color: white; }
+    #showTile #navigation-instructions {
+      width: 288px;
+      height: 470px; }
+      #showTile #navigation-instructions #navi-content {
+        width: 239.04px; }
+    #showTile #buy {
+      letter-spacing: 1px !important; }
+  #cellphone-wrapper {
+    display: block; } }

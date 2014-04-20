@@ -4,8 +4,9 @@
 </div>
 
 <div class="row" ng-init="loadTiles()" ng-show="loadComplete">
+  
+  <img id="cellphone-wrapper" src="img/galaxy-webview-s3.png">
   <section id="showTile" class="col-xs-12">
-  <!-- <button ng-click="createTile()">Herroo Prease</button> -->
 
     <div id="tileMain" ng-class="{'colorOffset': !colorOffset, 'prizeTile': prizeTile}" class="tileTemplate">
       <div class="tile-content swipeable">
@@ -13,7 +14,6 @@
         <img src="http://storage.googleapis.com/gloss/tiles/{{tileMain.imgUrl}}" alt="Google Storage: Limit Exceeded">
         <div class="tile-info">
           <h1>{{tileMain.name}}</h1>
-          <!-- <h5>${{tileMain.price | fixprice}}</h5> -->
           <div class="tile-desc"><p>{{tileMain.content}}</p></div>
         </div>
       </div>
@@ -96,11 +96,6 @@
         <i class="fa fa-angle-left kiss left"></i>
           <div id ="navi-content">
             <div id="welcome-screen" ng-show="firstTime">
-              <!-- <div>{{clientHeight}}</div> -->
-              <!-- <div class="visible-xs">xs</div> -->
-              <!-- <div class="visible-sm">sm</div> -->
-              <!-- <div class="visible-md">md</div> -->
-              <!-- <div class="visible-lg">lg</div> -->
               <img src="img/icons/swipe-up.svg"><h2>Swipe up and down for a new category</h2>
               <img src="img/icons/swipe-left.svg"><h2>Left and right for more</h2>
               <img src="img/icons/finger-tap.svg"><h2>And tap to access your radar and favs</h2>
@@ -124,26 +119,6 @@
 
     <div id="heart-like"><i class="fa fa-heart"></i></div>
     <div id="prize-win"><i class="fa fa-gift"></i></div>
-
-
-<!-- TRYING TO GET NG REPEAT TO WORK -->
-  <!--     <div ng-repeat="tile in loadedTiles" id="tile{{tile.name}}" ng-class="{'colorOffset': !colorOffset}" class="tileTemplate">
-      <div class="tile-content swipeable">
-        <h2>gloss</h2>
-        <img src="http://storage.googleapis.com/gloss/tiles/{{tile.loaded.imgUrl}}" alt="Gloss">
-        <div class="tile-info">
-          <h1>{{tile.loaded.name}}</h1>
-          <div class="tile-desc"><p>{{tile.loaded.content}}</p></div>
-        </div>
-      </div>
-      <div class="tile-footer">
-        <i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ng-click="updateLikes()"></i><span>{{tile.loaded.likes}}</span>
-        <h3 id="buy">BUY NOW</h3>
-      </div>
-    </div> -->
-
-<!-- FERNS FAV STUFF -->
-    <!-- <i class="fa fa-star" ng-class="{'liked': favoriteTile}" ng-click="addFavorite()"></i> -->
 
   </section>
 </div>
