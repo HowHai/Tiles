@@ -103,7 +103,7 @@ h1, h2, h3 {
 // Load Screen
 
 #loadScreen {
-  position:absolute;
+  position: absolute;
   transition: 1.5s;
   opacity: 0;
   z-index: 100;
@@ -874,6 +874,7 @@ h1, h2, h3 {
     }
   }
   #showTile {
+    cursor: url('../img/icons/swipe-cursor.png'), auto;
     position: absolute;
     width: 288px;
     height: 470px;

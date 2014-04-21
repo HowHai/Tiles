@@ -177,10 +177,10 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             windowWidth = 288;
           }
 
-          if(direction=="right" && distance > (windowWidth)*0.45){
+          if(direction=="right" && distance > (windowWidth)*0.25){
             animateAndMove("Left", $scope.tileLeft, colorMain, colorOffset);
           }
-          else if(direction=="left" && distance > (windowWidth)*0.45){
+          else if(direction=="left" && distance > (windowWidth)*0.25){
             animateAndMove("Right", $scope.tileRight, colorMain, colorOffset);
           }
           else if(direction=="up" && distance > (windowHeight)*0.25){

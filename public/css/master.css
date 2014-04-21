@@ -617,6 +617,7 @@ h1, h2, h3 {
   #welcome-screen h1 {
     display: none; }
   #showTile {
+    cursor: url('../img/icons/swipe-cursor.png'), auto;
     position: absolute;
     width: 288px;
     height: 470px;
