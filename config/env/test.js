@@ -7,23 +7,23 @@ module.exports = {
 		title: 'MEAN.JS - Test Environment'
 	},
 	facebook: {
-		clientID: '1438896579687548',
-		clientSecret: '36595df0938baaf481b4d9a01d41d11e',
+		clientID: '[CLIENT_ID]',
+		clientSecret: '[CLIENT_SECRET]',
 		callbackURL: 'http://localhost:3000/auth/facebook/callback'
 	},
 	twitter: {
-		clientID: 'iqAy3ijMvrMDKFBwdS3Vg',
-		clientSecret: 'yJhzQBGiWFdvZPxpp2mtnRRIzt1jeU6unK95Ps1ramY',
+		clientID: '[CLIENT_ID]',
+		clientSecret: '[CLIENT_SECRET]',
 		callbackURL: 'http://localhost:3000/auth/twitter/callback'
 	},
 	google: {
-		clientID: '743872871433.apps.googleusercontent.com',
-		clientSecret: '1cp5Tz2ZxrVGVTW26tSEWlhC',
+		clientID: '[CLIENT_ID]',
+		clientSecret: '[CLIENT_SECRET]',
 		callbackURL: 'http://localhost:3000/auth/google/callback'
 	},
 	linkedin: {
-		clientID: '75rv26520ofdeq',
-		clientSecret: 'c7hG6qOpHeBtsKDc',
+		clientID: '[CLIENT_ID]',
+		clientSecret: '[CLIENT_SECRET]',
 		callbackURL: 'http://localhost:3000/auth/linkedin/callback'
 	}
 };
