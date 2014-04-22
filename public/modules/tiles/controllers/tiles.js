@@ -773,7 +773,9 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
               var deleteSelect = $(event.target).siblings(".deleteButton").attr("class").indexOf("show");
               removeDeleteButtons();
               if(distance>0){
-                $(event.target).siblings(".deleteButton").toggleClass("show");
+                if(deleteSelect == -1){
+                  $(event.target).siblings(".deleteButton").addClass("show");
+                }
               }
               else{
                 if(deleteSelect == -1){
@@ -787,7 +789,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
        } 
 
       };
-    
+  
 
     var removeDeleteButtons = function(){
       $(".deleteButton").removeClass("show");
