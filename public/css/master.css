@@ -492,6 +492,9 @@ h1, h2, h3 {
 #cellphone-wrapper {
   display: none; }
 
+.phone-select {
+  display: none; }
+
 .signin {
   background-color: #58c9f3;
   height: auto; }
@@ -642,29 +645,87 @@ h1, h2, h3 {
   #showTile {
     cursor: url('../img/icons/swipe-cursor.png'), auto;
     position: absolute;
-    width: 288px;
-    height: 470px;
-    left: 43px;
-    top: 96px;
     background-color: white; }
-    #showTile #navigation-instructions {
+    #showTile.samsung {
       width: 288px;
-      height: 470px; }
-      #showTile #navigation-instructions #navi-content {
-        width: 239.04px; }
-      #showTile #navigation-instructions .kiss.left {
-        left: 53px; }
-      #showTile #navigation-instructions .kiss.right {
-        left: -661px; }
+      height: 470px;
+      left: 43px;
+      top: 96px; }
+      #showTile.samsung #heart-like {
+        top: 47px;
+        width: 288px;
+        height: 470px; }
+      #showTile.samsung #prize-win {
+        top: 47px;
+        width: 288px;
+        height: 470px; }
+      #showTile.samsung #navigation-instructions {
+        width: 288px;
+        height: 470px; }
+        #showTile.samsung #navigation-instructions #navi-content {
+          width: 239.04px; }
+        #showTile.samsung #navigation-instructions .kiss.left {
+          left: 53px; }
+        #showTile.samsung #navigation-instructions .kiss.right {
+          left: -661px; }
+    #showTile.iphone {
+      width: 275px;
+      height: 488px;
+      left: 50px;
+      top: 123px; }
+      #showTile.iphone #heart-like {
+        top: 47px;
+        width: 275px;
+        height: 488px; }
+      #showTile.iphone #prize-win {
+        top: 47px;
+        width: 275px;
+        height: 488px; }
+      #showTile.iphone #navigation-instructions {
+        width: 275px;
+        height: 488px; }
+        #showTile.iphone #navigation-instructions #navi-content {
+          width: 239.04px; }
+        #showTile.iphone #navigation-instructions .kiss.left {
+          top: 38%;
+          left: 53px; }
+        #showTile.iphone #navigation-instructions .kiss.right {
+          top: 38%;
+          left: -1047px; }
     #showTile #buy {
       letter-spacing: 1px !important; }
-    #showTile #heart-like {
-      top: 47px;
-      width: 288px;
-      height: 470px; }
-    #showTile #prize-win {
-      top: 47px;
-      width: 288px;
-      height: 470px; }
   #cellphone-wrapper {
-    display: block; } }
+    display: block; }
+  .phone-select {
+    display: block;
+    position: fixed;
+    right: 100px;
+    top: 50px; }
+    .phone-select input {
+      border-radius: none;
+      background-color: white;
+      border: 1px solid #58c9f3; }
+    .phone-select input[disabled] {
+      background-color: #58c9f3;
+      color: white; }
+  #showTile #navigation-instructions #nav-header .list-button {
+    position: absolute;
+    left: 222px; }
+  #favorites {
+    cursor: url('../img/icons/swipe-cursor.png'), auto;
+    position: absolute;
+    overflow: scroll; }
+    #favorites.iphone {
+      width: 275px;
+      height: 488px;
+      left: 50px;
+      top: 123px; }
+      #favorites.iphone .page-header {
+        width: 275px !important; }
+    #favorites.samsung {
+      width: 288px;
+      height: 470px;
+      left: 43px;
+      top: 96px; }
+      #favorites.samsung .page-header {
+        width: 288px !important; } }

@@ -44,6 +44,21 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     var socket = io.connect();
     $scope.colorOffset = true;
     $scope.prizeTile = false;
+    $scope.iphone = true;
+
+    $scope.changePhone = function(){
+      if($scope.iphone){
+        $("#cellphone-wrapper").attr("src","img/galaxy-webview-s3.png");
+        $("#showTile").removeClass("iphone").addClass("samsung");
+        $("#favorites").removeClass("iphone").addClass("samsung");
+      }
+      else{
+        $("#cellphone-wrapper").attr("src","img/iphone-webview-5.png");
+        $("#showTile").removeClass("samsung").addClass("iphone");
+        $("#favorites").removeClass("samsung").addClass("iphone");
+      }
+      $scope.iphone = !$scope.iphone;
+    };
 
     // KYLE & JUSTIN
 
@@ -402,6 +417,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         grid +=i;
         grid += ": ";
         for(var j=0;j<$scope.allTiles[i].length;j++){
+          // console.log($scope.allTiles[i][j].likes);
           var none = true;
           if($scope.allTiles[i][j].location.length > 0){
             grid+="X";
@@ -422,7 +438,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).removeClass("heart");
             none = false;
           }
-          if($scope.allTiles[i][j].likes > 5){
+          if($scope.allTiles[i][j].likes >= 5){
+            // console.log("lots of likes");
             $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition)).addClass("heart").addClass("obj");
             var found = $("#"+(8+i-$scope.currentCategory)+(8+j-$scope.hPosition));
             // console.log($scope.allTiles[i][j].likes);
@@ -447,7 +464,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         }
         // console.log(grid);
       }
-      // console.log(found);
+      // console.log($scope.allTiles);
       showDots();
     };
     var showDots = function(){

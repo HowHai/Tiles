@@ -2,11 +2,15 @@
   <div class="load-text">gloss</div>
   <div class="load-spinner"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
+<div class="phone-select">
+  <input type="button" value="iPhone 5" ng-click="changePhone()" ng-disabled="iphone">
+  <input type="button" value="Samsung S3" ng-click="changePhone()" ng-disabled="!iphone">
+</div>
 
 <div class="row" ng-init="loadTiles()" ng-show="loadComplete">
   
-  <img id="cellphone-wrapper" src="img/galaxy-webview-s3.png">
-  <section id="showTile" class="col-xs-12">
+  <img id="cellphone-wrapper" src="img/iphone-webview-5.png">
+  <section id="showTile" class="iphone col-xs-12">
 
     <div id="tileMain" ng-class="{'colorOffset': !colorOffset, 'prizeTile': prizeTile}" class="tileTemplate">
       <div class="tile-content swipeable">

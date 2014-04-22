@@ -1,4 +1,9 @@
-<section id="favorites" data-ng-init="find()">
+<div class="phone-select">
+  <input class-"button" type="button" value="iPhone 5" ng-click="changePhone()" ng-disabled="iphone">
+  <input class-"button" type="button" value="Samsung S3" ng-click="changePhone()" ng-disabled="!iphone">
+</div>
+<img id="cellphone-wrapper" src="img/iphone-webview-5.png">
+<section id="favorites" data-ng-init="find()" class="iphone">
   <div class="page-header col-xs-12">
     <div class="control col-xs-12">
     <div class="brand pull-left">gloss</div>

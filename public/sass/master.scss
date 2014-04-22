@@ -689,6 +689,9 @@ h1, h2, h3 {
 #cellphone-wrapper {
   display: none;
 }
+.phone-select{
+  display: none;
+}
 
 // Styles for sign in screen
 
@@ -903,14 +906,26 @@ h1, h2, h3 {
     }
   }
   #showTile {
+
     cursor: url('../img/icons/swipe-cursor.png'), auto;
     position: absolute;
-    width: 288px;
-    height: 470px;
-    left: 43px;
-    top: 96px;
-    background-color: white;
-    #navigation-instructions {
+    &.samsung{
+      width: 288px;
+      height: 470px;
+      left: 43px;
+      top: 96px;
+
+      #heart-like {
+        top: 47px;
+        width: 288px;
+        height: 470px;
+      }
+      #prize-win {
+        top: 47px;
+        width: 288px;
+        height: 470px;
+      }
+      #navigation-instructions {
       width: 288px;
       height: 470px;
       #navi-content {
@@ -925,21 +940,92 @@ h1, h2, h3 {
         }
       }
     }
+    }
+    &.iphone{
+      width: 275px;
+      height: 488px;
+      left: 50px;
+      top: 123px;
+
+      #heart-like {
+        top: 47px;
+        width: 275px;
+        height: 488px;
+      }
+      #prize-win {
+        top: 47px;
+        width: 275px;
+        height: 488px;
+      }
+      #navigation-instructions {
+      width: 275px;
+      height: 488px;
+      #navi-content {
+        width: 239.04px;
+      }
+      .kiss {
+        &.left {
+          top: 38%;
+          left: 53px;
+        }
+        &.right {
+          top: 38%;
+          left: -1047px;
+        }
+      }
+    }
+    }
+    background-color: white;
     #buy {
       letter-spacing: 1px !important;
     }
-    #heart-like {
-      top: 47px;
-      width: 288px;
-      height: 470px;
-    }
-    #prize-win {
-      top: 47px;
-      width: 288px;
-      height: 470px;
-    }
+    
   }
   #cellphone-wrapper {
     display: block;
+  }
+  .phone-select{
+    display: block;
+    position: fixed;
+    right: 100px;
+    top: 50px;
+    input{
+      border-radius: none;
+      background-color: white;
+      border: 1px solid #58c9f3;
+    }
+    input[disabled]{
+      background-color: #58c9f3;
+      color: white;
+    }
+  }
+  #showTile #navigation-instructions #nav-header .list-button {
+    position: absolute;
+    left: 222px;
+  }
+  #favorites{
+    &.iphone{
+      width: 275px;
+      height: 488px;
+      left: 50px;
+      top: 123px;
+      .page-header{
+      width: 275px !important;
+    }
+    }
+    &.samsung{
+      width: 288px;
+      height: 470px;
+      left: 43px;
+      top: 96px;
+      .page-header{
+      width: 288px !important;
+    }
+    }
+    cursor: url('../img/icons/swipe-cursor.png'), auto;
+    position: absolute;
+    
+    overflow: scroll;
+    
   }
 }
