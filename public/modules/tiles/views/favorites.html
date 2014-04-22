@@ -7,7 +7,9 @@
     <h1 class="col-xs-12">FAVORITES</h1>
   </div>
   <div class="list-group">
-    <a ng-class-odd="'dark'" data-ng-repeat="favorite in favorites" data-ng-href="{{favorite.itemUrl}}" class="list-group-item col-xs-12">
+    <div ng-click="showOptions()" ng-class-odd="'dark'" data-ng-repeat="favorite in favorites"  class="list-group-item col-xs-12" ng-init="addSwipeToFavs($index,favorites.length)">
+      <div class="list-cover" data-href="{{favorite.itemUrl}}"></div>
+      <!-- <a data-ng-href="{{favorite.itemUrl}}"> -->
       <div class="thumb-image col-xs-3" style="background-image: url(http://storage.googleapis.com/gloss/tiles/{{favorite.imgUrl}})"></div>
       <div class="col-xs-9">
       <p class="list-group-item-heading">{{favorite.name | capitalize}}</p>
@@ -16,6 +18,8 @@
         <span class="pull-right"><i class="fa fa-heart" ng-class="{'liked': votedOnTile}" ></i><span class="likes">{{favorite.likes}}</span></span>
       </p>
       </div>
-    </a>
+      <!-- </a> -->
+      <div id="delete{{favorite._id}}" class="deleteButton"><button class="btn-danger" ng-click="removeFavorite(favorite)"><i class="fa fa-minus"></i></button></div>
+    </div>
   </div>
 </section>

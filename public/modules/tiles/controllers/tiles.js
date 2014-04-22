@@ -22,6 +22,11 @@ angular.module('mean.tiles').filter('capitalize', function() {
     array.splice(fixed.indexOf("-"),1000);
     fixed = array.join("");
   }
+  if(fixed.indexOf("and") != -1){
+    var array = fixed.split("");
+    array.splice(fixed.indexOf("-"),1000);
+    fixed = array.join("");
+  }
   console.log("fixed: "+fixed)
   return fixed;
 }
@@ -241,6 +246,7 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
       $(".swipeable").swipe( {swipeStatus: swipe2,
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount) {
+          console.log("hello");
           var colorMain = $("#tileMain").css("background-color");
           var colorOffset = $("#tileLeft").css("background-color");
           var windowHeight = document.documentElement.clientHeight - 100;
@@ -276,6 +282,8 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
         //Default is 75px, set to 0 for demo so any distance triggers swipe
          threshold:0
       });
+  
+
 
       function animateAndMove(direction, tile, colorMain, colorOffset){
         $("#tile" + direction).addClass("center-tile", "show");
@@ -500,6 +508,28 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     //This is for the RADAR
 
 
+    $scope.removeFavorite = function(id){
+      event.cancelBubble = true;
+      // var index = user.favorites.indexOf(id);
+      console.log("Id to delete: " + id._id);
+      console.log("favorites: " + user.favorites.length);
+      var fav_to_remove_index = user.favorites.indexOf(id._id);
+      var index = $scope.favorites.indexOf(id);
+      console.log(fav_to_remove_index);
+      console.log($scope.favorites);
+      console.log(index);
+      $scope.favorites.splice(index,1);
+      console.log("favorites: " + user.favorites.length);
+      $http.put('/users/favorite', {tileId: id._id, removeFavorite: true})
+        .success(function(data) {
+          // Update tile for current user here.
+          console.log("SUCCESSSS")
+          console.log(data);
+       });
+
+     
+
+    }
 
 
 
@@ -760,9 +790,45 @@ angular.module('mean.tiles').controller('TilesCtrl', ['$scope', '$http', '$cooki
     // Grab list of current user's favorite tiles
     $scope.find = function() {
       $http.get('/users/favorites', null).success(function(data){
-        $scope.favorites = data;
+          $scope.favorites = data;
         console.log(data);
-      })
+      });
+      };
+
+
+      $scope.addSwipeToFavs = function(index, length){
+        console.log(index);
+        console.log(length);
+
+        if(index == length-1){
+          console.log("made it");
+          $(".list-cover").swipe({
+            swipeStatus: function(event, phase, direction, distance){
+              // console.log(direction + distance);
+            },
+            swipe: function(event, direction, distance, duration, fingerCount){
+              var deleteSelect = $(event.target).siblings(".deleteButton").attr("class").indexOf("show");
+              removeDeleteButtons();
+              if(distance>0){
+                $(event.target).siblings(".deleteButton").toggleClass("show");
+              }
+              else{
+                if(deleteSelect == -1){
+                  console.log($(event.target).attr("data-href"));
+                  window.open($(event.target).attr("data-href"));
+                }
+              }
+            },
+            threshold: 0
+          });
+       } 
+
+      };
+    
+
+    var removeDeleteButtons = function(){
+      $(".deleteButton").removeClass("show");
+      console.log("hello");
     };
 
     // Search DB for previous likes

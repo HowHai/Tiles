@@ -557,6 +557,12 @@ h1, h2, h3 {
     border-radius: 0px;
     border: none;
     color: black; }
+    #favorites .list-group .list-group-item .list-cover {
+      position: absolute;
+      z-index: 10;
+      height: 100%;
+      width: 100%;
+      background-color: none; }
     #favorites .list-group .list-group-item .thumb-image {
       height: 62px;
       width: 44px;
@@ -581,3 +587,20 @@ h1, h2, h3 {
       color: white; }
       #favorites .list-group .list-group-item.dark p {
         color: white; }
+  #favorites .list-group .deleteButton {
+    position: absolute;
+    z-index: 10;
+    display: none;
+    height: 100%;
+    width: 60px; }
+    #favorites .list-group .deleteButton button {
+      background-color: red;
+      background-image: none;
+      opacity: 0.5;
+      height: 100%;
+      width: 100%;
+      border: none;
+      margin: 0px;
+      padding: 0px; }
+    #favorites .list-group .deleteButton.show {
+      display: block; }

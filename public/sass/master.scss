@@ -780,6 +780,14 @@ h1, h2, h3 {
   .list-group{
     padding-top: 50px;
     .list-group-item{
+      .list-cover{
+        position: absolute;
+        z-index: 10;
+        height: 100%;
+        width: 100%;
+        background-color: none;
+
+      }
       border-radius: 0px;
       border: none;
       color: black;
@@ -815,6 +823,27 @@ h1, h2, h3 {
           }
         }
       
+    }
+    .deleteButton{
+      position: absolute;
+      z-index: 10;
+      display: none;
+      height: 100%;
+      width: 60px;
+      button{
+        background-color: red;
+        background-image: none;
+        opacity: 0.5;
+        height: 100%;
+        width: 100%;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+        
+      }
+      &.show{
+        display: block;
+      }
     }
   }
 }
